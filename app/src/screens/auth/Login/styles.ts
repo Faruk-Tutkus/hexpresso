@@ -13,6 +13,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 15,
   },
+  socialMediaContainer: {
+    marginTop: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 15,
+  },
 })
 
 export default styles;

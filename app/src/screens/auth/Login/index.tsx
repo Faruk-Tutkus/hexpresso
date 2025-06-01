@@ -1,4 +1,4 @@
-import { ContainerButton, CustomButton, FloatingLabelInput } from '@components'
+import { ContainerButton, CustomButton, FloatingLabelInput, ForgotPassword } from '@components'
 import React, { useState } from 'react'
 import { View } from 'react-native'
 import { useTheme } from 'ThemeContext'
@@ -31,27 +31,30 @@ const Login = () => {
           size="medium"
           leftIcon="enter"
         />
-        <ContainerButton
-          title="Google ile Giriş Yap"
-          onPress={() => {}}
-          variant="primary"
-          size="medium"
-          leftImage={require('@assets/image/google.png')}
-        />
-        <ContainerButton
-          title="Facebook ile Giriş Yap"
-          onPress={() => {}}
-          variant="primary"
-          size="medium"
-          leftImage={require('@assets/image/facebook.png')}
-        />
-        <ContainerButton
-          title="Apple ile Giriş Yap"
-          onPress={() => {}}
-          variant="primary"
-          size="medium"
-          leftImage={require('@assets/image/apple.png')}
-        />
+        <ForgotPassword title="Şifremi unuttum" />
+        <View style={styles.socialMediaContainer}>
+          <ContainerButton
+            title="Google ile Giriş Yap"
+            onPress={() => {}}
+            variant="primary"
+            size="medium"
+            leftImage={require('@assets/image/google.png')}
+          />
+          <ContainerButton
+            title="Facebook ile Giriş Yap"
+            onPress={() => {}}
+            variant="primary"
+            size="medium"
+            leftImage={require('@assets/image/facebook.png')}
+          />
+          <ContainerButton
+            title="Apple ile Giriş Yap"
+            onPress={() => {}}
+            variant="primary"
+            size="medium"
+            leftImage={require('@assets/image/apple.png')}
+          />
+        </View>
       </View>
     </View>
   )

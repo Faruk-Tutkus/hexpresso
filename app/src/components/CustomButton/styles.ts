@@ -4,6 +4,7 @@ export default StyleSheet.create({
       padding: 10,
       overflow: 'hidden',
       borderRadius: 8,
+      width: '50%',
     },
     button: {
       alignItems: 'center',

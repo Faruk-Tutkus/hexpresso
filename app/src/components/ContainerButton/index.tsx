@@ -1,10 +1,10 @@
 import { Image } from 'expo-image';
 import React from 'react';
 import {
-    ActivityIndicator,
-    Text,
-    TouchableOpacity,
-    View
+  ActivityIndicator,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
 import { useTheme } from 'ThemeContext';
 import styles from './styles';
@@ -38,7 +38,7 @@ const ContainerButton: React.FC<ContainerButtonProps> = ({
       style={[
         styles.container,
         disabled && styles.disabled,
-        { backgroundColor: colors.primary },
+        { backgroundColor: colors.text },
       ]}
     >
       <View style={styles.content}>

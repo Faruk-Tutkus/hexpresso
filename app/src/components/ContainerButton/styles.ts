@@ -7,14 +7,17 @@ export default StyleSheet.create({
       alignSelf: 'center',
       justifyContent: 'center',
       alignItems: 'center',
+      flexDirection: 'row',
     },
     content: {
+      width: '80%',
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      gap: 10,
+      gap: 35,
     },
     text: {
+      flex: 1,
       fontSize: 16,
       fontWeight: '600',
     },

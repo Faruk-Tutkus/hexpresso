@@ -57,7 +57,7 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
   useEffect(() => {
     Animated.timing(animatedLabelPosition, {
       toValue: (isFocused || value) ? 1 : 0,
-      duration: 350,
+      duration: 200,
       useNativeDriver: true,
     }).start();
   }, [isFocused, value]);
@@ -83,7 +83,11 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
           outputRange: [1, 0.9],
         })
       }
-    ]
+    ],
+    opacity: animatedLabelPosition.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0.5, 1],
+    }),
   };
 
   const containerStyle = {
