@@ -16,7 +16,7 @@ const Register = () => {
   const { showToast, message, type } = useToast()
 
   const { signUp, error, loading, user } = useSignUpWithEmail()
-  
+  const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState({
     email: '',
     password: '',
@@ -33,6 +33,7 @@ const Register = () => {
   
   const handleSignIn = async () => {
     try {
+      setIsLoading(true)
       // Reset error messages first
       setErrorMessage(prev => ({ ...prev, email: '', password: '', general: '' }))
 
@@ -57,6 +58,8 @@ const Register = () => {
           setErrorMessage(prev => ({ ...prev, general: errorMsg }))
         }
       }
+    } finally {
+      setIsLoading(false)
     }
   }
   console.log(errorMessage)
@@ -95,6 +98,7 @@ const Register = () => {
           variant="primary"
           size="medium"
           leftIcon="enter"
+          loading={isLoading}
         />
         <View style={styles.socialMediaContainer}>
           <ContainerButton
