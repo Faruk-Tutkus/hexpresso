@@ -1,5 +1,5 @@
+import { AuthProvider, ThemeProvider, ToastProvider, useTheme } from "@providers";
 import { Stack } from "expo-router";
-import { ThemeProvider, useTheme } from "./ThemeContext";
 
 
 export function AppContent() {
@@ -16,6 +16,7 @@ export function AppContent() {
       }}
     >
       <Stack.Screen name="src/screens/side/SplashScreen/index" />
+      <Stack.Screen name="src/screens/auth/Register/index" />
       <Stack.Screen name="src/screens/auth/Login/index" />
     </Stack>
   )
@@ -24,7 +25,11 @@ export function AppContent() {
 export default function RootLayout() {
   return (
     <ThemeProvider themeColor="dark">
-      <AppContent />
+      <ToastProvider>
+        <AuthProvider>
+          <AppContent />
+        </AuthProvider>
+      </ToastProvider>
     </ThemeProvider>
   );
 }

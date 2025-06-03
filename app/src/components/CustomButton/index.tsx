@@ -1,4 +1,5 @@
 import Icon from '@assets/icons';
+import { useTheme } from '@providers';
 import React from 'react';
 import {
   ActivityIndicator,
@@ -6,7 +7,6 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import { useTheme } from 'ThemeContext';
 import styles from './styles';
 interface CustomButtonProps {
   onPress: () => void;

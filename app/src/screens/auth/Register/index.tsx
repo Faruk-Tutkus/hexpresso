@@ -1,5 +1,5 @@
-import { ContainerButton, CustomButton, FloatingLabelInput, ForgotPassword } from '@components'
-import { useSignInWithEmail } from '@hooks'
+import { ContainerButton, CustomButton, FloatingLabelInput } from '@components'
+import { useSignUpWithEmail } from '@hooks'
 import { useTheme, useToast } from '@providers'
 import { router } from 'expo-router'
 import React, { useState } from 'react'
@@ -7,47 +7,59 @@ import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import '../../../utils/i18n'
 import styles from './styles'
-const Login = () => {
+const Register = () => {
   const { theme, colors, toggleTheme } = useTheme()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { showToast } = useToast()
-  const { signIn, user, loading } = useSignInWithEmail()
+  const [rePassword, setRePassword] = useState('')
   const { t } = useTranslation()
-  const [isLoading, setIsLoading] = useState(false)
+  const { showToast, message, type } = useToast()
+
+  const { signUp, error, loading, user } = useSignUpWithEmail()
+  
   const [errorMessage, setErrorMessage] = useState({
     email: '',
     password: '',
     general: '',
   })
+
+  const validation = () => {
+    if (password !== rePassword) {
+      setErrorMessage(prev => ({ ...prev, password: t('auth.auth/password-not-match') }))
+      return false
+    }
+    return true
+  }
+  
   const handleSignIn = async () => {
     try {
-      setIsLoading(true)
+      // Reset error messages first
       setErrorMessage(prev => ({ ...prev, email: '', password: '', general: '' }))
-      await signIn(email, password)
-      if (user) {
-        router.push('/src/screens/main/home')
+
+      // Validate after resetting errors
+      if (!validation()) {
+        return
       }
-      console.log(user)
+      
+      await signUp(email, password)
+      showToast("Dogrulama linki gonderildi", 'success')
+      router.push('/src/screens/auth/Login')
     } catch (error: any) {
-      if (error === 'auth/email-not-verified') {
-        showToast(t('auth.auth/email-not-verified'), 'error')
+      if (error) {
+        const errorKey = `auth.${JSON.stringify(error.code).replace(/["]/g, '')}`
+        const errorMsg = t(errorKey)
+        console.log(error)
+        if (error.code.includes('email')) {
+          setErrorMessage(prev => ({ ...prev, email: errorMsg }))
+        } else if (error.code.includes('password')) {
+          setErrorMessage(prev => ({ ...prev, password: errorMsg }))
+        } else {
+          setErrorMessage(prev => ({ ...prev, general: errorMsg }))
+        }
       }
-      const errorKey = `auth.${JSON.stringify(error.code).replace(/["]/g, '')}`
-      const errorMsg = t(errorKey)
-      console.log(error)
-      if (error.code.includes('email')) {
-        setErrorMessage(prev => ({ ...prev, email: errorMsg }))
-      } else if (error.code.includes('password')) {
-        setErrorMessage(prev => ({ ...prev, password: errorMsg }))
-      } else {
-        setErrorMessage(prev => ({ ...prev, general: errorMsg }))
-        showToast(errorMessage.general, 'error')
-      }
-    } finally {
-      setIsLoading(false)
     }
   }
+  console.log(errorMessage)
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.content}>
@@ -68,15 +80,22 @@ const Login = () => {
           type="password"
           error={errorMessage.password}
         />
+        <FloatingLabelInput
+          placeholder="rePassword"
+          value={rePassword}
+          onChangeText={setRePassword}
+          leftIcon="lock-closed"
+          isPassword={true}
+          type="password"
+          error={errorMessage.password}
+        />
         <CustomButton
-          title="Login"
+          title="Kayıt Ol"
           onPress={handleSignIn}
           variant="primary"
           size="medium"
           leftIcon="enter"
-          loading={isLoading}
         />
-        <ForgotPassword title="Şifremi unuttum" />
         <View style={styles.socialMediaContainer}>
           <ContainerButton
             title="Google ile Giriş Yap"
@@ -105,4 +124,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Register

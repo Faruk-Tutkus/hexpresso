@@ -1,6 +1,6 @@
+import { useTheme } from '@providers'
 import React from 'react'
 import { StyleProp, View, ViewStyle } from 'react-native'
-import { useTheme } from 'ThemeContext'
 import styles from './styles'
 
 interface ContainerProps {

@@ -1,8 +1,8 @@
 import { Animation } from "@components";
+import { useTheme } from "@providers";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
-import { useTheme } from "ThemeContext";
 import styles from "./styles";
 
 const  SplashScreen = () => {

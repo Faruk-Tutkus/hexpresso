@@ -1,3 +1,4 @@
+import { useTheme } from '@providers';
 import { Image } from 'expo-image';
 import React from 'react';
 import {
@@ -6,7 +7,6 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import { useTheme } from 'ThemeContext';
 import styles from './styles';
 
 interface ContainerButtonProps {

@@ -13,7 +13,8 @@
       "@store/*": ["src/store/*"],
       "@utils/*": ["src/utils/*"],
       "@constants": ["src/constants/index"],
-      "@hooks": ["src/hooks/index"]
+      "@hooks": ["src/hooks/index"],
+      "@providers": ["src/providers/index"]
     }
   },
   "include": [

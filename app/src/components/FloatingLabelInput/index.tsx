@@ -1,7 +1,7 @@
 import Icon from '@assets/icons';
+import { useTheme } from '@providers';
 import React, { useEffect, useRef, useState } from 'react';
 import { Animated, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { useTheme } from 'ThemeContext';
 import { breathingAnimation, shakeAnimation, styles } from './styles';
 
 interface FloatingLabelInputProps {
@@ -11,6 +11,7 @@ interface FloatingLabelInputProps {
   leftIcon?: string;
   rightIcon?: string;
   isPassword?: boolean;
+  type: 'text' | 'email' | 'password' | 'number';
   error?: string;
   onFocus?: () => void;
   onBlur?: () => void;
@@ -23,6 +24,7 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
   leftIcon,
   rightIcon,
   isPassword = false,
+  type = 'text',
   error,
   onFocus,
   onBlur,
@@ -64,7 +66,7 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
 
   const handleChangeText = (text: string) => {
     if (localError) {
-      setLocalError(undefined);
+      setLocalError('');
     }
     onChangeText(text);
   };
@@ -129,6 +131,9 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
             onBlur?.();
           }}
           secureTextEntry={isPassword && !isPasswordVisible}
+          autoCapitalize='none'
+          autoComplete={'off'}
+          keyboardType={type === 'email' ? 'email-address' : type === 'number' ? 'numeric' : 'default'}
         />
         {isPassword ? (
           <TouchableOpacity
