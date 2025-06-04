@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, UserCredential } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, updateProfile, UserCredential } from "firebase/auth";
 import { useState } from "react";
 
 interface SignUpResult {
@@ -16,7 +16,7 @@ export const useSignUpWithEmail = () => {
     verificationSent: false,
   });
 
-  const signUp = async (email: string, password: string) => {
+  const signUp = async (email: string, password: string, displayName: string) => {
     try {
       setResult(prev => ({ ...prev, loading: true, error: null }));
       const auth = getAuth();
@@ -25,6 +25,9 @@ export const useSignUpWithEmail = () => {
       // Send verification email
       if (userCredential.user) {
         await sendEmailVerification(userCredential.user);
+        await updateProfile(userCredential.user, {
+          displayName: displayName,
+        });
         setResult({
           user: userCredential,
           error: null,

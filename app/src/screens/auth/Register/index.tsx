@@ -9,6 +9,7 @@ import '../../../utils/i18n'
 import styles from './styles'
 const Register = () => {
   const { theme, colors, toggleTheme } = useTheme()
+  const [displayName, setDisplayName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [rePassword, setRePassword] = useState('')
@@ -21,6 +22,7 @@ const Register = () => {
     email: '',
     password: '',
     general: '',
+    displayName: '',
   })
 
   const validation = () => {
@@ -35,14 +37,14 @@ const Register = () => {
     try {
       setIsLoading(true)
       // Reset error messages first
-      setErrorMessage(prev => ({ ...prev, email: '', password: '', general: '' }))
+      setErrorMessage(prev => ({ ...prev, email: '', password: '', general: '', displayName: '' }))
 
       // Validate after resetting errors
       if (!validation()) {
         return
       }
       
-      await signUp(email, password)
+      await signUp(email, password, displayName)
       showToast("Dogrulama linki gonderildi", 'success')
       router.push('/src/screens/auth/Login')
     } catch (error: any) {
@@ -66,6 +68,14 @@ const Register = () => {
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.content}>
+        <FloatingLabelInput
+          placeholder="Name"
+          value={displayName}
+          onChangeText={setDisplayName}
+          leftIcon="person"
+          type="text"
+          error={errorMessage.displayName}
+        />
         <FloatingLabelInput
           placeholder="Email"
           value={email}
