@@ -3,34 +3,28 @@ import { useTheme } from '@providers';
 import React from 'react';
 import {
   ActivityIndicator,
-  Text,
   TouchableOpacity,
   View
 } from 'react-native';
 import styles from './styles';
-interface CustomButtonProps {
+interface IconButtonProps {
   onPress: () => void;
-  title: string;
-  variant?: 'primary' | 'secondary' | 'outline';
   size?: 'small' | 'medium' | 'large';
+  variant?: 'primary' | 'secondary' | 'tertiary';
   loading?: boolean;
   disabled?: boolean;
-  leftIcon?: string;
-  rightIcon?: string;
+  icon?: string;
 }
 
-const CustomButton: React.FC<CustomButtonProps> = ({
+const IconButton: React.FC<IconButtonProps> = ({
   onPress,
-  title,
   size = 'medium',
+  variant = 'primary',
   loading = false,
   disabled = false,
-  leftIcon,
-  rightIcon,
+  icon,
 }) => {
   const { colors } = useTheme();
-
-
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -38,7 +32,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       style={[
         styles.container,
         disabled && styles.disabled,
-        { backgroundColor: colors.primary },
+        { backgroundColor: variant === 'primary' ? colors.primary : variant === 'secondary' ? colors.errorText : colors.tertiary },
       ]}
     >
       <View style={styles.content}>
@@ -49,21 +43,11 @@ const CustomButton: React.FC<CustomButtonProps> = ({
           />
         ) : (
           <>
-            {leftIcon && (
+            {icon && (
               <Icon 
-                name={leftIcon as any} 
+                name={icon as any} 
                 size={size === 'small' ? 16 : size === 'medium' ? 20 : 24} 
-                color={colors.surface} 
-                style={styles.leftIcon}
-              />
-            )}
-            <Text style={styles.text}>{title}</Text>
-            {rightIcon && (
-              <Icon 
-                name={rightIcon as any} 
-                size={size === 'small' ? 16 : size === 'medium' ? 20 : 24} 
-                color={colors.surface} 
-                style={styles.rightIcon}
+                color={colors.surface}
               />
             )}
           </>
@@ -73,4 +57,4 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   );
 };
 
-export default CustomButton; 
+export default IconButton; 

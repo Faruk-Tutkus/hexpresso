@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Animated, Text, TouchableOpacity, View } from 'react-native';
 import { breathingAnimation, shakeAnimation, styles } from './styles';
 
-interface FloatingDatePickerProps {
+interface FloatingTimePickerProps {
   value: Date;
   onChange: (date: Date) => void;
   placeholder: string;
@@ -13,7 +13,7 @@ interface FloatingDatePickerProps {
   error?: string;
 }
 
-const FloatingDatePicker: React.FC<FloatingDatePickerProps> = ({
+const FloatingTimePicker: React.FC<FloatingTimePickerProps> = ({
   value,
   onChange,
   placeholder,
@@ -33,6 +33,12 @@ const FloatingDatePicker: React.FC<FloatingDatePickerProps> = ({
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear();
     return `${day}.${month}.${year}`;
+  };
+
+  const formatTime = (date: Date) => {
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${hours}.${minutes}`;
   };
 
   useEffect(() => {
@@ -128,15 +134,15 @@ const FloatingDatePicker: React.FC<FloatingDatePickerProps> = ({
           <Text style={{ color: colors.text }}>{placeholder}</Text>
         </Animated.View>
         <TouchableOpacity onPress={() => setIsOpen(true)} style={{ flex: 1, paddingVertical: 8 }}>
-          <Text style={[styles.labelText, { color: colors.text }]}>{value ? formatDate(value) : ''}</Text>
+          <Text style={[styles.labelText, { color: colors.text }]}>{value ? formatTime(value) : ''}</Text>
         </TouchableOpacity>
       </Animated.View>
       {localError && <Text style={[styles.errorText, { color: colors.errorText }]}>{localError}</Text>}
       
       {isOpen && (
         <DatePicker
-          mode="date"
-          display="calendar"
+          mode="time"
+          display="clock"
           value={value || new Date()}
           onChange={handleChangeText}
           maximumDate={new Date(new Date().setFullYear(new Date().getFullYear() - 8))}
@@ -147,4 +153,4 @@ const FloatingDatePicker: React.FC<FloatingDatePickerProps> = ({
   );
 };
 
-export default FloatingDatePicker;
+export default FloatingTimePicker;

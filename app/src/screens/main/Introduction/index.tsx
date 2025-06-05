@@ -1,8 +1,8 @@
-import { CustomButton, FloatingDatePicker, FloatingLabelInput, FloatingLabelPicker } from '@components';
+import { FloatingDatePicker, FloatingLabelInput, FloatingLabelPicker, FloatingTimePicker, IconButton } from '@components';
 import { useTheme } from '@providers';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Dimensions, FlatList, Text, View } from 'react-native';
-import Animated, { FadeInUp } from 'react-native-reanimated';
+import Animated, { FadeIn } from 'react-native-reanimated';
 import styles from './styles';
 
 const useIntroductionData = () => {
@@ -10,6 +10,11 @@ const useIntroductionData = () => {
   const [name, setName] = useState('');
   const [gender, setGender] = useState('');
   const [date, setDate] = useState<Date | ''>('');
+  const [time, setTime] = useState<Date | ''>('');
+  const [error, setError] = useState({
+    name: '',
+    date: '',
+  });
 
   const data = [
     {
@@ -23,13 +28,15 @@ const useIntroductionData = () => {
           onChangeText={setName}
           type={'text'}
           leftIcon={'person'}
+          error={error.name}
         />
       ),
       button: {
         title: 'Devam Et',
         onPress: () => {
-          // İsim validasyonu veya işlemleri burada yapılabilir
-          console.log('İsim:', name);
+          if (!name) {
+            setError(prev => ({ ...prev, name: 'Adınızı giriniz' }));
+          }
         }
       }
     },
@@ -41,21 +48,41 @@ const useIntroductionData = () => {
         <FloatingDatePicker
           value={date as Date}
           onChange={(date) => setDate(date)}
-          
           placeholder={'Doğum tarihinizi giriniz'}
+          leftIcon={'calendar'}
+          error={error.date}
+        />
+      ),
+      button: {
+        title: 'Devam Et',
+        onPress: () => {
+          if (!date) {
+            setError(prev => ({ ...prev, date: 'Doğum tarihinizi giriniz' }));
+          }
+        }
+      }
+    },
+    {
+      id: 3,
+      title: 'Doğum saatiniz nedir?',
+      description: 'Bu, uygulamanın ilk ekranıdır',
+      FloatingLabelInput: (
+        <FloatingTimePicker
+          value={time as Date}
+          onChange={(date) => setTime(date)}
+          placeholder={'Doğum saatinizi giriniz'}
           leftIcon={'calendar'}
         />
       ),
       button: {
         title: 'Devam Et',
         onPress: () => {
-          // Tarih validasyonu veya işlemleri burada yapılabilir
-          console.log('Tarih:', date);
+
         }
       }
     },
     {
-      id: 3,
+      id: 4,
       title: 'Cinsiyetin nedir?',
       description: 'Bu, uygulamanın ilk ekranıdır',
       FloatingLabelInput: (
@@ -70,8 +97,7 @@ const useIntroductionData = () => {
       button: {
         title: 'Devam Et',
         onPress: () => {
-          // Cinsiyet validasyonu veya işlemleri burada yapılabilir
-          console.log('Cinsiyet:', gender);
+          
         }
       }
     },
@@ -84,42 +110,110 @@ const useIntroductionData = () => {
     date,
     setDate,
     gender,
-    setGender
+    setGender,
+    error,
+    time,
+    setTime
   };
 };
 
 const Introduction = () => {
   const { colors } = useTheme();
   const { width } = Dimensions.get('window');
-  const { data, name, setName, date, setDate, gender, setGender } = useIntroductionData();
+  const { data, name, setName, date, setDate, gender, setGender, error, time, setTime } = useIntroductionData();
   const flatListRef = useRef<FlatList>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const scrollToNext = () => {
-    if (currentIndex < data.length - 1) {
-      flatListRef.current?.scrollToIndex({
-        index: currentIndex + 1,
-        animated: true
-      });
-      setCurrentIndex(currentIndex + 1);
+
+  // Sadece kontrol için
+  const canScroll = (direction: 'next' | 'prev') => {
+    if (direction === 'next') {
+      if (
+        (currentIndex === 0 && name === '') ||
+        (currentIndex === 1 && date === '') ||
+        (currentIndex === 2 && time === '') ||
+        (currentIndex === 3 && gender === '')
+      ) {
+        return false;
+      }
+      if (currentIndex < data.length - 1) {
+        return true;
+      }
+      return false;
     }
+    if (direction === 'prev') {
+      if (
+        (currentIndex === 1 && name === '') ||
+        (currentIndex === 2 && date === '') ||
+        (currentIndex === 3 && time === '')
+      ) {
+        return false;
+      }
+      if (currentIndex > 0) {
+        return true;
+      }
+      return false;
+    }
+    return false;
   };
 
-  const renderItem = ({ item}: { item: any}) => {
+  // Scroll işlemi için
+  const handleScroll = (direction: 'next' | 'prev') => {
+    if (canScroll(direction)) {
+      if (direction === 'next') {
+        flatListRef.current?.scrollToIndex({
+          index: currentIndex + 1,
+          animated: true
+        });
+        setCurrentIndex(currentIndex + 1);
+      } else if (direction === 'prev') {
+        flatListRef.current?.scrollToIndex({
+          index: currentIndex - 1,
+          animated: true
+        });
+        setCurrentIndex(currentIndex - 1);
+      }
+      return true;
+    }
+    return false;
+  };
+
+  const renderItem = ({ item, index }: { item: any, index: number }) => {
     return (
       <Animated.View
-        entering={FadeInUp.delay(currentIndex * 1000)}
+        entering={FadeIn}
       >
-        <View style={[styles.item, { width }]}>
+        <View style={[styles.item, { width }]}> 
           <Text style={[styles.title, { color: colors.text }]}>{item.title}</Text>
           <Text style={[styles.description, { color: colors.text }]}>{item.description}</Text>
           {item.FloatingLabelInput}
-          <CustomButton
-            title={item.button.title}
+          <View style={styles.buttonContainer}>
+            <IconButton
+              icon='arrow-back-outline'
+              variant='secondary'
+              onPress={() => {
+                item.button.onPress();
+                handleScroll('prev');
+              }}
+            />
+            <IconButton
+            icon='arrow-forward-outline'
             onPress={() => {
               item.button.onPress();
-              scrollToNext();
+              // Step 1: Name
+              if (item.id === 1 && name !== '') {
+                handleScroll('next');
+              }
+              // Step 2: Date
+              else if (item.id === 2 && date !== '') {
+                handleScroll('next');
+              }
+              // Step 3: Time
+              else if (item.id === 3) {
+                handleScroll('next');
+              }
             }}
-          />
+          />  
+          </View>
         </View>
       </Animated.View>
     )
@@ -135,10 +229,17 @@ const Introduction = () => {
         keyExtractor={(item) => item.id.toString()}
         horizontal
         showsHorizontalScrollIndicator={false}
-        scrollEnabled={true}
+        scrollEnabled={false}
         pagingEnabled
-        windowSize={3}
-        initialNumToRender={3}
+        initialNumToRender={1}        
+        maxToRenderPerBatch={1}
+        windowSize={1} 
+        removeClippedSubviews={true}
+        getItemLayout={(_, index) => ({
+          length: width,            // her item'ın genişliği
+          offset: width * index,    // offset = index * genişlik
+          index,
+        })}
         onMomentumScrollEnd={(event) => {
           const newIndex = Math.round(event.nativeEvent.contentOffset.x / width);
           setCurrentIndex(newIndex);

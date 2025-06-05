@@ -22,10 +22,8 @@ export const styles = StyleSheet.create({
   label: {
     position: 'absolute',
     left: 60,
-    fontSize: 16,
     justifyContent: 'center',
     alignItems: 'center',
-    fontWeight: 'bold',
   },
   iconContainer: {
     padding: 8,

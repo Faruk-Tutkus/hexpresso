@@ -112,7 +112,7 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
       ]}>
         {leftIcon && (
           <View style={styles.iconContainer}>
-            <Icon name={leftIcon} size={24} color={colors.text} />
+            <Icon name={leftIcon as any} size={24} color={colors.text} />
           </View>
         )}
         <Animated.View style={[styles.label, labelStyle, { backgroundColor: colors.background }]}>
@@ -148,7 +148,7 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
           </TouchableOpacity>
         ) : rightIcon ? (
           <View style={styles.iconContainer}>
-            <Icon name={rightIcon} size={24} color={colors.text} />
+            <Icon name={rightIcon as any} size={24} color={colors.text} />
           </View>
         ) : null}
       </Animated.View>

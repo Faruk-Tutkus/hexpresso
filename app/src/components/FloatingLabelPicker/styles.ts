@@ -17,17 +17,18 @@ export const styles = StyleSheet.create({
   picker: {
     flex: 1,
     fontSize: 16,
-    paddingVertical: 8,
+    paddingVertical: 0,
   },
-  label: {
+  placeholder: {
     position: 'absolute',
     top: -11,
     transform: [{ scale: 0.9 }],
     left: 60,
-    fontSize: 16,
     justifyContent: 'center',
     alignItems: 'center',
-    fontWeight: 'bold',
+  },
+  pickerItem: {
+    left: 100,
   },
   iconContainer: {
     padding: 8,

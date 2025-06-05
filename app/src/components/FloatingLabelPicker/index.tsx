@@ -84,10 +84,10 @@ const FloatingLabelPicker: React.FC<FloatingLabelPickerProps> = ({
       ]}>
         {leftIcon && (
           <View style={styles.iconContainer}>
-            <Icon name={leftIcon} size={24} color={colors.text} />
+            <Icon name={leftIcon as any} size={24} color={colors.text} />
           </View>
         )}
-        <Animated.View style={[styles.label, { backgroundColor: colors.background }]}>
+        <Animated.View style={[styles.placeholder, { backgroundColor: colors.background }]}>
           <Text style={{ color: colors.text }}>{placeholder}</Text>
         </Animated.View>
         <Picker
@@ -95,7 +95,7 @@ const FloatingLabelPicker: React.FC<FloatingLabelPickerProps> = ({
           onValueChange={handleChangeText}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          style={[styles.picker, { color: colors.text }]}
+          style={[styles.picker, { color: colors.text, marginHorizontal: -11 }]}
           mode="dropdown"
           dropdownIconColor={colors.text}
         >

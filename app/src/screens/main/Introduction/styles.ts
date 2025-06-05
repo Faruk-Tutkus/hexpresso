@@ -25,6 +25,11 @@ const styles = StyleSheet.create({
         fontFamily: 'Domine-Regular',
         fontSize: 16,
     },
+    buttonContainer: {
+        flexDirection: 'row',
+        width: '80%',
+        justifyContent: 'space-between',
+    },
 })
 
 export default styles
