@@ -11,6 +11,13 @@ const useIntroductionData = () => {
   const [gender, setGender] = useState('');
   const [date, setDate] = useState<Date | ''>('');
   const [time, setTime] = useState<Date | ''>('');
+  const [reason, setReason] = useState('');
+  const [love, setLove] = useState('');
+  const [need, setNeed] = useState('');
+  const [mood, setMood] = useState('');
+  const [meaning, setMeaning] = useState('');
+  const [experience, setExperience] = useState('');
+  const [curious, setCurious] = useState('');
   const [error, setError] = useState({
     name: '',
     date: '',
@@ -19,12 +26,12 @@ const useIntroductionData = () => {
   const data = [
     {
       id: 1,
-      title: 'Hoşgeldiniz',
-      description: 'Seni tanımakla başlayalım, adın ne?',
+      title: '✨ Hoş geldin güzel ruh!',
+      description: 'Önce enerjine bir dokunalım... İsmini fısıldar mısın bana?',
       FloatingLabelInput: (
         <FloatingLabelInput
           value={name}
-          placeholder={'Adınızı giriniz'}
+          placeholder={'Adını söyle, yıldızlar duysun'}
           onChangeText={setName}
           type={'text'}
           leftIcon={'person'}
@@ -32,75 +39,197 @@ const useIntroductionData = () => {
         />
       ),
       button: {
-        title: 'Devam Et',
+        title: 'Sıradaki Yıldız ✨',
         onPress: () => {
           if (!name) {
-            setError(prev => ({ ...prev, name: 'Adınızı giriniz' }));
+            setError(prev => ({ ...prev, name: 'Adını yazmadan devam edemem tatlım 💫' }));
           }
         }
       }
     },
     {
       id: 2,
-      title: 'Doğum tarihin nedir?',
-      description: 'Bu, uygulamanın ilk ekranıdır',
+      title: '📅 Doğum Günü Kutlu Olsun...',
+      description: 'Burcun, kaderinin kilididir. Ne zaman doğdun canımın içi?',
       FloatingLabelInput: (
         <FloatingDatePicker
           value={date as Date}
           onChange={(date) => setDate(date)}
-          placeholder={'Doğum tarihinizi giriniz'}
+          placeholder={'Doğum gününü söyle bana'}
           leftIcon={'calendar'}
           error={error.date}
         />
       ),
       button: {
-        title: 'Devam Et',
+        title: 'Yıldız Haritasına Geç →',
         onPress: () => {
           if (!date) {
-            setError(prev => ({ ...prev, date: 'Doğum tarihinizi giriniz' }));
+            setError(prev => ({ ...prev, date: 'Tarih olmadan gökyüzünü okuyamam tatlım 🌙' }));
+            setError(prev => ({ ...prev, name: '' }));
           }
         }
       }
     },
     {
       id: 3,
-      title: 'Doğum saatiniz nedir?',
-      description: 'Bu, uygulamanın ilk ekranıdır',
+      title: '⏰ Gecenin kaçıydı o an?',
+      description: 'Doğduğun saat, yıldızlar hangi sıradaydı? Bilirsen söyle...',
       FloatingLabelInput: (
         <FloatingTimePicker
           value={time as Date}
           onChange={(date) => setTime(date)}
-          placeholder={'Doğum saatinizi giriniz'}
-          leftIcon={'calendar'}
+          placeholder={'Doğum saatini söyle tatlım'}
+          leftIcon={'time'}
         />
       ),
       button: {
-        title: 'Devam Et',
+        title: 'Devam Edelim 🌠',
         onPress: () => {
-
+          setError(prev => ({ ...prev, date: '' }));
         }
       }
     },
     {
       id: 4,
-      title: 'Cinsiyetin nedir?',
-      description: 'Bu, uygulamanın ilk ekranıdır',
+      title: '🌺 Enerjin hangi renkte?',
+      description: 'Eril mi dişil mi yoksa bambaşka bir frekansta mısın?',
       FloatingLabelInput: (
         <FloatingLabelPicker
           value={gender}
-          placeholder={'Cinsiyetinizi giriniz'}
+          placeholder={'Kendini nasıl tanımlarsın?'}
           onChangeText={setGender}
-          leftIcon={gender === 'Erkek' ? 'man' : 'woman'}
-          data={[{ id: '1', label: 'Erkek', value: 'Erkek' }, { id: '2', label: 'Kadın', value: 'Kadın' }]}
+          leftIcon={gender === 'Erkek' ? 'man' : gender === 'Kadın' ? 'woman' : 'star'}
+          data={[
+            { id: '1', label: 'Eril enerjideyim (Erkek)', value: 'Erkek' },
+            { id: '2', label: 'Dişil enerjideyim (Kadın)', value: 'Kadın' },
+            { id: '3', label: 'Tanımlamak istemiyorum ✨', value: 'Diğer' },
+          ]}
         />
       ),
       button: {
-        title: 'Devam Et',
-        onPress: () => {
-          
-        }
+        title: 'Gönül Frekansına Geç 💞',
+        onPress: () => { }
       }
     },
+    {
+      id: 5,
+      title: '💭 Ruhunu en çok ne yoruyor bugünlerde?',
+      description: 'Dertlerini içime çekmeden sana fal bakamam canım. En çok hangi konu canını sıkıyor?',
+      FloatingLabelInput: (
+        <FloatingLabelPicker
+          value={reason}
+          placeholder={'İçindeki yükü seç...'}
+          onChangeText={setReason}
+          leftIcon={'heart-broken'}
+          data={[
+            { id: '1', label: 'Aşk... Kalbim kırık 💔', value: 'aşk' },
+            { id: '2', label: 'İş / okul... Yoruldum artık 💼', value: 'iş' },
+            { id: '3', label: 'Ailemle aram gergin 🏠', value: 'aile' },
+            { id: '4', label: 'Kendime inancım zayıf 🪞', value: 'güven' },
+            { id: '5', label: 'Para derdi bitmiyor 💸', value: 'para' },
+            { id: '6', label: 'Sağlık sorunlarımdan usandım 🏥', value: 'sağlık' },
+            { id: '7', label: 'Gelecek... Korkuyorum 🌫️', value: 'gelecek' },
+            { id: '8', label: 'Yalnızım... çok yalnız 🕯️', value: 'yalnızlık' },
+            { id: '9', label: 'Arkadaşlarım uzaklaştı 🤝', value: 'arkadaşlık' },
+            { id: '10', label: 'Hayatın kendisi yorucu be abla... 🌀', value: 'hiçbiri' },
+          ]}
+        />
+      ),
+      button: {
+        title: 'Fincanı getiriyorum ☕',
+        onPress: () => { }
+      }
+    },
+    {
+      id: 6,
+      title: '❤️ Aşk hayatını anlat bakalım...',
+      description: 'Kalbin açık mı bir aşka? Anlat hadi, içini dök bana.',
+      FloatingLabelInput: (
+        <FloatingLabelInput
+          value={love}
+          placeholder={'Aşk var mı, yoksa kaçtı mı?'}
+          onChangeText={setLove}
+          type={'text'}
+          leftIcon={'heart'}
+        />
+      ),
+      button: {
+        title: 'Gönül Defterine Devam 💌',
+        onPress: () => { }
+      }
+    },
+    {
+      id: 7,
+      title: '🌈 Şu an hayatta en çok neye ihtiyacın var?',
+      description: 'Ruhunun eksik parçası ne dersin, neye sarılmak istersin?',
+      FloatingLabelInput: (
+        <FloatingLabelInput
+          value={need}
+          placeholder={'Bir dilek tut, belki gerçek olur...'}
+          onChangeText={setNeed}
+          type={'text'}
+          leftIcon={'gift'}
+        />
+      ),
+      button: {
+        title: 'Ruhsal Yolculuğa Devam 🌌',
+        onPress: () => { }
+      }
+    },
+    {
+      id: 8,
+      title: '🌀 Bugün enerjin nasıl?',
+      description: 'Güneş gibi mi parlıyorsun yoksa bulutlar mı var?',
+      FloatingLabelInput: (
+        <FloatingLabelInput
+          value={mood}
+          placeholder={'Bugünkü ruh halin ne alemde?'}
+          onChangeText={setMood}
+          type={'text'}
+          leftIcon={'emoji'}
+        />
+      ),
+      button: {
+        title: 'Hissediyorum 🔮',
+        onPress: () => { }
+      }
+    },
+    {
+      id: 9,
+      title: '🌌 Bu hayatta ne arıyorsun?',
+      description: 'Anlam mı, huzur mu, başarı mı? Neyin peşindesin?',
+      FloatingLabelInput: (
+        <FloatingLabelInput
+          value={meaning}
+          placeholder={'Hayat senin için ne ifade ediyor?'}
+          onChangeText={setMeaning}
+          type={'text'}
+          leftIcon={'compass'}
+        />
+      ),
+      button: {
+        title: 'Gökyüzüne Bir Adım Daha 🌠',
+        onPress: () => { }
+      }
+    },
+    {
+      id: 10,
+      title: '🔮 Daha önce hiç fal deneyimin oldu mu?',
+      description: 'İlk defa mı geliyorsun yoksa biz tanışıyor muyuz çoktan?',
+      FloatingLabelInput: (
+        <FloatingLabelInput
+          value={experience}
+          placeholder={'İtiraf et bakalım...'}
+          onChangeText={setExperience}
+          type={'text'}
+          leftIcon={'sparkles'}
+        />
+      ),
+      button: {
+        title: 'Gizemli Soruya Geçelim ✨',
+        onPress: () => { }
+      }
+    }
   ];
 
   return {
@@ -113,14 +242,29 @@ const useIntroductionData = () => {
     setGender,
     error,
     time,
-    setTime
+    setTime,
+    reason,
+    setReason,
+    love,
+    setLove,
+    need,
+    setNeed,
+    mood,
+    setMood,
+    meaning,
+    setMeaning,
+    experience,
+    setExperience,
+    curious,
+    setCurious
   };
 };
+
 
 const Introduction = () => {
   const { colors } = useTheme();
   const { width } = Dimensions.get('window');
-  const { data, name, setName, date, setDate, gender, setGender, error, time, setTime } = useIntroductionData();
+  const { data, name, setName, date, setDate, gender, setGender, error, time, setTime, reason, setReason, love, setLove, need, setNeed, mood, setMood, meaning, setMeaning, experience, setExperience, curious, setCurious } = useIntroductionData();
   const flatListRef = useRef<FlatList>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -131,7 +275,13 @@ const Introduction = () => {
         (currentIndex === 0 && name === '') ||
         (currentIndex === 1 && date === '') ||
         (currentIndex === 2 && time === '') ||
-        (currentIndex === 3 && gender === '')
+        (currentIndex === 3 && gender === '') ||
+        (currentIndex === 4 && reason === '') ||
+        (currentIndex === 5 && love === '') ||
+        (currentIndex === 6 && need === '') ||
+        (currentIndex === 7 && mood === '') ||
+        (currentIndex === 8 && meaning === '') ||
+        (currentIndex === 9 && experience === '')
       ) {
         return false;
       }
@@ -144,7 +294,14 @@ const Introduction = () => {
       if (
         (currentIndex === 1 && name === '') ||
         (currentIndex === 2 && date === '') ||
-        (currentIndex === 3 && time === '')
+        (currentIndex === 3 && time === '') ||
+        (currentIndex === 4 && gender === '') ||
+        (currentIndex === 5 && reason === '') ||
+        (currentIndex === 6 && love === '') ||
+        (currentIndex === 7 && need === '') ||
+        (currentIndex === 8 && mood === '') ||
+        (currentIndex === 9 && meaning === '') ||
+        (currentIndex === 10 && experience === '')
       ) {
         return false;
       }
@@ -177,7 +334,7 @@ const Introduction = () => {
     return false;
   };
 
-  const renderItem = ({ item, index }: { item: any, index: number }) => {
+  const renderItem = ({ item }: { item: any }) => {
     return (
       <Animated.View
         entering={FadeIn}
@@ -202,6 +359,7 @@ const Introduction = () => {
               // Step 1: Name
               if (item.id === 1 && name !== '') {
                 handleScroll('next');
+
               }
               // Step 2: Date
               else if (item.id === 2 && date !== '') {
@@ -209,6 +367,34 @@ const Introduction = () => {
               }
               // Step 3: Time
               else if (item.id === 3) {
+                handleScroll('next');
+              }
+              // Step 4: Gender
+              else if (item.id === 4 && gender !== '') {
+                handleScroll('next');
+              }
+              // Step 5: Reason
+              else if (item.id === 5 && reason !== '') {
+                handleScroll('next');
+              }
+              // Step 6: Love
+              else if (item.id === 6 && love !== '') {
+                handleScroll('next');
+              }
+              // Step 7: Need
+              else if (item.id === 7 && need !== '') {
+                handleScroll('next');
+              }
+              // Step 8: Mood
+              else if (item.id === 8 && mood !== '') {
+                handleScroll('next');
+              }
+              // Step 9: Meaning 
+              else if (item.id === 9 && meaning !== '') {
+                handleScroll('next');
+              }
+              // Step 10: Experience
+              else if (item.id === 10 && experience !== '') {
                 handleScroll('next');
               }
             }}
