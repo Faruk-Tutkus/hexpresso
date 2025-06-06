@@ -23,7 +23,7 @@ export const useSignInWithEmail = () => {
         setResult({
           user: userCredential,
           error: null,
-          loading: false,
+          loading: true,
         });
         return userCredential;
       } else {
@@ -37,6 +37,9 @@ export const useSignInWithEmail = () => {
         loading: false,
       });
       throw error;
+    }
+    finally {
+      setResult(prev => ({ ...prev, loading: false }));
     }
   };
 

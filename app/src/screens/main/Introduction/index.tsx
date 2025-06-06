@@ -1,7 +1,7 @@
 import { IconButton } from '@components';
 import { useTheme } from '@providers';
 import { useRef, useState } from 'react';
-import { Dimensions, FlatList, Text, View } from 'react-native';
+import { Dimensions, FlatList, KeyboardAvoidingView, Text, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 
 import useIntroductionData from './Data';
@@ -117,6 +117,7 @@ const Introduction = () => {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
+      <KeyboardAvoidingView behavior='padding' style={{  }}>
       <Animated.FlatList
         ref={flatListRef}
         contentContainerStyle={[styles.flatList]}
@@ -136,11 +137,12 @@ const Introduction = () => {
           offset: width * index,    // offset = index * genişlik
           index,
         })}
-        onMomentumScrollEnd={(event) => {
-          const newIndex = Math.round(event.nativeEvent.contentOffset.x / width);
-          setCurrentIndex(newIndex);
-        }}
+        // onMomentumScrollEnd={(event) => {
+        //   const newIndex = Math.round(event.nativeEvent.contentOffset.x / width);
+        //   setCurrentIndex(newIndex);
+        // }}
       />
+      </KeyboardAvoidingView>
     </View>
   )
 }

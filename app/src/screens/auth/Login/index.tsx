@@ -12,7 +12,7 @@ const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const { showToast } = useToast()
-  const { signIn, user, loading } = useSignInWithEmail()
+  const { signIn } = useSignInWithEmail()
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState({
@@ -22,32 +22,35 @@ const Login = () => {
   })
   const handleSignIn = async () => {
     try {
-      setIsLoading(true)
-      setErrorMessage(prev => ({ ...prev, email: '', password: '', general: '' }))
-      await signIn(email, password)
-      if (user) {
-        router.push('/src/screens/main/home')
+      setIsLoading(true);
+      setErrorMessage(prev => ({ ...prev, email: '', password: '', general: '' }));
+      
+      const userCredential = await signIn(email, password);
+      
+      if (userCredential?.user?.emailVerified) {
+        router.push('/src/screens/main/home');
       }
-      console.log(user)
     } catch (error: any) {
       if (error === 'auth/email-not-verified') {
-        showToast(t('auth.auth/email-not-verified'), 'error')
+        showToast(t('auth.auth/email-not-verified'), 'error');
+        return;
       }
-      const errorKey = `auth.${JSON.stringify(error.code).replace(/["]/g, '')}`
-      const errorMsg = t(errorKey)
-      console.log(error)
-      if (error.code.includes('email')) {
-        setErrorMessage(prev => ({ ...prev, email: errorMsg }))
-      } else if (error.code.includes('password')) {
-        setErrorMessage(prev => ({ ...prev, password: errorMsg }))
+
+      const errorKey = `auth.${JSON.stringify(error.code).replace(/["]/g, '')}`;
+      const errorMsg = t(errorKey);
+
+      if (error.code?.includes('email')) {
+        setErrorMessage(prev => ({ ...prev, email: errorMsg }));
+      } else if (error.code?.includes('password')) {
+        setErrorMessage(prev => ({ ...prev, password: errorMsg }));
       } else {
-        setErrorMessage(prev => ({ ...prev, general: errorMsg }))
-        showToast(errorMessage.general, 'error')
+        setErrorMessage(prev => ({ ...prev, general: errorMsg }));
+        showToast(errorMsg, 'error');
       }
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.content}>

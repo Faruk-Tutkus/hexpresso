@@ -1,10 +1,15 @@
 import { AuthProvider, ThemeProvider, ToastProvider, useTheme } from "@providers";
 import { useFonts } from 'expo-font';
 import { Stack } from "expo-router";
-
+import * as SystemUI from 'expo-system-ui';
+import { useEffect } from "react";
+import Animated from "react-native-reanimated";
 
 export function AppContent() {
   const { theme, colors } = useTheme();
+  useEffect(() => {
+    SystemUI.setBackgroundColorAsync(colors.background);
+  }, [colors.background]);
   const [fontsLoaded] = useFonts({
     'Almendra-Regular': require('./src/assets/fonts/Almendra-Regular.ttf'),
     'CroissantOne-Regular': require('./src/assets/fonts/CroissantOne-Regular.ttf'),
@@ -18,13 +23,16 @@ export function AppContent() {
   }
   return (
     <Stack
-      initialRouteName="src/screens/main/Introduction/index"
+      //initialRouteName="src/screens/main/Introduction/index"
       screenOptions={{
         headerShown: false,
         animation: 'slide_from_right',
         animationDuration: 300,
         statusBarStyle: theme === 'dark' ? 'light' : 'dark',
         statusBarBackgroundColor: colors.background,
+        contentStyle: {
+          backgroundColor: colors.background,
+        },
       }}
     >
       <Stack.Screen name="src/screens/side/SplashScreen/index" />
@@ -39,9 +47,11 @@ export default function RootLayout() {
     <ThemeProvider>
       <ToastProvider>
         <AuthProvider>
-          <AppContent />
+          <Animated.View style={{ flex: 1, backgroundColor: 'transparent' }}>
+            <AppContent />
+          </Animated.View>
         </AuthProvider>
       </ToastProvider>
     </ThemeProvider>
-  );
+);
 }
