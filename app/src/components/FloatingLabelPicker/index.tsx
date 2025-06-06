@@ -57,6 +57,28 @@ const FloatingLabelPicker: React.FC<FloatingLabelPickerProps> = ({
     }).start();
   }, [value]);
 
+
+  const labelStyle = {
+    transform: [
+      {
+        translateY: animatedLabelPosition.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, -28],
+        })
+      },
+      {
+        scale: animatedLabelPosition.interpolate({
+          inputRange: [0, 1],
+          outputRange: [1, 0.9],
+        })
+      }
+    ],
+    opacity: animatedLabelPosition.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0.5, 1],
+    }),
+  };
+
   const handleChangeText = (text: string) => {
     if (localError) {
       setLocalError('');
@@ -87,7 +109,7 @@ const FloatingLabelPicker: React.FC<FloatingLabelPickerProps> = ({
             <Icon name={leftIcon as any} size={24} color={colors.text} />
           </View>
         )}
-        <Animated.View style={[styles.placeholder, { backgroundColor: colors.background }]}>
+        <Animated.View style={[styles.placeholder, { backgroundColor: colors.background }, labelStyle]}>
           <Text style={{ color: colors.text }}>{placeholder}</Text>
         </Animated.View>
         <Picker
@@ -99,8 +121,9 @@ const FloatingLabelPicker: React.FC<FloatingLabelPickerProps> = ({
           mode="dropdown"
           dropdownIconColor={colors.text}
         >
+          {!isFocused && <Picker.Item label="" value="" />}
           {data.map((item) => (
-            <Picker.Item key={item.id} label={item.label} value={item.value}/>
+            <Picker.Item key={item.id} label={item.label} value={item.value} />
           ))}
         </Picker>
       </Animated.View>

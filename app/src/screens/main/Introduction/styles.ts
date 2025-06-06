@@ -11,23 +11,28 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     item: {
-        minHeight: 300,
-        borderRadius: 10,
+        minHeight: 400,
         justifyContent: 'center',
         alignItems: 'center',
     },
     title: {
         textAlign: 'center',
+        paddingHorizontal: 20,
         fontFamily: 'CroissantOne-Regular',
         fontSize: 36,
     },
     description: {
         fontFamily: 'Domine-Regular',
+        alignContent: 'center',
+        textAlign: 'center',
+        paddingHorizontal: 20,
+        marginVertical: 15,
         fontSize: 16,
     },
     buttonContainer: {
         flexDirection: 'row',
         width: '80%',
+        marginTop: 15,
         justifyContent: 'space-between',
     },
 })

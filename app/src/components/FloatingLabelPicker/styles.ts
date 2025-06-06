@@ -21,8 +21,6 @@ export const styles = StyleSheet.create({
   },
   placeholder: {
     position: 'absolute',
-    top: -11,
-    transform: [{ scale: 0.9 }],
     left: 60,
     justifyContent: 'center',
     alignItems: 'center',
