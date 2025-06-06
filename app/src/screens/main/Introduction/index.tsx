@@ -49,7 +49,7 @@ const useIntroductionData = () => {
     },
     {
       id: 2,
-      title: '📅 Doğum Günü Kutlu Olsun...',
+      title: 'Doğum Günü Kutlu Olsun...',
       description: 'Burcun, kaderinin kilididir. Ne zaman doğdun canımın içi?',
       FloatingLabelInput: (
         <FloatingDatePicker
@@ -79,7 +79,7 @@ const useIntroductionData = () => {
           value={time as Date}
           onChange={(date) => setTime(date)}
           placeholder={'Doğum saatini söyle tatlım'}
-          leftIcon={'time'}
+          leftIcon={'clock'}
         />
       ),
       button: {
@@ -142,92 +142,142 @@ const useIntroductionData = () => {
     },
     {
       id: 6,
-      title: '❤️ Aşk hayatını anlat bakalım...',
-      description: 'Kalbin açık mı bir aşka? Anlat hadi, içini dök bana.',
+      title: '❤️ Kalbin ne diyor?',
+      description: 'Aşk hayatın nasıl gidiyor tatlım?',
       FloatingLabelInput: (
-        <FloatingLabelInput
+        <FloatingLabelPicker
           value={love}
-          placeholder={'Aşk var mı, yoksa kaçtı mı?'}
+          placeholder={'Aşk durumun nedir?'}
           onChangeText={setLove}
-          type={'text'}
           leftIcon={'heart'}
+          data={[
+            { id: '1', label: 'Aşık oldum 🥰', value: 'aşık' },
+            { id: '2', label: 'Kalbim kırık 💔', value: 'kırık' },
+            { id: '3', label: 'Yalnızım ama umutluyum 🌈', value: 'umut' },
+            { id: '4', label: 'Aşka inancım kalmadı 🖤', value: 'yok' },
+          ]}
         />
       ),
       button: {
-        title: 'Gönül Defterine Devam 💌',
-        onPress: () => { }
+        title: 'İç Sesine Kulak Ver 🔮',
+        onPress: () => {}
       }
     },
     {
       id: 7,
-      title: '🌈 Şu an hayatta en çok neye ihtiyacın var?',
-      description: 'Ruhunun eksik parçası ne dersin, neye sarılmak istersin?',
+      title: '🫶 En çok neye ihtiyaç duyuyorsun?',
+      description: 'Şu an en çok ne seni iyi hissettirir?',
       FloatingLabelInput: (
-        <FloatingLabelInput
+        <FloatingLabelPicker
           value={need}
-          placeholder={'Bir dilek tut, belki gerçek olur...'}
+          placeholder={'İhtiyacın nedir?'}
           onChangeText={setNeed}
-          type={'text'}
-          leftIcon={'gift'}
+          leftIcon={'hands-helping'}
+          data={[
+            { id: '1', label: 'Sevgi 💞', value: 'sevgi' },
+            { id: '2', label: 'Huzur 🕊️', value: 'huzur' },
+            { id: '3', label: 'Başarı 🏆', value: 'başarı' },
+            { id: '4', label: 'Güven 🔐', value: 'güven' },
+          ]}
         />
       ),
       button: {
-        title: 'Ruhsal Yolculuğa Devam 🌌',
-        onPress: () => { }
+        title: 'Ruh Haline Geçelim ☁️',
+        onPress: () => {}
       }
     },
     {
       id: 8,
-      title: '🌀 Bugün enerjin nasıl?',
-      description: 'Güneş gibi mi parlıyorsun yoksa bulutlar mı var?',
+      title: '🌈 Bugün nasılsın?',
+      description: 'Ruh halin bir şarkı olsaydı hangi tonda çalardı?',
       FloatingLabelInput: (
-        <FloatingLabelInput
+        <FloatingLabelPicker
           value={mood}
-          placeholder={'Bugünkü ruh halin ne alemde?'}
+          placeholder={'Duygusal frekansını seç'}
           onChangeText={setMood}
-          type={'text'}
-          leftIcon={'emoji'}
+          leftIcon={'smile'}
+          data={[
+            { id: '1', label: 'Mutlu 😊', value: 'mutlu' },
+            { id: '2', label: 'Hüzünlü 😢', value: 'hüzünlü' },
+            { id: '3', label: 'Kafam karışık 🤯', value: 'karışık' },
+            { id: '4', label: 'Sakin 😌', value: 'sakin' },
+          ]}
         />
       ),
       button: {
-        title: 'Hissediyorum 🔮',
-        onPress: () => { }
+        title: 'Simgeleri Seçiyoruz 🧿',
+        onPress: () => {}
       }
     },
     {
       id: 9,
-      title: '🌌 Bu hayatta ne arıyorsun?',
-      description: 'Anlam mı, huzur mu, başarı mı? Neyin peşindesin?',
+      title: '🪬 Rüyanda hangi semboller vardı?',
+      description: 'Sana özel mesajlar hangi imgelerde saklıydı?',
       FloatingLabelInput: (
-        <FloatingLabelInput
+        <FloatingLabelPicker
           value={meaning}
-          placeholder={'Hayat senin için ne ifade ediyor?'}
+          placeholder={'Bir sembol seç'}
           onChangeText={setMeaning}
-          type={'text'}
-          leftIcon={'compass'}
+          leftIcon={'eye'}
+          data={[
+            { id: '1', label: 'Kelebek 🦋', value: 'kelebek' },
+            { id: '2', label: 'Yılan 🐍', value: 'yılan' },
+            { id: '3', label: 'Ayna 🪞', value: 'ayna' },
+            { id: '4', label: 'Karanlık 🌑', value: 'karanlık' },
+          ]}
         />
       ),
       button: {
-        title: 'Gökyüzüne Bir Adım Daha 🌠',
-        onPress: () => { }
+        title: 'Yaşanmışlıklara Bakalım 🕰️',
+        onPress: () => {}
       }
     },
     {
       id: 10,
-      title: '🔮 Daha önce hiç fal deneyimin oldu mu?',
-      description: 'İlk defa mı geliyorsun yoksa biz tanışıyor muyuz çoktan?',
+      title: '📖 Hayatında seni en çok etkileyen neydi?',
+      description: 'Bir olay, bir kişi, bir an... Seni en çok şekillendiren şey neydi?',
       FloatingLabelInput: (
-        <FloatingLabelInput
+        <FloatingLabelPicker
           value={experience}
-          placeholder={'İtiraf et bakalım...'}
+          placeholder={'Birini seç tatlım'}
           onChangeText={setExperience}
-          type={'text'}
-          leftIcon={'sparkles'}
+          leftIcon={'star'}
+          data={[
+            { id: '1', label: 'Ailemle yaşadığım bir olay 👪', value: 'aile' },
+            { id: '2', label: 'Aşık olduğum biri ❤️', value: 'aşk' },
+            { id: '3', label: 'Kariyer yolculuğum 💼', value: 'kariyer' },
+            { id: '4', label: 'Bir kayıp... 🕯️', value: 'kayıp' },
+          ]}
         />
       ),
       button: {
-        title: 'Gizemli Soruya Geçelim ✨',
-        onPress: () => { }
+        title: 'Son Soruya Geçiyoruz 🧠',
+        onPress: () => {}
+      }
+    },
+    {
+      id: 11,
+      title: '🔍 En çok neyi merak ediyorsun?',
+      description: 'Geleceğinle ilgili seni en çok heyecanlandıran veya kafanı kurcalayan konu ne?',
+      FloatingLabelInput: (
+        <FloatingLabelPicker
+          value={curious}
+          placeholder={'Merak ettiğin bir alan seç'}
+          onChangeText={setCurious}
+          leftIcon={'question'}
+          data={[
+            { id: '1', label: 'Aşk hayatım ❤️', value: 'aşk' },
+            { id: '2', label: 'Kariyerim 💼', value: 'kariyer' },
+            { id: '3', label: 'Sağlık durumum 🏥', value: 'sağlık' },
+            { id: '4', label: 'Ailemle ilgili gelişmeler 👪', value: 'aile' },
+            { id: '5', label: 'Parasal konular 💸', value: 'para' },
+            { id: '6', label: 'Hayatımın genel akışı 🌀', value: 'genel' },
+          ]}
+        />
+      ),
+      button: {
+        title: 'Falına Geçiyoruz ✨',
+        onPress: () => {}
       }
     }
   ];
@@ -259,6 +309,7 @@ const useIntroductionData = () => {
     setCurious
   };
 };
+
 
 
 const Introduction = () => {
