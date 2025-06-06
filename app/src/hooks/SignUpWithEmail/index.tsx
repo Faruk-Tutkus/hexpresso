@@ -47,6 +47,9 @@ export const useSignUpWithEmail = () => {
       });
       throw error;
     }
+    finally {
+      setResult(prev => ({ ...prev, loading: false }));
+    }
   };
 
   return {

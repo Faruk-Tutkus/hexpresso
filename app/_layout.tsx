@@ -23,7 +23,7 @@ export function AppContent() {
   }
   return (
     <Stack
-      //initialRouteName="src/screens/main/Introduction/index"
+      initialRouteName="src/screens/auth/Register/index"
       screenOptions={{
         headerShown: false,
         animation: 'slide_from_right',

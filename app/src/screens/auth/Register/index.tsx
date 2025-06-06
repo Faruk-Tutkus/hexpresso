@@ -14,9 +14,9 @@ const Register = () => {
   const [password, setPassword] = useState('')
   const [rePassword, setRePassword] = useState('')
   const { t } = useTranslation()
-  const { showToast, message, type } = useToast()
+  const { showToast } = useToast()
 
-  const { signUp, error, loading, user } = useSignUpWithEmail()
+  const { signUp, loading } = useSignUpWithEmail()
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState({
     email: '',
@@ -35,7 +35,7 @@ const Register = () => {
   
   const handleSignIn = async () => {
     try {
-      setIsLoading(true)
+      setIsLoading(loading)
       // Reset error messages first
       setErrorMessage(prev => ({ ...prev, email: '', password: '', general: '', displayName: '' }))
 
@@ -44,8 +44,13 @@ const Register = () => {
         return
       }
       
-      await signUp(email, password, displayName)
-      showToast("Dogrulama linki gonderildi", 'success')
+      const userCredential = await signUp(email, password, displayName)
+      if (userCredential) {
+        showToast("Dogrulama linki gonderildi", 'success')
+        router.push('/src/screens/auth/Login')
+      } else {
+        showToast("Dogrulama linki gonderildi", 'error')
+      }
       router.push('/src/screens/auth/Login')
     } catch (error: any) {
       if (error) {
@@ -61,7 +66,7 @@ const Register = () => {
         }
       }
     } finally {
-      setIsLoading(false)
+      setIsLoading(loading)
     }
   }
   console.log(errorMessage)
