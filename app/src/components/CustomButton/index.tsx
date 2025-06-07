@@ -3,9 +3,11 @@ import { useTheme } from '@providers';
 import React from 'react';
 import {
   ActivityIndicator,
+  StyleProp,
   Text,
   TouchableOpacity,
-  View
+  View,
+  ViewStyle
 } from 'react-native';
 import styles from './styles';
 interface CustomButtonProps {
@@ -17,16 +19,19 @@ interface CustomButtonProps {
   disabled?: boolean;
   leftIcon?: string;
   rightIcon?: string;
+  contentStyle?: StyleProp<ViewStyle>;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
   onPress,
   title,
+  variant = 'primary',
   size = 'medium',
   loading = false,
   disabled = false,
   leftIcon,
   rightIcon,
+  contentStyle,
 }) => {
   const { colors } = useTheme();
 
@@ -37,11 +42,12 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       disabled={disabled || loading}
       style={[
         styles.container,
+        contentStyle,
         disabled && styles.disabled,
-        { backgroundColor: colors.primary },
+        { backgroundColor: variant === 'secondary' ? colors.errorBorder : colors.primary },
       ]}
     >
-      <View style={styles.content}>
+      <View style={[styles.content]}>
         {loading ? (
           <ActivityIndicator 
             color={colors.surface} 
@@ -53,16 +59,16 @@ const CustomButton: React.FC<CustomButtonProps> = ({
               <Icon 
                 name={leftIcon as any} 
                 size={size === 'small' ? 16 : size === 'medium' ? 20 : 24} 
-                color={colors.surface} 
+                color={colors.background} 
                 style={styles.leftIcon}
               />
             )}
-            <Text style={styles.text}>{title}</Text>
+            <Text style={[styles.text, { color: variant === 'secondary' ? colors.text : colors.surface }]}>{title}</Text>
             {rightIcon && (
               <Icon 
                 name={rightIcon as any} 
                 size={size === 'small' ? 16 : size === 'medium' ? 20 : 24} 
-                color={colors.surface} 
+                color={colors.background} 
                 style={styles.rightIcon}
               />
             )}

@@ -7,8 +7,8 @@ import styles from "./styles";
 
 const  SplashScreen = () => {
   const router = useRouter()
-  const { theme, colors, toggleTheme } = useTheme()
-  const [texts, setTexts] = useState([
+  const { theme, colors } = useTheme()
+  const [texts] = useState([
     "Sana bir sır fısıldayacağım, hazır ol...",
     "Bugün kaderini değiştirecek bir şey olacak...",
     "Boşuna bekleme, mesaj gelmeyecek...",
@@ -29,7 +29,7 @@ const  SplashScreen = () => {
   
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.replace("/src/screens/auth/Login")
+      router.replace("/src/screens/main/StartScreen")
     }
     , 3000)
     return () => clearTimeout(timer)
