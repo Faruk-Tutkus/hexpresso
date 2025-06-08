@@ -1,8 +1,9 @@
-import { IconButton } from '@components';
+import { CustomButton, IconButton } from '@components';
 import { useTheme } from '@providers';
+import { useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
 import { Dimensions, FlatList, KeyboardAvoidingView, Text, View } from 'react-native';
-import Animated, { FadeIn } from 'react-native-reanimated';
+import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
 import useIntroductionData from './Data';
 import styles from './styles';
@@ -14,7 +15,19 @@ const Introduction = () => {
   const { data, name, setName, date, setDate, gender, setGender, error, time, setTime, reason, setReason, love, setLove, need, setNeed, mood, setMood, meaning, setMeaning, experience, setExperience, curious, setCurious } = useIntroductionData();
   const flatListRef = useRef<FlatList>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  const router = useRouter();
+  const isAllFieldsFilled = () => {
+    return name !== '' && 
+           date !== '' && 
+           gender !== '' && 
+           reason !== '' && 
+           love !== '' && 
+           need !== '' && 
+           mood !== '' && 
+           meaning !== '' && 
+           experience !== '' &&
+           curious !== '';
+  };
   // Sadece kontrol için
   const canScroll = (direction: 'next' | 'prev') => {
     if (direction === 'next') {
@@ -83,12 +96,13 @@ const Introduction = () => {
     return (
       <Animated.View
         entering={FadeIn}
+        exiting={FadeOut}
       >
         <View style={[styles.item, { width }]}> 
           <Text style={[styles.title, { color: colors.text }]}>{item.title}</Text>
           <Text style={[styles.description, { color: colors.text }]}>{item.description}</Text>
           {item.FloatingLabelInput}
-          <View style={[styles.buttonContainer, { justifyContent: currentIndex === 0 ? 'flex-end' : currentIndex === data.length - 1 ? 'flex-start' : 'space-between' }]}>
+          <View style={[styles.buttonContainer, { justifyContent: currentIndex === 0 ? 'flex-end' : 'space-between' }]}>
             {currentIndex > 0 && (
               <IconButton
                 icon='arrow-back-outline'
@@ -106,6 +120,29 @@ const Introduction = () => {
                 onPress={() => {
                   item.button.onPress();
                   handleScroll('next');
+                }}
+              />
+            )}
+            {currentIndex === data.length - 1 && isAllFieldsFilled() && (
+              <CustomButton
+                title='Hadi Başlayalım'
+                onPress={() => {
+                  router.push({
+                    pathname: '/src/screens/auth/Register',
+                    params: {
+                      name,
+                      date: date ? date.toISOString() : '',
+                      time: time ? time.toISOString() : '',
+                      gender,
+                      reason,
+                      love,
+                      need,
+                      mood,
+                      meaning,
+                      experience,
+                      curious,
+                    }
+                  });
                 }}
               />
             )}

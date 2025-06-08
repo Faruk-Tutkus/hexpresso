@@ -47,7 +47,7 @@ const IconButton: React.FC<IconButtonProps> = ({
               <Icon 
                 name={icon as any} 
                 size={size === 'small' ? 16 : size === 'medium' ? 20 : 24} 
-                color={colors.surface}
+                color={variant === 'primary' ? colors.background : colors.text}
               />
             )}
           </>

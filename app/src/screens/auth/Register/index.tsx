@@ -1,7 +1,7 @@
 import { ContainerButton, CustomButton, FloatingLabelInput } from '@components'
 import { useSignUpWithEmail } from '@hooks'
 import { useTheme, useToast } from '@providers'
-import { router } from 'expo-router'
+import { router, useLocalSearchParams } from 'expo-router'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
@@ -9,7 +9,8 @@ import '../../../utils/i18n'
 import styles from './styles'
 const Register = () => {
   const { theme, colors, toggleTheme } = useTheme()
-  const [displayName, setDisplayName] = useState('')
+  const { name, date, time, gender, reason, love, need, mood, meaning, experience, curious } = useLocalSearchParams()
+  const [displayName, setDisplayName] = useState(name)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [rePassword, setRePassword] = useState('')
@@ -44,19 +45,17 @@ const Register = () => {
         return
       }
       
-      const userCredential = await signUp(email, password, displayName)
+      const userCredential = await signUp(email, password, displayName as string)
       if (userCredential) {
         showToast("Dogrulama linki gonderildi", 'success')
-        router.push('/src/screens/auth/Login')
+        router.replace('/src/screens/auth/Login')
       } else {
-        showToast("Dogrulama linki gonderildi", 'error')
+        showToast("Bir hata oluştu", 'error')
       }
-      router.push('/src/screens/auth/Login')
     } catch (error: any) {
       if (error) {
         const errorKey = `auth.${JSON.stringify(error.code).replace(/["]/g, '')}`
         const errorMsg = t(errorKey)
-        console.log(error)
         if (error.code.includes('email')) {
           setErrorMessage(prev => ({ ...prev, email: errorMsg }))
         } else if (error.code.includes('password')) {
@@ -69,13 +68,12 @@ const Register = () => {
       setIsLoading(loading)
     }
   }
-  console.log(errorMessage)
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.content}>
         <FloatingLabelInput
           placeholder="Name"
-          value={displayName}
+          value={displayName as string}
           onChangeText={setDisplayName}
           leftIcon="person"
           type="text"

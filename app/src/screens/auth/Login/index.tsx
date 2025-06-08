@@ -5,6 +5,7 @@ import { router } from 'expo-router'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
+import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
 import '../../../utils/i18n'
 import styles from './styles'
 const Login = () => {
@@ -28,7 +29,7 @@ const Login = () => {
       const userCredential = await signIn(email, password);
       
       if (userCredential?.user?.emailVerified) {
-        router.push('/src/screens/main/home');
+        router.replace('/src/screens/main/home');
       }
     } catch (error: any) {
       if (error === 'auth/email-not-verified') {
@@ -52,7 +53,7 @@ const Login = () => {
     }
   };
   return (
-    <View style={[styles.container, { backgroundColor: colors.background }]}>
+    <Animated.View entering={FadeIn} exiting={FadeOut} style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.content}>
         <FloatingLabelInput
           placeholder="Email"
@@ -104,7 +105,7 @@ const Login = () => {
           />
         </View>
       </View>
-    </View>
+    </Animated.View>
   )
 }
 

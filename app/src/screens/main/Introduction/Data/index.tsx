@@ -102,9 +102,9 @@ const useIntroductionData = () => {
             onChangeText={setGender}
             leftIcon={gender === 'Erkek' ? 'man' : gender === 'Kadın' ? 'woman' : 'star'}
             data={[
-              { id: '1', label: 'Eril enerjideyim (Erkek)', value: 'Erkek' },
-              { id: '2', label: 'Dişil enerjideyim (Kadın)', value: 'Kadın' },
-              { id: '5', label: 'Tanımlamak istemiyorum ✨', value: 'Diğer' },
+              { id: '1', label: 'Eril enerjideyim (Erkek)', value: 'masculine_energy' },
+              { id: '2', label: 'Dişil enerjideyim (Kadın)', value: 'feminine_energy' },
+              { id: '5', label: 'Tanımlamak istemiyorum ✨', value: 'undefined_energy' },
             ]}
             error={error.gender}
           />
@@ -128,19 +128,19 @@ const useIntroductionData = () => {
             onChangeText={setReason}
             leftIcon={'heart-dislike-outline'}
             data={[
-              { id: '1', label: 'Aşk... Kalbim kırık 💔', value: 'aşk' },
-              { id: '2', label: 'İş / okul... Yoruldum artık 💼', value: 'iş' },
-              { id: '3', label: 'Ailemle aram gergin 🏠', value: 'aile' },
-              { id: '4', label: 'Kendime inancım zayıf 🪞', value: 'güven' },
-              { id: '5', label: 'Para derdi bitmiyor 💸', value: 'para' },
-              { id: '6', label: 'Sağlık sorunlarımdan usandım 🏥', value: 'sağlık' },
-              { id: '7', label: 'Gelecek... Korkuyorum 🌫️', value: 'gelecek' },
-              { id: '8', label: 'Yalnızım... çok yalnız 🕯️', value: 'yalnızlık' },
-              { id: '9', label: 'Arkadaşlarım uzaklaştı 🤝', value: 'arkadaşlık' },
-              { id: '10', label: 'Ruhsal bir arayıştayım 🌟', value: 'ruhsal' },
-              { id: '11', label: 'Kariyer yolculuğumda kayboldum 🗺️', value: 'kariyer' },
-              { id: '12', label: 'İç huzurumu kaybettim 🧘‍♀️', value: 'huzur' },
-              { id: '13', label: 'Hayatın kendisi yorucu be abla... 🌀', value: 'hiçbiri' },
+              { id: '1', label: 'Aşk... Kalbim kırık 💔', value: 'broken_heart_love' },
+              { id: '2', label: 'İş / okul... Yoruldum artık 💼', value: 'work_school_exhaustion' },
+              { id: '3', label: 'Ailemle aram gergin 🏠', value: 'family_tension' },
+              { id: '4', label: 'Kendime inancım zayıf 🪞', value: 'low_self_confidence' },
+              { id: '5', label: 'Para derdi bitmiyor 💸', value: 'financial_struggles' },
+              { id: '6', label: 'Sağlık sorunlarımdan usandım 🏥', value: 'health_issues' },
+              { id: '7', label: 'Gelecek... Korkuyorum 🌫️', value: 'future_anxiety' },
+              { id: '8', label: 'Yalnızım... çok yalnız 🕯️', value: 'loneliness' },
+              { id: '9', label: 'Arkadaşlarım uzaklaştı 🤝', value: 'distant_friendships' },
+              { id: '10', label: 'Ruhsal bir arayıştayım 🌟', value: 'spiritual_search' },
+              { id: '11', label: 'Kariyer yolculuğumda kayboldum 🗺️', value: 'career_confusion' },
+              { id: '12', label: 'İç huzurumu kaybettim 🧘‍♀️', value: 'lost_inner_peace' },
+              { id: '13', label: 'Hayatın kendisi yorucu be abla... 🌀', value: 'general_life_exhaustion' },
             ]}
             error={error.reason}
           />
@@ -165,14 +165,14 @@ const useIntroductionData = () => {
             onChangeText={setLove}
             leftIcon={'heart'}
             data={[
-              { id: '1', label: 'Aşık oldum, kalbim çarpıyor 🥰', value: 'aşık' },
-              { id: '2', label: 'Kalbim kırık, acı çekiyorum 💔', value: 'kırık' },
-              { id: '3', label: 'Yalnızım ama umutluyum ��', value: 'umut' },
-              { id: '4', label: 'Aşka inancım kalmadı 🖤', value: 'yok' },
-              { id: '5', label: 'Karmaşık duygular içindeyim 🎭', value: 'karmaşık' },
-              { id: '6', label: 'Yeni bir aşkın eşiğindeyim 🌹', value: 'yeni' },
-              { id: '7', label: 'İlişkimde sorunlar var ⚖️', value: 'sorunlu' },
-              { id: '8', label: 'Aşkı arıyorum ama bulamıyorum 🔍', value: 'arayış' },
+              { id: '1', label: 'Aşık oldum, kalbim çarpıyor 🥰', value: 'new_love_excitement' },
+              { id: '2', label: 'Kalbim kırık, acı çekiyorum 💔', value: 'heartbreak_pain' },
+              { id: '3', label: 'Yalnızım ama umutluyum 🕯️', value: 'hopeful_solitude' },
+              { id: '4', label: 'Aşka inancım kalmadı 🖤', value: 'lost_faith_in_love' },
+              { id: '5', label: 'Karmaşık duygular içindeyim 🎭', value: 'complex_emotions' },
+              { id: '6', label: 'Yeni bir aşkın eşiğindeyim 🌹', value: 'on_the_brink_of_love' },
+              { id: '7', label: 'İlişkimde sorunlar var ⚖️', value: 'relationship_problems' },
+              { id: '8', label: 'Aşkı arıyorum ama bulamıyorum 🔍', value: 'searching_for_love' },
             ]}
             error={error.love}
           />
@@ -197,15 +197,15 @@ const useIntroductionData = () => {
             onChangeText={setNeed}
             leftIcon={'balloon'}
             data={[
-              { id: '1', label: 'Sevgi ve şefkat 💞', value: 'sevgi' },
-              { id: '2', label: 'İç huzur ve sükunet 🕊️', value: 'huzur' },
-              { id: '3', label: 'Başarı ve tanınma 🏆', value: 'başarı' },
-              { id: '4', label: 'Güven ve istikrar 🔐', value: 'güven' },
-              { id: '5', label: 'Maddi refah ve bolluk 💰', value: 'refah' },
-              { id: '6', label: 'Ruhsal gelişim ve aydınlanma 🌟', value: 'ruhsal' },
-              { id: '7', label: 'Sağlık ve enerji 💪', value: 'sağlık' },
-              { id: '8', label: 'Yaratıcılık ve ilham 🎨', value: 'yaratıcılık' },
-              { id: '9', label: 'Özgürlük ve bağımsızlık 🦅', value: 'özgürlük' },
+              { id: '1', label: 'Sevgi ve şefkat 💞', value: 'love_and_affection' },
+              { id: '2', label: 'İç huzur ve sükunet 🕊️', value: 'inner_peace_and_tranquility' },
+              { id: '3', label: 'Başarı ve tanınma 🏆', value: 'success_and_recognition' },
+              { id: '4', label: 'Güven ve istikrar 🔐', value: 'security_and_stability' },
+              { id: '5', label: 'Maddi refah ve bolluk 💰', value: 'material_prosperity' },
+              { id: '6', label: 'Ruhsal gelişim ve aydınlanma 🌟', value: 'spiritual_growth' },
+              { id: '7', label: 'Sağlık ve enerji 💪', value: 'health_and_energy' },
+              { id: '8', label: 'Yaratıcılık ve ilham 🎨', value: 'creativity_and_inspiration' },
+              { id: '9', label: 'Özgürlük ve bağımsızlık 🦅', value: 'freedom_and_independence' },
             ]}
             error={error.need}
           />
@@ -230,15 +230,15 @@ const useIntroductionData = () => {
             onChangeText={setMood}
             leftIcon={'sunny'}
             data={[
-              { id: '1', label: 'Mutlu ve neşeli 😊', value: 'mutlu' },
-              { id: '2', label: 'Hüzünlü ve melankolik 😢', value: 'hüzünlü' },
-              { id: '3', label: 'Kafam karışık ve endişeliyim 🤯', value: 'karışık' },
-              { id: '4', label: 'Sakin ve dengeli 😌', value: 'sakin' },
-              { id: '5', label: 'Heyecanlı ve tutkulu 🔥', value: 'heyecanlı' },
-              { id: '6', label: 'Yorgun ve bitkin 😫', value: 'yorgun' },
-              { id: '7', label: 'Öfkeli ve gergin 😠', value: 'öfkeli' },
-              { id: '8', label: 'Umutsuz ve karamsar 🌑', value: 'umutsuz' },
-              { id: '9', label: 'İçe dönük ve düşünceli 🤔', value: 'düşünceli' },
+              { id: '1', label: 'Mutlu ve neşeli 😊', value: 'happy_and_cheerful' },
+              { id: '2', label: 'Hüzünlü ve melankolik 😢', value: 'sad_and_melancholic' },
+              { id: '3', label: 'Kafam karışık ve endişeliyim 🤯', value: 'confused_and_anxious' },
+              { id: '4', label: 'Sakin ve dengeli 😌', value: 'calm_and_balanced' },
+              { id: '5', label: 'Heyecanlı ve tutkulu 🔥', value: 'excited_and_passionate' },
+              { id: '6', label: 'Yorgun ve bitkin 😫', value: 'tired_and_exhausted' },
+              { id: '7', label: 'Öfkeli ve gergin 😠', value: 'angry_and_tense' },
+              { id: '8', label: 'Umutsuz ve karamsar 🌑', value: 'hopeless_and_pessimistic' },
+              { id: '9', label: 'İçe dönük ve düşünceli 🤔', value: 'introspective_and_thoughtful' },
             ]}
             error={error.mood}
           />
@@ -263,16 +263,16 @@ const useIntroductionData = () => {
             onChangeText={setMeaning}
             leftIcon={'eye-outline'}
             data={[
-              { id: '1', label: 'Kelebek - Dönüşüm ve yenilenme 🦋', value: 'kelebek' },
-              { id: '2', label: 'Yılan - Bilgelik ve şifa 🐍', value: 'yılan' },
-              { id: '3', label: 'Ayna - Kendini keşfetme 🪞', value: 'ayna' },
-              { id: '4', label: 'Karanlık - Gizem ve dönüşüm 🌑', value: 'karanlık' },
-              { id: '5', label: 'Ay - Sezgi ve duygusallık 🌙', value: 'ay' },
-              { id: '6', label: 'Güneş - Güç ve canlılık ☀️', value: 'güneş' },
-              { id: '7', label: 'Yıldız - Rehberlik ve umut ⭐', value: 'yıldız' },
-              { id: '8', label: 'Su - Duygular ve akış 🌊', value: 'su' },
-              { id: '9', label: 'Ateş - Tutku ve dönüşüm 🔥', value: 'ateş' },
-              { id: '10', label: 'Toprak - İstikrar ve büyüme 🌱', value: 'toprak' },
+              { id: '1', label: 'Kelebek - Dönüşüm ve yenilenme 🦋', value: 'transformation_and_renewal' },
+              { id: '2', label: 'Yılan - Bilgelik ve şifa 🐍', value: 'wisdom_and_healing' },
+              { id: '3', label: 'Ayna - Kendini keşfetme 🪞', value: 'self_discovery' },
+              { id: '4', label: 'Karanlık - Gizem ve dönüşüm 🌑', value: 'mystery_and_transformation' },
+              { id: '5', label: 'Ay - Sezgi ve duygusallık 🌙', value: 'intuition_and_emotion' },
+              { id: '6', label: 'Güneş - Güç ve canlılık ☀️', value: 'power_and_vitality' },
+              { id: '7', label: 'Yıldız - Rehberlik ve umut ⭐', value: 'guidance_and_hope' },
+              { id: '8', label: 'Su - Duygular ve akış 🌊', value: 'emotions_and_flow' },
+              { id: '9', label: 'Ateş - Tutku ve dönüşüm 🔥', value: 'passion_and_transformation' },
+              { id: '10', label: 'Toprak - İstikrar ve büyüme 🌱', value: 'stability_and_growth' },
             ]}
             error={error.meaning}
           />
@@ -298,16 +298,16 @@ const useIntroductionData = () => {
             onChangeText={setExperience}
             leftIcon={'star-half'}
             data={[
-              { id: '1', label: 'Ailemle yaşadığım bir olay 👪', value: 'aile' },
-              { id: '2', label: 'Aşık olduğum biri ❤️', value: 'aşk' },
-              { id: '3', label: 'Kariyer yolculuğum 💼', value: 'kariyer' },
-              { id: '4', label: 'Bir kayıp... 🕯️', value: 'kayıp' },
-              { id: '5', label: 'Ruhsal bir deneyim 🌟', value: 'ruhsal' },
-              { id: '6', label: 'Sağlık sorunları 🏥', value: 'sağlık' },
-              { id: '7', label: 'Eğitim hayatım 📚', value: 'eğitim' },
-              { id: '8', label: 'Yolculuk ve keşif 🌍', value: 'yolculuk' },
-              { id: '9', label: 'Yaratıcı bir başarı 🎨', value: 'yaratıcılık' },
-              { id: '10', label: 'Maddi bir değişim 💰', value: 'maddi' },
+              { id: '1', label: 'Ailemle yaşadığım bir olay 👪', value: 'family_experience' },
+              { id: '2', label: 'Aşık olduğum biri ❤️', value: 'falling_in_love' },
+              { id: '3', label: 'Kariyer yolculuğum 💼', value: 'career_journey' },
+              { id: '4', label: 'Bir kayıp... 🕯️', value: 'significant_loss' },
+              { id: '5', label: 'Ruhsal bir deneyim 🌟', value: 'spiritual_experience' },
+              { id: '6', label: 'Sağlık sorunları 🏥', value: 'health_challenges' },
+              { id: '7', label: 'Eğitim hayatım 📚', value: 'educational_journey' },
+              { id: '8', label: 'Yolculuk ve keşif 🌍', value: 'travel_and_discovery' },
+              { id: '9', label: 'Yaratıcı bir başarı 🎨', value: 'creative_achievement' },
+              { id: '10', label: 'Maddi bir değişim 💰', value: 'financial_change' },
             ]}
           />
         ),
@@ -331,17 +331,17 @@ const useIntroductionData = () => {
             onChangeText={setCurious}
             leftIcon={'bookmark'}
             data={[
-              { id: '1', label: 'Aşk hayatım ve ilişkilerim ❤️', value: 'aşk' },
-              { id: '2', label: 'Kariyerim ve iş hayatım 💼', value: 'kariyer' },
-              { id: '3', label: 'Sağlık durumum ve enerjim 🏥', value: 'sağlık' },
-              { id: '4', label: 'Ailemle ilgili gelişmeler 👪', value: 'aile' },
-              { id: '5', label: 'Parasal konular ve maddi durum 💸', value: 'para' },
-              { id: '6', label: 'Ruhsal gelişim ve aydınlanma 🌟', value: 'ruhsal' },
-              { id: '7', label: 'Yaratıcı projelerim ve yeteneklerim 🎨', value: 'yaratıcılık' },
-              { id: '8', label: 'Sosyal ilişkilerim ve arkadaşlıklarım 🤝', value: 'sosyal' },
-              { id: '9', label: 'Eğitim ve öğrenme sürecim 📚', value: 'eğitim' },
-              { id: '10', label: 'Yolculuklar ve yeni deneyimler 🌍', value: 'yolculuk' },
-              { id: '11', label: 'Hayatımın genel akışı ve kaderim 🌀', value: 'genel' },
+              { id: '1', label: 'Aşk hayatım ve ilişkilerim ❤️', value: 'love_life_and_relationships' },
+              { id: '2', label: 'Kariyerim ve iş hayatım 💼', value: 'career_and_work_life' },
+              { id: '3', label: 'Sağlık durumum ve enerjim 🏥', value: 'health_and_energy_status' },
+              { id: '4', label: 'Ailemle ilgili gelişmeler 👪', value: 'family_developments' },
+              { id: '5', label: 'Parasal konular ve maddi durum 💸', value: 'financial_matters' },
+              { id: '6', label: 'Ruhsal gelişim ve aydınlanma 🌟', value: 'spiritual_development' },
+              { id: '7', label: 'Yaratıcı projelerim ve yeteneklerim 🎨', value: 'creative_projects_and_talents' },
+              { id: '8', label: 'Sosyal ilişkilerim ve arkadaşlıklarım 🤝', value: 'social_relationships' },
+              { id: '9', label: 'Eğitim ve öğrenme sürecim 📚', value: 'education_and_learning' },
+              { id: '10', label: 'Yolculuklar ve yeni deneyimler 🌍', value: 'travels_and_new_experiences' },
+              { id: '11', label: 'Hayatımın genel akışı ve kaderim 🌀', value: 'life_path_and_destiny' },
             ]}
             error={error.curious}
           />

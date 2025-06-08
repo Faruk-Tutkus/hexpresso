@@ -1,7 +1,10 @@
-import React from 'react'
-import { Text, View } from 'react-native'
+import { useAuth } from '@providers';
+import React from 'react';
+import { Text, View } from 'react-native';
 
-const index = () => {
+const Home = () => {
+  const user = useAuth();
+  console.log(user);
   return (
     <View>
       <Text>index</Text>
@@ -9,4 +12,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Home;

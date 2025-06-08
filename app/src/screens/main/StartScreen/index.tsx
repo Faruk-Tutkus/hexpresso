@@ -49,7 +49,7 @@ const StartScreen = () => {
         setCurrentIndex(nextIndex);
         flatListRef.current.scrollToIndex({
           index: nextIndex,
-          animated: false
+          animated: true
         });
       }
     }, 2500);

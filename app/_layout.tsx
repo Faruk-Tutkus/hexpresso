@@ -3,7 +3,6 @@ import { useFonts } from 'expo-font';
 import { Stack } from "expo-router";
 import * as SystemUI from 'expo-system-ui';
 import { useEffect } from "react";
-import Animated from "react-native-reanimated";
 
 export function AppContent() {
   const { theme, colors } = useTheme();
@@ -26,8 +25,8 @@ export function AppContent() {
       initialRouteName="src/screens/main/StartScreen/index"
       screenOptions={{
         headerShown: false,
-        animation: 'slide_from_right',
-        animationDuration: 300,
+        animation: 'fade',
+        animationDuration: 2500,
         statusBarStyle: theme === 'dark' ? 'light' : 'dark',
         statusBarBackgroundColor: colors.background,
         contentStyle: {
@@ -47,9 +46,7 @@ export default function RootLayout() {
     <ThemeProvider>
       <ToastProvider>
         <AuthProvider>
-          <Animated.View style={{ flex: 1, backgroundColor: 'transparent' }}>
-            <AppContent />
-          </Animated.View>
+          <AppContent />
         </AuthProvider>
       </ToastProvider>
     </ThemeProvider>
