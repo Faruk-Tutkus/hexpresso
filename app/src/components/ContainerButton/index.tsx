@@ -38,7 +38,7 @@ const ContainerButton: React.FC<ContainerButtonProps> = ({
       style={[
         styles.container,
         disabled && styles.disabled,
-        { backgroundColor: colors.text },
+        { backgroundColor: colors.secondaryText },
       ]}
     >
       <View style={styles.content}>
@@ -51,13 +51,13 @@ const ContainerButton: React.FC<ContainerButtonProps> = ({
           <>
             {leftImage && (
               <Image
-              style={styles.image}
+              style={[styles.image, { tintColor: colors.background }]}
               source={leftImage}
               contentFit="cover"
               transition={1000}
               />
             )}
-            <Text style={styles.text}>{title}</Text>
+            <Text style={[styles.text, { color: colors.background }]}>{title}</Text>
             {rightImage && (
               <Image
                 style={styles.image}

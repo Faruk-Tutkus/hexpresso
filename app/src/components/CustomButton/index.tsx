@@ -63,7 +63,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
                 style={styles.leftIcon}
               />
             )}
-            <Text style={[styles.text, { color: variant === 'secondary' ? colors.text : colors.surface }]}>{title}</Text>
+            <Text style={[styles.text, { color: colors.background }]}>{title}</Text>
             {rightIcon && (
               <Icon 
                 name={rightIcon as any} 

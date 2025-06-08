@@ -10,7 +10,7 @@ import styles from './styles';
 interface IconButtonProps {
   onPress: () => void;
   size?: 'small' | 'medium' | 'large';
-  variant?: 'primary' | 'secondary' | 'tertiary';
+  variant?: 'primary' | 'secondary';
   loading?: boolean;
   disabled?: boolean;
   icon?: string;
@@ -31,8 +31,8 @@ const IconButton: React.FC<IconButtonProps> = ({
       disabled={disabled || loading}
       style={[
         styles.container,
-        disabled && styles.disabled,
-        { backgroundColor: variant === 'primary' ? colors.primary : variant === 'secondary' ? colors.errorText : colors.tertiary },
+        disabled && styles.disabled,  
+        { backgroundColor: variant === 'primary' ? colors.primary : colors.errorText },
       ]}
     >
       <View style={styles.content}>

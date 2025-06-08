@@ -29,7 +29,7 @@ const Login = () => {
       const userCredential = await signIn(email, password);
       
       if (userCredential?.user?.emailVerified) {
-        router.replace('/src/screens/main/home');
+        router.replace('/src/screens/main/HomeScreen');
       }
     } catch (error: any) {
       if (error === 'auth/email-not-verified') {

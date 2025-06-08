@@ -3,7 +3,6 @@ import { useTheme } from '@providers';
 import { router } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { Dimensions, FlatList, Text, View } from 'react-native';
-import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { styles } from './styles';
 
 const data = [
@@ -59,9 +58,9 @@ const StartScreen = () => {
 
   const renderItem = ({ item }: { item: { id: number; symbol: string } }) => {
     return (
-      <Animated.View entering={FadeIn} exiting={FadeOut} style={[styles.emojiContainer, { width }]}>
+      <View style={[styles.emojiContainer, { width }]}>
         <Text style={styles.emojiText}>{item.symbol}</Text>
-      </Animated.View>
+      </View>
     )
   }
 
@@ -84,9 +83,9 @@ const StartScreen = () => {
           showsHorizontalScrollIndicator={false}
           scrollEnabled={false}
           pagingEnabled
-          initialNumToRender={1}        
-          maxToRenderPerBatch={1}
-          windowSize={1} 
+          initialNumToRender={4}        
+          maxToRenderPerBatch={4}
+          windowSize={4} 
           removeClippedSubviews={true}
           getItemLayout={(_, index) => ({
             length: width,            // her item'ın genişliği

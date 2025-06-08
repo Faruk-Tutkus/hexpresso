@@ -12,8 +12,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   animation: {
-    width: 500,
-    height: 500,
+    width: 450,
+    height: 450,
   },
   buttonContainer: {
     marginBottom: 100,
@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     gap: 15,
   },
   button: {
-    width: '65%',
+    width: '85%',
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
