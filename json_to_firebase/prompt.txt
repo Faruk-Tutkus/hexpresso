@@ -21,11 +21,15 @@ Aşk, arkadaşlık, kariyer eşleşmeleri için de 1'er burç yaz. Genel ruh dur
 
 **weakly**
 01.01.2025 - 31.12.2025 tarih aralıkları için başak burcunun haftalık burç yorumlarını oluştur.
+Toplamda 52 hafta olmalı ve her bir haftanın ilk günü pazartesine son günü ise pazra denk gelmeli.
+Her bir haftanın başlangıç ve btiş aralıklarını belirt.
 Haftalık yorumlarını tek bir paragrafta ve minimum 80 ve maksimum ise 100 kelimelik olacak şekilde yaz.
 Aşk, arkadaşlık, kariyer eşleşmeleri için de 1'er burç yaz. Genel ruh durumu; Aşk, Hustle, Success, Vibe içinde 0 ile 5 arasında 0.5'in katı olan puan ver.
 
 **montly**
 01.01.2025 - 31.12.2025 tarih aralıkları için başak burcunun aylık burç yorumlarını oluştur.
+Toplamda 12 ay olmalı.
+Her bir ayın başlangıç ve btiş aralıklarını belirt.
 Aylık yorumlarını tek bir paragrafta ve minimum 150 ve maksimum ise 200 kelimelik olacak şekilde yaz.
 Aşk, arkadaşlık, kariyer eşleşmeleri için de 1'er burç yaz. Genel ruh durumu; Aşk, Hustle, Success, Vibe içinde 0 ile 5 arasında 0.5'in katı olan puan ver.
 
