@@ -1,0 +1,36 @@
+01.01.2025 - 03.06.2025 tarih aralıkları için başak burcu günlük, haftalık, aylık ve yıllık burç yorumu oluştur.
+Günlük yorumunu tek bir paragrafta ve minimum 60 ve maksimum ise 75 kelimelik olacak şekilde yaz.
+Aşk, arkadaşlık, kariyer eşleşmeleri için de 1'er burç yaz. Genel ruh durumu; Aşk, Hustle, Success, Vibe içinde 0 ile 5 arasında 0.5'in katı olan puan ver.
+Haftalık yorumunu tek bir paragrafta ve minimum 80 ve maksimum ise 100 kelimelik olacak şekilde yaz. Aşk, arkadaşlık, kariyer eşleşmeleri için de 1'er burç yaz.
+Genel ruh durumu; Aşk, Hustle, Success, Vibe içinde 0 ile 5 arasında 0.5'in katı olan puan ver.
+Aylık yorumunu tek bir paragrafta ve minimum 100 ve maksimum ise 150 kelimelik olacak şekilde yaz.
+Aşk, arkadaşlık, kariyer eşleşmeleri için de 1'er burç yaz. Genel ruh durumu; Aşk, Hustle, Success, Vibe içinde 0 ile 5 arasında 0.5'in katı olan puan ver.
+Yıllık yorumunu tek bir paragrafta ve minimum 200 ve maksimum ise 250 kelimelik olacak şekilde yaz. Aşk, arkadaşlık, kariyer eşleşmeleri için de 1'er burç yaz.
+Genel ruh durumu; Aşk, Hustle, Success, Vibe içinde 0 ile 5 arasında 0.5'in katı olan puan ver.
+Haftalık, aylık ve yıllık yorumlarını günlük yorumlarla çelişmesin, günlük yorumlarla paralel olarak ilerlesin.
+
+***Daily-1***
+01.01.2025 - 30.06.2025 tarih aralıkları için başak burcunun günlük burç yorumlarını oluştur.
+Günlük yorumlarını tek bir paragrafta ve minimum 60 ve maksimum ise 75 kelimelik olacak şekilde yaz.
+Aşk, arkadaşlık, kariyer eşleşmeleri için de 1'er burç yaz. Genel ruh durumu; Aşk, Hustle, Success, Vibe içinde 0 ile 5 arasında 0.5'in katı olan puan ver.
+
+***Daily-1***
+01.07.2025 - 31.12.2025 tarih aralıkları için başak burcunun günlük burç yorumlarını oluştur.
+Günlük yorumlarını tek bir paragrafta ve minimum 60 ve maksimum ise 75 kelimelik olacak şekilde yaz.
+Aşk, arkadaşlık, kariyer eşleşmeleri için de 1'er burç yaz. Genel ruh durumu; Aşk, Hustle, Success, Vibe içinde 0 ile 5 arasında 0.5'in katı olan puan ver.
+
+**weakly**
+01.01.2025 - 31.12.2025 tarih aralıkları için başak burcunun haftalık burç yorumlarını oluştur.
+Haftalık yorumlarını tek bir paragrafta ve minimum 80 ve maksimum ise 100 kelimelik olacak şekilde yaz.
+Aşk, arkadaşlık, kariyer eşleşmeleri için de 1'er burç yaz. Genel ruh durumu; Aşk, Hustle, Success, Vibe içinde 0 ile 5 arasında 0.5'in katı olan puan ver.
+
+**montly**
+01.01.2025 - 31.12.2025 tarih aralıkları için başak burcunun aylık burç yorumlarını oluştur.
+Aylık yorumlarını tek bir paragrafta ve minimum 150 ve maksimum ise 200 kelimelik olacak şekilde yaz.
+Aşk, arkadaşlık, kariyer eşleşmeleri için de 1'er burç yaz. Genel ruh durumu; Aşk, Hustle, Success, Vibe içinde 0 ile 5 arasında 0.5'in katı olan puan ver.
+
+
+**yearly**
+01.01.2025 - 31.12.2025 tarih aralıkları için başak burcunun yıllık burç yorumunu oluştur.
+Yıllık yorumunu tek bir paragrafta ve minimum 500 ve maksimum ise 1000 kelimelik olacak şekilde yaz.
+Aşk, arkadaşlık, kariyer eşleşmeleri için de 1'er burç yaz. Genel ruh durumu; Aşk, Hustle, Success, Vibe içinde 0 ile 5 arasında 0.5'in katı olan puan ver.

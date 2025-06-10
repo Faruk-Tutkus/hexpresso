@@ -1,0 +1,784 @@
+{
+  "weekly": [
+    {
+      "date": "01.01.2025 - 07.01.2025",
+      "description": "Sevgili Koç, yeni yılın ilk haftasına yenilenme ve hedef belirleme enerjisiyle başlıyorsunuz. Haftanın başlarında kariyerinizde liderlik özelliklerinizle parlayabilir, önemli projelere adım atabilirsiniz. Hafta ortası, sosyal çevrenizdeki hareketlilik sayesinde yeni bağlantılar kurma fırsatı sunarken, duygusal olarak daha hassas hissedebilir ve ailenize odaklanabilirsiniz. Hafta sonuna doğru enerjiniz tekrar yükseliyor; fiziksel aktiviteler ve romantik jestlerle kendinizi şımartın. Bu dönem, hem içsel muhasebe yapmak hem de dış dünyada parlamak için denge kurmanız gereken dinamik bir hafta olacak.",
+      "matches": {
+        "career": "Aslan",
+        "friendship": "Terazi",
+        "love": "Kova"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "08.01.2025 - 14.01.2025",
+      "description": "Bu hafta pratik konulara ve detaylara odaklanarak başlıyorsunuz; iş yerinde düzen ve organizasyon başarı getirecek. Hafta ortası ikili ilişkilerde diplomasi, ortak finansal konularda ise sezgileriniz ön plana çıkıyor. Maceraperest ruhunuzun canlandığı hafta sonuna doğru, yeni şeyler öğrenme ve büyük resmi görme isteğiniz artıyor. Kariyerinizde disiplinli çalışmalarla ilerlerken, sosyal çevreniz ve geleceğe yönelik hayalleriniz de gündeminizde olacak. Haftayı manevi bir içe dönüşle tamamlayarak enerjinizi dengeleyebilirsiniz. Hem pratik hem vizyoner yönleriniz aktif olacak.",
+      "matches": {
+        "career": "Başak",
+        "friendship": "Kova",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "3.5",
+        "success": "4.0",
+        "vibe": "3.5"
+      }
+    },
+    {
+      "date": "15.01.2025 - 21.01.2025",
+      "description": "Haftaya dinamik ve girişimci bir ruhla başlıyorsunuz, kişisel projeleriniz için mükemmel bir zaman. Finansal konulara yönelerek maddi güvenliğinizi pekiştirebilir, sabırlı adımlarla ilerleyebilirsiniz. İletişim yeteneklerinizin güçlendiği hafta ortasında önemli görüşmeler yapabilirsiniz. Ancak hafta sonuna doğru ev ve ailevi meseleler ön plana çıkacak, duygusal olarak daha hassas olabilirsiniz. Yaratıcılığınızın ve romantizmin de parladığı bu dönemde, sosyal ve özel hayat arasında denge kurmak önem kazanacak. Enerjinizi dengeli kullanarak verimli bir hafta geçirebilirsiniz.",
+      "matches": {
+        "career": "Yay",
+        "friendship": "Kova",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "3.5",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "22.01.2025 - 28.01.2025",
+      "description": "Bu hafta derin sezgiler ve finansal konularla başlıyor; ortak kaynaklarla ilgili meseleler gündeminizde olabilir. Maceracı ruhunuzun canlandığı ilerleyen günlerde, yeni ufuklara açılma ve öğrenme isteğiniz artacak. Hafta ortasında kariyer hedeflerinize odaklanarak disiplinli bir çalışma sergileyebilir ve uzun vadeli planlar yapabilirsiniz. Sosyal çevreniz ve arkadaşlıklarınız hafta sonuna doğru canlanırken, haftayı enerjik ve kişisel projelere odaklanmış bir şekilde tamamlıyorsunuz. Finansal olarak kararlı adımlar atmanız gereken, hareketli bir hafta olacak.",
+      "matches": {
+        "career": "Boğa",
+        "friendship": "İkizler",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.0",
+        "success": "4.5",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "29.01.2025 - 04.02.2025",
+      "description": "Haftaya güçlü iletişim becerileriyle başlıyorsunuz, önemli görüşmeler yapabilirsiniz. Ardından ev ve aile konuları gündeme geliyor, duygusal olarak içe dönebilirsiniz. Ay başıyla birlikte, aşk ve yaratıcılık hayatınızın merkezine yerleşiyor; kendinizi ifade etmekten ve eğlenmekten çekinmeyeceksiniz. Hafta sonu ilişkiler ve ortaklıklar alanında denge arayışı ön plandayken, sezgilerinizin güçlendiği anlar yaşayacaksınız. Bu hafta, hem zihinsel hareketlilik hem de duygusal derinlik arasında gidip gelebilir, maceracı ruhunuzu yeni keşiflerle besleyebilirsiniz.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Kova",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "05.02.2025 - 11.02.2025",
+      "description": "Bu hafta kariyer hedeflerinize odaklanarak ve sorumluluklarınızı yerine getirerek başlıyorsunuz. Sosyal çevrenizden alacağınız destekle motive olurken, haftanın ilerleyen günlerinde manevi bir içe çekilme ve dinlenme ihtiyacı hissedebilirsiniz. Hafta sonu, enerjiniz yeniden yükseliyor; yeni başlangıçlar yapmak için cesaret bulacaksınız. Maddi konular ve finansal planlama da gündeminize gelecek. İletişim trafiğinizin yoğunlaşacağı, zihinsel olarak aktif olacağınız bir dönemdesiniz. Duygusal güvenliğiniz ve ailevi konular ise haftanın kapanış teması olacak, dengeyi sağlamalısınız.",
+      "matches": {
+        "career": "Başak",
+        "friendship": "İkizler",
+        "love": "Koç"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "3.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "12.02.2025 - 18.02.2025",
+      "description": "Haftaya aşk, romantizm ve yaratıcılık dolu bir başlangıç yapıyorsunuz; Sevgililer Günü'nde de bu enerji zirve yapacak. Pratik konular ve günlük işlerinizle ilgilenerek düzen sağlarken, ikili ilişkilerde denge ve uyum arayışınız ön planda olacak. Finansal meselelerde sezgileriniz güçleniyor. Hafta sonuna doğru ufkunuzu genişletecek maceralara atılma ve yeni şeyler öğrenme arzusu duyacaksınız. Kariyerde sorumluluklar ve sosyal hayattaki hareketlilikle dengeli, dolu dolu bir hafta geçirebilirsiniz. Sürpriz gelişmelere açık olun.",
+      "matches": {
+        "career": "Boğa",
+        "friendship": "Kova",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "19.02.2025 - 25.02.2025",
+      "description": "Haftaya kendi iç dünyanıza dönerek ve enerji toplayarak başlıyorsunuz. Ardından kişisel enerjiniz yükseliyor ve yeni başlangıçlar için cesaret buluyorsunuz. Maddi konulara odaklanarak finansal güvenliğinizi sağlamlaştırabilir, iletişim yeteneklerinizle önemli bağlantılar kurabilirsiniz. Hafta sonuna doğru ailevi meseleler ve evle ilgili konular gündeminize yerleşiyor. Yaratıcılığınızın da tavan yaptığı bu dönemde, hem pratik işlerinizi düzenleyecek hem de hayattan keyif alacak anlar yaratacaksınız. Bu hafta kendinize özen göstermeyi ihmal etmeyin.",
+      "matches": {
+        "career": "Aslan",
+        "friendship": "Kova",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "26.02.2025 - 04.03.2025",
+      "description": "İkili ilişkilerde denge ve uyum arayışıyla başlayan haftada, sezgileriniz finansal konularda size yol gösterecek. Maceracı ruhunuzun canlanmasıyla yeni ufuklara açılma ve öğrenme isteğiniz artıyor. Mart ayına kariyer hedeflerinize odaklanarak ciddi bir başlangıç yapıyorsunuz. Sosyal çevrenizden destek alırken, manevi bir içe dönüşle enerjinizi yenileme ihtiyacı hissedebilirsiniz. Hafta, kişisel gücünüzü ve girişimci ruhunuzu yeniden keşfedeceğiniz dinamik bir enerjiyle sonlanıyor. Diplomatik ve cesur yönleriniz bir arada olacak.",
+      "matches": {
+        "career": "Boğa",
+        "friendship": "İkizler",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "05.03.2025 - 11.03.2025",
+      "description": "Haftaya maddi konulara odaklanarak ve finansal güvenliğinizi pekiştirerek başlıyorsunuz. İletişim trafiğinizin yoğunlaşacağı, yeni bilgiler öğreneceğiniz hareketli günler sizi bekliyor. Ev ve aile konuları gündeme geldiğinde duygusal hassasiyetiniz artabilir, sevdiklerinizle vakit geçirmek size huzur verecektir. Aşk, yaratıcılık ve eğlence temaları hafta sonuna doğru canlanıyor. Pratik zekanız ve diplomatik yaklaşımlarınız sayesinde hem iş hem de özel hayatınızda denge kurarak ilerleyeceksiniz. Derin sezgileriniz de rehberiniz olacak.",
+      "matches": {
+        "career": "Başak",
+        "friendship": "Kova",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "12.03.2025 - 18.03.2025",
+      "description": "Maceracı ruhunuzun ve iyimserliğinizin zirve yaptığı bir haftaya giriyorsunuz. Yeni şeyler öğrenmek ve seyahat etmek için güçlü bir arzu duyabilirsiniz. Kariyerinizde ise disiplin ve sorumluluk bilinciyle hareket ederek önemli adımlar atacaksınız. Sosyal çevrenizden destek göreceğiniz, umutlarınızın ve hayallerinizin canlanacağı bir dönemdesiniz. Haftayı, kişisel enerjinizin yenilendiği, yeni başlangıçlara hazır olduğunuz bir ruh haliyle ve maddi konulara pratik çözümler bularak tamamlayacaksınız. İletişim becerileriniz de oldukça güçlü olacak.",
+      "matches": {
+        "career": "Boğa",
+        "friendship": "İkizler",
+        "love": "Koç"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.0",
+        "success": "4.5",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "19.03.2025 - 25.03.2025",
+      "description": "Haftaya ailevi konular ve duygusal meselelere odaklanarak başlıyorsunuz; iç huzurunuzu sağlamak önceliğiniz olacak. Ardından yaratıcılığınız ve aşk hayatınız canlanıyor; hayattan keyif alma isteğiniz yüksek. Günlük işlerinizi ve sağlığınızı düzene sokarken, ikili ilişkilerde denge ve uyum arayacaksınız. Hafta sonu, derin sezgileriniz ve finansal dönüşüm enerjileriyle karşı karşıyasınız. Maceracı ruhunuz ve kariyer hedeflerinizle harmanlanan bu hafta, hem içsel hem de dışsal dünyanızda önemli gelişmeler vaat ediyor. Çok yönlü bir dönemdesiniz.",
+      "matches": {
+        "career": "Boğa",
+        "friendship": "Kova",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "26.03.2025 - 01.04.2025",
+      "description": "Sosyal çevrenizdeki hareketlilikle başlayan bu hafta, geleceğe yönelik umutlarınızı tazeliyor. Ardından, iç dünyanıza çekilip enerji toplama ihtiyacı duyabilirsiniz. Kişisel enerjinizin yeniden yükselmesiyle, yeni başlangıçlar yapmak için cesaret bulacaksınız. Finansal konulara pratik bir yaklaşımla eğilirken, iletişim yeteneklerinizle de parlayacaksınız. Haftanın son günleri ve Nisan ayının başlangıcı, aşk, yaratıcılık ve eğlence temalarıyla hayatınıza renk katıyor. Hem zihinsel hem de duygusal olarak dopdolu bir hafta sizi bekliyor.",
+      "matches": {
+        "career": "Yay",
+        "friendship": "İkizler",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "02.04.2025 - 08.04.2025",
+      "description": "Haftaya günlük işlerinizi ve sağlığınızı düzene sokarak başlıyorsunuz. İkili ilişkilerde ise denge ve diplomasi ön planda olacak. Ortak finansal konularda sezgileriniz size rehberlik ederken, maceracı ruhunuz yeni ufuklara yelken açmanızı sağlayacak. Hafta ortasında kariyer hedeflerinize odaklanarak önemli sorumluluklar alabilirsiniz. Sosyal hayatınızdaki canlılık ve içsel bir dinlenme ihtiyacı arasında denge kurmanız gerekecek. Hem profesyonel hem de sosyal alanda aktif bir hafta sizi bekliyor.",
+      "matches": {
+        "career": "Başak",
+        "friendship": "İkizler",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "09.04.2025 - 15.04.2025",
+      "description": "Haftaya enerjik ve girişimci bir ruhla başlıyorsunuz, kişisel projelerinize odaklanmak için harika bir zaman. Ardından maddi konulara eğilerek finansal güvenliğinizi pekiştirebilirsiniz. İletişim trafiğinizin yoğun olacağı, yeni bilgiler öğreneceğiniz günler sizi bekliyor. Ailevi ve duygusal meseleler gündeminize geldiğinde hassaslaşabilirsiniz. Hafta sonu ise aşk, yaratıcılık ve eğlenceye odaklanırken, ikili ilişkilerde denge ve uyum arayacaksınız. Hem bireysel hem de ilişkisel temaların öne çıktığı dinamik bir hafta geçireceksiniz.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Kova",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "16.04.2025 - 22.04.2025",
+      "description": "Sezgilerinizin ve finansal dönüşüm enerjinizin yüksek olduğu bir haftaya başlıyorsunuz. Ortak kaynaklarla ilgili önemli gelişmeler yaşanabilir. Maceraperest ruhunuz canlanıyor, yeni yerler görme ve öğrenme isteğiniz artıyor. Kariyerinizde ise disiplinli çalışmalarla sorumluluklarınızı yerine getireceksiniz. Sosyal çevrenizden destek alırken, dinlenme ihtiyacı da duyabilirsiniz. Haftayı kişisel enerjinizin ve girişimci ruhunuzun yenilendiği bir şekilde tamamlayarak maddi konularda sağlam adımlar atacaksınız. Hem vizyoner hem de planlı olmanız gereken bir dönemdesiniz.",
+      "matches": {
+        "career": "Boğa",
+        "friendship": "Kova",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.0",
+        "success": "4.5",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "23.04.2025 - 29.04.2025",
+      "description": "İletişim becerilerinizle öne çıkarak başladığınız bu hafta, önemli görüşmeler ve anlaşmalar getirebilir. Ailevi konular gündeme geldiğinde duygusal yönünüz ağır basacak, sevdiklerinize zaman ayırmak isteyeceksiniz. Hafta ortasında aşk, yaratıcılık ve eğlence temaları hayatınıza renk katıyor. Günlük işlerinizi ve sağlığınızı düzenlerken, ikili ilişkilerde uyum arayacaksınız. Haftayı, sezgisel ve finansal açıdan dönüştürücü enerjilerle kapatırken, maceracı yönünüzü de ihmal etmeyeceksiniz. Dopdolu ve çok yönlü bir hafta sizi bekliyor.",
+      "matches": {
+        "career": "Yay",
+        "friendship": "Kova",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "30.04.2025 - 06.05.2025",
+      "description": "Haftaya kariyer hedeflerinize odaklanarak ve sorumluluk alarak başlıyorsunuz. Mayıs ayının girişiyle sosyal çevreniz canlanıyor ve geleceğe yönelik umutlarınız tazeleniyor. Ardından, iç dünyanıza çekilip dinlenme ve enerji toplama ihtiyacı duyabilirsiniz. Kişisel gücünüzü yeniden keşfedeceğiniz, girişimci ruhunuzun parlayacağı günler sizi bekliyor. Finansal konularda sağlam adımlar atarken, iletişim becerilerinizle yeni kapılar açacaksınız. Haftayı ailevi meselelere ve duygusal güvenliğe odaklanarak kapatıyorsunuz. Profesyonel ve kişisel yaşam arasında denge kuracaksınız.",
+      "matches": {
+        "career": "Boğa",
+        "friendship": "İkizler",
+        "love": "Koç"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "3.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "07.05.2025 - 13.05.2025",
+      "description": "Haftanın başlangıcında aşk, romantizm ve yaratıcılık hayatınızın merkezinde yer alıyor. Günlük işlerinizi düzene sokarken ve sağlığınıza özen gösterirken, ikili ilişkilerde denge ve uyum arayışınız ön plana çıkıyor. Ortak finansal konular ve sezgisel derinlikler hafta ortasında sizi meşgul edebilir. Ufkunuzu genişletecek maceralara atılma ve yeni şeyler öğrenme arzusu hafta sonuna doğru artacak. Kariyer hedeflerinize odaklanarak ve sosyal çevrenizden destek alarak dengeli ve ilerleyici bir hafta geçirebilirsiniz.",
+      "matches": {
+        "career": "Boğa",
+        "friendship": "Kova",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "14.05.2025 - 20.05.2025",
+      "description": "Kendi iç dünyanıza çekilerek başladığınız hafta, dinlenme ve ruhsal yenilenme fırsatı sunuyor. Ardından, kişisel enerjiniz yükseliyor ve yeni başlangıçlar için cesaretiniz artıyor; liderlik özellikleriniz parlayacak. Finansal konulara pratik bir yaklaşımla eğilerek güvenliğinizi artırabilirsiniz. İletişim trafiğinizin yoğunlaşacağı, yeni bilgiler edineceğiniz günler sizi bekliyor. Hafta sonuna doğru ailevi konular ve aşk hayatınızdaki romantik gelişmeler gündeminizi oluşturacak. Hem bireysel atılımlar hem de duygusal paylaşımlar açısından zengin bir dönemdesiniz.",
+      "matches": {
+        "career": "Aslan",
+        "friendship": "Kova",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "21.05.2025 - 27.05.2025",
+      "description": "Haftaya ikili ilişkilerde uyum arayarak başlıyorsunuz. Ardından sezgilerinizin güçlendiği finansal konular ve derin duygular gündeme geliyor. Maceraperest ruhunuzun canlanmasıyla yeni deneyimlere ve bilgilere açılacaksınız. Kariyerinizde disiplinli çalışmalarla sorumluluklarınızı yerine getirirken, sosyal hayatınızdaki canlılık size moral verecek. İçsel bir dinlenme ihtiyacının ardından, kişisel enerjinizin yeniden tavan yapacağı bir dönemle haftayı kapatacaksınız. Bu hafta hem sosyal hem de bireysel anlamda önemli adımlar atabilirsiniz. Girişimci yönünüz oldukça aktif.",
+      "matches": {
+        "career": "Boğa",
+        "friendship": "İkizler",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.5",
+        "success": "4.5",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "28.05.2025 - 03.06.2025",
+      "description": "Haftanın başlangıcında maddi konulara ve finansal güvenliğinize odaklanıyorsunuz. İletişim becerileriniz güçleniyor ve yeni fikirler zihninizi meşgul ediyor. Ailevi ve duygusal meseleler gündeminize geldiğinde hassas bir tavır sergileyebilirsiniz. Hafta sonu, aşk, yaratıcılık ve eğlenceye daha fazla zaman ayıracaksınız. Yeni ay, günlük işlerinizi düzenleme ve sağlığınıza dikkat etme fırsatı sunuyor. İkili ilişkilerde denge ve derin sezgilerin ön planda olduğu, çok yönlü bir hafta sizi bekliyor.",
+      "matches": {
+        "career": "Yengeç",
+        "friendship": "Balık",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "04.06.2025 - 10.06.2025",
+      "description": "Maceracı ruhunuzun ve iyimserliğinizin ön planda olduğu bir haftaya başlıyorsunuz. Yeni şeyler öğrenmek ve ufkunuzu genişletmek için harika bir zaman. Kariyerinizde disiplinli ve sorumlu tavırlarınızla ilerlerken, sosyal çevrenizden destek alacaksınız. Hafta ortasında dinlenme ve içe çekilme ihtiyacı duyabilirsiniz. Hafta sonu ise kişisel enerjiniz yükseliyor, yeni başlangıçlar için motive oluyorsunuz. Maddi konulara pratik çözümler getirirken, iletişim becerilerinizi de etkin bir şekilde kullanacaksınız. Planlama ve atılım haftası olacak.",
+      "matches": {
+        "career": "Başak",
+        "friendship": "İkizler",
+        "love": "Koç"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "3.5",
+        "success": "4.5",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "11.06.2025 - 17.06.2025",
+      "description": "Haftanın ilk günlerinde ailevi konular ve duygusal güvenliğiniz ön planda olacak. Ardından yaratıcılığınız, aşk hayatınız ve eğlenceye olan düşkünlüğünüz zirve yapıyor. Günlük işlerinizi düzene sokarken pratik ve verimli olacaksınız. Hafta sonuna doğru ikili ilişkilerde denge, finansal konularda derin sezgiler ve maceraperest bir ruh haliyle hareket edeceksiniz. Kariyerinizde alacağınız sorumluluklar sizi daha da güçlendirecek. Bu hafta hem duygusal hem de profesyonel anlamda önemli adımlar atabilirsiniz.",
+      "matches": {
+        "career": "Boğa",
+        "friendship": "Kova",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "18.06.2025 - 24.06.2025",
+      "description": "Sosyal hayatınızın hareketliliğiyle başlayan bu hafta, geleceğe yönelik umutlarınızı besliyor. Kısa bir içe çekilmenin ardından kişisel enerjiniz tavan yapacak ve yeni başlangıçlara cesaret edeceksiniz. Maddi konulara sağlam adımlarla yaklaşırken, iletişim becerilerinizle de dikkat çekeceksiniz. Hafta sonu ailevi meseleler ve duygusal güvenlik ihtiyacı ön plana çıkıyor. Aşk, yaratıcılık ve eğlence de gündeminizde olacak. Hem bireysel hem de sosyal alanlarda aktif olacağınız dinamik bir hafta sizi bekliyor.",
+      "matches": {
+        "career": "Aslan",
+        "friendship": "İkizler",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.5",
+        "success": "4.5",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "25.06.2025 - 01.07.2025",
+      "description": "Haftaya pratik zekanız ve organizasyon yeteneğinizle başlıyorsunuz, günlük işlerinizi yoluna koyacaksınız. İkili ilişkilerde diplomasi ön planda olurken, ortak finansal konularda sezgileriniz size rehberlik edecek. Maceracı ruhunuzun canlanmasıyla yeni ufuklara açılma isteği duyacaksınız. Kariyerinizde disiplinli ve sorumlu bir tutum sergilerken, sosyal hayatınızdan ve enerjik yapınızdan da güç alacaksınız. Bu hafta hem planlama hem de eyleme geçme arasında denge kurarak önemli başarılar elde edebilirsiniz.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Kova",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.5",
+        "success": "4.5",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "02.07.2025 - 08.07.2025",
+      "description": "Haftanın başlangıcında duygusal dalgalanmalar yaşayabilir, iç dünyanıza yönelebilirsiniz. Ancak yaratıcı ve iletişimci yönünüzün parlamasıyla bu durumu lehinize çevireceksiniz. Ailevi konular ve ev hayatınız gündeminizi meşgul ederken, romantizm ve eğlenceye olan düşkünlüğünüz de artacak. Pratik zekanızla günlük işlerinizi organize edip, ikili ilişkilerde dengeyi bulacaksınız. Haftayı, sezgisel ve finansal açıdan dönüştürücü enerjilerle kapatacaksınız. Bu dönemde duygusal ve mantıksal yönlerinizi bir arada kullanmanız gerekecek.",
+      "matches": {
+        "career": "Akrep",
+        "friendship": "Balık",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "09.07.2025 - 15.07.2025",
+      "description": "Ufkunuzu genişletecek maceralar ve öğrenme fırsatlarıyla dolu bir haftaya giriyorsunuz. Kariyerinizde disiplinli ve sorumlu tavrınızla dikkat çekerken, sosyal çevrenizden de destek göreceksiniz. Hafta ortasında kısa bir dinlenme ve içe çekilme döneminin ardından, kişisel enerjiniz yeniden yükselecek. Yeni başlangıçlar yapmak ve liderlik etmek için motive olacaksınız. Finansal konularda sağlam adımlar atarken, zihinsel olarak aktif ve meraklı olacağınız günler de sizi bekliyor. Dinamik ve ilerici bir hafta geçireceksiniz.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "İkizler",
+        "love": "Kova"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.0",
+        "success": "4.5",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "16.07.2025 - 22.07.2025",
+      "description": "Haftanın başlangıcında ailevi konular ve duygusal güvenliğiniz öncelikli olacak. Ardından yaratıcılığınız, aşk hayatınız ve yaşam sevinciniz tavan yapıyor. Kendinizi ifade etmekten ve sahneye çıkmaktan keyif alacaksınız. Günlük işlerinizi organize ederken, pratik yönünüzü kullanacaksınız. Hafta sonu ise ikili ilişkilerde denge, finansal konularda derin sezgiler ve maceracı bir ruh hali öne çıkıyor. Kariyerinizde ciddi adımlar atarak bu verimli haftayı taçlandıracaksınız. Her alanda hareketli bir dönem sizi bekliyor.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Yay",
+        "love": "Yay"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.5",
+        "success": "4.5",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "23.07.2025 - 29.07.2025",
+      "description": "Haftaya sosyal çevrenizdeki canlılık ve geleceğe dönük umutlarla başlıyorsunuz. Kısa bir içe çekilme ve dinlenme molasının ardından, kişisel enerjiniz yükseliyor ve girişimci ruhunuzla parlıyorsunuz. Finansal konulara mantıklı bir yaklaşımla eğilirken, iletişim becerileriniz sayesinde yeni fırsatlar yaratabilirsiniz. Ailevi meseleler ve duygusal paylaşımlar hafta sonuna doğru önem kazanıyor. Haftanın kapanışını ise aşk, yaratıcılık ve eğlence temalarıyla yaparak moralinizi yükselteceksiniz. Hem bireysel hem de sosyal açıdan verimli geçecek.",
+      "matches": {
+        "career": "Yay",
+        "friendship": "Aslan",
+        "love": "İkizler"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "30.07.2025 - 05.08.2025",
+      "description": "Haftaya günlük işlerinizi ve sağlığınızı düzenleyerek pratik bir başlangıç yapıyorsunuz. İkili ilişkilerde uyum ve denge arayışınız devam ederken, ayın başında finansal konular ve derin sezgileriniz ön plana çıkıyor. Maceracı ruhunuzun canlanmasıyla yeni deneyimlere açılacak ve ufkunuzu genişleteceksiniz. Kariyerinizde sorumluluklarınız artarken, sosyal çevrenizdeki hareketlilik de sizi besleyecek. Haftanın kapanışını ruhsal bir arınma ve dinlenme ile yapıyorsunuz. Disiplin ve vizyon arasında gidip geleceğiniz yoğun bir hafta.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Yay",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "06.08.2025 - 12.08.2025",
+      "description": "Haftaya enerjik ve girişimci bir ruhla başlıyorsunuz. Kişisel hedeflerinize odaklanmak ve yeni başlangıçlar yapmak için gezegenler sizi destekliyor. Ardından maddi konulara eğilerek finansal güvenliğinizi pekiştireceksiniz. İletişim yeteneklerinizin parladığı, yeni bilgiler öğreneceğiniz günler sizi bekliyor. Ailevi konular gündeme geldiğinde duygusal bir sığınak arayabilirsiniz. Hafta sonu aşk, yaratıcılık ve eğlence temaları hayatınıza neşe katarken, günlük işlerinizde de düzen ve verimlilik arayacaksınız. Dinamik ve çok yönlü bir dönemdesiniz.",
+      "matches": {
+        "career": "Aslan",
+        "friendship": "Kova",
+        "love": "Yay"
+      },
+      "stars": {
+        "hustle": "4.5",
+        "sex": "4.5",
+        "success": "4.5",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "13.08.2025 - 19.08.2025",
+      "description": "Sezgilerinizin ve finansal farkındalığınızın yüksek olduğu bir haftaya başlıyorsunuz. Ortak kaynaklarla ilgili konulara odaklanabilirsiniz. Maceraperest yönünüzün canlanmasıyla yeni ufuklara açılma ve öğrenme isteğiniz artıyor. Kariyerinizde ise disiplinli ve sorumlu tavrınızla dikkat çekeceksiniz. Sosyal çevrenizden destek alırken, bir miktar dinlenmeye de ihtiyaç duyabilirsiniz. Haftayı, kişisel enerjinizin ve girişimci ruhunuzun yenilendiği bir atmosferde tamamlayarak finansal konularda pratik adımlar atacaksınız. Planlama ve atılım zamanı.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Aslan",
+        "love": "Boğa"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.0",
+        "success": "4.5",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "20.08.2025 - 26.08.2025",
+      "description": "Haftaya güçlü iletişim becerileriyle başlıyor, zihinsel olarak aktif bir dönem geçiriyorsunuz. Ailevi konular ve duygusal güvenlik ihtiyacı ardından gündeme gelecek. Yaratıcılığınızın, aşk hayatınızın ve eğlenceye olan düşkünlüğünüzün parladığı günler sizi bekliyor. Günlük işlerinizi düzenlerken, pratik ve verimli olacaksınız. Hafta sonu ikili ilişkilerde denge, ortak finansal konularda derin sezgiler ve maceracı bir ruh hali öne çıkacak. Çok yönlü ve dinamik bir hafta sizi bekliyor, her alanda aktifsiniz.",
+      "matches": {
+        "career": "Aslan",
+        "friendship": "Yay",
+        "love": "İkizler"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.5",
+        "success": "4.5",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "27.08.2025 - 02.09.2025",
+      "description": "Haftanın başlangıcında kariyer hedeflerinize ve sorumluluklarınıza odaklanıyorsunuz. Sosyal çevrenizden alacağınız destekle motive olurken, dinlenme ve içe çekilme ihtiyacı da hissedebilirsiniz. Eylül ayına zihinsel olarak aktif ve iletişimci bir başlangıç yapıyorsunuz. Haftayı, enerjinizin yeniden yükseldiği, kişisel girişimlerinizin ön plana çıktığı bir atmosferde tamamlarken, ailevi meseleler ve duygusal paylaşımlar da önem kazanacak. Profesyonel ve kişisel yaşam arasında denge kurarak verimli bir dönem geçirebilirsiniz. Çok yönlü enerjiler altındasınız.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "İkizler",
+        "love": "Yay"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "3.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "03.09.2025 - 09.09.2025",
+      "description": "Bu hafta aşk, romantizm ve yaratıcılık dolu bir başlangıç yapıyor. Günlük işlerinizde ve sağlık rutinlerinizde düzen sağlarken, ikili ilişkilerde uyum ve denge arayışınız ön plana çıkıyor. Ortak finansal konularda sezgileriniz güçleniyor, derinlemesine analizler yapabilirsiniz. Hafta sonuna doğru ufkunuzu genişletecek maceralara atılma ve yeni şeyler öğrenme arzusu duyacaksınız. Kariyerinizde alacağınız sorumluluklar ve sosyal çevrenizle olan etkileşiminizle dopdolu bir hafta sizi bekliyor. Hem planlı hem de spontane olmalısınız.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Yay",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.0",
+        "success": "4.5",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "10.09.2025 - 16.09.2025",
+      "description": "Kendi iç dünyanıza dönerek ve enerji toplayarak başladığınız hafta, kişisel enerjinizin yükselmesiyle devam ediyor. Yeni başlangıçlar ve liderlik için motive olacaksınız. Finansal konularda pratik ve sağlam adımlar atarken, iletişim trafiğinizin yoğunlaşmasıyla zihinsel olarak aktifleşiyorsunuz. Ailevi konular ve duygusal güvenliğiniz önem kazanıyor. Hafta sonunu ise aşk, romantizm ve eğlence temalarıyla renklendiriyorsunuz. Bu hafta, hem içsel hem de dışsal dünyanızda önemli gelişmeler yaşayarak, işlerinizde de düzeni sağlayacaksınız.",
+      "matches": {
+        "career": "Başak",
+        "friendship": "İkizler",
+        "love": "Yay"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "17.09.2025 - 23.09.2025",
+      "description": "İkili ilişkilerde uyum ve denge arayarak başladığınız haftada, diplomatik yönünüz ön planda olacak. Ortak finansal meselelerde ve derin duygusal konularda sezgileriniz size rehberlik edecek. Maceracı ruhunuzun canlanmasıyla yeni deneyimlere açılacak ve ufkunuzu genişleteceksiniz. Kariyerinizde sorumluluklarınız artarken, sosyal çevrenizdeki hareketlilik size ilham verecek. İçsel bir dinlenme ihtiyacının ardından kişisel enerjinizin yeniden tavan yapacağı bir dönemle haftayı kapatıyorsunuz. Girişimci ruhunuzla parlayacağınız bir dönem.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Aslan",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "24.09.2025 - 30.09.2025",
+      "description": "Finansal konulara ve maddi güvenliğinize odaklanarak başladığınız hafta, sağlam adımlar atmanızı gerektiriyor. İletişim yetenekleriniz güçleniyor, zihinsel olarak aktif ve meraklısınız. Ailevi meseleler gündeme geldiğinde duygusal bir hassasiyet sergileyebilirsiniz. Hafta sonu aşk, yaratıcılık ve eğlence hayatınızda öne çıkıyor; hayattan keyif alma isteğiniz yüksek. Günlük işlerinizi düzene sokarken, ikili ilişkilerde de dengeyi arayacaksınız. Eylül ayını, finansal konularda derin bir dönüşüm enerjisiyle tamamlıyorsunuz.",
+      "matches": {
+        "career": "Yengeç",
+        "friendship": "Yay",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "01.10.2025 - 07.10.2025",
+      "description": "Ekim ayına maceraperest ve iyimser bir ruhla başlıyorsunuz. Yeni şeyler öğrenmek ve ufkunuzu genişletmek için harika bir zaman. Kariyerinizde disiplinli ve sorumlu bir tutum sergilerken, sosyal çevrenizden alacağınız destekle motive olacaksınız. Hafta ortasında dinlenme ve içe çekilme ihtiyacı duyabilirsiniz. Ardından, kişisel enerjiniz yükseliyor ve yeni başlangıçlar için cesaret buluyorsunuz. Maddi konularda pratik çözümler getirirken, iletişim becerilerinizi de etkin bir şekilde kullanarak haftayı verimli kapatacaksınız.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Kova",
+        "love": "Koç"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.0",
+        "success": "4.5",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "08.10.2025 - 14.10.2025",
+      "description": "Ailevi konular ve duygusal güvenliğinizle başladığınız hafta, iç huzurunuzu ön planda tutmanızı sağlıyor. Ardından, yaratıcılığınız, aşk hayatınız ve eğlenceye olan düşkünlüğünüz tavan yapıyor. Günlük işlerinizi düzene sokarken, pratik ve verimli olacaksınız. Hafta sonuna doğru ikili ilişkilerde denge, finansal konularda derin sezgiler ve maceraperest bir ruh haliyle hareket edeceksiniz. Kariyerinizde alacağınız sorumluluklar sizi daha da güçlendirecek. Çok yönlü ve dinamik bir hafta sizi bekliyor.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Aslan",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.5",
+        "success": "4.5",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "15.10.2025 - 21.10.2025",
+      "description": "Sosyal çevrenizdeki canlılıkla başlayan bu hafta, geleceğe dair umutlarınızı besliyor. Kısa bir içe çekilme ve dinlenme molasından sonra, kişisel enerjiniz tavan yapacak ve yeni başlangıçlara cesaretle adım atacaksınız. Maddi konularda sağlam adımlar atarken, iletişim becerilerinizle dikkat çekeceksiniz. Ailevi meseleler ve duygusal güvenlik ihtiyacı hafta sonuna doğru önem kazanıyor. Aşk, yaratıcılık ve eğlence de gündeminizde olacak. Hem bireysel hem de sosyal alanlarda aktif bir hafta geçireceksiniz.",
+      "matches": {
+        "career": "Yay",
+        "friendship": "İkizler",
+        "love": "İkizler"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.5",
+        "success": "4.5",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "22.10.2025 - 28.10.2025",
+      "description": "Pratik zekanız ve organizasyon yeteneğinizle başladığınız bu hafta, günlük işlerinizi yoluna koymanızı sağlıyor. İkili ilişkilerde denge ve diplomasi ön planda olurken, ortak finansal konularda sezgileriniz size rehberlik edecek. Maceraperest ruhunuzun canlanmasıyla yeni ufuklara açılma isteği duyacaksınız. Kariyerinizde disiplinli ve sorumlu bir tutum sergilerken, sosyal hayatınızdaki canlılık da sizi besleyecek. Haftanın kapanışını ruhsal bir arınma ve dinlenme ile yapıyorsunuz. Disiplin ve vizyon haftası.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "İkizler",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "29.10.2025 - 04.11.2025",
+      "description": "Enerjik ve girişimci bir ruhla başladığınız hafta, yeni başlangıçlar için harika fırsatlar sunuyor. Maddi konularda sağlam adımlar atarken, zihinsel olarak aktif ve meraklı olacaksınız. İletişim trafiğiniz oldukça yoğun. Kasım ayının ilk günlerinde ailevi konular ve duygusal güvenlik ihtiyacı öne çıkıyor. Ardından aşk, yaratıcılık ve eğlence dolu günler sizi bekliyor. Günlük işlerinizi ve ikili ilişkilerinizi dengeleyerek bu çok yönlü haftayı verimli bir şekilde tamamlayabilirsiniz.",
+      "matches": {
+        "career": "Aslan",
+        "friendship": "Yay",
+        "love": "İkizler"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "05.11.2025 - 11.11.2025",
+      "description": "Haftanın başlangıcında derin sezgiler ve ortaklaşa finansal konular gündeminize geliyor. Maceracı ruhunuzun canlanmasıyla yeni deneyimlere açılacak, ufkunuzu genişleteceksiniz. Kariyerinizde sorumluluk almaktan çekinmeyecek, disiplinli çalışmalarınızla takdir toplayacaksınız. Sosyal hayatınızdaki canlılık size moral verirken, hafta ortasında dinlenmeye de ihtiyaç duyacaksınız. Kişisel enerjinizin yeniden yükseldiği hafta sonunda ise finansal konularda pratik çözümler üretebilirsiniz. Hem planlı hem de atılımcı olmanız gereken bir dönem.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Aslan",
+        "love": "Koç"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.0",
+        "success": "4.5",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "12.11.2025 - 18.11.2025",
+      "description": "Zihinsel aktivitenizin ve iletişim yeteneklerinizin parladığı bir haftaya başlıyorsunuz. Ailevi konular gündeme geldiğinde duygusal bir hassasiyet gösterebilir, sevdiklerinize daha fazla zaman ayırmak isteyebilirsiniz. Hafta ortasında aşk, yaratıcılık ve eğlence temaları hayatınıza neşe katıyor. Günlük işlerinizi ve sağlığınızı düzenlerken, pratik ve verimli olacaksınız. Haftayı, ikili ilişkilerde denge arayışı, finansal konularda derin sezgiler ve maceracı bir ruh haliyle kapatacaksınız. Çok yönlü ve dinamik bir hafta.",
+      "matches": {
+        "career": "Yay",
+        "friendship": "İkizler",
+        "love": "İkizler"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.5",
+        "success": "4.5",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "19.11.2025 - 25.11.2025",
+      "description": "Haftanın başlangıcında kariyer hedeflerinize ve sorumluluklarınıza odaklanıyorsunuz. Disiplinli çalışmalarınızla profesyonel hayatta ilerleme kaydedebilirsiniz. Sosyal çevrenizden destek alırken, dinlenme ve içe çekilme ihtiyacı da duyabilirsiniz. Kişisel enerjinizin yeniden tavan yaptığı hafta sonunda, girişimci ruhunuzla parlayacaksınız. Maddi konularda sağlam adımlar atarken, iletişim becerilerinizle yeni fırsatlar yaratacaksınız. Ailevi meseleler ve duygusal güvenliğinizle de ilgilenmeniz gerekecek. Denge ve atılım haftası.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "İkizler",
+        "love": "Koç"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "3.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "26.11.2025 - 02.12.2025",
+      "description": "Aşk, yaratıcılık ve eğlence dolu bir başlangıç yapan bu hafta, günlük işlerinizi ve sağlığınızı düzene sokma fırsatı sunuyor. İkili ilişkilerde denge ve uyum arayışı devam ederken, ortak finansal konularda sezgileriniz size rehberlik edecek. Aralık ayına kariyerinize odaklanarak ve sosyal çevrenizle bağlarınızı güçlendirerek giriyorsunuz. Maceraperest ruhunuzun canlanmasıyla yeni ufuklara açılacak, hem profesyonel hem de kişisel anlamda kendinizi geliştireceksiniz. Dolu dolu ve hareketli bir hafta.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "İkizler",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.0",
+        "success": "4.5",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "03.12.2025 - 09.12.2025",
+      "description": "Kendi iç dünyanıza çekilerek ve enerji toplayarak başladığınız hafta, kişisel gücünüzü yeniden keşfetmenizle devam ediyor. Yeni başlangıçlar için cesaretiniz artıyor ve liderlik vasıflarınız parlıyor. Finansal konulara pratik bir yaklaşımla eğilerek güvenliğinizi pekiştirebilirsiniz. İletişim trafiğinizin yoğunlaşacağı, yeni bilgiler öğreneceğiniz günler sizi bekliyor. Hafta sonuna doğru ailevi meseleler ve aşk hayatınızdaki romantik gelişmeler gündeminizi oluşturacak. Bu hafta, hem pratik işlerinizi düzenleyecek hem de hayattan keyif alacaksınız.",
+      "matches": {
+        "career": "Başak",
+        "friendship": "Yay",
+        "love": "Yay"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.0",
+        "success": "4.5",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "10.12.2025 - 16.12.2025",
+      "description": "İkili ilişkilerde denge ve uyum arayarak başladığınız haftada, diplomatik yönünüz ön plana çıkacak. Ortak finansal meselelerde ve derin duygusal konularda sezgileriniz size rehberlik edecek. Maceracı ruhunuzun canlanmasıyla yeni deneyimlere açılacak ve ufkunuzu genişleteceksiniz. Kariyerinizde sorumluluklarınız artarken, sosyal çevrenizdeki hareketlilik size ilham verecek. İçsel bir dinlenme ihtiyacının ardından kişisel enerjinizin yeniden tavan yapacağı bir dönemle haftayı kapatıyorsunuz. Girişimci ruhunuzla parlayacaksınız.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Aslan",
+        "love": "Koç"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "17.12.2025 - 23.12.2025",
+      "description": "Finansal konulara ve maddi güvenliğinize odaklanarak başladığınız hafta, sağlam adımlar atmanızı gerektiriyor. İletişim yetenekleriniz güçleniyor, zihinsel olarak aktif ve meraklısınız. Ailevi meseleler gündeme geldiğinde duygusal bir hassasiyet sergileyebilirsiniz. Hafta sonu aşk, yaratıcılık ve eğlence hayatınızda öne çıkıyor; hayattan keyif alma isteğiniz yüksek. Günlük işlerinizi düzene sokarken, ikili ilişkilerde de dengeyi arayacaksınız. Yıl sonuna yaklaşırken finansal konularda derin bir dönüşüm enerjisi sizi sarıyor.",
+      "matches": {
+        "career": "Başak",
+        "friendship": "Kova",
+        "love": "Yay"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "24.12.2025 - 30.12.2025",
+      "description": "Yılın son haftasına maceraperest ve iyimser bir ruhla başlıyorsunuz. Yeni şeyler öğrenmek ve ufkunuzu genişletmek için harika bir zaman. Kariyerinizde disiplinli ve sorumlu bir tutum sergilerken, sosyal çevrenizden alacağınız destekle motive olacaksınız. Hafta ortasında dinlenme ve içe çekilme ihtiyacı duyabilirsiniz. Ardından, kişisel enerjiniz yükseliyor ve yeni başlangıçlar için cesaret buluyorsunuz. Maddi konularda pratik çözümler getirirken, iletişim becerilerinizi de etkin bir şekilde kullanarak haftayı verimli kapatacaksınız.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Kova",
+        "love": "Koç"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.0",
+        "success": "4.5",
+        "vibe": "4.0"
+      }
+    }
+  ]
+}

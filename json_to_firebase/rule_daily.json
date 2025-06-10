@@ -1,0 +1,67 @@
+{
+  "type": "object",
+  "properties": {
+    "daily": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "matches": {
+          "type": "object",
+          "properties": {
+            "love": {
+              "type": "string"
+            },
+            "friendship": {
+              "type": "string"
+            },
+            "career": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "love",
+            "friendship",
+            "career"
+          ]
+        },
+        "stars": {
+          "type": "object",
+          "properties": {
+            "sex": {
+              "type": "number"
+            },
+            "hustle": {
+              "type": "number"
+            },
+            "success": {
+              "type": "number"
+            },
+            "vibe": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "sex",
+            "hustle",
+            "success",
+            "vibe"
+          ]
+        }
+      },
+      "required": [
+        "date",
+        "description",
+        "matches",
+        "stars"
+      ]
+    }
+  },
+  "required": [
+    "daily"
+  ]
+}
