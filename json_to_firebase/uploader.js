@@ -19,32 +19,39 @@ fs.readdir(directoryPath, function(err, files) {
   files.forEach(function(file) {
     const lastDotIndex = file.lastIndexOf(".");
     const fileNameWithoutExt = file.substring(0, lastDotIndex);
-
     const fullPath = path.join(directoryPath, file);
-    const jsonData = require(fullPath);
+    
+    try {
+      const jsonData = require(fullPath);
 
-    const items = Array.isArray(jsonData)
-      ? jsonData
-      : jsonData.weekly || [];
+      // Desteklenen periyot tipleri
+      const periods = ["daily", "weekly", "monthly", "yearly"];
 
-    if (!Array.isArray(items)) {
-      console.error(`HATA: ${file} dosyasının içeriği işlenebilir bir dizi değil.`);
-      return;
+      periods.forEach(period => {
+        if (jsonData[period] && Array.isArray(jsonData[period])) {
+          jsonData[period].forEach(obj => {
+            if (!obj.date) {
+              console.error(`HATA: ${file} dosyasında ${period} içinde tarih bilgisi eksik`);
+              return;
+            }
+
+            const docId = obj.date.replace(/\./g, "-");
+            const collectionName = `${period}_${fileNameWithoutExt}`;
+
+            firestore.collection(collectionName)
+              .doc(docId)
+              .set(obj)
+              .then(() => {
+                console.log(`✅ ${docId} eklendi -> ${collectionName}`);
+              })
+              .catch(error => {
+                console.error(`❌ ${collectionName}/${docId} eklenirken hata:`, error);
+              });
+          });
+        }
+      });
+    } catch (e) {
+      console.error(`HATA: ${file} dosyası işlenirken hata oluştu:`, e);
     }
-
-    items.forEach(function(obj) {
-      const docId = obj.date.replace(/\./g, "-"); // date'i docID olarak kullan, noktalardan kurtul
-
-      firestore
-        .collection(fileNameWithoutExt)
-        .doc(docId)
-        .set(obj)
-        .then(() => {
-          console.log(`✅ ${docId} dokümanı eklendi -> Koleksiyon: ${fileNameWithoutExt}`);
-        })
-        .catch(function(error) {
-          console.error("❌ Doküman eklenirken hata: ", error);
-        });
-    });
   });
 });

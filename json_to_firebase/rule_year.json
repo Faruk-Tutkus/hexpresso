@@ -2,63 +2,66 @@
   "type": "object",
   "properties": {
     "year": {
-      "type": "object",
-      "properties": {
-        "year": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "matches ": {
-          "type": "object",
-          "properties": {
-            "love": {
-              "type": "string"
-            },
-            "friendship": {
-              "type": "string"
-            },
-            "career": {
-              "type": "string"
-            }
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "type": "string"
           },
-          "required": [
-            "love",
-            "friendship",
-            "career"
-          ]
-        },
-        "stars": {
-          "type": "object",
-          "properties": {
-            "sex": {
-              "type": "string"
-            },
-            "hustle": {
-              "type": "string"
-            },
-            "success": {
-              "type": "string"
-            },
-            "vibe": {
-              "type": "string"
-            }
+          "description": {
+            "type": "string"
           },
-          "required": [
-            "sex",
-            "hustle",
-            "success",
-            "vibe"
-          ]
-        }
-      },
-      "required": [
-        "year",
-        "description",
-        "matches ",
-        "stars"
-      ]
+          "matches ": {
+            "type": "object",
+            "properties": {
+              "love": {
+                "type": "string"
+              },
+              "friendship": {
+                "type": "string"
+              },
+              "career": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "love",
+              "friendship",
+              "career"
+            ]
+          },
+          "stars": {
+            "type": "object",
+            "properties": {
+              "sex": {
+                "type": "string"
+              },
+              "hustle": {
+                "type": "string"
+              },
+              "success": {
+                "type": "string"
+              },
+              "vibe": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "sex",
+              "hustle",
+              "success",
+              "vibe"
+            ]
+          }
+        },
+        "required": [
+          "year",
+          "description",
+          "matches ",
+          "stars"
+        ]
+      }
     }
   },
   "required": [

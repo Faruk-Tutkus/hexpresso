@@ -5475,5 +5475,986 @@
         "vibe": 5.0
       }
     }
-  ]
+  ],
+  "weekly": [
+    {
+      "date": "30.12.2024 - 05.01.2025",
+      "description": "Sevgili Koç, yeni yıla yenilenme enerjisiyle başlıyorsunuz. Bu hafta kişisel hedeflerinizi gözden geçirmek ve yeni başlangıçlar yapmak için mükemmel bir fırsat sunuyor. Kariyer alanında yaratıcılığınız ve liderlik özelliklerinizle parlayabilir, üstlerinizin dikkatini çekebilirsiniz. Aşk hayatınızda beklenmedik ve heyecan verici gelişmeler yaşanırken, sosyal çevrenizdeki hareketlilik enerjinizi tazeleyecek. Ancak, finansal konularda temkinli olmalı ve ani harcamalardan kaçınmalısınız. Haftanın ilk günleri içsel muhasebe ve planlama için uygunken, hafta sonuna doğru enerjiniz artacak.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Kova",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "3.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "06.01.2025 - 12.01.2025",
+      "description": "Bu hafta iç dünyanızla dış dünya arasında bir denge kurmaya çalışıyorsunuz. Haftanın başında yalnız kalma ve stratejik planlar yapma ihtiyacı hissedebilirsiniz. Sezgileriniz oldukça güçlü olacak, bu yüzden iç sesinize güvenin. Haftanın ortasına doğru kendinizi ifade etme ve liderlik etme enerjiniz yükseliyor, kariyerinizde parlayabilirsiniz. İlişkiler ve ortaklıklar alanında diplomatik olmanız gereken günler de olacak. Hafta sonuna doğru sorumluluklarınız artarken, disiplinli çalışmalarınızla hedeflerinize ulaşmanız mümkün. Finansal konularda hem riskli hem de kazançlı fırsatlar var, dikkatli olun.",
+      "matches": {
+        "career": "Aslan",
+        "friendship": "Terazi",
+        "love": "Terazi"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "3.5"
+      }
+    },
+    {
+      "date": "13.01.2025 - 19.01.2025",
+      "description": "Sevgili Koç, bu hafta sosyal çevreniz ve geleceğe yönelik hayalleriniz ön planda. Arkadaş grupları içinde aktif olabilir, yeni insanlarla tanışarak ufkunuzu genişletebilirsiniz. Haftanın başında enerjiniz yüksek ve kişisel girişimleriniz için harika fırsatlar var. Maddi konularda daha planlı olmalı, bütçenizi gözden geçirmelisiniz. Haftanın ilerleyen günlerinde iletişim yetenekleriniz sayesinde önemli görüşmeler yapabilirsiniz. Ailevi meseleler ve evle ilgili konular hafta sonuna doğru duygusal hassasiyet yaratabilir. Yaratıcılığınızı kullanacağınız hobilerle rahatlayın.",
+      "matches": {
+        "career": "Yay",
+        "friendship": "İkizler",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "20.01.2025 - 26.01.2025",
+      "description": "Bu hafta iş, sağlık ve ilişkiler ana gündem maddeleriniz. Haftaya günlük rutinlerinizi ve işlerinizi organize ederek başlıyorsunuz. Detaylara dikkat etmeniz gereken konularda başarılı olabilirsiniz. Haftanın ortasında ikili ilişkiler ve ortaklıklar önem kazanacak; denge ve uyum arayışında olacaksınız. Diplomatik tavrınız sorunları çözmenize yardımcı olur. Finansal olarak ortak kaynaklar ve derin duygusal bağlar da gündeme gelebilir; sezgilerinize güvenin. Hafta sonu maceracı ruhunuz canlanacak, yeni fikirlere ve planlara açık olacaksınız.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Kova",
+        "love": "Terazi"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "27.01.2025 - 02.02.2025",
+      "description": "Sevgili Koç, haftaya enerjik ve girişimci bir ruhla başlıyorsunuz, kişisel projeleriniz için harika bir zaman. Maddi konularda daha dikkatli ve planlı hareket ederek finansal güvenliğinizi artırabilirsiniz. Haftanın ortasında iletişim trafiğiniz artacak, yeni bilgiler öğrenmekten keyif alacaksınız. Ailevi ve duygusal konular gündeme gelebilir, evde huzur arayacaksınız. Hafta sonuna doğru aşk, yaratıcılık ve eğlence temaları öne çıkıyor. Hayatın tadını çıkarırken işlerinizi de organize etmeyi ihmal etmeyin.",
+      "matches": {
+        "career": "Aslan",
+        "friendship": "Terazi",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "03.02.2025 - 09.02.2025",
+      "description": "Bu hafta derin duygular, büyük hedefler ve kişisel enerjiniz arasında gidip geliyorsunuz. Haftaya sezgilerinizin güçlü olduğu, finansal konuların öne çıktığı bir başlangıç yapıyorsunuz. Ufkunuzu genişletecek seyahat veya eğitim planları gündeme gelebilir. Kariyerinizde önemli sorumluluklar alarak disiplinli bir şekilde ilerleyebilirsiniz. Hafta sonuna doğru enerjiniz yerine geliyor ve yeni başlangıçlar yapmak için cesaret buluyorsunuz. Sosyal çevrenizden destek göreceğiniz, umut dolu bir hafta sonu sizi bekliyor.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Kova",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "10.02.2025 - 16.02.2025",
+      "description": "Sevgili Koç, bu hafta iletişim, aşk ve macera temaları öne çıkıyor. Zihniniz oldukça aktif olacak, yeni şeyler öğrenmek ve fikirlerinizi paylaşmak için harika bir zaman. Aşk hayatınızda ve yaratıcı konularda parlak bir dönemdesiniz. Sevgililer Günü'nde romantizm ve uyum arayışı içinde olacaksınız. Haftanın ilerleyen günlerinde ortaklaşa finansal konular gündeme gelebilir ve sezgileriniz size yol gösterebilir. Hafta sonu iyimserliğiniz artıyor ve yeni ufuklara açılma arzunuz yoğunlaşıyor. Fırsatları değerlendirin.",
+      "matches": {
+        "career": "Kova",
+        "friendship": "İkizler",
+        "love": "Terazi"
+      },
+      "stars": {
+        "hustle": "3.0",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "17.02.2025 - 23.02.2025",
+      "description": "Bu hafta kariyer hedeflerinizden başlayarak kişisel enerjinize kadar geniş bir yelpazede yoğun etkiler altındasınız. Haftaya iş hayatınızdaki sorumluluklarla başlıyorsunuz, disiplinli çalışmalarınızla başarı yakalayabilirsiniz. Sosyal çevrenizden ve arkadaşlarınızdan alacağınız destek moralinizi yükseltecek. Haftanın ilerleyen günlerinde enerjiniz yerine geliyor ve yeni başlangıçlar için cesaret buluyorsunuz. Maddi konularda daha dikkatli olmanız gereken bir dönem. Haftayı ev ve aile konularıyla ilgilenerek daha sakin kapatacaksınız.",
+      "matches": {
+        "career": "Boğa",
+        "friendship": "İkizler",
+        "love": "Kova"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "3.5",
+        "success": "4.0",
+        "vibe": "3.5"
+      }
+    },
+    {
+      "date": "24.02.2025 - 02.03.2025",
+      "description": "Sevgili Koç, bu hafta aşk, iş ve sosyal hayat arasında denge kurmanız gerekecek. Yaratıcılığınızın ve eğlenceye olan düşkünlüğünüzün arttığı bir başlangıç yapıyorsunuz. İş hayatınızda ise detaylara odaklanarak verimliliğinizi artırabilirsiniz. İlişkilerde uyum ve denge arayışınız ön planda olacak, diplomatik davranarak kazançlı çıkabilirsiniz. Sezgilerinizin güçlendiği ve finansal konularda derinleştiğiniz bir dönem. Hafta sonuna doğru sosyal çevrenizle geleceğe dair umut verici planlar yapabilirsiniz.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Kova",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "03.03.2025 - 09.03.2025",
+      "description": "Bu hafta iç dünyanızdan dışa doğru açılan bir enerjiyle ilerleyeceksiniz. Haftaya maneviyat ve sezgilerinizle baş başa kalarak başlayabilirsiniz. Sonrasında ise enerjiniz yükseliyor ve yeni başlangıçlar için harekete geçiyorsunuz. Maddi konularda daha planlı olmalı, iletişim yeteneklerinizi iş ve özel hayatınızda etkili bir şekilde kullanmalısınız. Ailevi meseleler ve evle ilgili konular da gündeme gelebilir. Hafta sonu aşk ve yaratıcılık temalarıyla kendinizi şımartmak için harika bir fırsat.",
+      "matches": {
+        "career": "Aslan",
+        "friendship": "Terazi",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "10.03.2025 - 16.03.2025",
+      "description": "Sevgili Koç, bu hafta ilişkiler ve hedefleriniz ön planda. İkili ilişkilerinizde denge ararken, ortaklaşa konularda derin ve dönüştürücü kararlar alabilirsiniz. Sezgileriniz finansal alanlarda size rehberlik edebilir. Ufkunuzu genişletecek seyahat veya eğitim fırsatları karşınıza çıkabilir. Kariyerinizde disiplinli ve sorumlu davranarak önemli adımlar atabilirsiniz. Sosyal hayatınız oldukça canlı olacak, arkadaşlarınızdan destek görebilirsiniz. Haftayı kişisel enerjinizi toplayarak ve yeni başlangıçlara hazırlanarak tamamlayacaksınız.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "İkizler",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "17.03.2025 - 23.03.2025",
+      "description": "Bu hafta Güneş'in sizin burcunuza geçişiyle enerjiniz doruk noktasına ulaşıyor! Kişisel girişimleriniz ve yeni başlangıçlar için harika bir dönemdesiniz. Maddi konularda istikrarlı adımlar atarken, iletişim becerilerinizle çevrenizi etkileyebilirsiniz. Aile ve evle ilgili konular hassasiyet yaratabilir. Aşk, romantizm ve yaratıcılık alanında ise kendinizi şanslı hissedeceksiniz. Sağlığınıza dikkat etmeli ve ortaklıklarda dengeyi gözetmelisiniz. Tutkulu ve dönüştürücü bir hafta sonu sizi bekliyor.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Kova",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "24.03.2025 - 30.03.2025",
+      "description": "Sevgili Koç, bu hafta maceracı ruhunuzdan kişisel enerjinize kadar geniş bir alanda aktif olacaksınız. Ufkunuzu genişletmek, yeni şeyler öğrenmek isteyeceksiniz. Kariyerinizde ciddi ve sorumlu adımlar atarak hedeflerinize ilerleyeceksiniz. Sosyal hayatınız oldukça hareketli, arkadaşlarınızla keyifli planlar yapabilirsiniz. Haftanın sonlarına doğru enerjiniz yerine geliyor, yeni başlangıçlar yapmak için sabırsızlanacaksınız. Finansal ve iletişimsel konular da hafta boyunca gündeminizde olacak, fırsatları iyi değerlendirin.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "İkizler",
+        "love": "Kova"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.0",
+        "success": "4.5",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "31.03.2025 - 06.04.2025",
+      "description": "Nisan ayına girerken, ev ve aile hayatınızdan başlayarak kariyerinize kadar uzanan önemli temalarla meşgul olacaksınız. Haftaya ailevi konularla ilgilenerek ve duygusal güvenliğinizi sağlayarak başlıyorsunuz. Ardından aşk ve yaratıcılık alanında şanslı etkiler altındasınız. İş hayatınızda düzen ve verimlilik ön planda olacak. İlişkilerde denge ve uyum arayışınız devam ederken, ortak finansal konularda derinlemesine kararlar alabilirsiniz. Hafta sonu kariyer hedeflerinize odaklanmak için harika bir zaman.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "İkizler",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "3.5"
+      }
+    },
+    {
+      "date": "07.04.2025 - 13.04.2025",
+      "description": "Bu hafta sosyal hayatınız ve kişisel hedefleriniz arasında bir köprü kuruyorsunuz. Haftaya arkadaşlarınızla keyifli planlar yaparak başlayabilirsiniz. İç dünyanıza dönüp dinlenmeniz gereken bir günün ardından enerjiniz tazeleniyor ve yeni girişimler için harekete geçiyorsunuz. Maddi konularda daha dikkatli olmanız, iletişimde ise zekanızı konuşturmanız gereken bir dönem. Ailevi konular hassasiyet yaratabilir. Hafta sonu yaratıcılığınız ve romantizm duygunuz tavan yapacak, hayatın tadını çıkarın.",
+      "matches": {
+        "career": "Aslan",
+        "friendship": "İkizler",
+        "love": "Koç"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "14.04.2025 - 20.04.2025",
+      "description": "Sevgili Koç, bu hafta iş hayatından sosyal ilişkilere, iç dünyanızdan kariyer hedeflerinize uzanan yoğun bir tempo sizi bekliyor. Günlük rutinlerinizi düzenleyerek ve sağlığınıza dikkat ederek haftaya başlıyorsunuz. İlişkilerde dengeyi gözetmeli, ortaklıklarda adil olmalısınız. Ortak finansal konularda derinlemesine analizler yapabilirsiniz. Hafta sonuna doğru maceracı ruhunuz canlanıyor ve kariyerinizde önemli adımlar atma fırsatı buluyorsunuz. Arkadaş çevrenizden ve iç dünyanızdan gelen ilhamla haftayı tamamlayacaksınız.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Kova",
+        "love": "Terazi"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "3.5"
+      }
+    },
+    {
+      "date": "21.04.2025 - 27.04.2025",
+      "description": "Bu hafta enerjiniz zirvede! Kişisel hedeflerinize odaklanarak ve yeni başlangıçlar yaparak haftaya damga vurabilirsiniz. Güneş'in Boğa burcuna geçişiyle maddi konular ve finansal güvenlik önceliğiniz haline gelecek. İletişim yetenekleriniz güçlü, ancak ailevi konularda duygusal dengeyi korumaya çalışın. Aşk, yaratıcılık ve eğlence temaları hayatınıza renk katacak. Haftanın sonlarına doğru günlük işlerinizi organize etme ve ilişkilerinizde uyumu yakalama ihtiyacı duyacaksınız. Dinamik bir hafta sizi bekliyor.",
+      "matches": {
+        "career": "Boğa",
+        "friendship": "Terazi",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.5",
+        "success": "4.5",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "28.04.2025 - 04.05.2025",
+      "description": "Sevgili Koç, bu hafta dönüşüm ve yenilenme temaları öne çıkıyor. Ortak finansal konular, krediler veya miras gibi meselelerle ilgilenirken sezgilerinize güvenin. Ufkunuzu genişletecek seyahat veya eğitim fırsatları karşınıza çıkabilir. Kariyerinizde önemli sorumluluklar alarak otorite figürlerinin takdirini kazanabilirsiniz. Sosyal hayatınız canlanıyor, arkadaşlarınızla keyifli anlar geçirebilirsiniz. Haftayı kişisel enerjinizi toparlayıp, yeni hedeflere odaklanarak ve finansal planlar yaparak kapatacaksınız.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "İkizler",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.5",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "05.05.2025 - 11.05.2025",
+      "description": "İletişim, ev ve aşk hayatı bu haftanın anahtar kelimeleri. Haftaya zihinsel olarak oldukça aktif başlayacak, yakın çevrenizle bolca sohbet edeceksiniz. Aile ve yuva konularına odaklanarak duygusal güvenliğinizi pekiştirebilirsiniz. Haftanın ortasında yaratıcılığınız ve romantizm duygunuz tavan yapıyor; hayattan keyif almak için harika fırsatlar var. İş hayatında daha düzenli ve verimli olmanız gerekebilir. Hafta sonu ilişkilerde denge arayışı ve ortak finansal konular gündeme gelecek.",
+      "matches": {
+        "career": "Başak",
+        "friendship": "Kova",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "12.05.2025 - 18.05.2025",
+      "description": "Sevgili Koç, bu hafta kariyer hedefleriniz ve kişisel enerjiniz arasında bir denge kuracaksınız. Haftaya uzun vadeli planlarınıza odaklanarak ve sorumluluklarınızı yerine getirerek başlıyorsunuz. Sosyal çevrenizden alacağınız destek moralinizi yükseltecek. Haftanın ortasında iç dünyanıza çekilip dinlenmek isteyebilirsiniz. Sonrasında ise enerjiniz yükseliyor ve yeni başlangıçlar yapmak için sabırsızlanıyorsunuz. Maddi konularda daha planlı olmalı, iletişim yeteneklerinizi etkili kullanmalısınız. Ailevi konularla haftayı kapatıyorsunuz.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "İkizler",
+        "love": "Kova"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "3.5",
+        "success": "4.0",
+        "vibe": "3.5"
+      }
+    },
+    {
+      "date": "19.05.2025 - 25.05.2025",
+      "description": "Bu hafta Güneş'in İkizler burcuna geçmesiyle iletişim, öğrenme ve sosyal hayatınız ön plana çıkıyor. Aşk ve yaratıcılık alanında keyifli ve eğlenceli zamanlar geçirebilirsiniz. Günlük işlerinizi organize etmek ve sağlığınıza dikkat etmek önemli olacak. İlişkilerde denge ve uyum arayışı içinde olacaksınız. Ortak finansal konular ve derin duygusal bağlar da gündeminizde yer alabilir. Hafta sonu maceracı ruhunuz canlanıyor; yeni fikirler, seyahatler ve felsefi sohbetler sizi bekliyor.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Kova",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "26.05.2025 - 01.06.2025",
+      "description": "Sevgili Koç, bu hafta iç dünyanızdan başlayarak finansal konulara kadar geniş bir yelpazede yoğun etkiler altındasınız. Haftaya dinlenerek ve enerji toplayarak başlayın. Sonrasında ise kişisel girişimleriniz için enerjiniz yükseliyor. Finansal durumunuzu gözden geçirmek ve sağlam adımlar atmak için iyi bir zaman. İletişim ve yakın çevre ilişkileriniz oldukça hareketli olacak. Ay sonuna doğru ev ve aile konuları gündeme gelirken, ay başında günlük işlerinizi düzene sokmanız gerekebilir.",
+      "matches": {
+        "career": "Başak",
+        "friendship": "Yay",
+        "love": "Boğa"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "02.06.2025 - 08.06.2025",
+      "description": "Haziran'ın bu haftasında ilişkiler, kariyer ve kişisel enerji ön planda. Haftaya ikili ilişkilerde denge ve uyum arayarak başlıyorsunuz. Ortak finansal konularda sezgileriniz size yol gösterebilir. Maceracı ruhunuzla yeni şeyler öğrenmek isteyeceksiniz. Kariyerinizde önemli sorumluluklar alabilir, disiplinli çalışmalarınızla öne çıkabilirsiniz. Hafta sonuna doğru kişisel enerjiniz yükseliyor ve yeni başlangıçlar yapmak için gereken cesareti buluyorsunuz. Sosyal ve dinamik bir hafta sizi bekliyor.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "İkizler",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.0",
+        "success": "4.5",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "09.06.2025 - 15.06.2025",
+      "description": "Sevgili Koç, bu hafta finansal konulardan aşka, iletişimden ilişkilere kadar çeşitli alanlarda aktif olacaksınız. Maddi güvenliğinizi sağlamlaştırmak için planlar yaparken, iletişim yetenekleriniz sayesinde yeni fırsatlar yakalayabilirsiniz. Ev ve aile hayatınızda duygusal dengeyi korumak önemli. Haftanın ortasında aşk ve yaratıcılık temaları hayatınıza neşe katacak. İlişkilerde ise denge ve uyum arayışınız devam ediyor. Hafta sonu ortak finansal konular ve derin duygusal paylaşımlar gündeme gelebilir.",
+      "matches": {
+        "career": "Kova",
+        "friendship": "Oğlak",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "16.06.2025 - 22.06.2025",
+      "description": "Bu hafta macera ve kariyer hedefleriniz arasında bir denge kurmanız gerekecek. Ufkunuzu genişletecek planlar yaparken, aynı zamanda iş hayatınızdaki sorumlulukları da ihmal etmemelisiniz. Disiplinli çalışmalarınızla üstlerinizin takdirini kazanabilirsiniz. Sosyal hayatınız oldukça canlı olacak, arkadaşlarınızdan destek görebilirsiniz. Haftanın ortasında iç dünyanıza dönüp dinlenmek isteyebilirsiniz. Hafta sonu, Güneş'in Yengeç burcuna geçmesiyle aile ve ev konuları öncelikli hale gelecek.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "İkizler",
+        "love": "Yay"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "3.5",
+        "success": "4.5",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "23.06.2025 - 29.06.2025",
+      "description": "Sevgili Koç, bu hafta Güneş Yengeç burcunda ilerlerken, ailevi ve duygusal konular öncelikli olacak. Ev ve yuva hayatınızda huzur arayacaksınız. Ancak aşk ve yaratıcılık alanında da parlak fırsatlar sizi bekliyor; hayatın tadını çıkarmaktan çekinmeyin. İş hayatınızda verimliliğiniz artarken, ilişkilerde diplomatik olmanız gereken durumlar oluşabilir. Ortak finansal konular ve derin sezgileriniz de gündemde olacak. Haftayı kariyer hedeflerinize odaklanarak kapatacaksınız.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Kova",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "30.06.2025 - 06.07.2025",
+      "description": "Temmuz ayına girerken, sosyal hayattan kişisel bakıma kadar pek çok alanda aktif olacaksınız. Haftaya arkadaşlarınızla keyifli planlar yaparak başlıyorsunuz. Sonrasında iç dünyanıza dönüp dinlenmeniz gerekebilir. Enerjiniz tazelendiğinde, kişisel girişimleriniz için harekete geçebilirsiniz. Finansal konulara odaklanmanız ve bütçenizi gözden geçirmeniz önemli olacak. Aşk ve yaratıcılık hafta sonuna doğru hayatınıza neşe katacak. Sağlığınıza ve günlük rutinlerinize de özen göstermelisiniz.",
+      "matches": {
+        "career": "Başak",
+        "friendship": "İkizler",
+        "love": "Terazi"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.0",
+        "success": "4.5",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "07.07.2025 - 13.07.2025",
+      "description": "Sevgili Koç, bu hafta ilişkiler ve hedefler ana gündeminiz. Haftaya ortaklıklar ve ikili ilişkilerde denge arayarak başlıyorsunuz. Ortak finansal konularda sezgileriniz kuvvetli olacak. Ufkunuzu genişletecek seyahat veya eğitim fırsatları sizi bekliyor. Kariyerinizde disiplinli ve sorumlu davranarak önemli adımlar atabilirsiniz. Sosyal çevrenizden destek göreceğiniz, umut dolu bir hafta sonu geçirebilirsiniz. Kişisel enerjiniz yükseliyor ve yeni başlangıçlara hazır hissediyorsunuz.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Aslan",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "4.5",
+        "sex": "4.0",
+        "success": "4.5",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "14.07.2025 - 20.07.2025",
+      "description": "Bu hafta maddi konulardan başlayarak duygusal derinliklere kadar inen bir yolculuk sizi bekliyor. Finansal durumunuzu sağlamlaştırmak için planlar yaparken, iletişim yetenekleriniz sayesinde yeni fırsatlar yakalayabilirsiniz. Ev ve aile hayatınızda huzuru arayacak, sevdiklerinize zaman ayıracaksınız. Haftanın ortasında aşk ve yaratıcılık enerjisi sizi saracak. İş ve sağlık konularında daha düzenli olmalısınız. Hafta sonu ortaklaşa para konuları ve tutkulu duygular öne çıkıyor.",
+      "matches": {
+        "career": "Başak",
+        "friendship": "Yengeç",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "21.07.2025 - 27.07.2025",
+      "description": "Sevgili Koç, Güneş'in Aslan burcuna geçişiyle bu hafta aşk, yaratıcılık ve eğlence sizinle olacak. Maceracı ruhunuzla yeni deneyimlere atılabilir, hayata daha pozitif bakabilirsiniz. Kariyerinizde ciddi adımlar atarak hedeflerinize ilerlerken, sosyal hayatınızda da aktif olacaksınız. Haftanın sonlarına doğru enerjiniz tazeleniyor, kişisel girişimleriniz için harika fırsatlar yakalayabilirsiniz. Finansal konulara odaklanmanız ve yakın çevrenizle iletişiminizi güçlü tutmanız da önemli olacak. Çok yönlü ve dinamik bir hafta!",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Kova",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.5",
+        "success": "4.5",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "28.07.2025 - 03.08.2025",
+      "description": "Bu hafta ailevi konulardan başlayarak büyük hedeflere uzanan bir süreçtesiniz. Haftaya ev ve aile hayatınızla ilgilenerek, duygusal dengeyi bularak başlıyorsunuz. Yaratıcılığınız ve romantizm duygunuz tavan yapıyor; hayatın tadını çıkarın. İş ve sağlık konularında daha pratik ve düzenli olmalısınız. İlişkilerde uyum ve denge ararken, ortaklaşa finansal konularda derin kararlar alabilirsiniz. Hafta sonuna doğru iyimserliğiniz artıyor ve kariyer hedeflerinize daha sıkı sarılıyorsunuz.",
+      "matches": {
+        "career": "Başak",
+        "friendship": "Aslan",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "04.08.2025 - 10.08.2025",
+      "description": "Ağustos ayının bu haftasında sosyal hayattan kişisel gelişime, maddi konulardan aşka kadar pek çok alanda aktifsiniz. Arkadaşlarınızla keyifli planlar yaparken, iç dünyanıza dönüp dinlenmeyi de ihmal etmeyeceksiniz. Kişisel enerjiniz yükseliyor, yeni başlangıçlar için harika bir dönem. Finansal konulara ve iletişime odaklanmanız size avantaj sağlayacak. Ailevi meseleler gündeme gelebilir. Hafta sonu aşk ve yaratıcılık temalarıyla kendinizi şımartacak, neşeli zamanlar geçireceksiniz.",
+      "matches": {
+        "career": "İkizler",
+        "friendship": "Kova",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "11.08.2025 - 17.08.2025",
+      "description": "Sevgili Koç, bu hafta iş hayatı, ilişkiler ve büyük hedefleriniz arasında bir denge kuracaksınız. Haftaya günlük rutinlerinizi ve sağlığınızı düzene sokarak başlıyorsunuz. İlişkilerde diplomatik ve adil olmanız gereken bir dönemdesiniz. Ortak finansal konularda sezgileriniz size yol gösterebilir. Maceracı ruhunuzla yeni ufuklara açılmak isteyeceksiniz. Kariyerinizde disiplinli ve sorumlu davranarak önemli adımlar atabilirsiniz. Sosyal çevrenizden destek göreceğiniz umut dolu bir hafta sonu sizi bekliyor.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "İkizler",
+        "love": "Terazi"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.0",
+        "success": "4.5",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "18.08.2025 - 24.08.2025",
+      "description": "Bu hafta kişisel enerjinizden ilişkilere, maddi konulardan aile hayatına kadar geniş bir yelpazede gelişmeler sizi bekliyor. Enerjik ve girişimci bir başlangıç yapıyorsunuz. Finansal durumunuzu sağlamlaştırmak için planlar yaparken, iletişim yetenekleriniz sayesinde yeni fırsatlar yakalayabilirsiniz. Güneş'in Başak burcuna geçişiyle iş ve sağlık konularına daha fazla odaklanacaksınız. Ailevi konular hassasiyet yaratabilirken, hafta sonu ikili ilişkilerde uyum ve denge arayışınız ön plana çıkıyor.",
+      "matches": {
+        "career": "Boğa",
+        "friendship": "Terazi",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.0",
+        "success": "4.5",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "25.08.2025 - 31.08.2025",
+      "description": "Sevgili Koç, bu hafta dönüşüm, macera ve kişisel enerji temaları öne çıkıyor. Ortak finansal konularda veya derin duygusal meselelerde önemli gelişmeler yaşayabilirsiniz. Ufkunuzu genişletecek seyahat veya eğitim fırsatları kapınızı çalabilir. Kariyerinizde sorumluluklarınız artarken, sosyal çevrenizden destek görebilirsiniz. Haftanın ortasında iç dünyanıza dönüp dinlenmek isteyebilirsiniz. Hafta sonu ise enerjiniz yükseliyor ve yeni başlangıçlar yapmak için sabırsızlanıyorsunuz. Finansal konulara da odaklanacaksınız.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Yay",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "01.09.2025 - 07.09.2025",
+      "description": "Eylül ayına zihinsel olarak oldukça aktif başlayacaksınız. İletişim, yakın çevre ve öğrenme konuları ön planda. Ailevi ve duygusal meselelere zaman ayırmanız gerekebilir. Haftanın ortasında aşk, yaratıcılık ve eğlence temaları hayatınıza neşe katacak. İş ve sağlık konularında daha düzenli ve pratik olmanız gereken bir dönemdesiniz. İlişkilerde denge ve uyum arayışınız devam ediyor. Hafta sonu maceraperest ruhunuz canlanıyor, yeni keşiflere açık olun.",
+      "matches": {
+        "career": "Başak",
+        "friendship": "İkizler",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "08.09.2025 - 14.09.2025",
+      "description": "Bu hafta kariyer hedefleriniz ve kişisel gelişiminiz ön planda. Haftaya disiplinli ve sorumlu bir şekilde işlerinize odaklanarak başlıyorsunuz. Sosyal çevrenizden alacağınız destekle motive olabilirsiniz. Haftanın ortasında iç dünyanıza dönüp enerji toplamanız gerekebilir. Sonrasında ise kişisel enerjiniz yükseliyor ve yeni başlangıçlar için harekete geçiyorsunuz. Finansal planlamalar ve etkili iletişim, bu haftanın diğer önemli konuları arasında yer alıyor. Haftayı ailevi konularla ilgilenerek tamamlayacaksınız.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Kova",
+        "love": "Koç"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "3.5",
+        "success": "4.5",
+        "vibe": "3.5"
+      }
+    },
+    {
+      "date": "15.09.2025 - 21.09.2025",
+      "description": "Sevgili Koç, bu hafta aşk, iş ve ilişkiler üçgeninde dengeler kuracaksınız. Haftaya yaratıcılığınızı ve romantik enerjinizi kullanarak başlıyorsunuz. İş hayatında ise detaylara odaklanarak verimliliğinizi artırabilirsiniz. İkili ilişkilerde uyum ve denge arayışınız ön planda olacak. Diplomatik davranarak kazançlı çıkabilirsiniz. Ortak finansal konular ve derin duygusal meseleler gündeme gelebilir. Hafta sonuna doğru ufkunuzu genişletecek planlar yapabilir, kariyer hedeflerinize odaklanabilirsiniz.",
+      "matches": {
+        "career": "Başak",
+        "friendship": "Terazi",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.5",
+        "success": "4.5",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "22.09.2025 - 28.09.2025",
+      "description": "Bu hafta Güneş'in Terazi burcuna geçişiyle ilişkiler, ortaklıklar ve denge önceliğiniz oluyor. İç dünyanıza dönüp dinlendikten sonra enerjiniz yükseliyor ve kişisel girişimleriniz için harekete geçiyorsunuz. Maddi konularda daha planlı olmalı, bütçenizi gözden geçirmelisiniz. İletişim yeteneklerinizle yakın çevrenizi etkileyebilirsiniz. Ailevi konular ve ev hayatınız da önem kazanıyor. Hafta sonu aşk, romantizm ve eğlence temalarıyla kendinizi şımartmak için harika bir fırsat bulacaksınız.",
+      "matches": {
+        "career": "Boğa",
+        "friendship": "Kova",
+        "love": "Terazi"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "29.09.2025 - 05.10.2025",
+      "description": "Ekim ayına girerken, ilişkilerden başlayarak iç dünyanıza uzanan önemli temalarla ilgileneceksiniz. Haftaya ortaklıklar ve ikili ilişkilerde denge arayarak başlıyorsunuz. Ortak finansal konularda derin ve sezgisel kararlar alabilirsiniz. Ufkunuzu genişletecek seyahat veya eğitim fırsatları sizi bekliyor. Kariyerinizde önemli sorumluluklar alabilir, disiplinli çalışmalarınızla öne çıkabilirsiniz. Haftayı kişisel enerjinizi toplayıp yeni başlangıçlara hazırlanarak ve sosyal çevrenizle vakit geçirerek tamamlayacaksınız.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "İkizler",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "06.10.2025 - 12.10.2025",
+      "description": "Sevgili Koç, bu hafta finansal konulardan duygusal derinliklere kadar birçok alanda aktif olacaksınız. Maddi güvenliğinizi sağlamlaştırmak için planlar yaparken, iletişim yetenekleriniz sayesinde yeni fırsatlar yakalayabilirsiniz. Ev ve aile hayatınızda huzuru arayacak, sevdiklerinize zaman ayıracaksınız. Haftanın ortasında aşk ve yaratıcılık enerjisi sizi saracak. İş ve sağlık konularında daha düzenli olmalısınız. Hafta sonu ortaklaşa para konuları ve tutkulu duygular öne çıkıyor.",
+      "matches": {
+        "career": "Boğa",
+        "friendship": "Kova",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "13.10.2025 - 19.10.2025",
+      "description": "Bu hafta macera, kariyer ve kişisel enerji temaları arasında bir denge kuracaksınız. Ufkunuzu genişletecek planlar yaparken, aynı zamanda iş hayatınızdaki sorumlulukları da ihmal etmemelisiniz. Disiplinli çalışmalarınızla üstlerinizin takdirini kazanabilirsiniz. Sosyal hayatınız oldukça canlı olacak, arkadaşlarınızdan destek görebilirsiniz. Haftanın ortasında iç dünyanıza dönüp dinlenmek isteyebilirsiniz. Hafta sonu, maddi konularda daha pratik ve dikkatli olmanız gereken bir dönem olacak.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "İkizler",
+        "love": "Yay"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "3.5",
+        "success": "4.5",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "20.10.2025 - 26.10.2025",
+      "description": "Sevgili Koç, Güneş'in Akrep burcuna geçişiyle bu hafta dönüşüm, tutku ve ortaklaşa konular ön planda. Ailevi ve duygusal meseleler gündeme gelebilir. Aşk ve yaratıcılık alanında keyifli zamanlar sizi bekliyor. İş ve sağlık konularında düzenli olmanız gereken bir dönemdesiniz. İkili ilişkilerde dengeyi gözetirken, ortak finansal konularda derinlemesine analizler yapabilirsiniz. Hafta sonuna doğru maceracı ruhunuz canlanıyor ve kariyer hedeflerinize daha sıkı sarılıyorsunuz.",
+      "matches": {
+        "career": "Başak",
+        "friendship": "Yay",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "27.10.2025 - 02.11.2025",
+      "description": "Bu hafta sosyal hayattan kişisel bakıma kadar pek çok alanda aktifsiniz. Haftaya arkadaşlarınızla keyifli planlar yaparak başlıyorsunuz. İç dünyanıza dönüp dinlenmeniz gerekebilir. Enerjiniz tazelendiğinde, kişisel girişimleriniz için harekete geçebilirsiniz. Finansal konulara odaklanmanız ve bütçenizi gözden geçirmeniz önemli olacak. İletişim yeteneklerinizle dikkat çekerken, ailevi konular hassasiyet yaratabilir. Hafta sonu yaratıcılığınız ve romantizm duygunuz tavan yapacak.",
+      "matches": {
+        "career": "Kova",
+        "friendship": "Akrep",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "03.11.2025 - 09.11.2025",
+      "description": "Kasım'ın bu haftası iş, ilişkiler ve büyük hedefleriniz arasında denge kurmanızı gerektiriyor. Günlük rutinlerinizi düzenleyerek ve sağlığınıza dikkat ederek haftaya başlıyorsunuz. İlişkilerde dengeyi gözetmeli, ortaklıklarda adil olmalısınız. Ortak finansal konularda derinlemesine analizler yapabilirsiniz. Hafta sonuna doğru maceracı ruhunuz canlanıyor ve kariyerinizde önemli adımlar atma fırsatı buluyorsunuz. Sosyal çevrenizden ve iç dünyanızdan gelen ilhamla haftayı tamamlayacaksınız.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Kova",
+        "love": "Akrep"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "10.11.2025 - 16.11.2025",
+      "description": "Sevgili Koç, bu hafta kişisel enerjinizden ilişkilere, maddi konulardan aile hayatına kadar geniş bir yelpazede hareketlilik var. Enerjik ve girişimci bir başlangıç yapıyorsunuz. Finansal durumunuzu sağlamlaştırmak için planlar yaparken, iletişim yetenekleriniz sayesinde yeni fırsatlar yakalayabilirsiniz. Ailevi konular hassasiyet yaratabilirken, hafta sonu ikili ilişkilerde uyum ve denge arayışınız ön plana çıkıyor. Aşk hayatınızda da romantik anlar yaşanabilir.",
+      "matches": {
+        "career": "Boğa",
+        "friendship": "İkizler",
+        "love": "Terazi"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "17.11.2025 - 23.11.2025",
+      "description": "Bu hafta dönüşüm, macera ve kişisel enerji temaları öne çıkıyor. Ortak finansal konularda veya derin duygusal meselelerde önemli gelişmeler yaşayabilirsiniz. Güneş'in Yay burcuna geçmesiyle ufkunuzu genişletecek seyahat veya eğitim fırsatları kapınızı çalabilir. Kariyerinizde sorumluluklarınız artarken, sosyal çevrenizden destek görebilirsiniz. Haftanın sonlarına doğru enerjiniz yükseliyor ve yeni başlangıçlar yapmak için sabırsızlanıyorsunuz. Finansal konulara da odaklanacaksınız.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "İkizler",
+        "love": "Yay"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.0",
+        "success": "4.5",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "24.11.2025 - 30.11.2025",
+      "description": "Sevgili Koç, bu hafta zihinsel olarak oldukça aktif başlayacaksınız. İletişim, yakın çevre ve öğrenme konuları ön planda. Ailevi ve duygusal meselelere zaman ayırmanız gerekebilir. Haftanın ortasında aşk, yaratıcılık ve eğlence temaları hayatınıza neşe katacak. İş ve sağlık konularında daha düzenli ve pratik olmanız gereken bir dönemdesiniz. İlişkilerde denge ve uyum arayışınız devam ediyor. Hafta sonu maceraperest ruhunuz canlanıyor, yeni keşiflere açık olun.",
+      "matches": {
+        "career": "Başak",
+        "friendship": "İkizler",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "01.12.2025 - 07.12.2025",
+      "description": "Aralık ayına kariyerinize odaklanarak başlıyorsunuz. Disiplinli çalışmalarınızla hedeflerinize doğru emin adımlarla ilerleyeceksiniz. Sosyal çevrenizden alacağınız destekle motive olabilirsiniz. Haftanın ortasında iç dünyanıza dönüp enerji toplamanız gerekebilir. Sonrasında ise kişisel enerjiniz yükseliyor ve yeni başlangıçlar için harekete geçiyorsunuz. Finansal planlamalar ve etkili iletişim, bu haftanın diğer önemli konuları arasında. Haftayı ailevi konularla ilgilenerek tamamlayacaksınız.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Kova",
+        "love": "Koç"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "3.5",
+        "success": "4.5",
+        "vibe": "3.5"
+      }
+    },
+    {
+      "date": "08.12.2025 - 14.12.2025",
+      "description": "Sevgili Koç, bu hafta aşk, iş ve ilişkiler üçgeninde dengeler kuracaksınız. Haftaya yaratıcılığınızı ve romantik enerjinizi kullanarak başlıyorsunuz. İş hayatında ise detaylara odaklanarak verimliliğinizi artırabilirsiniz. İkili ilişkilerde uyum ve denge arayışınız ön planda olacak. Diplomatik davranarak kazançlı çıkabilirsiniz. Ortak finansal konular ve derin duygusal meseleler gündeme gelebilir. Hafta sonuna doğru ufkunuzu genişletecek planlar yapabilir, kariyer hedeflerinize odaklanabilirsiniz.",
+      "matches": {
+        "career": "Başak",
+        "friendship": "Terazi",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.5",
+        "success": "4.5",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "15.12.2025 - 21.12.2025",
+      "description": "Yılın sonlarına yaklaşırken, iç dünyanızdan başlayarak kişisel enerjinize uzanan önemli temalarla ilgileneceksiniz. Haftaya maneviyat ve sezgilerinizle baş başa kalarak başlıyorsunuz. Sonrasında ise enerjiniz yükseliyor ve yeni başlangıçlar için harekete geçiyorsunuz. Maddi konularda daha planlı olmalı, bütçenizi gözden geçirmelisiniz. İletişim yeteneklerinizle yakın çevrenizi etkileyebilirsiniz. Ailevi konular ve ev hayatınız da önem kazanıyor. Hafta sonu aşk, romantizm ve eğlence gündemde.",
+      "matches": {
+        "career": "Boğa",
+        "friendship": "Yay",
+        "love": "Koç"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "22.12.2025 - 31.12.2025",
+      "description": "Yılın son tam haftasında, Güneş'in Oğlak burcuna geçişiyle kariyer hedefleriniz ön plana çıkıyor. Haftaya ikili ilişkilerde denge arayarak başlıyorsunuz. Ortak finansal konularda sezgileriniz kuvvetli olacak. Ufkunuzu genişletecek seyahat veya eğitim fırsatları sizi bekliyor. Kariyerinizde disiplinli ve sorumlu davranarak önemli adımlar atabilirsiniz. Sosyal çevrenizden destek göreceğiniz, umut dolu bir hafta sonu geçirebilirsiniz. Kişisel enerjiniz yükseliyor ve yeni başlangıçlara hazırsınız.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "İkizler",
+        "love": "Terazi"
+      },
+      "stars": {
+        "hustle": "4.5",
+        "sex": "4.0",
+        "success": "4.5",
+        "vibe": "4.0"
+      }
+    }
+  ],
+  "monthly": [
+    {
+      "date": "01.01.2025 - 31.01.2025",
+      "description": "Sevgili Koç, yeni yıla kariyerinize ve hedeflerinize odaklanarak güçlü bir başlangıç yapıyorsunuz. Oğlak burcundaki gezegen yoğunluğu, hırslarınızı körüklerken disiplinli çalışmalarınızın karşılığını almanızı sağlayacak. Ayın ortalarına doğru Kova burcu etkileriyle sosyal çevreniz hareketleniyor; yeni insanlarla tanışmak ve ekip çalışmalarına katılmak için harika fırsatlar doğacak. Bu dönemde profesyonel hedeflerinizle sosyal yaşamınız arasında bir denge kurmak önem kazanacak. Aşk hayatınızda ise Terazi burcunun dengeleyici enerjisi, mevcut ilişkilerde uyumu artırırken, bekarlar için adil ve zeki partner adaylarını karşınıza çıkarabilir. Finansal konularda sağlam temeller atmak ve uzun vadeli planlar yapmak için oldukça verimli bir aydasınız. Enerjinizi doğru yönlendirerek yılın ilk ayında önemli mesafeler kat edebilirsiniz. Geleceğinizi yapılandırmak için attığınız adımlar, ilerleyen aylarda size büyük avantajlar sağlayacaktır.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Kova",
+        "love": "Terazi"
+      },
+      "stars": {
+        "hustle": "4.5",
+        "sex": "3.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "01.02.2025 - 28.02.2025",
+      "description": "Şubat ayı, sosyal çevreniz ve geleceğe yönelik hayallerinizle ön plana çıkıyor, sevgili Koç. Ayın ilk yarısında Kova burcunun etkisiyle arkadaş grupları içinde parlayacak, yenilikçi fikirlerinizle dikkat çekeceksiniz. Teknolojik konular ve toplu projeler size başarı getirebilir. Aşkta, zihinsel uyum aradığınız bir dönemdesiniz; Aslan burcunun yaratıcı ve eğlenceli enerjisiyle romantik anlar yaşayabilirsiniz. Ayın ikinci yarısında Balık burcu etkileriyle birlikte daha içe dönük ve sezgisel bir ruh haline bürüneceksiniz. Bu, sizin için bir nevi hazırlık dönemi olacak; doğum günü ayınız olan Mart'a girmeden önce enerjinizi toplamak, meditasyon yapmak ve ruhsal olarak dinlenmek için harika bir fırsat. Kariyerde ise arka planda stratejik planlamalar yapmak, ilerleyen dönemlerdeki atılımlarınız için zemin hazırlayacaktır.",
+      "matches": {
+        "career": "Kova",
+        "friendship": "İkizler",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.0",
+        "success": "3.5",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "01.03.2025 - 31.03.2025",
+      "description": "Mart ayı, enerjinizin ve kişisel gücünüzün zirveye ulaştığı bir dönem olacak. Ayın ilk haftalarında Balık burcunun etkisiyle bir miktar içe dönüklük ve geçmişi değerlendirme hali hakim olabilir. Ancak Güneş'in sizin burcunuza geçişiyle birlikte adeta yeniden doğmuş gibi hissedeceksiniz. Yeni başlangıçlar yapmak, cesur adımlar atmak ve kişisel projelerinizi hayata geçirmek için yıldızlar size tam destek veriyor. Liderlik vasıflarınızla öne çıkacak, çevrenizi motive edeceksiniz. Aşk hayatınızda da Koç burcunun tutkulu ve direkt enerjisiyle heyecan verici gelişmeler yaşanabilir. Arkadaşlık ilişkilerinde ise sizin gibi ateş elementi olan Aslan ve Yay burçlarıyla harika bir uyum yakalayacaksınız. Kariyerde inisiyatif almaktan çekinmeyin, bu ay sizin ayınız ve tüm spot ışıkları üzerinizde olacak.",
+      "matches": {
+        "career": "Yay",
+        "friendship": "Aslan",
+        "love": "Koç"
+      },
+      "stars": {
+        "hustle": "5.0",
+        "sex": "4.5",
+        "success": "5.0",
+        "vibe": "5.0"
+      }
+    },
+    {
+      "date": "01.04.2025 - 30.04.2025",
+      "description": "Nisan ayı, kişisel enerjinizin ve girişimci ruhunuzun hala çok yüksek olduğu bir zaman dilimi, sevgili Koç. Ayın ilk yarısında doğum günü enerjinizle parlamaya devam edeceksiniz. Bu dönemde başlattığınız her iş, uzun vadede size başarı getirme potansiyeli taşıyor. Ancak bu yüksek enerjiyi kontrol altında tutmak, aceleci kararlar almamak önemli. Ayın ikinci yarısında Güneş'in Boğa burcuna geçişiyle birlikte odağınız maddi konulara ve finansal güvenliğe kayacak. Kazançlarınızı artırmak, bütçenizi düzenlemek ve yatırımlarınızı gözden geçirmek için uygun bir zaman. Aşk hayatınızda Aslan burcunun ateşli romantizmi sizi cezbederken, Kova ile kuracağınız zihinsel bağ arkadaşlıklarınızı güçlendirecek. Kariyerde Boğa'nın sabırlı enerjisiyle somut adımlar atarak hedeflerinizi sağlamlaştırabilirsiniz.",
+      "matches": {
+        "career": "Boğa",
+        "friendship": "Kova",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "4.5",
+        "sex": "4.0",
+        "success": "4.5",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "01.05.2025 - 31.05.2025",
+      "description": "Mayıs ayında hız kesip biraz daha sakin ve ayakları yere basan bir enerjiye geçiş yapıyorsunuz. Ayın ilk bölümünde Boğa burcunun etkisiyle finansal konular, gelirleriniz ve kişisel değerleriniz ön planda olacak. Bu dönemde maddi güvenliğinizi sağlamlaştırmak için somut adımlar atabilirsiniz. Ayın ikinci yarısında İkizler burcunun enerjisiyle iletişiminiz hızlanıyor, zihinsel olarak daha aktif ve meraklı olacaksınız. Kısa seyahatler, eğitimler ve yeni anlaşmalar gündeminize gelebilir. Kardeşler ve yakın çevrenizle olan ilişkileriniz canlanacak. Aşkta Boğa'nın sadakati ve güveni sizi çekerken, kariyerde Oğlak burcunun disipliniyle uyum içinde çalışabilirsiniz. Arkadaşlıkta ise İkizler'in esprili ve zeki tavırları sizi eğlendirecek. Bu ay, maddi temelleri güçlendirip entelektüel olarak beslenme ayı olacak.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "İkizler",
+        "love": "Boğa"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "3.5",
+        "success": "4.0",
+        "vibe": "3.5"
+      }
+    },
+    {
+      "date": "01.06.2025 - 30.06.2025",
+      "description": "Haziran ayına İkizler burcunun hareketli ve iletişimci enerjisiyle başlıyorsunuz. Zihniniz oldukça açık ve öğrenmeye hevesli. Yakın çevrenizle, komşularınızla ve kardeşlerinizle olan diyaloglarınız artabilir. Ayın ikinci yarısında Güneş'in Yengeç burcuna geçişiyle birlikte odağınız tamamen ev, aile ve özel yaşamınıza kayacak. Köklerinize dönmek, ailenizle vakit geçirmek ve duygusal güvenliğinizi sağlamlaştırmak önceliğiniz olacak. Kariyerdeki hırslarınızın yerini, evinizde huzur bulma isteği alabilir. Bu dönemde evle ilgili tadilat veya dekorasyon işlerine girişebilirsiniz. Aşk hayatınızda, İkizler'in zeki flörtleri yerini Yengeç burcunun hassas ve korumacı tavırlarına bırakabilir. Kariyerde, Yengeç burcu ile yapacağınız sezgisel ortaklıklar başarılı olabilir.",
+      "matches": {
+        "career": "Yengeç",
+        "friendship": "Terazi",
+        "love": "İkizler"
+      },
+      "stars": {
+        "hustle": "3.0",
+        "sex": "3.0",
+        "success": "3.5",
+        "vibe": "3.0"
+      }
+    },
+    {
+      "date": "01.07.2025 - 31.07.2025",
+      "description": "Temmuz ayı, size ateşli ve enerjik bir atmosfer vaat ediyor. Ayın ilk yarısında hala Yengeç burcunun etkisiyle ev ve aile konularına odaklanabilirsiniz. Ancak ayın ikinci yarısında Güneş'in sizin gibi bir ateş burcu olan Aslan'a geçmesiyle birlikte, sosyal hayatınız canlanacak, yaratıcılığınız tavan yapacak ve aşk rüzgarları esecek. Kendinizi ifade etmekten, sahneye çıkmaktan ve dikkatleri üzerinize çekmekten büyük keyif alacaksınız. Romantizm, flörtler ve eğlence dolu aktiviteler için harika bir dönem. Bekarsanız, yeni bir aşk hikayesine başlayabilirsiniz. Kariyerinizde de Aslan burcunun liderlik vasıfları sayesinde parlayabilir, önemli projelerde öne çıkabilirsiniz. Arkadaşlıkta Yay burcunun maceracı ruhu, aşkta ise Kova'nın özgünlüğü sizi cezbedecek.",
+      "matches": {
+        "career": "Aslan",
+        "friendship": "Yay",
+        "love": "Kova"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "5.0",
+        "success": "4.5",
+        "vibe": "5.0"
+      }
+    },
+    {
+      "date": "01.08.2025 - 31.08.2025",
+      "description": "Ağustos ayı, eğlenceli ve yaratıcı enerjilerle başlıyor. Aslan burcunun cömert ve gösterişli etkileri altında, aşk hayatınız ve sosyal ilişkileriniz parlaklığını koruyacak. Bu dönemi tatil yapmak veya hobilerinize zaman ayırmak için değerlendirebilirsiniz. Ayın ikinci yarısında ise Güneş'in Başak burcuna geçmesiyle birlikte vites değiştirme zamanı geliyor. Artık iş, sağlık ve günlük rutinlerinizi düzene sokmaya odaklanacaksınız. Verimliliğinizi artırmak, detaylı çalışmalar yapmak ve sağlığınıza özen göstermek için ideal bir dönem. Kariyerde Başak burcunun titiz ve analitik yaklaşımı size başarı getirecektir. Arkadaşlıkta Kova'nın entelektüel sohbetleri ilginizi çekerken, aşkta Aslan burcunun sıcaklığı hala kalbinizi ısıtmaya devam edecek. Düzen ve disiplinle ayı verimli bir şekilde tamamlayacaksınız.",
+      "matches": {
+        "career": "Başak",
+        "friendship": "Kova",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "4.5",
+        "sex": "4.0",
+        "success": "4.0",
+        "vibe": "3.5"
+      }
+    },
+    {
+      "date": "01.09.2025 - 30.09.2025",
+      "description": "Eylül ayına iş ve sorumluluklarınıza odaklanarak başlıyorsunuz. Başak burcunun getirdiği düzen ve verimlilik enerjisi, projelerinizi tamamlamanıza ve hedeflerinize ulaşmanıza yardımcı olacak. Ancak ayın ikinci yarısında Güneş'in sizin karşıt burcunuz olan Terazi'ye geçmesiyle birlikte, odağınız tamamen ikili ilişkilere, ortaklıklara ve dengeye kayacak. Bu dönemde partnerinizle veya iş ortaklarınızla olan bağlarınızı güçlendirebilir, uyum içinde hareket etmenin yollarını arayabilirsiniz. Adalet ve diplomasi sizin için anahtar kelimeler olacak. Yeni bir ortaklık veya ciddi bir ilişki başlangıcı için uygun bir zemin oluşabilir. Kariyerde Terazi'nin işbirlikçi ruhu, arkadaşlıkta İkizler'in sosyal enerjisi, aşkta ise Kova'nın zihinsel uyumu sizi destekleyecektir. Bu ay, kişisel çabalardan çok, 'biz' olma üzerine kurulu bir ay olacak.",
+      "matches": {
+        "career": "Başak",
+        "friendship": "İkizler",
+        "love": "Kova"
+      },
+      "stars": {
+        "hustle": "3.5",
+        "sex": "4.5",
+        "success": "4.0",
+        "vibe": "4.0"
+      }
+    },
+    {
+      "date": "01.10.2025 - 31.10.2025",
+      "description": "Ekim ayı, derin ve dönüştürücü enerjilerle dolu, sevgili Koç. Ayın ilk yarısında hala Terazi burcunun etkisiyle ilişkilerde denge arayışınız sürebilir. Ancak ayın ikinci yarısında Güneş'in Akrep burcuna geçmesiyle birlikte, meseleler daha derin ve tutkulu bir hal alacak. Finansal ortaklıklar, krediler, borçlar, miras gibi konular gündeminize gelebilir. Sezgileriniz oldukça güçlenecek ve olayların ardındaki gerçekleri görmekte zorlanmayacaksınız. Aşk hayatınızda, Yengeç burcunun şefkatli tavırları size güven verirken, kariyerde Akrep burcunun stratejik ve kararlı doğasıyla büyük başarılar elde edebilirsiniz. Bu ay, size hizmet etmeyen eski alışkanlıkları ve korkuları geride bırakmak için güçlü bir iradeye sahip olacaksınız. İçsel bir dönüşüm için kendinize izin verin.",
+      "matches": {
+        "career": "Akrep",
+        "friendship": "Balık",
+        "love": "Yengeç"
+      },
+      "stars": {
+        "hustle": "3.0",
+        "sex": "5.0",
+        "success": "3.5",
+        "vibe": "3.0"
+      }
+    },
+    {
+      "date": "01.11.2025 - 30.11.2025",
+      "description": "Kasım ayı, size yeni ufuklar ve maceralar vaat ediyor. Ayın ilk yarısında Akrep burcunun derin enerjileri devam ederken, ayın ikinci yarısında Güneş'in Yay burcuna geçmesiyle birlikte ruhunuzda bir hafifleme ve iyimserlik hissedeceksiniz. Seyahat etme, yeni eğitimlere başlama, farklı kültürleri keşfetme ve felsefi konulara dalma isteğiniz artacak. Bu dönem, vizyonunuzu genişletmek ve hayata daha pozitif bir pencereden bakmak için harika bir fırsat. Kariyerinizde Yay burcunun cesur ve vizyoner enerjisiyle yeni projeler başlatabilirsiniz. Aşkta Terazi burcunun uyumu, arkadaşlıkta ise Aslan burcunun sıcaklığı size iyi gelecek. Bu ay, sizi kısıtlayan sınırlardan kurtulup özgürleşme ve büyüme ayıdır. Enerjinizi yüksek tutun ve maceralara atılmaktan korkmayın.",
+      "matches": {
+        "career": "Yay",
+        "friendship": "Aslan",
+        "love": "Terazi"
+      },
+      "stars": {
+        "hustle": "4.0",
+        "sex": "4.0",
+        "success": "4.5",
+        "vibe": "4.5"
+      }
+    },
+    {
+      "date": "01.12.2025 - 31.12.2025",
+      "description": "Sevgili Koç, yılın son ayına Yay burcunun iyimser ve neşeli enerjisiyle giriyorsunuz. Tatil ruhu ve maceraperestliğiniz ön planda olacak. Ancak ayın ikinci yarısında Güneş'in Oğlak burcuna geçmesiyle birlikte, odak noktanız tamamen kariyerinize, hedeflerinize ve toplumsal statünüze yönelecek. Yılı güçlü bir şekilde bitirmek ve yeni yıla dair somut planlar yapmak için hırslarınız artacak. Bu dönemde disiplinli ve sorumlu bir şekilde çalışarak önemli başarılar elde edebilirsiniz. Aşk hayatınızda, Aslan'ın tutkusu sizi cezbederken, Kova burcunun zekası arkadaşlık ilişkilerinizi zenginleştirecek. Kariyerde, Oğlak burcunun liderlik vasıflarıyla uyum sağlayarak zirveye oynayabilirsiniz. Yıl sonu değerlendirmesi yaparak, gelecek yıl için sağlam temeller atmak için mükemmel bir zamandasınız.",
+      "matches": {
+        "career": "Oğlak",
+        "friendship": "Kova",
+        "love": "Aslan"
+      },
+      "stars": {
+        "hustle": "4.5",
+        "sex": "3.5",
+        "success": "5.0",
+        "vibe": "4.0"
+      }
+    }
+  ],
+  "yearly": [
+      {
+        "description": "Sevgili Koç, 2025 yılı senin için iki belirgin perdeden oluşan bir tiyatro oyunu gibi sahnelenecek; ilki hareketli, sosyal ve entelektüel, ikincisi ise duygusal, içsel ve aile odaklı bir yapıya sahip olacak. Bu yıl, geçmişin gölgeleriyle yüzleşerek ruhsal bir temizlik yaparken, aynı zamanda geleceğin teknolojik ve toplumsal rüzgarlarını da arkanıza alacaksınız. Yılın ilk yarısında, şans ve bolluk gezegeni Jüpiter'in İkizler burcundaki yolculuğu, iletişim, öğrenme ve sosyal bağlantılarla ilgili üçüncü evinizi aydınlatacak. Bu dönemde zihniniz adeta bir sünger gibi yeni bilgileri çekecek; yeni bir dil öğrenmek, bir kursa yazılmak, yazmak, konuşmak veya dijital becerilerinizi geliştirmek için inanılmaz fırsatlarla karşılaşacaksınız. İkna kabiliyetiniz ve ifade gücünüz zirve yapacak, bu da sizi iş görüşmelerinde, sunumlarda ve sosyal ortamlarda bir adım öne taşıyacak. Yakın çevrenizle, kardeşlerinizle ve komşularınızla ilişkileriniz canlanacak, kısa seyahatler gündeminize sıkça gelecektir. Bu dinamik süreçte edindiğiniz her yeni beceri ve kurduğunuz her yeni bağlantı, yılın ikinci yarısında ve sonrasında size önemli kapılar aralayacaktır. Ancak bu enerjik tempo, yüzeyselleşme riskini de beraberinde getirir. Bilgi bombardımanı altında odağınızı kaybetmemeye ve enerjinizi verimli kullanmaya özen göstermelisiniz. Haziran ayından itibaren Jüpiter'in Yengeç burcuna geçmesiyle birlikte, oyunun ikinci perdesi açılacak ve spot ışıkları dış dünyadan iç dünyanıza, ev ve aile yaşamınıza dönecek. Dördüncü evinizdeki bu transit, size kök salma, aidiyet duygunuzu güçlendirme ve duygusal güvenlik arayışına girme fırsatı sunacak. Ev almak, satmak, taşınmak veya yaşam alanınızı güzelleştirmek için harika bir dönem. Aile bağları ön plana çıkacak; ebeveynlerinizle veya çocuklarınızla daha derin ve anlamlı ilişkiler kurabilirsiniz. Geçmişten gelen ailevi meseleler çözüme kavuşabilir. Bu süreç, dış dünyadaki Koç savaşçısının zırhını çıkarıp evinin sıcaklığında dinlenmesi, yaralarını sarması ve kendini şarj etmesi için bir davettir. Tüm bu gelişmeler yaşanırken, disiplin gezegeni Satürn yıl boyunca Balık burcunda, on ikinci evinizde seyahat edecek. Bu, yılın belki de en derin ve en zorlayıcı ama bir o kadar da ödüllendirici transitidir. On ikinci ev, bilinçaltı, gizli düşmanlar, tamamlanmamış işler ve ruhsal şifa alanıdır. Satürn burada sizi geçmişin hayaletleriyle, korkularınızla ve kendi kendinize koyduğunuz engellerle yüzleşmeye davet ediyor. Bu bir inziva, bir hazırlık ve bir temizlik dönemidir. Terapi, meditasyon, yoga gibi ruhsal pratikler veya yalnız kalıp kendinizi dinlemek bu süreçte en büyük yardımcılarınız olacaktır. Neptün'ün de aynı evde olması, sezgilerinizi ve yaratıcı ilhamınızı zirveye çıkarırken, aynı zamanda gerçeklerden kaçma, kurban rolüne bürünme veya aldanma riskini de artırır. Satürn'ün disiplini, Neptün'ün bu sisli enerjisini somut bir şifaya ve yaratıcılığa dönüştürmenize yardımcı olacak. Bu dönemi, 2026'da Satürn'ün burcunuza girmesiyle başlayacak olan yepyeni bir döngüye hazırlık olarak görmelisiniz. Finansal alanda ise sürprizler gezegeni Uranüs, Boğa burcundaki seyrine devam ederek para ve değerler evinizi sarsmaya devam edecek. Gelir kaynaklarınızda ani değişiklikler, beklenmedik kazançlar veya kayıplar yaşayabilirsiniz. Geleneksel para kazanma yöntemlerinin dışına çıkmak, teknolojiye dayalı yeni iş modellerini denemek ve kişisel yeteneklerinizi farklı yollarla kazanca dönüştürmek için cesur olmalısınız. Bu transit, aynı zamanda size \"Ben neye değer veriyorum?\" sorusunu sordurarak maddi dünyanın ötesinde manevi değerlerinizi yeniden tanımlamanızı sağlayacak. Uzun vadeli toplumsal dönüşüm gezegeni Plüton ise Kova burcunda, sosyal çevrenizi, arkadaşlıklarınızı ve gelecek hayallerinizi temsil eden on birinci evinizi yeniden yapılandırmaya başlıyor. Arkadaş çevrenizde önemli elemeler ve dönüşümler yaşanabilir. Güçlü ve etkili gruplara dahil olabilir, toplumsal bir amaç uğruna mücadele edebilirsiniz. Bu süreçte kurduğunuz dostluklar, hayatınızın geri kalanında size rehberlik edecek kadar derin ve anlamlı olabilir. 2025, sevgili Koç, kısacası dışarıda parladığınız, içeride ise derinleştiğiniz, hem zihinsel hem de ruhsal olarak büyüyerek kimliğinizi sağlamlaştırdığınız unutulmaz bir yıl olacak. Cesaretinizle zorlukları aşın ve bu dönüştürücü yolculuğun tadını çıkarın.",
+        "matches ": {
+          "career": "Oğlak",
+          "friendship": "Kova",
+          "love": "Yay"
+        },
+        "stars": {
+          "hustle": "4.0",
+          "sex": "4.0",
+          "success": "4.5",
+          "vibe": "4.5"
+        },
+        "date": "2025"
+      }
+    ]
 }
