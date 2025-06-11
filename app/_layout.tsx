@@ -9,7 +9,7 @@ export function AppContent() {
   useEffect(() => {
     SystemUI.setBackgroundColorAsync(colors.background);
   }, [colors.background]);
-  const [fontsLoaded] = useFonts({
+  const [fontsLoaded, fontError] = useFonts({
     'Almendra-Regular': require('./src/assets/fonts/Almendra-Regular.ttf'),
     'CroissantOne-Regular': require('./src/assets/fonts/CroissantOne-Regular.ttf'),
     'Domine-Regular': require('./src/assets/fonts/Domine-Regular.ttf'),
@@ -17,12 +17,13 @@ export function AppContent() {
     'Domine-SemiBold': require('./src/assets/fonts/Domine-SemiBold.ttf'),
     'Domine-Bold': require('./src/assets/fonts/Domine-Bold.ttf'),
   });
-  if (!fontsLoaded) {
+  
+  // Font loading hatası durumunda da uygulamayı başlat
+  if (!fontsLoaded && !fontError) {
     return null;
   }
   return (
     <Stack
-      initialRouteName="src/screens/main"
       screenOptions={{
         headerShown: false,
         animation: 'fade',

@@ -3,6 +3,7 @@
 Bu proje, Expo ve React Native kullanılarak geliştirilmiş, modern ve ölçeklenebilir bir mobil uygulama projesidir. TypeScript ile geliştirilmiş olup, Firebase entegrasyonu ve çoklu dil desteği içermektedir.
 
 ## 🚀 Teknolojiler
+- npx npm-check-updates -u - → Update package.json
 
 - [Expo](https://expo.dev) - React Native geliştirme platformu
 - [React Native](https://reactnative.dev) - Mobil uygulama geliştirme framework'ü

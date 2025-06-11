@@ -1,7 +1,7 @@
 import { Animation, CustomButton } from '@components';
 import { useTheme } from '@providers';
 import { router } from 'expo-router';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Dimensions, FlatList, Text, View } from 'react-native';
 import { styles } from './styles';
 
@@ -97,7 +97,7 @@ const StartScreen = () => {
           <CustomButton
             title='Benim için bir hesap oluştur'
             variant='secondary'
-            onPress={() => {router.push('/src/screens/main/Introduction')}}
+            onPress={() => {router.push('/src/screens/side/Introduction')}}
             contentStyle={styles.button}
           />
           <CustomButton
