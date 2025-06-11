@@ -5486,10 +5486,10 @@
         "love": "Balık"
       },
       "stars": {
-        "hustle": "3.5",
-        "sex": "4.0",
-        "success": "3.5",
-        "vibe": "4.0"
+        "hustle": 3.5,
+        "sex": 4.0,
+        "success": 3.5,
+        "vibe": 4.0
       }
     },
     {
@@ -5501,10 +5501,10 @@
         "love": "Koç"
       },
       "stars": {
-        "hustle": "4.0",
-        "sex": "4.5",
-        "success": "4.0",
-        "vibe": "3.0"
+        "hustle": 4.0,
+        "sex": 4.5,
+        "success": 4.0,
+        "vibe": 3.0
       }
     },
     {
@@ -5516,10 +5516,10 @@
         "love": "Aslan"
       },
       "stars": {
-        "hustle": "3.0",
-        "sex": "3.5",
-        "success": "4.5",
-        "vibe": "4.5"
+        "hustle": 3.0,
+        "sex": 3.5,
+        "success": 4.5,
+        "vibe": 4.5
       }
     },
     {
@@ -5531,10 +5531,10 @@
         "love": "Oğlak"
       },
       "stars": {
-        "hustle": "5.0",
-        "sex": "3.0",
-        "success": "5.0",
-        "vibe": "3.5"
+        "hustle": 5.0,
+        "sex": 3.0,
+        "success": 5.0,
+        "vibe": 3.5
       }
     },
     {
@@ -5546,10 +5546,10 @@
         "love": "Boğa"
       },
       "stars": {
-        "hustle": "3.0",
-        "sex": "3.5",
-        "success": "3.5",
-        "vibe": "4.5"
+        "hustle": 3.0,
+        "sex": 3.5,
+        "success": 3.5,
+        "vibe": 4.5
       }
     },
     {
@@ -5561,10 +5561,10 @@
         "love": "Akrep"
       },
       "stars": {
-        "hustle": "4.0",
-        "sex": "4.0",
-        "success": "5.0",
-        "vibe": "5.0"
+        "hustle": 4.0,
+        "sex": 4.0,
+        "success": 5.0,
+        "vibe": 5.0
       }
     },
     {
@@ -5576,10 +5576,10 @@
         "love": "Akrep"
       },
       "stars": {
-        "hustle": "4.0",
-        "sex": "5.0",
-        "success": "4.5",
-        "vibe": "5.0"
+        "hustle": 4.0,
+        "sex": 5.0,
+        "success": 4.5,
+        "vibe": 5.0
       }
     },
     {
@@ -5591,10 +5591,10 @@
         "love": "Balık"
       },
       "stars": {
-        "hustle": "4.5",
-        "sex": "3.5",
-        "success": "4.0",
-        "vibe": "3.5"
+        "hustle": 4.5,
+        "sex": 3.5,
+        "success": 4.0,
+        "vibe": 3.5
       }
     },
     {
@@ -5606,10 +5606,10 @@
         "love": "Oğlak"
       },
       "stars": {
-        "hustle": "3.5",
-        "sex": "3.0",
-        "success": "4.0",
-        "vibe": "4.0"
+        "hustle": 3.5,
+        "sex": 3.0,
+        "success": 4.0,
+        "vibe": 4.0
       }
     },
     {
@@ -5621,10 +5621,10 @@
         "love": "Terazi"
       },
       "stars": {
-        "hustle": "2.5",
-        "sex": "4.0",
-        "success": "3.0",
-        "vibe": "4.5"
+        "hustle": 2.5,
+        "sex": 4.0,
+        "success": 3.0,
+        "vibe": 4.5
       }
     },
     {
@@ -5636,10 +5636,10 @@
         "love": "Akrep"
       },
       "stars": {
-        "hustle": "3.0",
-        "sex": "5.0",
-        "success": "4.0",
-        "vibe": "4.5"
+        "hustle": 3.0,
+        "sex": 5.0,
+        "success": 4.0,
+        "vibe": 4.5
       }
     },
     {
@@ -5651,10 +5651,10 @@
         "love": "Oğlak"
       },
       "stars": {
-        "hustle": "4.5",
-        "sex": "3.5",
-        "success": "4.0",
-        "vibe": "4.0"
+        "hustle": 4.5,
+        "sex": 3.5,
+        "success": 4.0,
+        "vibe": 4.0
       }
     }
   ],
@@ -5668,10 +5668,10 @@
         "love": "Balık"
       },
       "stars": {
-        "hustle": "2.5",
-        "sex": "3.5",
-        "success": "3.0",
-        "vibe": "4.0"
+        "hustle": 2.5,
+        "sex": 3.5,
+        "success": 3.0,
+        "vibe": 4.0
       }
     },
     {
@@ -5683,10 +5683,10 @@
         "love": "Akrep"
       },
       "stars": {
-        "hustle": "4.0",
-        "sex": "4.0",
-        "success": "3.5",
-        "vibe": "3.5"
+        "hustle": 4.0,
+        "sex": 4.0,
+        "success": 3.5,
+        "vibe": 3.5
       }
     },
     {
@@ -5698,10 +5698,10 @@
         "love": "Oğlak"
       },
       "stars": {
-        "hustle": "3.5",
-        "sex": "4.5",
-        "success": "3.0",
-        "vibe": "3.0"
+        "hustle": 3.5,
+        "sex": 4.5,
+        "success": 3.0,
+        "vibe": 3.0
       }
     },
     {
@@ -5713,10 +5713,10 @@
         "love": "Aslan"
       },
       "stars": {
-        "hustle": "3.0",
-        "sex": "3.0",
-        "success": "4.0",
-        "vibe": "4.5"
+        "hustle": 3.0,
+        "sex": 3.0,
+        "success": 4.0,
+        "vibe": 4.5
       }
     },
     {
@@ -5728,10 +5728,10 @@
         "love": "Boğa"
       },
       "stars": {
-        "hustle": "4.0",
-        "sex": "4.0",
-        "success": "3.5",
-        "vibe": "3.0"
+        "hustle": 4.0,
+        "sex": 4.0,
+        "success": 3.5,
+        "vibe": 3.0
       }
     },
     {
@@ -5743,10 +5743,10 @@
         "love": "Akrep"
       },
       "stars": {
-        "hustle": "2.5",
-        "sex": "4.5",
-        "success": "3.0",
-        "vibe": "5.0"
+        "hustle": 2.5,
+        "sex": 4.5,
+        "success": 3.0,
+        "vibe": 5.0
       }
     },
     {
@@ -5758,10 +5758,10 @@
         "love": "Oğlak"
       },
       "stars": {
-        "hustle": "4.5",
-        "sex": "2.5",
-        "success": "4.0",
-        "vibe": "3.0"
+        "hustle": 4.5,
+        "sex": 2.5,
+        "success": 4.0,
+        "vibe": 3.0
       }
     },
     {
@@ -5773,10 +5773,10 @@
         "love": "Terazi"
       },
       "stars": {
-        "hustle": "3.0",
-        "sex": "3.5",
-        "success": "4.0",
-        "vibe": "4.5"
+        "hustle": 3.0,
+        "sex": 3.5,
+        "success": 4.0,
+        "vibe": 4.5
       }
     },
     {
@@ -5788,10 +5788,10 @@
         "love": "Kova"
       },
       "stars": {
-        "hustle": "5.0",
-        "sex": "2.5",
-        "success": "4.5",
-        "vibe": "3.0"
+        "hustle": 5.0,
+        "sex": 2.5,
+        "success": 4.5,
+        "vibe": 3.0
       }
     },
     {
@@ -5803,10 +5803,10 @@
         "love": "Aslan"
       },
       "stars": {
-        "hustle": "3.0",
-        "sex": "3.0",
-        "success": "3.5",
-        "vibe": "4.5"
+        "hustle": 3.0,
+        "sex": 3.0,
+        "success": 3.5,
+        "vibe": 4.5
       }
     },
     {
@@ -5818,10 +5818,10 @@
         "love": "Yengeç"
       },
       "stars": {
-        "hustle": "1.5",
-        "sex": "2.5",
-        "success": "2.0",
-        "vibe": "3.5"
+        "hustle": 1.5,
+        "sex": 2.5,
+        "success": 2.0,
+        "vibe": 3.5
       }
     },
     {
@@ -5833,10 +5833,10 @@
         "love": "Oğlak"
       },
       "stars": {
-        "hustle": "4.5",
-        "sex": "3.0",
-        "success": "4.5",
-        "vibe": "4.0"
+        "hustle": 4.5,
+        "sex": 3.0,
+        "success": 4.5,
+        "vibe": 4.0
       }
     },
     {
@@ -5848,10 +5848,10 @@
         "love": "Terazi"
       },
       "stars": {
-        "hustle": "5.0",
-        "sex": "3.5",
-        "success": "5.0",
-        "vibe": "3.5"
+        "hustle": 5.0,
+        "sex": 3.5,
+        "success": 5.0,
+        "vibe": 3.5
       }
     },
     {
@@ -5863,10 +5863,10 @@
         "love": "Akrep"
       },
       "stars": {
-        "hustle": "3.0",
-        "sex": "2.5",
-        "success": "3.0",
-        "vibe": "3.0"
+        "hustle": 3.0,
+        "sex": 2.5,
+        "success": 3.0,
+        "vibe": 3.0
       }
     },
     {
@@ -5878,10 +5878,10 @@
         "love": "Oğlak"
       },
       "stars": {
-        "hustle": "4.0",
-        "sex": "4.0",
-        "success": "4.5",
-        "vibe": "4.0"
+        "hustle": 4.0,
+        "sex": 4.0,
+        "success": 4.5,
+        "vibe": 4.0
       }
     },
     {
@@ -5893,10 +5893,10 @@
         "love": "Başak"
       },
       "stars": {
-        "hustle": "4.5",
-        "sex": "3.0",
-        "success": "4.0",
-        "vibe": "3.5"
+        "hustle": 4.5,
+        "sex": 3.0,
+        "success": 4.0,
+        "vibe": 3.5
       }
     },
     {
@@ -5908,10 +5908,10 @@
         "love": "Aslan"
       },
       "stars": {
-        "hustle": "3.5",
-        "sex": "3.0",
-        "success": "4.0",
-        "vibe": "4.0"
+        "hustle": 3.5,
+        "sex": 3.0,
+        "success": 4.0,
+        "vibe": 4.0
       }
     },
     {
@@ -5923,10 +5923,10 @@
         "love": "Akrep"
       },
       "stars": {
-        "hustle": "3.0",
-        "sex": "3.5",
-        "success": "3.5",
-        "vibe": "4.5"
+        "hustle": 3.0,
+        "sex": 3.5,
+        "success": 3.5,
+        "vibe": 4.5
       }
     },
     {
@@ -5938,10 +5938,10 @@
         "love": "Balık"
       },
       "stars": {
-        "hustle": "2.5",
-        "sex": "5.0",
-        "success": "3.0",
-        "vibe": "4.5"
+        "hustle": 2.5,
+        "sex": 5.0,
+        "success": 3.0,
+        "vibe": 4.5
       }
     },
     {
@@ -5953,10 +5953,10 @@
         "love": "Boğa"
       },
       "stars": {
-        "hustle": "4.5",
-        "sex": "2.5",
-        "success": "4.0",
-        "vibe": "3.0"
+        "hustle": 4.5,
+        "sex": 2.5,
+        "success": 4.0,
+        "vibe": 3.0
       }
     },
     {
@@ -5968,10 +5968,10 @@
         "love": "Yengeç"
       },
       "stars": {
-        "hustle": "2.0",
-        "sex": "3.0",
-        "success": "2.5",
-        "vibe": "3.5"
+        "hustle": 2.0,
+        "sex": 3.0,
+        "success": 2.5,
+        "vibe": 3.5
       }
     },
     {
@@ -5983,10 +5983,10 @@
         "love": "Oğlak"
       },
       "stars": {
-        "hustle": "1.5",
-        "sex": "3.0",
-        "success": "2.0",
-        "vibe": "4.0"
+        "hustle": 1.5,
+        "sex": 3.0,
+        "success": 2.0,
+        "vibe": 4.0
       }
     },
     {
@@ -5998,10 +5998,10 @@
         "love": "Balık"
       },
       "stars": {
-        "hustle": "3.0",
-        "sex": "3.5",
-        "success": "4.0",
-        "vibe": "4.5"
+        "hustle": 3.0,
+        "sex": 3.5,
+        "success": 4.0,
+        "vibe": 4.5
       }
     },
     {
@@ -6013,10 +6013,10 @@
         "love": "Akrep"
       },
       "stars": {
-        "hustle": "4.5",
-        "sex": "4.5",
-        "success": "5.0",
-        "vibe": "5.0"
+        "hustle": 4.5,
+        "sex": 4.5,
+        "success": 5.0,
+        "vibe": 5.0
       }
     },
     {
@@ -6028,10 +6028,10 @@
         "love": "Koç"
       },
       "stars": {
-        "hustle": "4.0",
-        "sex": "4.0",
-        "success": "4.5",
-        "vibe": "4.5"
+        "hustle": 4.0,
+        "sex": 4.0,
+        "success": 4.5,
+        "vibe": 4.5
       }
     },
     {
@@ -6043,10 +6043,10 @@
         "love": "Yay"
       },
       "stars": {
-        "hustle": "3.5",
-        "sex": "5.0",
-        "success": "4.0",
-        "vibe": "5.0"
+        "hustle": 3.5,
+        "sex": 5.0,
+        "success": 4.0,
+        "vibe": 5.0
       }
     },
     {
@@ -6058,10 +6058,10 @@
         "love": "Boğa"
       },
       "stars": {
-        "hustle": "4.0",
-        "sex": "4.0",
-        "success": "4.0",
-        "vibe": "4.0"
+        "hustle": 4.0,
+        "sex": 4.0,
+        "success": 4.0,
+        "vibe": 4.0
       }
     },
     {
@@ -6073,10 +6073,10 @@
         "love": "Akrep"
       },
       "stars": {
-        "hustle": "3.0",
-        "sex": "5.0",
-        "success": "3.5",
-        "vibe": "4.5"
+        "hustle": 3.0,
+        "sex": 5.0,
+        "success": 3.5,
+        "vibe": 4.5
       }
     },
     {
@@ -6088,10 +6088,10 @@
         "love": "Oğlak"
       },
       "stars": {
-        "hustle": "4.5",
-        "sex": "2.5",
-        "success": "4.0",
-        "vibe": "3.0"
+        "hustle": 4.5,
+        "sex": 2.5,
+        "success": 4.0,
+        "vibe": 3.0
       }
     },
     {
@@ -6103,10 +6103,10 @@
         "love": "Aslan"
       },
       "stars": {
-        "hustle": "3.5",
-        "sex": "4.0",
-        "success": "3.5",
-        "vibe": "4.0"
+        "hustle": 3.5,
+        "sex": 4.0,
+        "success": 3.5,
+        "vibe": 4.0
       }
     },
     {
@@ -6118,10 +6118,10 @@
         "love": "Boğa"
       },
       "stars": {
-        "hustle": "3.5",
-        "sex": "4.5",
-        "success": "4.0",
-        "vibe": "3.0"
+        "hustle": 3.5,
+        "sex": 4.5,
+        "success": 4.0,
+        "vibe": 3.0
       }
     },
     {
@@ -6133,10 +6133,10 @@
         "love": "Koç"
       },
       "stars": {
-        "hustle": "3.0",
-        "sex": "3.5",
-        "success": "4.0",
-        "vibe": "4.5"
+        "hustle": 3.0,
+        "sex": 3.5,
+        "success": 4.0,
+        "vibe": 4.5
       }
     },
     {
@@ -6148,10 +6148,10 @@
         "love": "Terazi"
       },
       "stars": {
-        "hustle": "5.0",
-        "sex": "2.5",
-        "success": "5.0",
-        "vibe": "3.0"
+        "hustle": 5.0,
+        "sex": 2.5,
+        "success": 5.0,
+        "vibe": 3.0
       }
     },
     {
@@ -6163,10 +6163,10 @@
         "love": "Aslan"
       },
       "stars": {
-        "hustle": "3.0",
-        "sex": "3.0",
-        "success": "3.5",
-        "vibe": "4.5"
+        "hustle": 3.0,
+        "sex": 3.0,
+        "success": 3.5,
+        "vibe": 4.5
       }
     },
     {
@@ -6178,10 +6178,10 @@
         "love": "Kova"
       },
       "stars": {
-        "hustle": "4.0",
-        "sex": "3.0",
-        "success": "4.0",
-        "vibe": "4.0"
+        "hustle": 4.0,
+        "sex": 3.0,
+        "success": 4.0,
+        "vibe": 4.0
       }
     },
     {
@@ -6193,10 +6193,10 @@
         "love": "Terazi"
       },
       "stars": {
-        "hustle": "3.5",
-        "sex": "3.5",
-        "success": "4.0",
-        "vibe": "3.5"
+        "hustle": 3.5,
+        "sex": 3.5,
+        "success": 4.0,
+        "vibe": 3.5
       }
     },
     {
@@ -6208,10 +6208,10 @@
         "love": "Kova"
       },
       "stars": {
-        "hustle": "4.5",
-        "sex": "3.0",
-        "success": "4.5",
-        "vibe": "3.0"
+        "hustle": 4.5,
+        "sex": 3.0,
+        "success": 4.5,
+        "vibe": 3.0
       }
     },
     {
@@ -6223,10 +6223,10 @@
         "love": "Aslan"
       },
       "stars": {
-        "hustle": "3.0",
-        "sex": "3.5",
-        "success": "3.5",
-        "vibe": "4.5"
+        "hustle": 3.0,
+        "sex": 3.5,
+        "success": 3.5,
+        "vibe": 4.5
       }
     },
     {
@@ -6238,10 +6238,10 @@
         "love": "Terazi"
       },
       "stars": {
-        "hustle": "2.5",
-        "sex": "3.5",
-        "success": "3.0",
-        "vibe": "4.0"
+        "hustle": 2.5,
+        "sex": 3.5,
+        "success": 3.0,
+        "vibe": 4.0
       }
     },
     {
@@ -6253,10 +6253,10 @@
         "love": "Balık"
       },
       "stars": {
-        "hustle": "2.0",
-        "sex": "4.0",
-        "success": "3.0",
-        "vibe": "4.5"
+        "hustle": 2.0,
+        "sex": 4.0,
+        "success": 3.0,
+        "vibe": 4.5
       }
     },
     {
@@ -6268,10 +6268,10 @@
         "love": "Akrep"
       },
       "stars": {
-        "hustle": "3.0",
-        "sex": "4.5",
-        "success": "3.5",
-        "vibe": "4.0"
+        "hustle": 3.0,
+        "sex": 4.5,
+        "success": 3.5,
+        "vibe": 4.0
       }
     },
     {
@@ -6283,10 +6283,10 @@
         "love": "Koç"
       },
       "stars": {
-        "hustle": "4.0",
-        "sex": "3.0",
-        "success": "4.0",
-        "vibe": "3.5"
+        "hustle": 4.0,
+        "sex": 3.0,
+        "success": 4.0,
+        "vibe": 3.5
       }
     },
     {
@@ -6298,10 +6298,10 @@
         "love": "Akrep"
       },
       "stars": {
-        "hustle": "3.0",
-        "sex": "4.5",
-        "success": "3.5",
-        "vibe": "4.0"
+        "hustle": 3.0,
+        "sex": 4.5,
+        "success": 3.5,
+        "vibe": 4.0
       }
     },
     {
@@ -6313,10 +6313,10 @@
         "love": "Akrep"
       },
       "stars": {
-        "hustle": "3.5",
-        "sex": "5.0",
-        "success": "4.0",
-        "vibe": "4.5"
+        "hustle": 3.5,
+        "sex": 5.0,
+        "success": 4.0,
+        "vibe": 4.5
       }
     },
     {
@@ -6328,10 +6328,10 @@
         "love": "Balık"
       },
       "stars": {
-        "hustle": "4.0",
-        "sex": "4.5",
-        "success": "3.5",
-        "vibe": "4.0"
+        "hustle": 4.0,
+        "sex": 4.5,
+        "success": 3.5,
+        "vibe": 4.0
       }
     },
     {
@@ -6343,10 +6343,10 @@
         "love": "Kova"
       },
       "stars": {
-        "hustle": "4.5",
-        "sex": "2.5",
-        "success": "4.0",
-        "vibe": "3.5"
+        "hustle": 4.5,
+        "sex": 2.5,
+        "success": 4.0,
+        "vibe": 3.5
       }
     },
     {
@@ -6358,10 +6358,10 @@
         "love": "İkizler"
       },
       "stars": {
-        "hustle": "3.5",
-        "sex": "3.5",
-        "success": "4.0",
-        "vibe": "4.0"
+        "hustle": 3.5,
+        "sex": 3.5,
+        "success": 4.0,
+        "vibe": 4.0
       }
     },
     {
@@ -6373,10 +6373,10 @@
         "love": "Oğlak"
       },
       "stars": {
-        "hustle": "4.5",
-        "sex": "3.0",
-        "success": "4.0",
-        "vibe": "3.5"
+        "hustle": 4.5,
+        "sex": 3.0,
+        "success": 4.0,
+        "vibe": 3.5
       }
     },
     {
@@ -6388,10 +6388,10 @@
         "love": "Boğa"
       },
       "stars": {
-        "hustle": "3.5",
-        "sex": "4.5",
-        "success": "4.0",
-        "vibe": "3.0"
+        "hustle": 3.5,
+        "sex": 4.5,
+        "success": 4.0,
+        "vibe": 3.0
       }
     },
     {
@@ -6403,10 +6403,10 @@
         "love": "Aslan"
       },
       "stars": {
-        "hustle": "3.0",
-        "sex": "3.5",
-        "success": "4.5",
-        "vibe": "4.5"
+        "hustle": 3.0,
+        "sex": 3.5,
+        "success": 4.5,
+        "vibe": 4.5
       }
     },
     {
@@ -6418,14 +6418,14 @@
         "love": "Terazi"
       },
       "stars": {
-        "hustle": "5.0",
-        "sex": "2.5",
-        "success": "5.0",
-        "vibe": "3.0"
+        "hustle": 5.0,
+        "sex": 2.5,
+        "success": 5.0,
+        "vibe": 3.0
       }
     },
     {
-      "date": "22.12.2025 - 31.12.2025",
+      "date": "22.12.2025 - 28.12.2025",
       "description": "Yılın son haftasına girerken Oğlak mevsiminin başlamasıyla, odak noktanız ilişkiler ve ortaklıklar oluyor. Sevdiklerinizle, partnerinizle ve yakın dostlarınızla bir araya gelmek size büyük keyif verecek. Yılbaşı planları yapmak ve kutlamalara hazırlanmak için harika bir zaman. Geçmiş yılın bir değerlendirmesini yaparken, ilişkilerinizdeki dengeyi ve uyumu gözden geçirebilirsiniz. Sosyal çevreniz ve arkadaşlarınızla olan bağlarınız bu hafta son derece önemli olacak.",
       "matches": {
         "career": "Terazi",
@@ -6433,10 +6433,10 @@
         "love": "Yengeç"
       },
       "stars": {
-        "hustle": "2.5",
-        "sex": "4.0",
-        "success": "3.5",
-        "vibe": "4.5"
+        "hustle": 2.5,
+        "sex": 4.0,
+        "success": 3.5,
+        "vibe": 4.5
       }
     }
   ],
@@ -6450,10 +6450,10 @@
         "love": "Akrep"
       },
       "stars": {
-        "hustle": "4.0",
-        "sex": "4.0",
-        "success": "4.5",
-        "vibe": "4.5"
+        "hustle": 4.0,
+        "sex": 4.0,
+        "success": 4.5,
+        "vibe": 4.5
       }
     }
   ]
