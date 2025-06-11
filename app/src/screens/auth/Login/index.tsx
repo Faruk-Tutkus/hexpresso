@@ -6,6 +6,7 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
+import { useSignInWithGoogle } from 'src/hooks/SignInWithGoogle'
 import '../../../utils/i18n'
 import styles from './styles'
 const Login = () => {
@@ -14,6 +15,7 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const { showToast } = useToast()
   const { signIn } = useSignInWithEmail()
+  const { signInGoogle } = useSignInWithGoogle()
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState({
@@ -52,6 +54,16 @@ const Login = () => {
       setIsLoading(false);
     }
   };
+  const handleSignInGoogle = async () => {
+    try {
+      const googleCredential = await signInGoogle();
+      if (googleCredential.user) {
+        router.replace('/src/screens/main/HomeScreen');
+      }
+    } catch (error: any) {
+      console.log(error);
+    }
+  }
   return (
     <Animated.View entering={FadeIn} exiting={FadeOut} style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.content}>
@@ -84,7 +96,7 @@ const Login = () => {
         <View style={styles.socialMediaContainer}>
           <ContainerButton
             title="Google ile Giriş Yap"
-            onPress={() => {}}
+            onPress={handleSignInGoogle}
             variant="primary"
             size="medium"
             leftImage={require('@assets/image/google.png')}
