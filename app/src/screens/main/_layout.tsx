@@ -118,6 +118,7 @@ const TabLayout = () => {
     <Tabs
       screenOptions={{
         headerShown: false,
+        animation: 'shift',
         tabBarStyle: {
           backgroundColor: colors.background,
           borderTopColor: colors.border,
