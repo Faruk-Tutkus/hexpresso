@@ -72,7 +72,7 @@ const Login = () => {
       }
     } catch (error: any) {
       console.log(error);
-      showToast(t('auth.google-sign-in-error'), 'error');
+      showToast(t('auth.auth/google-sign-in-error'), 'error');
     } finally {
       setIsGoogleLoading(false);
     }

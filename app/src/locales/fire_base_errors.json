@@ -1,5 +1,6 @@
 {
     "auth": {
+      "auth/missing-email": "E-posta adresi girilmedi.",
       "auth/email-already-in-use": "Bu e-posta adresi zaten kullanılıyor.",
       "auth/invalid-email": "Geçersiz e-posta adresi.",
       "auth/operation-not-allowed": "Bu e-posta adresi ile kayıt yapılamıyor.",
@@ -61,7 +62,8 @@
       "auth/session-cookie-revoked": "Oturum iptal edildi.",
       "auth/uid-already-exists": "Bu kullanıcı kimliği başka bir kullanıcı tarafından kullanılıyor.",
       "auth/unauthorized-continue-uri": "Yetkisiz yönlendirme adresi.",
-      "auth/user-not-found": "Kullanıcı bulunamadı."
+      "auth/user-not-found": "Kullanıcı bulunamadı.",
+      "auth/google-sign-in-error": "Google ile giriş yaparken bir hata oluştu. Lütfen daha sonra tekrar deneyiniz."
     }
 }
   

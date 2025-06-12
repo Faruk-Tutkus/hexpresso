@@ -1,5 +1,4 @@
-import { StyleSheet } from "react-native";
-
+import { Dimensions, StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -12,11 +11,11 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   animation: {
-    width: 450,
-    height: 450,
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').width,
   },
   buttonContainer: {
-    marginBottom: 100,
+    marginBottom: 75,
     zIndex: 2,
     justifyContent: 'center',
     alignItems: 'center',
@@ -41,6 +40,5 @@ export const styles = StyleSheet.create({
   },
   flatList: {
     paddingHorizontal: 10,
-    maxHeight: 200,
   },
 })

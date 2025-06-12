@@ -24,7 +24,7 @@ export function AppContent() {
   }
   return (
     <Stack
-      //initialRouteName="src/screens/auth/Login/index"
+      initialRouteName="src/screens/main"
       screenOptions={{
         headerShown: false,
         animation: 'fade',
@@ -39,6 +39,8 @@ export function AppContent() {
       <Stack.Screen name="src/screens/side/SplashScreen/index" />
       <Stack.Screen name="src/screens/auth/Register/index" />
       <Stack.Screen name="src/screens/auth/Login/index" />
+      <Stack.Screen name="src/screens/side/StartScreen/index" />
+      <Stack.Screen name="src/screens/side/Introduction/index" />
     </Stack>
   )
 }
