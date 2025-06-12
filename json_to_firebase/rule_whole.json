@@ -63,7 +63,7 @@
         ]
       }
     },
-    "montly": {
+    "monthly": {
       "type": "array",
       "items": {
         "type": "object",
@@ -190,7 +190,7 @@
   },
   "required": [
     "weekly",
-    "montly",
+    "monthly",
     "yearly"
   ]
 }

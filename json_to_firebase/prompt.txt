@@ -18,7 +18,7 @@ Her bir haftanın başlangıç ve bitiş aralıklarını belirt.
 Haftalık yorumlarını tek bir paragrafta ve minimum 80 ve maksimum ise 100 kelimelik olacak şekilde yaz.
 Aşk, arkadaşlık, kariyer eşleşmeleri için de 1'er burç yaz. Genel ruh durumu; Aşk, Hustle, Success, Vibe içinde 0 ile 5 arasında 0.5'in katı olan puan ver.
 
-**montly**
+**monthly**
 01.01.2025 - 31.12.2025 tarih aralıkları için balık burcunun aylık burç yorumlarını oluştur.
 Date formatı DD.MM.YYYY olacak şekilde ayarla.
 Toplamda 12 ay olmalı.

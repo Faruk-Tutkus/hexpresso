@@ -4,6 +4,7 @@ import { useState } from "react";
 
 interface SignInResult {
   user: UserCredential | null;
+  newUser: boolean;
   error: string | null;
   loading: boolean;
 }
@@ -11,6 +12,7 @@ interface SignInResult {
 export const useSignInWithGoogle = () => {
   const [result, setResult] = useState<SignInResult>({
     user: null,
+    newUser: false,
     error: null,
     loading: false,
   });
@@ -37,6 +39,7 @@ export const useSignInWithGoogle = () => {
       if (userCredential) {
         setResult({
           user: userCredential,
+          newUser: false,
           error: null,
           loading: true,
         });
@@ -48,6 +51,7 @@ export const useSignInWithGoogle = () => {
       const errorMessage = error.message || "An error occurred during sign in";
       setResult({
         user: null,
+        newUser: false,
         error: errorMessage,
         loading: false,
       });

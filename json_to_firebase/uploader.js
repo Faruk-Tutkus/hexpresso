@@ -1,57 +1,53 @@
 const admin = require("firebase-admin");
 const serviceAccount = require("./service_key.json");
+const path = require("path");
+const fs = require("fs");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://kitap-takip-67654.firebaseio.com"
+  databaseURL: "https://hexpresso-5d0d6.firebaseio.com"
 });
 
 const firestore = admin.firestore();
-const path = require("path");
-const fs = require("fs");
 const directoryPath = path.join(__dirname, "files");
 
-fs.readdir(directoryPath, function(err, files) {
+fs.readdir(directoryPath, function (err, files) {
   if (err) {
     return console.log("Unable to scan directory: " + err);
   }
 
-  files.forEach(function(file) {
-    const lastDotIndex = file.lastIndexOf(".");
-    const fileNameWithoutExt = file.substring(0, lastDotIndex);
+  files.forEach(function (file) {
+    const fileNameWithoutExt = file.split(".")[0].toLowerCase(); // örnek: "Kova.json" -> "kova"
     const fullPath = path.join(directoryPath, file);
-    
+
     try {
       const jsonData = require(fullPath);
-
-      // Desteklenen periyot tipleri
       const periods = ["daily", "weekly", "monthly", "yearly"];
 
-      periods.forEach(period => {
+      const documentData = {};
+
+      periods.forEach((period) => {
         if (jsonData[period] && Array.isArray(jsonData[period])) {
-          jsonData[period].forEach(obj => {
-            if (!obj.date) {
-              console.error(`HATA: ${file} dosyasında ${period} içinde tarih bilgisi eksik`);
-              return;
-            }
-
-            const docId = obj.date.replace(/\./g, "-");
-            const collectionName = `${period}_${fileNameWithoutExt}`;
-
-            firestore.collection(collectionName)
-              .doc(docId)
-              .set(obj)
-              .then(() => {
-                console.log(`✅ ${docId} eklendi -> ${collectionName}`);
-              })
-              .catch(error => {
-                console.error(`❌ ${collectionName}/${docId} eklenirken hata:`, error);
-              });
-          });
+          documentData[period] = jsonData[period];
         }
       });
+
+      if (Object.keys(documentData).length > 0) {
+        firestore
+          .collection("signs") // tek collection
+          .doc(fileNameWithoutExt) // burç adı
+          .set(documentData)
+          .then(() => {
+            console.log(`✅ signs/${fileNameWithoutExt} yüklendi`);
+          })
+          .catch((error) => {
+            console.error(`❌ ${fileNameWithoutExt} yüklenirken hata:`, error);
+          });
+      } else {
+        console.warn(`⚠️ ${fileNameWithoutExt} için içerik yok`);
+      }
     } catch (e) {
-      console.error(`HATA: ${file} dosyası işlenirken hata oluştu:`, e);
+      console.error(`❌ ${file} okunurken hata:`, e);
     }
   });
 });
