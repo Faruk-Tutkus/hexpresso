@@ -1,10 +1,11 @@
 import { FloatingDatePicker, FloatingLabelInput, FloatingLabelPicker, FloatingTimePicker } from '@components';
-import { useTheme } from '@providers';
+import { useAuth, useTheme } from '@providers';
 import { useState } from 'react';
 
 const useIntroductionData = () => {
     const { colors } = useTheme();
-    const [name, setName] = useState('');
+    const { user } = useAuth();
+    const [name, setName] = useState(user?.displayName || '');
     const [gender, setGender] = useState('');
     const [date, setDate] = useState<Date | ''>('');
     const [time, setTime] = useState<Date | ''>('');
@@ -360,28 +361,16 @@ const useIntroductionData = () => {
     return {
       data,
       name,
-      setName,
       date,
-      setDate,
       gender,
-      setGender,
-      error,
       time,
-      setTime,
       reason,
-      setReason,
       love,
-      setLove,
       need,
-      setNeed,
       mood,
-      setMood,
       meaning,
-      setMeaning,
       experience,
-      setExperience,
       curious,
-      setCurious
     };
 };
 

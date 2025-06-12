@@ -1,6 +1,7 @@
+import { db } from "@api/config.firebase";
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { getAuth, GoogleAuthProvider, signInWithCredential, UserCredential } from "firebase/auth";
-import { useState } from "react";
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 interface SignInResult {
   user: UserCredential | null;
@@ -10,12 +11,6 @@ interface SignInResult {
 }
 
 export const useSignInWithGoogle = () => {
-  const [result, setResult] = useState<SignInResult>({
-    user: null,
-    newUser: false,
-    error: null,
-    loading: false,
-  });
   GoogleSignin.configure({
     webClientId: '503552610366-cncgkggphfoi53jna1euf5qsmpnl46oe.apps.googleusercontent.com',
     scopes: ['https://www.googleapis.com/auth/drive'], // what API you want to access on behalf of the user, default is email and profile
@@ -23,7 +18,6 @@ export const useSignInWithGoogle = () => {
   });
   const signInGoogle = async () => {
     try {
-      setResult(prev => ({ ...prev, loading: true, error: null }));
       await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
       const signInResult = await GoogleSignin.signIn();
       let idToken = signInResult.data?.idToken;
@@ -36,34 +30,36 @@ export const useSignInWithGoogle = () => {
       }
       const googleCredential  = GoogleAuthProvider.credential(signInResult.data?.idToken);
       const userCredential = await signInWithCredential(auth, googleCredential);
-      if (userCredential) {
-        setResult({
-          user: userCredential,
-          newUser: false,
-          error: null,
-          loading: true,
+      const user = userCredential.user;
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
+      
+      if (!userDoc.exists()) {
+        await setDoc(doc(db, 'users', user.uid), {
+          email: user.email,
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+          createdAt: new Date(),
+          newUser: true,
         });
-        return userCredential;
+        return {
+          userCredential,
+          newUser: true,
+          user
+        };
       } else {
-        throw 'auth/email-not-verified';
+        return {
+          userCredential,
+          newUser: userDoc.data()?.newUser || false,
+          user
+        };
       }
     } catch (error: any) {
       const errorMessage = error.message || "An error occurred during sign in";
-      setResult({
-        user: null,
-        newUser: false,
-        error: errorMessage,
-        loading: false,
-      });
       throw error;
-    }
-    finally {
-      setResult(prev => ({ ...prev, loading: false }));
     }
   };
 
   return {
     signInGoogle,
-    ...result,
   };
 };

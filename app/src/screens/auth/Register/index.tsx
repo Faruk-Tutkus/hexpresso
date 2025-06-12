@@ -1,5 +1,5 @@
 import { ContainerButton, CustomButton, FloatingLabelInput } from '@components'
-import { useSignUpWithEmail } from '@hooks'
+import { useSignInWithGoogle, useSignUpWithEmail } from '@hooks'
 import { useTheme, useToast } from '@providers'
 import { router, useLocalSearchParams } from 'expo-router'
 import React, { useState } from 'react'
@@ -9,16 +9,17 @@ import '../../../utils/i18n'
 import styles from './styles'
 const Register = () => {
   const { theme, colors, toggleTheme } = useTheme()
-  const { name, date, time, gender, reason, love, need, mood, meaning, experience, curious } = useLocalSearchParams()
+  const { name } = useLocalSearchParams()
   const [displayName, setDisplayName] = useState(name)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [rePassword, setRePassword] = useState('')
   const { t } = useTranslation()
   const { showToast } = useToast()
-
+  const { signInGoogle } = useSignInWithGoogle()
   const { signUp, loading } = useSignUpWithEmail()
   const [isLoading, setIsLoading] = useState(false)
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState({
     email: '',
     password: '',
@@ -34,9 +35,9 @@ const Register = () => {
     return true
   }
   
-  const handleSignIn = async () => {
+  const handleSignUp = async () => {
     try {
-      setIsLoading(loading)
+      setIsLoading(true)
       // Reset error messages first
       setErrorMessage(prev => ({ ...prev, email: '', password: '', general: '', displayName: '' }))
 
@@ -48,7 +49,11 @@ const Register = () => {
       const userCredential = await signUp(email, password, displayName as string)
       if (userCredential) {
         showToast("Dogrulama linki gonderildi", 'success')
-        router.replace('/src/screens/auth/Login')
+        router.replace({pathname: '/src/screens/auth/Login', params: {
+          email: email,
+          password: password,
+          displayName: displayName,
+        }})
       } else {
         showToast("Bir hata oluştu", 'error')
       }
@@ -65,7 +70,26 @@ const Register = () => {
         }
       }
     } finally {
-      setIsLoading(loading)
+      setIsLoading(false)
+    }
+  }
+  const handleSignInGoogle = async () => {
+    try {
+      setIsGoogleLoading(true);
+      const result = await signInGoogle();
+      console.log(result.newUser);
+      if (result.user) {
+        if (result.newUser) {
+          router.replace('/src/screens/side/Introduction');
+        } else {
+          router.replace('/src/screens/main/HomeScreen');
+        }
+      }
+    } catch (error: any) {
+      console.log(error);
+      showToast(t('auth.google-sign-in-error'), 'error');
+    } finally {
+      setIsGoogleLoading(false);
     }
   }
   return (
@@ -107,7 +131,7 @@ const Register = () => {
         />
         <CustomButton
           title="Kayıt Ol"
-          onPress={handleSignIn}
+          onPress={handleSignUp}
           variant="primary"
           size="medium"
           leftIcon="enter"
@@ -116,10 +140,11 @@ const Register = () => {
         <View style={styles.socialMediaContainer}>
           <ContainerButton
             title="Google ile Giriş Yap"
-            onPress={() => {}}
+            onPress={handleSignInGoogle}
             variant="primary"
             size="medium"
             leftImage={require('@assets/image/google.png')}
+            loading={isGoogleLoading}
           />
           <ContainerButton
             title="Facebook ile Giriş Yap"

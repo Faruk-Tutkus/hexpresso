@@ -41,9 +41,9 @@ const ContainerButton: React.FC<ContainerButtonProps> = ({
         { backgroundColor: colors.secondaryText },
       ]}
     >
-      <View style={styles.content}>
+      <View style={[styles.content, { left: loading ? -10 : 0 }]}>
         {loading ? (
-          <ActivityIndicator 
+          <ActivityIndicator
             color={variant === 'primary' ? colors.surface : colors.primary} 
             size="small" 
           />

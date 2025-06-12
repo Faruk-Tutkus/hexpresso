@@ -1,23 +1,25 @@
 import { ContainerButton, CustomButton, FloatingLabelInput, ForgotPassword } from '@components'
-import { useSignInWithEmail } from '@hooks'
+import { useSignInWithEmail, useSignInWithGoogle } from '@hooks'
 import { useTheme, useToast } from '@providers'
-import { router } from 'expo-router'
+import { router, useLocalSearchParams } from 'expo-router'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
-import { useSignInWithGoogle } from 'src/hooks/SignInWithGoogle'
 import '../../../utils/i18n'
 import styles from './styles'
 const Login = () => {
   const { theme, colors, toggleTheme } = useTheme()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const { email: emailParam, password: passwordParam, displayName: displayNameParam } = useLocalSearchParams()
+  const [email, setEmail] = useState(emailParam as string)
+  const [password, setPassword] = useState(passwordParam as string)
+  const [displayName, setDisplayName] = useState(displayNameParam as string)
   const { showToast } = useToast()
   const { signIn } = useSignInWithEmail()
   const { signInGoogle } = useSignInWithGoogle()
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState({
     email: '',
     password: '',
@@ -30,7 +32,9 @@ const Login = () => {
       
       const userCredential = await signIn(email, password);
       
-      if (userCredential?.user?.emailVerified) {
+      if (userCredential?.user?.emailVerified && userCredential.newUser) {
+        router.replace('/src/screens/side/Introduction');
+      } else if (userCredential?.user?.emailVerified && !userCredential.newUser) {
         router.replace('/src/screens/main/HomeScreen');
       }
     } catch (error: any) {
@@ -56,12 +60,21 @@ const Login = () => {
   };
   const handleSignInGoogle = async () => {
     try {
-      const googleCredential = await signInGoogle();
-      if (googleCredential.user) {
-        router.replace('/src/screens/main/HomeScreen');
+      setIsGoogleLoading(true);
+      const result = await signInGoogle();
+      console.log(result.newUser);
+      if (result.user) {
+        if (result.newUser) {
+          router.replace('/src/screens/side/Introduction');
+        } else {
+          router.replace('/src/screens/main/HomeScreen');
+        }
       }
     } catch (error: any) {
       console.log(error);
+      showToast(t('auth.google-sign-in-error'), 'error');
+    } finally {
+      setIsGoogleLoading(false);
     }
   }
   return (
@@ -100,6 +113,7 @@ const Login = () => {
             variant="primary"
             size="medium"
             leftImage={require('@assets/image/google.png')}
+            loading={isGoogleLoading}
           />
           <ContainerButton
             title="Facebook ile Giriş Yap"

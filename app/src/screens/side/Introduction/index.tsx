@@ -1,21 +1,24 @@
+import { db } from '@api/config.firebase';
 import { CustomButton, IconButton } from '@components';
-import { useTheme } from '@providers';
+import { useAuth, useTheme } from '@providers';
 import { useRouter } from 'expo-router';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { useRef, useState } from 'react';
 import { Dimensions, FlatList, KeyboardAvoidingView, Text, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
-
 import useIntroductionData from './Data';
 import styles from './styles';
 
 
 const Introduction = () => {
   const { colors } = useTheme();
+  const { user } = useAuth();
   const { width } = Dimensions.get('window');
-  const { data, name, setName, date, setDate, gender, setGender, error, time, setTime, reason, setReason, love, setLove, need, setNeed, mood, setMood, meaning, setMeaning, experience, setExperience, curious, setCurious } = useIntroductionData();
+  const { data, name, date, gender, time, reason, love, need, mood, meaning, experience, curious } = useIntroductionData();
   const flatListRef = useRef<FlatList>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const isAllFieldsFilled = () => {
     return name !== '' && 
            date !== '' && 
@@ -91,7 +94,54 @@ const Introduction = () => {
     }
     return false;
   };
-
+  const [description] = useState(data.map(item => item.description));
+  const handleSave = async () => {
+    try {
+      setIsLoading(true);
+      if (user) {
+        const userDoc = await getDoc(doc(db, 'users', user.uid));
+        
+        if (userDoc.data()?.newUser) {
+          await setDoc(doc(db, 'users', user.uid), {
+            ...userDoc.data(),
+            prompt: {
+              q1: "Kullanıcının " + description[0] + " sorusuna cevabı: " + name,
+              q2: "Kullanıcının " + description[1] + " sorusuna cevabı: " + date,
+              q3: "Kullanıcının " + description[2] + " sorusuna cevabı: " + time,
+              q4: "Kullanıcının " + description[3] + " sorusuna cevabı: " + gender,
+              q5: "Kullanıcının " + description[4] + " sorusuna cevabı: " + reason,
+              q6: "Kullanıcının " + description[5] + " sorusuna cevabı: " + love,
+              q7: "Kullanıcının " + description[6] + " sorusuna cevabı: " + need,
+              q8: "Kullanıcının " + description[7] + " sorusuna cevabı: " + mood,
+              q9: "Kullanıcının " + description[8] + " sorusuna cevabı: " + meaning,
+              q10: "Kullanıcının " + description[9] + " sorusuna cevabı: " + experience,
+              q11: "Kullanıcının " + description[10] + " sorusuna cevabı: " + curious,
+            },
+            name,
+            date,
+            time,
+            gender,
+            reason,
+            love,
+            need,
+            mood,
+            meaning,
+            experience,
+            curious,
+            newUser: false,
+          });
+          router.replace('/src/screens/main/HomeScreen');
+        }
+        else {
+          router.replace('/src/screens/main/HomeScreen');
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
   const renderItem = ({ item }: { item: any }) => {
     return (
       <Animated.View
@@ -127,23 +177,26 @@ const Introduction = () => {
               <CustomButton
                 title='Hadi Başlayalım'
                 onPress={() => {
-                  router.push({
-                    pathname: '/src/screens/auth/Register',
-                    params: {
-                      name,
-                      date: date ? date.toISOString() : '',
-                      time: time ? time.toISOString() : '',
-                      gender,
-                      reason,
-                      love,
-                      need,
-                      mood,
-                      meaning,
-                      experience,
-                      curious,
-                    }
-                  });
+                  // router.push({
+                  //   pathname: '/src/screens/auth/Register',
+                  //   params: {
+                  //     name,
+                  //     date: date ? date.toISOString() : '',
+                  //     time: time ? time.toISOString() : '',
+                  //     gender,
+                  //     reason,
+                  //     love,
+                  //     need,
+                  //     mood,
+                  //     meaning,
+                  //     experience,
+                  //     curious,
+                  //   }
+                    
+                  // });
+                  handleSave();
                 }}
+                loading={isLoading}
               />
             )}
           </View>

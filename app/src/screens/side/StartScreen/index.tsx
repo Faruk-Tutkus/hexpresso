@@ -65,50 +65,48 @@ const StartScreen = () => {
   }
 
   return (
-    <>
-      <View style={styles.container}>
-        <View style={styles.animationContainer}>
-          <Animation
-            src = 'https://lottie.host/1a9e6fe7-c012-4f16-b085-710037385a28/c6F9SxqUBQ.lottie'
-            contentStyle={styles.animation}
-          />
-        </View>
-        <FlatList
-          ref={flatListRef}
-          contentContainerStyle={[styles.flatList]}
-          data={data}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id.toString()}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          scrollEnabled={false}
-          pagingEnabled
-          initialNumToRender={4}        
-          maxToRenderPerBatch={4}
-          windowSize={4} 
-          removeClippedSubviews={true}
-          getItemLayout={(_, index) => ({
-            length: width,            // her item'ın genişliği
-            offset: width * index,    // offset = index * genişlik
-            index,
-          })}
+    <View style={styles.container}>
+      <View style={styles.animationContainer}>
+        <Animation
+          src = 'https://lottie.host/1a9e6fe7-c012-4f16-b085-710037385a28/c6F9SxqUBQ.lottie'
+          contentStyle={styles.animation}
         />
-        <View style={styles.buttonContainer}>
-          <CustomButton
-            title='Benim için bir hesap oluştur'
-            variant='secondary'
-            onPress={() => {router.push('/src/screens/side/Introduction')}}
-            contentStyle={styles.button}
-          />
-          <CustomButton
-            title='Zaten buraya aitim'
-            variant='primary'
-            onPress={() => {router.push('/src/screens/auth/Login')}}
-            contentStyle={styles.button}
-          />
-        </View>
       </View>
-    </>
+      <FlatList
+        ref={flatListRef}
+        contentContainerStyle={[styles.flatList]}
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        scrollEnabled={false}
+        pagingEnabled
+        initialNumToRender={4}        
+        maxToRenderPerBatch={4}
+        windowSize={4} 
+        removeClippedSubviews={true}
+        getItemLayout={(_, index) => ({
+          length: width,            // her item'ın genişliği
+          offset: width * index,    // offset = index * genişlik
+          index,
+        })}
+      />
+      <View style={styles.buttonContainer}>
+        <CustomButton
+          title='Benim için bir hesap oluştur'
+          variant='secondary'
+          onPress={() => {router.push('/src/screens/auth/Register')}}
+          contentStyle={styles.button}
+        />
+        <CustomButton
+          title='Zaten buraya aitim'
+          variant='primary'
+          onPress={() => {router.push('/src/screens/auth/Login')}}
+          contentStyle={styles.button}
+        />
+      </View>
+    </View>
   )
 }
 

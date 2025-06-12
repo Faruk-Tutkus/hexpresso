@@ -24,7 +24,7 @@ export function AppContent() {
   }
   return (
     <Stack
-      initialRouteName="src/screens/auth/Login/index"
+      //initialRouteName="src/screens/auth/Login/index"
       screenOptions={{
         headerShown: false,
         animation: 'fade',

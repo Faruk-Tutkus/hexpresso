@@ -14,7 +14,7 @@ export default StyleSheet.create({
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      gap: 35,
+      gap: 30,
     },
     text: {
       flex: 1,

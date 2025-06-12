@@ -1,6 +1,7 @@
+import { db } from "@api/config.firebase";
 import { getAuth, signInWithEmailAndPassword, UserCredential } from "firebase/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useState } from "react";
-
 interface SignInResult {
   user: UserCredential | null;
   error: string | null;
@@ -19,13 +20,30 @@ export const useSignInWithEmail = () => {
       setResult(prev => ({ ...prev, loading: true, error: null }));
       const auth = getAuth();
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      if (userCredential.user.emailVerified) {
-        setResult({
-          user: userCredential,
-          error: null,
-          loading: true,
+      const user = userCredential.user;
+      if (user.emailVerified) {
+        const userDoc = await getDoc(doc(db, 'users', user.uid));
+      
+      if (!userDoc.exists()) {
+        await setDoc(doc(db, 'users', user.uid), {
+          email: user.email,
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+          createdAt: new Date(),
+          newUser: true,
         });
-        return userCredential;
+        return {
+          userCredential,
+          newUser: true,
+          user
+        };
+      } else {
+        return {
+          userCredential,
+          newUser: userDoc.data()?.newUser || false,
+          user
+        };
+      }
       } else {
         throw 'auth/email-not-verified';
       }
