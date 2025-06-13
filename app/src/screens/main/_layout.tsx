@@ -1,15 +1,17 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from "@providers";
+import { useAuth, useTheme } from "@providers";
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Tabs } from "expo-router";
 import * as SystemUI from 'expo-system-ui';
+import { UserCredential } from 'firebase/auth';
 import { useEffect, useRef } from 'react';
 import { Animated, TouchableOpacity, View } from 'react-native';
+import Header from 'src/components/Header';
 
 const TabLayout = () => {
   const { theme, colors } = useTheme();
   SystemUI.setBackgroundColorAsync(colors.background);
-
+  const user = useAuth();
   const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
     const filteredRoutes = state.routes.filter((route: any) => route.name !== 'HomeScreen/styles' && route.name !== 'GuideScreen/styles' && route.name !== 'FortunesScreen/styles' && route.name !== 'ExclusiveFortunesScreen/styles');
     const animatedValues = useRef(filteredRoutes.map(() => new Animated.Value(1))).current;
@@ -118,7 +120,9 @@ const TabLayout = () => {
     <Tabs
       initialRouteName="HomeScreen/index"
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
+        header: () => <Header user={user as UserCredential} />,
+        animation: 'shift',
         tabBarStyle: {
           backgroundColor: colors.background,
           borderTopColor: colors.border,

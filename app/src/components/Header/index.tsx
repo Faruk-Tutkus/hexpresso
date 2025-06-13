@@ -6,6 +6,7 @@ import { UserCredential } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import React, { useEffect, useRef, useState } from 'react';
 import { Animated, Text, View } from 'react-native';
+import getTimeBasedGreeting from 'src/hooks/GetTime';
 import styles from './styles';
 
 interface HeaderProps {
@@ -18,7 +19,7 @@ const Header = ({ user }: HeaderProps) => {
   useEffect(() => {
     const fetchHoroscopeInfo = async () => {
       const userDoc = await getDoc(doc(db, 'users', user.user?.uid as string))
-      const horoscopeInfo = userDoc.data()?.sign
+      const horoscopeInfo = userDoc.data()?.sunSign
       setHoroscopeInfo(horoscopeInfo)
     }
     fetchHoroscopeInfo()
@@ -104,10 +105,10 @@ const Header = ({ user }: HeaderProps) => {
     <View style={[styles.container, { backgroundColor: colors.surface }]}>
       <View style={styles.leftContainer}>
         <View style={styles.menuContainer}>
-          <Icon name="menu" size={24} color={colors.text} />
+          <Icon name="menu" size={32} color={colors.text} />
         </View>
         <View style={styles.titleContainer}>
-          <Text style={[styles.title, { color: colors.text }]}>{horoscopeInfo}</Text>
+          <Text style={[styles.title, { color: colors.text }]}>{ getTimeBasedGreeting() } {horoscopeInfo}</Text>
           <Animated.View
             style={{
               transform: [{ translateY: slideAnim }],

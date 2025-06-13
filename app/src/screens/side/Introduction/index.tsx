@@ -6,7 +6,7 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { useEffect, useRef, useState } from 'react';
 import { Dimensions, FlatList, KeyboardAvoidingView, Text, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
-import { FullAstroResult, getFullAstro, getSunSign } from 'src/hooks/GetHoroscopeInfo';
+import { FullAstroResult, getFullAstro } from 'src/hooks/GetHoroscopeInfo';
 import useIntroductionData from './Data';
 import styles from './styles';
 
@@ -96,24 +96,28 @@ const Introduction = () => {
     return false;
   };
   const [description] = useState(data.map(item => item.description));
-  const [fullAstro, setFullAstro] = useState<FullAstroResult | ''>('');
-  const [sunSign, setSunSign] = useState<string>('');
-  useEffect(() => {
-    if (date) {
-      const getSun = getSunSign(date);
-      setSunSign(getSun);
-    }
-  }, [date]);
+  const [fullAstro, setFullAstro] = useState<FullAstroResult>({
+    sunSign: '',
+    moonSign: '',
+    ascendantSign: '',
+    age: 0,
+    birthWeekday: '',
+    daysToNextBirthday: 0
+  });
   
   useEffect(() => {
-    if (date && time) {
-      const fullAstro = getFullAstro(date.toISOString(), time.toISOString(), { latitude: 0, longitude: 0 });
-      setFullAstro(fullAstro);
+    if (date instanceof Date) {
+      const { sunSign, ascendantSign, moonSign, age, birthWeekday, daysToNextBirthday } = getFullAstro(
+        date.toISOString(),
+        time instanceof Date ? time.toISOString() : date.toISOString(),
+        { latitude: 0, longitude: 0 }
+      );
+
+      setFullAstro({ sunSign, ascendantSign, moonSign, age, birthWeekday, daysToNextBirthday });
     }
   }, [date, time]);
   
   console.log(fullAstro);
-  console.log(sunSign);
   const handleSave = async () => {
     try {
       setIsLoading(true);
@@ -123,7 +127,12 @@ const Introduction = () => {
         if (userDoc.data()?.newUser) {
           await setDoc(doc(db, 'users', user.uid), {
             ...userDoc.data(),
-            sign: sunSign,
+            sunSign: fullAstro.sunSign,
+            moonSign: fullAstro.moonSign,
+            ascendantSign: fullAstro.ascendantSign,
+            age: fullAstro.age,
+            birthWeekday: fullAstro.birthWeekday,
+            daysToNextBirthday: fullAstro.daysToNextBirthday,
             prompt: {
               q1: "Kullanıcının " + description[0] + " sorusuna cevabı: " + name,
               q2: "Kullanıcının " + description[1] + " sorusuna cevabı: " + date,

@@ -13,18 +13,20 @@ const styles = StyleSheet.create({
     },
     leftContainer: {
         flexDirection: 'row',
-        gap: 4,
+        gap: 16,
     },
     menuContainer: {
-        width: 24,
-        height: 24,
+        width: 32,
+        height: 32,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     titleContainer: {
         flexDirection: 'column',
         gap: 4,
     },
     title: {
-        fontSize: 24,
+        fontSize: 20,
         fontFamily: 'Domine-SemiBold',
     },
     message: {
