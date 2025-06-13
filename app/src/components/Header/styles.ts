@@ -4,9 +4,8 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         justifyContent: 'space-between',
-        alignItems: 'center',
         flexDirection: 'row',
-        paddingVertical: 32,
+        paddingVertical: 36,
         paddingHorizontal: 16,
         borderBottomLeftRadius: 16,
         borderBottomRightRadius: 16,

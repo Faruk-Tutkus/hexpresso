@@ -24,7 +24,7 @@ export function AppContent() {
   }
   return (
     <Stack
-      //initialRouteName="src/screens/main"
+      initialRouteName="src/screens/main/navigator"
       screenOptions={{
         headerShown: false,
         animation: 'fade',
@@ -41,6 +41,7 @@ export function AppContent() {
       <Stack.Screen name="src/screens/auth/Login/index" />
       <Stack.Screen name="src/screens/side/StartScreen/index" />
       <Stack.Screen name="src/screens/side/Introduction/index" />
+      <Stack.Screen name="src/screens/main/navigator" />
     </Stack>
   )
 }

@@ -3,10 +3,8 @@ import { useAuth, useTheme } from "@providers";
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Tabs } from "expo-router";
 import * as SystemUI from 'expo-system-ui';
-import { UserCredential } from 'firebase/auth';
 import { useEffect, useRef } from 'react';
 import { Animated, TouchableOpacity, View } from 'react-native';
-import Header from 'src/components/Header';
 
 const TabLayout = () => {
   const { theme, colors } = useTheme();
@@ -120,8 +118,7 @@ const TabLayout = () => {
     <Tabs
       initialRouteName="HomeScreen/index"
       screenOptions={{
-        headerShown: true,
-        header: () => <Header user={user as UserCredential} />,
+        headerShown: false,
         animation: 'shift',
         tabBarStyle: {
           backgroundColor: colors.background,

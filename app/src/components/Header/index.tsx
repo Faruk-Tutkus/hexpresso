@@ -5,15 +5,16 @@ import { Image } from 'expo-image';
 import { UserCredential } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated, Text, View } from 'react-native';
+import { Animated, Text, TouchableOpacity, View } from 'react-native';
 import getTimeBasedGreeting from 'src/hooks/GetTime';
 import styles from './styles';
 
 interface HeaderProps {
   user: UserCredential
+  onPress: () => void
 }
 
-const Header = ({ user }: HeaderProps) => {
+const Header = ({ user, onPress }: HeaderProps) => {
   const { colors } = useTheme();
   const [horoscopeInfo, setHoroscopeInfo] = useState<string>('')
   useEffect(() => {
@@ -104,9 +105,11 @@ const Header = ({ user }: HeaderProps) => {
   return (
     <View style={[styles.container, { backgroundColor: colors.surface }]}>
       <View style={styles.leftContainer}>
+        <TouchableOpacity onPress={onPress}>
         <View style={styles.menuContainer}>
           <Icon name="menu" size={32} color={colors.text} />
         </View>
+        </TouchableOpacity>
         <View style={styles.titleContainer}>
           <Text style={[styles.title, { color: colors.text }]}>{ getTimeBasedGreeting() } {horoscopeInfo}</Text>
           <Animated.View
