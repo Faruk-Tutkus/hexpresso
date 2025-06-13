@@ -116,9 +116,9 @@ const TabLayout = () => {
 
   return (
     <Tabs
+      initialRouteName="HomeScreen/index"
       screenOptions={{
         headerShown: false,
-        animation: 'shift',
         tabBarStyle: {
           backgroundColor: colors.background,
           borderTopColor: colors.border,

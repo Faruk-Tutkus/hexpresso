@@ -3,9 +3,10 @@ import { CustomButton, IconButton } from '@components';
 import { useAuth, useTheme } from '@providers';
 import { useRouter } from 'expo-router';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Dimensions, FlatList, KeyboardAvoidingView, Text, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import { FullAstroResult, getFullAstro, getSunSign } from 'src/hooks/GetHoroscopeInfo';
 import useIntroductionData from './Data';
 import styles from './styles';
 
@@ -95,6 +96,24 @@ const Introduction = () => {
     return false;
   };
   const [description] = useState(data.map(item => item.description));
+  const [fullAstro, setFullAstro] = useState<FullAstroResult | ''>('');
+  const [sunSign, setSunSign] = useState<string>('');
+  useEffect(() => {
+    if (date) {
+      const getSun = getSunSign(date);
+      setSunSign(getSun);
+    }
+  }, [date]);
+  
+  useEffect(() => {
+    if (date && time) {
+      const fullAstro = getFullAstro(date.toISOString(), time.toISOString(), { latitude: 0, longitude: 0 });
+      setFullAstro(fullAstro);
+    }
+  }, [date, time]);
+  
+  console.log(fullAstro);
+  console.log(sunSign);
   const handleSave = async () => {
     try {
       setIsLoading(true);
@@ -104,6 +123,7 @@ const Introduction = () => {
         if (userDoc.data()?.newUser) {
           await setDoc(doc(db, 'users', user.uid), {
             ...userDoc.data(),
+            sign: sunSign,
             prompt: {
               q1: "Kullanıcının " + description[0] + " sorusuna cevabı: " + name,
               q2: "Kullanıcının " + description[1] + " sorusuna cevabı: " + date,

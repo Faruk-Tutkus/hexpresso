@@ -1,10 +1,14 @@
+import { Header } from '@components'
+import { useAuth } from '@providers'
+import { UserCredential } from 'firebase/auth'
 import React from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 
 const GuideScreen = () => {
+  const user = useAuth();
   return (
     <View>
-      <Text>GuideScreen</Text>
+      <Header user={user as UserCredential} />
     </View>
   )
 }

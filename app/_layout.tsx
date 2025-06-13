@@ -24,7 +24,7 @@ export function AppContent() {
   }
   return (
     <Stack
-      initialRouteName="src/screens/main"
+      //initialRouteName="src/screens/main"
       screenOptions={{
         headerShown: false,
         animation: 'fade',
