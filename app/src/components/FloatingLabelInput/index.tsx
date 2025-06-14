@@ -15,6 +15,7 @@ interface FloatingLabelInputProps {
   error?: string;
   onFocus?: () => void;
   onBlur?: () => void;
+  onRightIconPress?: () => void;
 }
 
 const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
@@ -28,6 +29,7 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
   error,
   onFocus,
   onBlur,
+  onRightIconPress,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -147,9 +149,9 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
             />
           </TouchableOpacity>
         ) : rightIcon ? (
-          <View style={styles.iconContainer}>
+          <TouchableOpacity style={styles.iconContainer} onPress={onRightIconPress}>
             <Icon name={rightIcon as any} size={24} color={colors.text} />
-          </View>
+          </TouchableOpacity>
         ) : null}
       </Animated.View>
       {localError && <Text style={[styles.errorText, { color: colors.errorText }]}>{localError}</Text>}

@@ -1,4 +1,5 @@
 export { default as Animation } from "./Animation";
+export { default as AskAI } from "./AskAI";
 export { default as Container } from "./Container";
 export { default as ContainerButton } from "./ContainerButton";
 export { default as CustomButton } from "./CustomButton";
