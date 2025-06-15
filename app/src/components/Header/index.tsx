@@ -1,12 +1,13 @@
 import { db } from '@api/config.firebase';
 import Icon from '@assets/icons';
+import { GetTimeBasedGreeting } from '@hooks';
 import { useTheme } from '@providers';
 import { Image } from 'expo-image';
 import { UserCredential } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import React, { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Animated, Text, TouchableOpacity, View } from 'react-native';
-import getTimeBasedGreeting from 'src/hooks/GetTime';
 import styles from './styles';
 
 interface HeaderProps {
@@ -17,6 +18,7 @@ interface HeaderProps {
 const Header = ({ user, onPress }: HeaderProps) => {
   const { colors } = useTheme();
   const [horoscopeInfo, setHoroscopeInfo] = useState<string>('')
+  const { t } = useTranslation()
   useEffect(() => {
     const fetchHoroscopeInfo = async () => {
       const userDoc = await getDoc(doc(db, 'users', user.user?.uid as string))
@@ -111,7 +113,7 @@ const Header = ({ user, onPress }: HeaderProps) => {
         </View>
         </TouchableOpacity>
         <View style={styles.titleContainer}>
-          <Text style={[styles.title, { color: colors.text }]}>{ getTimeBasedGreeting() } {horoscopeInfo}</Text>
+          <Text style={[styles.title, { color: colors.text }]}>{ GetTimeBasedGreeting() } {t('horoscope.' + horoscopeInfo)}</Text>
           <Animated.View
             style={{
               transform: [{ translateY: slideAnim }],

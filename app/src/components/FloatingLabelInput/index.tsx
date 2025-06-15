@@ -1,7 +1,7 @@
 import Icon from '@assets/icons';
 import { useTheme } from '@providers';
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Animated, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { breathingAnimation, shakeAnimation, styles } from './styles';
 
 interface FloatingLabelInputProps {
@@ -16,6 +16,7 @@ interface FloatingLabelInputProps {
   onFocus?: () => void;
   onBlur?: () => void;
   onRightIconPress?: () => void;
+  loading?: boolean;
 }
 
 const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
@@ -30,6 +31,7 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
   onFocus,
   onBlur,
   onRightIconPress,
+  loading = false
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -149,8 +151,8 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
             />
           </TouchableOpacity>
         ) : rightIcon ? (
-          <TouchableOpacity style={styles.iconContainer} onPress={onRightIconPress}>
-            <Icon name={rightIcon as any} size={24} color={colors.text} />
+          <TouchableOpacity style={styles.iconContainer} onPress={onRightIconPress} disabled={loading}>
+            {loading ? <ActivityIndicator size="small" color={colors.text} /> : <Icon name={rightIcon as any} size={24} color={colors.text} />}
           </TouchableOpacity>
         ) : null}
       </Animated.View>

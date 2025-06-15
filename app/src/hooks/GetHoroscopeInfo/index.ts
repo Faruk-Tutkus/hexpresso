@@ -37,31 +37,31 @@ export function getSunSign(d: Date): string {
   const day = d.getUTCDate(), m = d.getUTCMonth()+1;
 
   if((m===3 && day >=21) ||
-     (m===4 && day <=19)) return 'Koç';
+     (m===4 && day <=19)) return 'aries';
   if((m===4 && day >=20) ||
-     (m===5 && day <=20 )) return 'Boğa';
+     (m===5 && day <=20 )) return 'taurus';
   if((m===5 && day >=21) ||
-     (m===6 && day <=21 )) return 'İkizler';
+     (m===6 && day <=21 )) return 'gemini';
   if((m===6 && day >=22) ||
-     (m===7 && day <=22 )) return 'Yengeç';
+     (m===7 && day <=22 )) return 'cancer';
   if((m===7 && day >=23) ||
-     (m===8 && day <=22 )) return 'Aslan';
+     (m===8 && day <=22 )) return 'leo';
   if((m===8 && day >=23) ||
-     (m===9 && day <=22 )) return 'Başak';
+     (m===9 && day <=22 )) return 'virgo';
   if((m===9 && day >=23) ||
-     (m===10 && day <=23 )) return 'Terazi';
+     (m===10 && day <=23 )) return 'libra';
   if((m===10 && day >=24) ||
-     (m===11 && day <=21 )) return 'Akrep';
+     (m===11 && day <=21 )) return 'scorpio';
   if((m===11 && day >=22) ||
-     (m===12 && day <=21 )) return 'Yay';
+     (m===12 && day <=21 )) return 'sagittarius';
   if((m===12 && day >=22) ||
-     (m===1 && day <=19 )) return 'Oğlak';
+     (m===1 && day <=19 )) return 'capricorn';
   if((m===1 && day >=20) ||
-     (m===2 && day <=18 )) return 'Kova';
+     (m===2 && day <=18 )) return 'aquarius';
   if((m===2 && day >=19) ||
-     (m===3 && day <=20 )) return 'Balık';
+     (m===3 && day <=20 )) return 'pisces';
   
-  return 'Geçersiz';
+  return 'invalid';
 }
 
 /** Ay burcu */
@@ -163,5 +163,5 @@ function getJulian(d: Date): number {
 
 function zodiacFromDeg(deg: number): string {
   const idx = Math.floor(deg / 30) % 12;
-  return ['Koç','Boğa','İkizler','Yengeç','Aslan','Başak','Terazi','Akrep','Yay','Oğlak','Kova','Balık'][idx];
+  return ['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces'][idx];
 }

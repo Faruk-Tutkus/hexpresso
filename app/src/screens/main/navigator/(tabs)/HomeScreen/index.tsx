@@ -7,7 +7,7 @@ const Home = () => {
 
   return (
     <View>
-      <AskAI />
+      <AskAI type="comment" />
     </View>
   )
 }

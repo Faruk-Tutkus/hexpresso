@@ -64,6 +64,20 @@
       "auth/unauthorized-continue-uri": "Yetkisiz yönlendirme adresi.",
       "auth/user-not-found": "Kullanıcı bulunamadı.",
       "auth/google-sign-in-error": "Google ile giriş yaparken bir hata oluştu. Lütfen daha sonra tekrar deneyiniz."
-    }
+  },
+  "horoscope": {
+    "aquarius": "kova",
+    "pisces": "balık",
+    "aries": "koç",
+    "taurus": "boğa",
+    "gemini": "ikizler",
+    "cancer": "yengeç",
+    "leo": "aslan",
+    "virgo": "başak",
+    "libra": "terazi",
+    "scorpio": "akrep",
+    "sagittarius": "yay",
+    "capricorn": "oğlak"
+  }
 }
   

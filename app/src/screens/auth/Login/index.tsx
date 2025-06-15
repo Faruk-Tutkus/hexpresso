@@ -35,7 +35,7 @@ const Login = () => {
       if (userCredential?.user?.emailVerified && userCredential.newUser) {
         router.replace('/src/screens/side/Introduction');
       } else if (userCredential?.user?.emailVerified && !userCredential.newUser) {
-        router.replace('/src/screens/main/HomeScreen');
+        router.replace('/src/screens/main/navigator');
       }
     } catch (error: any) {
       if (error === 'auth/email-not-verified') {
@@ -67,7 +67,7 @@ const Login = () => {
         if (result.newUser) {
           router.replace('/src/screens/side/Introduction');
         } else {
-          router.replace('/src/screens/main/HomeScreen');
+          router.replace('/src/screens/main/navigator');
         }
       }
     } catch (error: any) {

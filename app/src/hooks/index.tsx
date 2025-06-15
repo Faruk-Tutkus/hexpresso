@@ -1,5 +1,6 @@
 export { FullAstroResult, getFullAstro, getSunSign } from './GetHoroscopeInfo'
-export { default as useGetTime } from './GetTime'
+export { default as GetTimeBasedGreeting, default as useGetTime } from './GetTime'
+export { checkDatePeriod, formatDateToDisplay, getDateRangeForPeriod, isIsoDateInRange } from './IsDate'
 export { useEmailVerification } from './SendEmailVerification'
 export { useSignInWithEmail } from './SignInWithEmail'
 export { useSignInWithGoogle } from './SignInWithGoogle'

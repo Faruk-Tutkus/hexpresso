@@ -13,7 +13,7 @@ import styles from './styles';
 interface CustomButtonProps {
   onPress: () => void;
   title: string;
-  variant?: 'primary' | 'secondary' | 'outline';
+  variant?: 'primary' | 'secondary' | 'third';
   size?: 'small' | 'medium' | 'large';
   loading?: boolean;
   disabled?: boolean;
@@ -44,7 +44,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
         styles.container,
         contentStyle,
         disabled && styles.disabled,
-        { backgroundColor: variant === 'secondary' ? colors.errorBorder : colors.primary },
+        { backgroundColor: variant === 'secondary' ? colors.errorBorder : variant === 'third' ? colors.secondary : colors.primary },
       ]}
     >
       <View style={[styles.content]}>
