@@ -82,7 +82,7 @@ const Register = () => {
         if (result.newUser) {
           router.replace('/src/screens/side/Introduction');
         } else {
-          router.replace('/src/screens/main/HomeScreen');
+          router.replace('/src/screens/main/navigator');
         }
       }
     } catch (error: any) {
