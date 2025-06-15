@@ -159,11 +159,8 @@ const Introduction = () => {
             curious,
             newUser: false,
           });
-          router.replace('/src/screens/main/HomeScreen');
         }
-        else {
-          router.replace('/src/screens/main/HomeScreen');
-        }
+        router.replace('/src/screens/main/navigator');
       }
     } catch (error) {
       console.log(error);

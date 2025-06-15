@@ -29,6 +29,7 @@ const AskAI = ({ type }: AskAIType) => {
   const { t } = useTranslation()
   const user = useAuth().user
   const [isLoading, setIsLoading] = React.useState(false)
+  const [error, setError] = React.useState<string>('')
   const [comments, setComments] = React.useState<any>({
     age: '',
     ascendantSign: '',
@@ -213,9 +214,14 @@ const AskAI = ({ type }: AskAIType) => {
       opacity: interpolate(progress.value, [0, 1], [0, 1])
     }
   })
-
   const handleSendSign = async () => {
-    if (!value.trim() && type === 'sign') return;
+    if (!value.trim() && type === 'sign') {
+      setTimeout(() => {
+        setError('Lütfen geçerli bir prompt giriniz.')
+      }, 0)
+      setError('')
+      return;
+    }
     progress.value = withTiming(0, { duration: 1250 });
     
     const userData = await getResponse();
@@ -228,7 +234,7 @@ const AskAI = ({ type }: AskAIType) => {
   }
 
   const handleSendComment = async () => {
-    if (!value.trim() && type === 'sign') return;
+    if (!value.trim()) return;
     progress.value = withTiming(0, { duration: 1250 });
     
     const userData = await getResponse();
@@ -252,6 +258,7 @@ const AskAI = ({ type }: AskAIType) => {
         onChangeText={onChangeText}
         onRightIconPress={handleSendSign}
         loading={isLoading}
+        error={error}
       />
       )}
       {type === 'comment' && (
