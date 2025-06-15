@@ -12,20 +12,18 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
+        overflow: 'hidden',
     },
-    answerContainer: {
+    responseContainer: {
         width: '90%',
         borderLeftWidth: 1,
         borderRightWidth: 1,
-        borderBottomWidth: 1,
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
         marginTop: 8,
-        paddingVertical: 16,
+        paddingBottom: 16,
         paddingHorizontal: 24,
         justifyContent: 'flex-start',
     },
-    answerText: {
+    responseText: {
         fontSize: 16,
         fontWeight: 'bold',
         textAlign: 'center',
