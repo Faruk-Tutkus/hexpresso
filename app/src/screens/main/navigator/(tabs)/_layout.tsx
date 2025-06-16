@@ -11,7 +11,7 @@ const TabLayout = () => {
   SystemUI.setBackgroundColorAsync(colors.background);
   const user = useAuth();
   const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
-    const filteredRoutes = state.routes.filter((route: any) => route.name !== 'HomeScreen/styles' && route.name !== 'GuideScreen/styles' && route.name !== 'FortunesScreen/styles' && route.name !== 'ExclusiveFortunesScreen/styles');
+    const filteredRoutes = state.routes.filter((route: any) => route.name !== 'HomeScreen/styles' && route.name !== 'GuideScreen/styles' && route.name !== 'SignComments/styles');
     const animatedValues = useRef(filteredRoutes.map(() => new Animated.Value(1))).current;
     const transformY = useRef(filteredRoutes.map(() => new Animated.Value(0))).current;
 
@@ -61,7 +61,7 @@ const TabLayout = () => {
         {filteredRoutes.map((route: any, index: number) => {
           const originalIndex = state.routes.findIndex(r => r.name === route.name);
           const isFocused = state.index === originalIndex;
-          const iconName = route.name === 'HomeScreen/index' ? 'home' : route.name === 'GuideScreen/index' ? 'book' : route.name === 'FortunesScreen/index' ? 'star' : 'star';
+          const iconName = route.name === 'HomeScreen/index' ? 'home' : route.name === 'GuideScreen/index' ? 'book' : route.name === 'SignComments/index' ? 'star' : 'star';
 
           return (
             <TouchableOpacity
@@ -104,7 +104,9 @@ const TabLayout = () => {
                     })
                   }}
                 >
-                  {route.name === 'HomeScreen/index' ? 'Ana Sayfa' : route.name === 'GuideScreen/index' ? 'Rehber' : route.name === 'FortunesScreen/index' ? 'Fallarım' : 'Exclusive Fallarım'}
+                  {route.name === 'HomeScreen/index' ? 'Hexpresso' : 
+                   route.name === 'GuideScreen/index' ? 'Burçlar' : 
+                   'Burç Yorumları'}
                 </Animated.Text>
               </Animated.View>
             </TouchableOpacity>
@@ -155,13 +157,13 @@ const TabLayout = () => {
         }} 
       />
       <Tabs.Screen 
-        name="FortunesScreen/index"
+        name="SignComments/index"
         options={{
           title: 'Fortunes',
         }} 
       />
       <Tabs.Screen 
-        name="FortunesScreen/styles"
+        name="SignComments/styles"
         options={{
           href: null,
         }} 

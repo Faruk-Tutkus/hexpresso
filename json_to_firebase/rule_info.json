@@ -1,0 +1,107 @@
+{
+    "type": "object",
+    "properties": {
+      "info": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "symbol": {
+              "type": "string"
+            },
+            "dates": {
+              "type": "string"
+            },
+            "element": {
+              "type": "string"
+            },
+            "modality": {
+              "type": "string"
+            },
+            "ruling planet": {
+              "type": "string"
+            },
+            "traits": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "key"
+              ]
+            },
+            "careers": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "key"
+              ]
+            },
+            "about": {
+              "type": "string"
+            },
+            "seduce": {
+              "type": "string"
+            },
+            "lovequickly": {
+              "type": "string"
+            },
+            "attracted": {
+              "type": "string"
+            },
+            "love": {
+              "type": "string"
+            },
+            "soulmate": {
+              "type": "string"
+            },
+            "famous": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "required": [
+            "symbol",
+            "dates",
+            "element",
+            "modality",
+            "ruling planet",
+            "traits",
+            "careers",
+            "about",
+            "seduce",
+            "lovequickly",
+            "attracted",
+            "love",
+            "soulmate",
+            "famous"
+          ]
+        }
+      }
+    },
+    "required": [
+      "info"
+    ]
+  }

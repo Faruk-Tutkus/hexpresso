@@ -1,4 +1,48 @@
 {
+    "info": {
+        "about": "Teraziler, çelişkili gibi görünen doğalarıyla (dışa dönük/içe dönük, stratejik/spontane) anlaşılması zor olabilirler. Empatiktirler, uyum ararlar ve başkalarının aynası olabilirler; çekicilikleriyle takdir edilmek isterler. Zayıf yönleri arasında çatışmadan kaçınma, kararsızlık ve başkalarının fikirlerine aşırı önem verme bulunur, bu da manipülasyona açık olmalarına yol açabilir. Yalnızlıktan ve bilinmeyenden korkarlar; hayatın idealleriyle gerçekleri arasındaki fark öfke yaratabilir. Eleştiriye hassastırlar ve onaylanmaya ihtiyaç duyarlar. Monotonluktan nefret eder, çeşitlilik ve macera ararlar.",
+        "attracted": "Güzellik fikrine çok çekilirler.",
+        "careers": {
+            "key": [
+                "Kolektif Zihin Çalışmaları",
+                "Sosyetik",
+                "Instagram modeli",
+                "İlham perisi",
+                "Arabulucu"
+            ]
+        },
+        "dates": "22 Eylül - 21 Ekim (2025 için)",
+        "element": "Hava",
+        "famous": {
+            "key": [
+                "Michel Foucault",
+                "Friedrich Nietzsche",
+                "Kim Kardashian",
+                "Donald Glover",
+                "Gwyneth Paltrow",
+                "Neil DeGrasse Tyson",
+                "Nico",
+                "Arthur Rimbaud"
+            ]
+        },
+        "love": "Teraziler güzelliğe önem verirler. Nasıl hissettiklerinin doğrudan görünümleriyle ilgili olduğunu bilirler. Bu nedenle, Teraziler sadece en iyi fiziksel özelliklerini değil, aynı zamanda ruh hallerini de vurgulayacak şekilde giyinirler. Güzellik fikrine o kadar çekilirler ki, başkalarının kusurlarında bile güzellik bulurlar. Herkesin güzel olabileceğine ve onları aksine ikna eden her şeyin sadece bir yanılsama olduğuna inanırlar.",
+        "lovequickly": "Venüs tarafından yönetildikleri ve partnerliğe, uyuma değer verdikleri için aşka hızla ilgi duyabilirler, ancak her yönü değerlendirme ve kararsızlık eğilimleri bu süreci yavaşlatabilir.",
+        "modality": "Öncü",
+        "ruling planet": "Venüs",
+        "seduce": "Bir Terazi'yi nasıl baştan çıkarırsınız: Sohbette bir şey söylediklerinde, “Aman Tanrım, ben de!” diye yanıt verin. Hiç yalnız kalmadan birlikte üç gün geçirin. İlham periniz olmalarını isteyin.",
+        "soulmate": "Terazi'nin ruh eşi, dışarıdan sofistike ve sakin görünürken içten içe güvensiz ve değişken olabilen doğaları arasındaki ikilemi köprüleyebilen biridir. Bu kişi, anlayışlı olup pasif olmayan, en zor anlarında Terazi'ye destek olan ve adeta bir deniz feneri gibi yol gösteren biri olmalıdır. Terazi'nin içindeki karanlığı doğal bir parçası olarak kabul eden, onu olduğu gibi kalması için teşvik eden ve kendi kontrolünün kendisinde olduğunu görmesine yardımcı olan biridir.",
+        "symbol": "Kefeler",
+        "traits": {
+            "key": [
+                "Yalnız olmaktan nefret eder",
+                "Çok iyi estetik anlayışına sahiptir",
+                "Çatışmadan kaçınır",
+                "Her yönü görür",
+                "Fanteziye eğilimlidir",
+                "Karar vermekte zorlanır"
+            ]
+        }
+    },
     "daily": [
         {
             "date": "01.01.2025",

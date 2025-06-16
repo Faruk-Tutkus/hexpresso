@@ -3,18 +3,31 @@
     "name": "hexpresso",
     "slug": "hexpresso",
     "version": "1.0.0",
+    "orientation": "portrait",
+    "entryPoint": "./index.tsx",
     "newArchEnabled": true,
+    "backgroundColor": "#000000",
+    "scheme": "hexpresso",
+    "experiments": {
+      "typedRoutes": true
+    },
+    "plugins": [
+      "@react-native-google-signin/google-signin"
+    ],
+    "android": {
+      "package": "com.faruktutkus.hexpresso",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#000000"
+      },
+      "googleServicesFile": "./google-services.json",
+      "edgeToEdgeEnabled": true
+    },
     "web": {
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "experiments": {
-      "typedRoutes": true
-    },
-    "plugins": ["@react-native-google-signin/google-signin"],
-    "android": {
-      "googleServicesFile": "./google-services.json"
-    }
+    "userInterfaceStyle": "automatic"
   }
 }

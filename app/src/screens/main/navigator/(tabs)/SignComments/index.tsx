@@ -1,10 +1,11 @@
+import { AskAI } from '@components'
 import React from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 
 const FortunesScreen = () => {
   return (
     <View>
-      <Text>FortunesScreen</Text>
+      <AskAI type="comment" />
     </View>
   )
 }

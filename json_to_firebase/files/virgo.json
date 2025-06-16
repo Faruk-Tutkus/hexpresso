@@ -1,4 +1,47 @@
 {
+    "info": {
+        "about": "Başaklar mükemmeliyetçilikleriyle tanınırlar. Detaylara verdikleri önem, olmayan yerlerde bile desenler bulmalarına yardımcı olur. Bazen Başaklar aşırı titiz ve eleştirel olabilirler. Başakların çok titiz olduğu doğrudur, ancak bu her zaman düzenli alanlar tuttukları anlamına gelmez. Kendilerine özgü huyları ve alışkanlıkları geleneksel temizlik görüşleriyle uyuşmayabilir. Başkalarına yardım etmeyi kendi rahatlıklarının önüne koyarlar ve nadiren kendi çıkarlarıyla motive olurlar. Zekidirler ancak içe dönük doğaları nedeniyle bazen kendilerini ifade etmekte zorlanabilirler. Mutlu olmak için faydalı olduklarını hissetmeye ihtiyaç duyarlar; kendilerinden daha büyük bir şeye katkıda bulunarak öz değerlerini kazanırlar. Her türlü karmaşayı aktif olarak ararlar. Amaç ve başarı duygusuna ihtiyaçları vardır. Genellikle çok mütevazıdırlar; katkıları için takdir edilmek isterler ama değerli hissetmek için büyük takdir jestlerine ihtiyaç duymazlar. Detayları fark ederler. Mükemmel olmadıkları gerçeği konusunda güvensizdirler. Mottoları 'Kendimi kendimden kurtarmak için önce kendimi yok etmeliyim'dir. Saf, temiz bir varoluş isterler. Varoluşlarına layık hissetmek için en iyi olmaları gerekir. Mükemmellik imgelerine o kadar takıntılı olabilirler ki gerçek dürtüleriyle bağlarını kaybedebilirler. Duygularını bastırırlar. Gerçekte olduklarından çok daha rasyonel görünebilirler. Duyguları genellikle onlar için büyük bir gizemdir; pek çok şeyi derinden hissederler ama genellikle bunun hakkında nasıl konuşacaklarını bilemezler. Anlatılamaz olanı ifade etmelerinin tek yolu kuru bir alaycılıktır.",
+        "attracted": "Kendilerini faydalı hissedebilecekleri, yardım edebilecekleri veya bir şeyleri düzeltebilecekleri durumlara veya kişilere çekilirler. Düzen ve iyileştirme potansiyeli olan şeylere ilgi duyarlar.",
+        "careers": {
+            "key": [
+                "Gözde kütüphaneci",
+                "Başkalarının karmaşaları için çözüm uzmanı",
+                "Yürüyen ansiklopedi",
+                "İnsan GPS",
+                "Tek kişilik karşılama komitesi"
+            ]
+        },
+        "dates": "2025 yılı için 22 Ağustos - 21 Eylül",
+        "element": "Toprak",
+        "famous": {
+            "key": [
+                "Fred Hampton",
+                "Bernie Sanders",
+                "Agatha Christie",
+                "Mary Shelley",
+                "D.H. Lawrence",
+                "George Bataille",
+                "Antonin Artaud",
+                "Marsha P. Johnson"
+            ]
+        },
+        "love": "Duyguları genellikle onlar için büyük bir gizemdir. Pek çok şeyi derinden hissederler ama genellikle bunun hakkında nasıl konuşacaklarını bilemezler. Başkalarının paylaştıklarını sonsuz bir şekilde kabul ederler, ancak kendileri hakkında benzer bir derinlemesine açılım yapmanın değerini görmeyebilirler. İlişkilerde sadık ve destekleyici olabilirler ancak duygusal ifadelerde çekingen veya dolaylı olabilirler, sevgilerini hizmet eylemleri veya pratik destek yoluyla göstermeyi tercih edebilirler.",
+        "lovequickly": "Hayır, Başaklar genellikle aşka hızla kapılmazlar. Analitik ve mükemmeliyetçi doğaları, duygularını hemen açığa vurmak yerine dikkatli ve gözlemci olmalarını sağlar. Güven inşa etmeleri ve birine gerçekten açılmaları zaman alabilir.",
+        "modality": "Değişken",
+        "ruling planet": "Merkür",
+        "seduce": "Bir Başak'ı etkilemek için zekalarını, detaylara verdikleri önemi ve yardımsever doğalarını takdir edin. Onlara gerçekten ihtiyaç duyulduğunu ve çabalarının fark edildiğini hissettirin. Samimiyet, düzen ve anlamlı sohbetler onları etkileyebilir. Büyük gösterişlerden ziyade düşünülmüş küçük jestler daha çok hoşlarına gider.",
+        "soulmate": "Metinde Başak burcunun ruh eşi hakkında özel bir bilgi verilmemiştir.",
+        "symbol": "Bakire",
+        "traits": {
+            "key": [
+                "Faydalı hissetmeye ihtiyaç duyar",
+                "Her şey için hızlı bir çözümü vardır",
+                "Yargılayıcıdır, ama iyi niyetlidir",
+                "Olağanüstü mekansal farkındalığa sahiptir",
+                "Saniyede bir milyon fikri vardır"
+            ]
+        }
+    },
     "daily": [
         {
             "date": "01.01.2025",

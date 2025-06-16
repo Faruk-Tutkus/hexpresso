@@ -234,7 +234,6 @@ const AskAI = ({ type }: AskAIType) => {
   }
 
   const handleSendComment = async () => {
-    if (!value.trim()) return;
     progress.value = withTiming(0, { duration: 1250 });
     
     const userData = await getResponse();
