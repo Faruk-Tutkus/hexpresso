@@ -1,11 +1,11 @@
 {
   "info": {
-    "about": "Balık iyi bir burç mudur? Bu soruyu soruyorsanız, muhtemelen güvensiz bir Balıksınız. Değer görmediğinizi düşünüyorsanız, bunun nedeni Balık olmanın kötü olması değil, toplumun genel olarak sezgi ve hassasiyet gibi yumuşak becerileri değersizleştirmesidir. Sizin için zorluk, bunları engel değil, yetenek olarak görmeye başlamaktır. Balık burcunun kişiliğini tanımlamak zor olabilir çünkü Balıklar ayrışmaktan kaçınma eğilimindedir. Davranışları, etraflarındaki kişilere göre önemli ölçüde değişir. Balıklar, sadece düşünceli bir şekilde şeylerin içlerinden akmasına izin veren geçirgen zarlardır. Onlar beyinsel deniz süngerleridir. Sınırsızdırlar, tutarlı kimlikler oluşturmaktan kaçınmak için kendilerini daha büyük kişiliklerle seyreltirler. Balıklarla genellikle ilişkilendirilen niteliklerin çoğu (hayalperestlik, duygusallık, hayal gücü) dışarıdan gözlemlenmesi zor olan içsel süreçlerdir. Balıklar öncelikle içe dönüktür. Kendini beğenmiş değillerdir ama kendileriyle meşguldürler. Nihayetinde, bir Balık çözülmek ister. Kendilerini fiziksel bir formdan kurtarıp dokundukları her şeye sevgi olarak yayılmak. Maddenin hemen üzerinde asılı duran incecik eşik katmanında var olmak. Hayatlarını romantik bir şiir gibi yaşamak. Gerçekliğin ve fantezinin aynı sonsuz düzlemde komşu olduğunu anlamak. Balıkların zayıf yönleri nelerdir? Gerçek Balık zayıflığı, genellikle kendi kargaşalarının nedeni olmalarıdır. Melankoliye biraz bağımlıdırlar. Balıklar her şeyi yoğun bir şekilde hissetmek isterler. Balıklar, kederin dokunaklılığını zevkli bulurlar. Hiçbir şey hissetmemektense, şehvetli bir umutsuzluk çukurunda demlenmeyi tercih ederler. Yürek parçalayan duygusal deneyimler arayışı, bazen Balıkların bilinçaltında kendi kendini yenilgiye uğratan durumlar aramasına neden olur.",
-    "attracted": "Balık burcuna kimler çekilir? Balıkların, bazıları için çekici, bazıları içinse sinir bozucu olabilen, anlaşılması zor bir cazibesi vardır. Sınırsızlıkları, merhametlerinden yararlanan, sınırları zayıf başka insanları çekmelerine neden olur. Balıkların, başkalarının duygusal karmaşaları için sadece bir paspas olmaktan daha fazlası olduklarını öğrenmeleri gerekir.",
+    "about": "Bir Balık burcunun kişiliğini tanımlamak zor olabilir çünkü Balıklar ayrımlardan kaçınma eğilimindedir. Davranışları, etraflarındakilere göre önemli ölçüde değişir. Onlar, düşünceli bir şekilde şeylerin içlerinden akıp gitmesine izin veren geçirgen zarlardır. Sınırsızdırlar, tutarlı kimlikler oluşturmaktan kaçınmak için kendilerini daha büyük kişiliklerle seyreltirler. Genellikle Balık ile ilişkilendirilen niteliklerin çoğu (hayalperestlik, duygusallık, hayal gücü) dışarıdan gözlemlenmesi zor olan içsel süreçlerdir. Balıklar öncelikle içe dönüktür. Nihayetinde bir Balık erimek, fiziksel bir formdan kurtulmak ve dokunduğu her şeye sevgi olarak yayılmak ister.",
+    "attracted": "Balık burcunun, bazıları için çekici, bazıları için ise sinir bozucu olabilen anlaşılması zor bir cazibesi vardır. Sınırsızlıkları, merhametlerinden yararlanan, kötü sınırlara sahip başka insanları kendilerine çekmelerine neden olur. Balıkların, başkalarının duygusal dağınıklıkları için sadece bir paspas olmaktan daha fazlası olduklarını öğrenmeleri gerekir. Onların bu gizemli ve fedakar doğası, korunmaya ve anlaşılmaya ihtiyaç duyan ruhları çeker, ancak bu durum Balık için yorucu olabilir. Bu nedenle, kendilerine değer veren ve sınırlarına saygı duyan partnerler bulmaları hayati önem taşır.",
     "careers": {
       "key": [
         "Gönüllü terapist",
-        "Kaldırım falcısı",
+        "Sokak falcısı",
         "Amatör şair",
         "Hüzünlü palyaço",
         "Işık küresi",
@@ -14,6 +14,7 @@
     },
     "dates": "2025 yılı için 18 Şubat - 19 Mart",
     "element": "Su",
+    "enemy": "Balık burcunun gerçek düşmanı, çoğu zaman kendi kargaşasının nedeni olmaları ve kendilerini sabote etme eğilimleridir. Melankoliye biraz bağımlıdırlar. Ayrıca, Başak gibi aşırı pratik, gerçekçi ve eleştirel burçlarla da anlaşmazlık yaşayabilirler. Balık'ın hayalperest, sezgisel ve sınırsız doğası, Başak'ın analitik, detaycı ve ayakları yere basan yaklaşımıyla sık sık çatışır. Bu durum, Balık'ın kendini sürekli eleştirilmiş, yanlış anlaşılmış ve duygusal olarak tükenmiş hissetmesine yol açabilir, bu da onları daha da içlerine kapanmaya iter.",
     "famous": {
       "key": [
         "Nina Simone",
@@ -26,21 +27,25 @@
         "Rosa Luxemburg"
       ]
     },
-    "love": "Bu, en çok Balık Venüs ve Mars için geçerlidir, ancak Balık Güneşler de bazı özelliklerle özdeşleşebilir. Balıklar aşkta aşırı romantik, fanteziye eğilimli ve duyguları yoğun yaşamayı arzulayan bir yapıya sahiptir. Kendilerini aşan, güçlü bir aşk isterler ve derin duygusal deneyimlerin peşindedirler. Aşkı, her şeyi kaplayan ve dönüştüren bir güç olarak algılarlar.",
-    "lovequickly": "Balıklar derinden romantiktir ve yoğun duygusal bağlar ararlar, bu da onların çabuk ve derinden aşık olmalarına yol açabilir.",
+    "friends": "Balıklar genellikle arkadaş edinmekte iyidirler. Çoğu insanla kolayca bağ kurabilirler. Kendilerine özgü bir şekilde sadıktırlar. 'Konuşmaya ihtiyacın olursa buradayım' diye bir mesaj atarlar, tam da telefonlarının şarjı biterken. Başkalarının sorunlarını içselleştirmemek ve bu süreçte işleri daha da kötüleştirmemek onlar için zor olabilir. Kötü niyetli olmasalar da dedikodu yapabilirler çünkü başkalarının kişisel hayatlarıyla gerçekten ilgilenirler. Bağımlı arkadaşlıklar ile çok fazla yalnız kalma ihtiyacı arasında gidip gelirler.",
+    "love": "Balık burcunun aşktaki en büyük zayıflığı, genellikle kendi kargaşalarının nedeni olmalarıdır. Melankoliye biraz bağımlıdırlar. Balıklar duyguları yoğun bir şekilde hissetmek ister. Hüznün dokunaklılığını zevkli bulurlar. Hiçbir şey hissetmemektense, şehvetli bir umutsuzluk çukurunda demlenmeyi tercih ederler. Bu yürek parçalayıcı duygusal deneyim arayışı, Balıkların bazen bilinçsizce kendilerini sabote eden durumlar aramasına neden olur. Aşkta, kendilerini tamamen kaybetme ve partnerlerinin içinde erime eğilimindedirler, bu da onları savunmasız bırakabilir.",
+    "lovequickly": "Evet, Balıklar aşırı romantik ve fanteziye eğilimli doğaları nedeniyle çok çabuk aşık olabilirler. Yoğun duygusal deneyimler ararlar ve birini hızla idealize ederek kendilerini bir anda tutkulu bir aşkın içinde bulabilirler. Onlar için aşk, gerçeklik ve hayalin iç içe geçtiği şiirsel bir deneyimdir. Bu nedenle, birine karşı derin hisler beslemeye başlamaları uzun sürmez. Bu durum, onlara büyülü anlar yaşatsa da, beklentileri karşılanmadığında kolayca hayal kırıklığına uğramalarına da neden olabilir. Aşkı bir çözünme ve birleşme olarak gördükleri için bu sürece hızla kapılırlar.",
+    "makeAngry": "Bir Balık'ın sinirlenmesi, yavaş ve kademeli bir birikim olmadan zordur. Küçük rahatsızlık hislerini, kendilerini ve kendi hassasiyetlerini suçlayarak çabucak göz ard ederler. Durum nihayet patlak verdiğinde, bu dağınık ve tuhaf olur ve tüm bu gücenmişliğin nereden geldiğini anlamak zordur. Başkalarının duygusal zihin okuyucuları olmasını beklerler; başlangıçta sorun olmadığını söyledikleri şeylerin aslında hiç de iyi olmadığını birdenbire belli ederler. Ve 'Ama iyi olmadığımı bilmeliydin!' diyerek tepki gösterirler.",
+    "makeHappy": "Balıklar en çok okyanus gibi bir şeye daldıklarında mutlu olurlar. Kendilerinden daha büyük bir şey tarafından yutuluyormuş gibi hissettiklerinde ölçülemez bir zevk alırlar. Balıklar, duyusal deneyimin içine dalmaktan hoşlanırlar: ayaklarının altındaki kum hissi, bir sevgilinin teninin kokusu, bir yaz esintisinin müziği. Erimekte olduklarını hissetmeyi severler. Yaratıcı çalışmalar onları toprağa bağlar ve mutlulukları için yaratıcı ifadelerine bir çıkış yolu bulmaları esastır. Balıklar daima geleceğe umutla bakar ve geçmişi geride bırakıp ilerleyebilirler.",
     "modality": "Değişken",
-    "ruling planet": "Neptün",
-    "seduce": "Bir Balık burcunu nasıl baştan çıkarırsınız? Sık sık gittikleri bir parka klasik bir romantik romanın kopyasını getirin. Biraz misk veya paçuli sürün. Kulağınızın arkasına bir kır çiçeği takın. Baktıklarını fark ettiğinizde, gözleriyle buluşun. Derinlemesine bakın, ama ürkütücü olmayacak şekilde. İlk konuşmanızda, onlara en son yaşadığınız kalp kırıklığından bahsedin. 'Daha önce kimseyle böyle konuşamadım' demeyi ihmal etmeyin. Duygularınızı el yazısıyla yazılmış bir mektupla itiraf edin. Ama önce, söylemek istediklerinizi Google Çeviri'ye yazın. Daha şiirsel olması için Fransızcaya çevirin ve sonra tekrar İngilizceye çevirin.",
-    "soulmate": "Balık burcunun ruh eşi kimdir? Balıkların bir partnerde neye ihtiyaç duydukları ile ne istedikleri arasında bir gerilim vardır. Kendilerini aşan bir aşk isterler. Balıkların aşkla şekillenmenin sorun olmadığını bilmeleri gerekir, ancak ortada kesin bir şey olmalıdır. Tüm bu uysallığın altında sert bir tel olmalıdır. Aşk, benliğin tamamen yokluğu ya da başka birinde tamamen çözülme değildir. Doğru partner bunu zaten bilir ve Balıkları ilkel duvarlar inşa etmeye teşvik eder. Bir Balık burcunun ruh eşi, romantizme hala duyarlı olurken gerçekliğe kök salmış biridir.",
+    "planet": "Neptün",
+    "seduce": "Sık sık gittikleri bir parka klasik bir romantik romanın bir kopyasını getirin. Biraz misk veya paçuli sürün. Kulağınızın arkasına bir kır çiçeği koyun. Baktıklarını fark ettiğinizde, bakışlarına karşılık verin. Ürkütücü olmadan derinlemesine bakın. İlk sohbetiniz sırasında onlara en son yaşadığınız kalp kırıklığından bahsedin. 'Daha önce kimseyle böyle konuşamadım' demeyi ihmal etmeyin. Duygularınızı el yazısıyla yazılmış bir mektupla itiraf edin. Daha şiirsel duyulması için metni önce başka bir dile çevirip sonra geri çevirebilirsiniz.",
+    "soulmate": "Balıkların bir partnerde neye ihtiyaç duydukları ile ne istedikleri arasında bir gerilim vardır. Onları alt eden bir aşk isterler. Balıkların aşk tarafından şekillendirilebilmenin sorun olmadığını, ancak tüm bu yoğrulabilirliğin altında kesin bir şeyin olması gerektiğini bilmeleri gerekir. Aşk, benliğin tamamen yokluğu veya başka birinde tamamen erimek değildir. Doğru partner bunu zaten bilir ve Balık'ı ilkel duvarlar inşa etmeye teşvik eder. Bir Balık'ın ruh eşi, romantizme hala duyarlı olurken gerçekliğe kök salmış biridir.",
+    "specialInfo": "Bu soruyu soruyorsanız, muhtemelen güvensiz bir Balık burcusunuz. Değerli hissetmiyorsanız, bunun nedeni Balık olmanın kötü olması değil, toplumun genel olarak sezgi ve hassasiyet gibi yumuşak becerilere yeterince değer vermemesidir. Sizin meydan okumanız, bu şeyleri engel olarak değil, yetenek olarak görmeye başlamaktır. Hassas doğanız, başkalarının göremediği derinlikleri ve bağlantıları görmenizi sağlayan bir süper güçtür. Bu yeteneklerinizi kucakladığınızda, sadece kendinize değil, etrafınızdakilere de ne kadar değerli olduğunuzu kanıtlayacaksınız.",
     "symbol": "Balıklar",
     "traits": {
       "key": [
-        "Bir şekilde aynı anda hem 5 hem de 50 yaşında olmak",
-        "Her şeyin bir işaret olduğunu düşünmek",
-        "Rüyasında mı gördüğünü yoksa gerçekten mi olduğunu hatırlayamamak",
-        "Aşırı romantik",
-        "Fanteziye eğilimli",
-        "Sınırların olmaması"
+        "Aynı anda hem 5 hem de 50 yaşında gibi davranmaları",
+        "Her şeyin bir işaret olduğunu düşünmeleri",
+        "Bunu hayal mi ettiklerini yoksa gerçekten yaşandığını mı hatırlayamamaları",
+        "Aşırı romantik olmaları",
+        "Fanteziye eğilimli olmaları",
+        "Sınırlarının olmaması"
       ]
     }
   },

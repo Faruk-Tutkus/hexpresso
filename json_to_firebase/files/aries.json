@@ -1,7 +1,7 @@
 {
   "info": {
-    "about": "Koç burcunun kişiliği nasıldır? Koçlar özlerinde her şeyi kendi bildikleri gibi yaparlar. Çatışmadan korkmazlar, son derece rekabetçidirler ve dürüsttürler. Kendilerini dünyaya hevesle ve korkusuzca atarlar. Koçlar, kendilerini ve güçlerini kanıtlama arzusuyla hareket ederler. Yüksek enerjileri vardır, rekabetçi ve hırslıdırlar. Yeni projeler başlatmada iyi oldukları için doğal olarak sorumluluk alırlar. Sabırsız da olabilirler, ancak doğal olarak aktiftirler ve zaman kaybetmeyi sevmezler. Koçlar rekabeti sevseler de oyun oynamayı sevmezler. Kendilerinin son derece farkındadırlar, güçlü fikirleri vardır ve bunları her zaman savunmaya hazırdırlar. Koç burcunun zayıf yönleri nelerdir? Tüm Koçlar her şeyi yoğun bir şekilde hissetmek isterler. Bu onların en takdire şayan özelliklerinden biridir, ancak aynı zamanda onlara büyük acı ve keder veren şeydir. Koçlar dürtüsel, sabırsız ve fevri olma eğilimindedir. Genellikle sakin ve açık bir zihinden ziyade duygusal tepkiler verirler. Öfkeleri için özür dilemezler. 'Umurumda değil' derler ve bunu kastederler. Her zaman en iyi öz kontrole sahip değillerdir.",
-    "attracted": "Koçlar kimlerden etkilenir? Koçlar, kendilerine ayak uydurabilen insanlardan etkilenir. Koçlar için duygular geçicidir ve bunu benimseyen insanlarla birlikte olmayı severler. Fiziksellik, doğrudanlık ve sıcaklığa çekilirler. Niyetleriniz ve arzularınız konusunda açık sözlü olmak bir Koç'u rahatlatır - bu, etrafınızdayken kendileri olmalarının güvenli olduğunu gösterir.",
+    "about": "Koç burcu temelinde her şeyi kendi bildiği gibi yapar. Çatışmadan korkmaz, son derece rekabetçi ve dürüsttürler. Kendilerini hevesle ve korkusuzca dünyaya atarlar. Kendilerini ve güçlerini kanıtlama arzusuyla hareket ederler. Yüksek enerjileri vardır, rekabetçi ve hırslıdırlar. Yeni projeler başlatmada iyi oldukları için doğal olarak liderliği üstlenirler. Sabırsız olabilirler, ancak doğal olarak aktiftirler ve zaman kaybetmeyi sevmezler. Rekabeti sevseler de oyun oynamayı sevmezler. Kendilerinin farkındadırlar, güçlü fikirlere sahiptirler ve bunları savunmaya her zaman hazırdırlar. Zayıf yönleri ise dürtüsel, sabırsız ve fevri olmalarıdır. Sakin ve mantıklı bir yerden değil, genellikle duygusal tepki verirler. Öfkeleri için özür dilemezler ve en iyi öz kontrole sahip olmayabilirler.",
+    "attracted": "Koç burcu, kendilerine ayak uydurabilen insanlara çekilir. Onlar için duygular geçicidir ve bunu benimseyen insanlarla birlikte olmaktan hoşlanırlar. Fiziksellik, doğrudanlık ve sıcaklıktan etkilenirler. Niyetleriniz ve arzularınız konusunda açık sözlü olmanız bir Koç'u rahatlatır; bu, yanınızda kendileri olabileceklerinin güvenli olduğunu gösterir.",
     "careers": {
       "key": [
         "Dublör",
@@ -11,33 +11,38 @@
         "Mısır gevreği kutusu maskotu"
       ]
     },
-    "dates": "2025 yılı için 20 Mart - 18 Nisan. Doğum yılınızı kontrol etmek için uygulamayı edinin.",
+    "dates": "20 Mart - 18 Nisan 2025",
     "element": "Ateş",
+    "enemy": "Koç burcunun düşmanı, onları kontrol etmeye çalışan, yavaş, dolaylı ve kararsız kişilerdir. Onların enerjisine ve doğrudanlığına ayak uyduramayan, sürekli olarak onların gücünü ve liderliğini sorgulayan insanlar, Koç burcunun sabrını zorlar. Pasif-agresif davranışlar ve manipülasyon girişimleri, onları en çok uzaklaştıran şeylerdir. Adaletsizliğe ve saygısızlığa tahammülleri yoktur, bu yüzden kendilerini aldatılmış veya engellenmiş hissettiren kişilerle kolayca düşman olabilirler.",
     "famous": {
       "key": [
         "Mariah Carey",
         "Jackie Chan",
-        "Leonardo Da Vinci",
+        "Leonardo DaVinci",
         "Charles Baudelaire",
         "Harry Houdini",
         "Cesar Chavez",
-        "Andrei Tarkovsky",
+        "Andrei Tarkovski",
         "Ilana Glazer"
       ]
     },
-    "love": "Bir Koç nasıl sevilir? Koçlar duygularını gizleyemezler ve bunları fiziksel olarak gösterirler. İyi günlerinde Koçlar inanılmaz derecede sevecendir. Kötü bir ruh halindeyken, felaket getiren doğa güçleridirler. Bunun nedeni, aşırı uçlar arasında gidip gelmeleridir. Üzgün veya savunmasız hissettiklerinde sizi iterler ve sonra sizi özlemeye başladıklarında koşarak geri dönerler. Bir Koç'u sevmek için inanılmaz bir güce ihtiyacınız vardır çünkü çalkantılı bir denizin ortasında sağlam bir direk olmanız gerekir. Koçlar bazen kendilerini kaptırıp sevdikleri insanları incitebilirler. Uzlaşmayı ve gücün zorlamadan gelmediğini öğrenmeleri gerekir. İlk dürtülerinin her zaman doğru olmadığını görmelerine yardımcı olmanız gerekebilir.",
-    "lovequickly": "Koç çabuk aşık olur mu? Koçlar nispeten çabuk aşık olurlar. Çok fazla enerjileri vardır ve önemsiz konulara çok fazla zaman harcamak istemezler. Bir kişiyi tanımak için zaman ayırmaktan hoşlansalar da, bunu uzun bir süre yapmayabilirler. Koçlar genellikle birine aşık olup olmadıklarının hemen farkındadırlar. Bir ilişkiye başlama kararı onlar için uzun sürmez. Bir Koç, ilişkinin işe yarayıp yaramadığı konusunda güçlü hislere sahip olacak ve işleri çok zorlanmadan bitirebilecektir.",
+    "friends": "Koçlar sadıktır. Ancak saygısızlık gördüklerini veya adil davranılmadığını hissettiklerinde, kendilerine haksızlık ettiğini düşündükleri kişiye olan saygılarını kaybedebilirler. Sizi koşulsuz sevecekler, ancak mutlaka yanınızda kalmayabilirler. İnanılmaz derecede sadık olabilirler, ancak aynı zamanda inanılmaz derecede kararsız da olabilirler. Koçlar tutkuyla hareket eder ve bu tutku her zaman sürmeyebilir.",
+    "love": "Koçlar duygularını gizleyemez ve fiziksel olarak gösterirler. İyi günlerinde inanılmaz derecede sevecendirler. Kötü bir ruh halindeyken ise felaket gibidirler. Aşırı uçlar arasında gidip gelirler. Üzgün veya savunmasız hissettiklerinde sizi iterler, sonra sizi özlemeye başladıklarında geri koşarlar. Bir Koç'u sevmek için, çalkantılı bir denizin ortasında sağlam bir direk olmanız gerektiğinden inanılmaz bir güce ihtiyacınız vardır. Bazen sevdikleri insanları incitebilirler. Uzlaşmayı ve gücün zorlamayla gelmediğini öğrenmeleri gerekir. İlk dürtülerinin her zaman doğru olmadığını görmelerine yardımcı olmanız gerekebilir.",
+    "lovequickly": "Koç burcu nispeten çabuk aşık olur. Çok enerjiktirler ve önemsiz konularda fazla zaman kaybetmek istemezler. Birini tanımak için zaman ayırmaktan hoşlansalar da, bunu uzun süre yapmayabilirler. Genellikle birine aşık olup olmadıklarını hemen anlarlar. Bir ilişkiye başlama kararı onlar için uzun sürmez. Bir Koç, ilişkinin işe yarayıp yaramadığı konusunda güçlü hislere sahip olacak ve işler yolunda gitmediğinde ilişkiyi zorlanmadan bitirebilecektir.",
+    "makeAngry": "Koçlar, hayatlarının direksiyonundaki büyük güç olduklarına inanırlar. Arka koltuğa geçmek zorunda kaldıklarında çok üzülürler. Sorumlu olmak istemeleri değil, sadece başkasının hayatlarını yönlendirme yeteneğine güvenmemeleridir. Kaderlerini kontrol etme yetenekleri konusunda çok güvensizdirler. Kendine güvenle liderlik etseler de, aslında sürekli olarak güvence ararlar. Cesaretlerinin altında birçok güvensizlik gizlidir. Gücünü çalmaya çalışırsanız bir Koç'u çıldırtabilirsiniz. Onların kontrol etme arzusuna müdahale etmek veya kararlarını sorgulamak onları sinirlendirir.",
+    "makeHappy": "Koç burcunu mutlu etmek için onlara meydan okuyun ve kazanmalarına izin verin. Liderlik etmelerine ve kontrolün onlarda olduğunu hissetmelerine olanak tanıyın. Doğrudan, dürüst ve sıcak bir yaklaşım sergileyin. Enerjilerine ayak uydurabilmeniz ve onları etkileyebilmeniz önemlidir. Onların cesaretini ve liderlik vasıflarını takdir ettiğinizi göstermek, kendilerini güvende ve mutlu hissetmelerini sağlar. Maceraya ve heyecana açık olmak da onları memnun edecektir.",
     "modality": "Öncü",
-    "ruling planet": "Mars",
-    "seduce": "Bir Koç nasıl baştan çıkarılır: Sizi kesinlikle fark etmeleri için tamamen kırmızı giyinin. Tutkunuzu paylaşacağınız bir sevgiliniz olmasını dilediğinizi yüksek sesle duyurun. Nereden bulabileceğinizi bilip bilmediklerini sorun.",
-    "soulmate": "Koç burcunun ruh eşi kimdir? Koç'un ruh eşi, şiddetli, çapkın ve duygusal olarak açık sözlü bir kişidir. Büyüleyici olmaktan hoşlanırlar ve aynı zamanda ele geçirilme fikrine de kapılırlar. Koç, risk iştahını paylaşan sevgililer arar. Coşkulu bir kişilikleri vardır ve ruh halleri genellikle değişkendir. Aşkta çok agresif olabilirler. Kendi ayakları üzerinde durabilen birini isterler. Koçlar duygusal olarak doğrudandır. Duygularını nadiren yumuşatırlar. Açık sözlülükleri karşısında ürkmeyen veya bayılmayan birini isterler. Koçlar uyumsuz, dürtüsel olma eğilimindedir ve kendilerini korkutan şeyleri aktif olarak ararlar. Geleneklere pek düşkün değillerdir. Eksantrik doğaları nedeniyle tek eşliliğe pek inanmazlar. Daha çok alanı oynamayı tercih ederler. Ancak, o kadar sert düşmeye de eğilimlidirler ki, oynadıklarını tamamen unuturlar. Koçlar etkilenmek isterler. Kendi romantik destanını yazabilecek bir sevgili isterler. Onların alametifarikası olan değişkenliklerini idare edebilirseniz, son derece sadık ve duygusal olarak cömert olduklarını göreceksiniz. Bir Koç, hayatınıza dörtnala girip duygusal bir fırtınanın ortasında size nazikçe bir gül uzatacak türden bir kişidir. Bulduklarından daha iyi bırakmayı seven türden insanlardır.",
+    "planet": "Mars",
+    "seduce": "Sizi fark etmelerini sağlamak için tamamen kırmızı giyinin. Tutkunuzu paylaşabileceğiniz bir sevgili istediğinizi yüksek sesle duyurun. Böyle birini nereden bulabileceğinizi onlara sorun.",
+    "soulmate": "Koç'un ruh eşi, şiddetli, çapkın ve duygusal olarak açık sözlü bir kişidir. Büyüleyici olmaktan hoşlanırlar ve aynı zamanda büyülenme fikrine de kapılırlar. Risk iştahlarını paylaşan sevgililer ararlar. Coşkulu bir kişilikleri vardır ve ruh halleri değişkendir. Aşkta çok agresif olabilirler. Kendi ayakları üzerinde durabilen birini isterler. Duygusal olarak doğrudandırlar ve nadiren duygularını süslerler. Patavatsızlıklarına şaşırmayan birini isterler. Geleneklere pek bağlı değillerdir, tek eşliliğe inanmazlar ve flört etmeyi tercih ederler. Ancak bazen o kadar sert düşerler ki oynadıklarını unuturlar. Etkilenmek isterler; kendi romantik destanını yazabilecek bir sevgili ararlar.",
+    "specialInfo": "Görünüşteki cesaretlerinin ve kendine güvenlerinin altında, kaderlerini kontrol etme yetenekleri konusunda derin güvensizlikler yatırır. Liderlik etme arzuları, aslında başkalarına güvenmemelerinden kaynaklanır. Aşkta geleneksel yolları sevmezler ve tek eşliliğe pek inanmasalar da, birine aşık olduklarında o kadar derinden bağlanabilirler ki tüm kuralları unuturlar. Sadakatleri tutkularına bağlıdır; bu tutku sürdüğü müddetçe inanılmaz derecede sadık, bittiğinde ise şaşırtıcı derecede kararsız olabilirler. Bu çelişkili doğaları, Koç burcunun en belirgin ve özel yönlerinden biridir.",
     "symbol": "Koç",
     "traits": {
       "key": [
-        "Filtresiz",
+        "Filtresizdir",
         "Sinirlenir, sonra neden sinirlendiğini unutur",
         "Her şeyi kazanabileceği bir oyun olarak görür",
-        "Cesaretlendirilirse her şeyi yapar",
+        "Cesaret gerektiren her şeyi yapar",
         "Kolayca sıkılır"
       ]
     }
