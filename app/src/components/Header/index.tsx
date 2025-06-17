@@ -8,6 +8,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Animated, Text, TouchableOpacity, View } from 'react-native';
+import Reanimated, { FadeIn } from 'react-native-reanimated';
 import styles from './styles';
 
 interface HeaderProps {
@@ -35,7 +36,7 @@ const Header = ({ user, onPress }: HeaderProps) => {
     'Başarılar dilerim',
     'İyi çalışmalar'
   ];
-  
+
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const slideAnim = useRef(new Animated.Value(0)).current;
   const fadeAnim = useRef(new Animated.Value(1)).current;
@@ -72,14 +73,14 @@ const Header = ({ user, onPress }: HeaderProps) => {
         })
       ]).start(() => {
         // Mesaj indeksini güncelle
-        setCurrentMessageIndex((prevIndex) => 
+        setCurrentMessageIndex((prevIndex) =>
           (prevIndex + 1) % messages.length
         );
-        
+
         // Yeni mesajı aşağıdan başlat ve görünmez yap
         slideAnim.setValue(20);
         fadeAnim.setValue(0);
-        
+
         // Yeni mesajı orta konuma getir ve fade in yap
         Animated.parallel([
           Animated.timing(slideAnim, {
@@ -105,15 +106,15 @@ const Header = ({ user, onPress }: HeaderProps) => {
   }, [slideAnim, fadeAnim, messages.length]);
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.surface }]}>
+    <Reanimated.View entering={FadeIn.duration(1000)} style={[styles.container, { backgroundColor: colors.surface }]}>
       <View style={styles.leftContainer}>
         <TouchableOpacity onPress={onPress}>
-        <View style={styles.menuContainer}>
-          <Icon name="menu" size={32} color={colors.text} />
-        </View>
+          <View style={styles.menuContainer}>
+            <Icon name="menu" size={32} color={colors.text} />
+          </View>
         </TouchableOpacity>
         <View style={styles.titleContainer}>
-          <Text style={[styles.title, { color: colors.text }]}>{ GetTimeBasedGreeting() } {t('horoscope.' + horoscopeInfo)}</Text>
+          {horoscopeInfo ? <Reanimated.Text entering={FadeIn.duration(1000)} style={[styles.title, { color: colors.text }]}>{GetTimeBasedGreeting() + ' ' + t('horoscope.' + horoscopeInfo)}</Reanimated.Text> : <Text style={[styles.title, { color: colors.text }]}></Text>}
           <Animated.View
             style={{
               transform: [{ translateY: slideAnim }],
@@ -135,7 +136,7 @@ const Header = ({ user, onPress }: HeaderProps) => {
           style={styles.logo}
         />
       </View>
-    </View>
+    </Reanimated.View>
   )
 }
 

@@ -57,6 +57,7 @@ const TabLayout = () => {
         borderRadius: 20,
         alignSelf: 'center',
         marginBottom: 30,
+        marginTop: 5,
       }}>
         {filteredRoutes.map((route: any, index: number) => {
           const originalIndex = state.routes.findIndex(r => r.name === route.name);
@@ -118,7 +119,7 @@ const TabLayout = () => {
 
   return (
     <Tabs
-      initialRouteName="HomeScreen/index"
+      initialRouteName="GuideScreen/index"
       screenOptions={{
         headerShown: false,
         animation: 'shift',
