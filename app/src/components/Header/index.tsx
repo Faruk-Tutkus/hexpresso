@@ -3,7 +3,7 @@ import Icon from '@assets/icons';
 import { GetTimeBasedGreeting } from '@hooks';
 import { useTheme } from '@providers';
 import { Image } from 'expo-image';
-import { UserCredential } from 'firebase/auth';
+import { User } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -12,7 +12,7 @@ import Reanimated, { FadeIn } from 'react-native-reanimated';
 import styles from './styles';
 
 interface HeaderProps {
-  user: UserCredential
+  user: User
   onPress: () => void
 }
 
@@ -22,7 +22,7 @@ const Header = ({ user, onPress }: HeaderProps) => {
   const { t } = useTranslation()
   useEffect(() => {
     const fetchHoroscopeInfo = async () => {
-      const userDoc = await getDoc(doc(db, 'users', user.user?.uid as string))
+      const userDoc = await getDoc(doc(db, 'users', user?.uid as string))
       const horoscopeInfo = userDoc.data()?.sunSign
       setHoroscopeInfo(horoscopeInfo)
     }

@@ -36,7 +36,7 @@ const data = [
 
 
 const StartScreen = () => {
-  const { colors } = useTheme();
+  const { colors, theme } = useTheme();
   const flatListRef = useRef<FlatList>(null);
   const width = Dimensions.get('window').width;
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -68,7 +68,7 @@ const StartScreen = () => {
     <View style={styles.container}>
       <View style={styles.animationContainer}>
         <Animation
-          src = 'https://lottie.host/1a9e6fe7-c012-4f16-b085-710037385a28/c6F9SxqUBQ.lottie'
+          src = { theme === 'dark' ? 'https://lottie.host/1a9e6fe7-c012-4f16-b085-710037385a28/c6F9SxqUBQ.lottie' : 'https://lottie.host/1a53bb28-6dbd-464c-9b5a-916adba3fd60/mtEnuhqqhw.lottie'}
           contentStyle={styles.animation}
         />
       </View>

@@ -4,7 +4,8 @@ Bu proje, Expo ve React Native kullanılarak geliştirilmiş, modern ve ölçekl
 
 - npx expo install --fix → fixx paxkage.json
 - npx npm-check-updates -u - → Update package.json
-
+- npx expo prebuild
+- npx expo run:android
 ## 🚀 Teknolojiler
 
 - [Expo](https://expo.dev) - React Native geliştirme platformu

@@ -1,8 +1,8 @@
 import { ContainerButton, CustomButton, FloatingLabelInput, ForgotPassword } from '@components'
-import { useSignInWithEmail, useSignInWithGoogle } from '@hooks'
-import { useTheme, useToast } from '@providers'
+import { useFetchData, useSignInWithEmail, useSignInWithGoogle } from '@hooks'
+import { useAuth, useTheme, useToast } from '@providers'
 import { router, useLocalSearchParams } from 'expo-router'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
@@ -25,17 +25,36 @@ const Login = () => {
     password: '',
     general: '',
   })
+  const [signs, setSigns] = useState<any[]>([]);
+  const [dataFetched, setDataFetched] = useState(false);
+  const { user } = useAuth();
+  
+  useEffect(() => {
+    if (user && !dataFetched) {
+      useFetchData({ user, setLoading: setIsLoading, setSigns })
+        .then((success) => {
+          if (success) {
+            setDataFetched(true);
+          }
+        });
+    }
+  }, [user, dataFetched])
   const handleSignIn = async () => {
     try {
       setIsLoading(true);
       setErrorMessage(prev => ({ ...prev, email: '', password: '', general: '' }));
-      
+
       const userCredential = await signIn(email, password);
-      
+
       if (userCredential?.user?.emailVerified && userCredential.newUser) {
         router.replace('/src/screens/side/Introduction');
       } else if (userCredential?.user?.emailVerified && !userCredential.newUser) {
-        router.replace('/src/screens/main/navigator');
+        // Data fetch işlemini bekle
+        const fetchSuccess = await useFetchData({ user: userCredential.user, setLoading: setIsLoading, setSigns });
+        if (fetchSuccess) {
+          setDataFetched(true);
+          router.replace('/src/screens/main/navigator/(tabs)/HomeScreen');
+        }
       }
     } catch (error: any) {
       if (error === 'auth/email-not-verified') {
@@ -67,7 +86,12 @@ const Login = () => {
         if (result.newUser) {
           router.replace('/src/screens/side/Introduction');
         } else {
-          router.replace('/src/screens/main/navigator');
+          // Veri fetch işlemini bekle
+          const fetchSuccess = await useFetchData({ user: result.user, setLoading: setIsLoading, setSigns });
+          if (fetchSuccess) {
+            setDataFetched(true);
+            router.replace('/src/screens/main/navigator/(tabs)/HomeScreen');
+          }
         }
       }
     } catch (error: any) {
@@ -117,14 +141,14 @@ const Login = () => {
           />
           <ContainerButton
             title="Facebook ile Giriş Yap"
-            onPress={() => {}}
+            onPress={() => { }}
             variant="primary"
             size="medium"
             leftImage={require('@assets/image/facebook.png')}
           />
           <ContainerButton
             title="Apple ile Giriş Yap"
-            onPress={() => {}}
+            onPress={() => { }}
             variant="primary"
             size="medium"
             leftImage={require('@assets/image/apple.png')}

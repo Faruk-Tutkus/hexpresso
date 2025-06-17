@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "70%",
     padding: 10,
+    gap: 10,
   },
   sign: {
     fontFamily: 'Almendra-Regular',

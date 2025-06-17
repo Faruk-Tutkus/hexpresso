@@ -1,8 +1,8 @@
 import { ContainerButton, CustomButton, FloatingLabelInput } from '@components'
-import { useSignInWithGoogle, useSignUpWithEmail } from '@hooks'
-import { useTheme, useToast } from '@providers'
+import { useFetchData, useSignInWithGoogle, useSignUpWithEmail } from '@hooks'
+import { useAuth, useTheme, useToast } from '@providers'
 import { router, useLocalSearchParams } from 'expo-router'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import '../../../utils/i18n'
@@ -26,7 +26,19 @@ const Register = () => {
     general: '',
     displayName: '',
   })
-
+  const { user } = useAuth();
+  const [dataFetched, setDataFetched] = useState(false);
+  const [signs, setSigns] = useState<any[]>([]);
+  useEffect(() => {
+    if (user && !dataFetched) {
+      useFetchData({ user, setLoading: setIsLoading, setSigns })
+        .then((success) => {
+          if (success) {
+            setDataFetched(true);
+          }
+        });
+    }
+  }, [user, dataFetched])
   const validation = () => {
     if (password !== rePassword) {
       setErrorMessage(prev => ({ ...prev, password: t('auth.auth/password-not-match') }))
@@ -34,7 +46,7 @@ const Register = () => {
     }
     return true
   }
-  
+
   const handleSignUp = async () => {
     try {
       setIsLoading(true)
@@ -45,15 +57,17 @@ const Register = () => {
       if (!validation()) {
         return
       }
-      
+
       const userCredential = await signUp(email, password, displayName as string)
       if (userCredential) {
         showToast("Dogrulama linki gonderildi", 'success')
-        router.replace({pathname: '/src/screens/auth/Login', params: {
-          email: email,
-          password: password,
-          displayName: displayName,
-        }})
+        router.replace({
+          pathname: '/src/screens/auth/Login', params: {
+            email: email,
+            password: password,
+            displayName: displayName,
+          }
+        })
       } else {
         showToast("Bir hata oluştu", 'error')
       }
@@ -82,7 +96,11 @@ const Register = () => {
         if (result.newUser) {
           router.replace('/src/screens/side/Introduction');
         } else {
-          router.replace('/src/screens/main/navigator');
+          const fetchSuccess = await useFetchData({ user: result.user, setLoading: setIsLoading, setSigns });
+          if (fetchSuccess) {
+            setDataFetched(true);
+            router.replace('/src/screens/main/navigator/(tabs)/HomeScreen');
+          }
         }
       }
     } catch (error: any) {
@@ -148,14 +166,14 @@ const Register = () => {
           />
           <ContainerButton
             title="Facebook ile Giriş Yap"
-            onPress={() => {}}
+            onPress={() => { }}
             variant="primary"
             size="medium"
             leftImage={require('@assets/image/facebook.png')}
           />
           <ContainerButton
             title="Apple ile Giriş Yap"
-            onPress={() => {}}
+            onPress={() => { }}
             variant="primary"
             size="medium"
             leftImage={require('@assets/image/apple.png')}

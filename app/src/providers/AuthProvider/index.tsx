@@ -4,9 +4,10 @@ import { createContext, useContext, useEffect, useState } from 'react';
 
 type AuthContextType = {
     user: User | null;
+    loading: boolean;
 }
 
-const AuthContext = createContext<AuthContextType>({user: null});
+const AuthContext = createContext<AuthContextType>({user: null, loading: true});
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<User | null>(null);
@@ -20,7 +21,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         return () => unsubscribe();
     }, []);
     return (
-        <AuthContext.Provider value={{ user }}>
+        <AuthContext.Provider value={{ user, loading }}>
             {children}
         </AuthContext.Provider>
     )

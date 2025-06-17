@@ -1,8 +1,9 @@
+import { AskAI, HoroscopeCard } from '@components';
 import { useTheme } from '@providers';
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
-import { MMKV } from 'react-native-mmkv';
-
+import { useTranslation } from 'react-i18next';
+import { ActivityIndicator, FlatList, View } from 'react-native';
+import loadCache from 'src/hooks/LoadCache';
 
 enum numSign {
   Aquarius = 0,
@@ -21,43 +22,29 @@ enum numSign {
 
 const GuideScreen = () => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const [signs, setSigns] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const storage = new MMKV({ id: 'signs_data' });
   useEffect(() => {
-    const loadCache = async (id: string) => {
-      try {
-        const item = storage.getString(id);
-        return item ? JSON.parse(item) : null;
-      } catch (error) {
-        console.error(error);
-        return null;
-      }
-    }
-    loadCache('signs_data').then((data: any[]) => {
-      console.log(data)
-      setSigns(data);
-      setLoading(false);
-    });
+    loadCache({ id: 'signs_data', setSigns, setLoading });
   }, [])
-  console.log(signs)
-  // const data = loading ? [] : [
-  //   { sign: 'Aquarius', date: signs[numSign.Aquarius].info.dates, image: require('@assets/image/aquarius.svg') },
-  //   { sign: 'Aries', date: signs[numSign.Aries].info.dates, image: require('@assets/image/aries.svg') },
-  //   { sign: 'Cancer', date: signs[numSign.Cancer].info.dates, image: require('@assets/image/cancer.svg') },
-  //   { sign: 'Capricorn', date: signs[numSign.Capricorn].info.dates, image: require('@assets/image/capricorn.svg') },
-  //   { sign: 'Gemini', date: signs[numSign.Gemini].info.dates, image: require('@assets/image/gemini.svg') },
-  //   { sign: 'Leo', date: signs[numSign.Leo].info.dates, image: require('@assets/image/leo.svg') },
-  //   { sign: 'Libra', date: signs[numSign.Libra].info.dates, image: require('@assets/image/libra.svg') },
-  //   { sign: 'Pisces', date: signs[numSign.Pisces].info.dates, image: require('@assets/image/pisces.svg') },
-  //   { sign: 'Sagittarius', date: signs[numSign.Sagittarius].info.dates, image: require('@assets/image/sagittarius.svg') },
-  //   { sign: 'Scorpio', date: signs[numSign.Scorpio].info.dates, image: require('@assets/image/scorpio.svg') },
-  //   { sign: 'Taurus', date: signs[numSign.Taurus].info.dates, image: require('@assets/image/taurus.svg') },
-  //   { sign: 'Virgo', date: signs[numSign.Virgo].info.dates, image: require('@assets/image/virgo.svg') },
-  // ]
+  const data = loading ? [] : [
+    { sign: t('horoscope.aquarius'), date: signs[numSign.Aquarius].info.dates, image: require('@assets/image/aquarius.svg') },
+    { sign: t('horoscope.aries'), date: signs[numSign.Aries].info.dates, image: require('@assets/image/aries.svg') },
+    { sign: t('horoscope.cancer'), date: signs[numSign.Cancer].info.dates, image: require('@assets/image/cancer.svg') },
+    { sign: t('horoscope.capricorn'), date: signs[numSign.Capricorn].info.dates, image: require('@assets/image/capricorn.svg') },
+    { sign: t('horoscope.gemini'), date: signs[numSign.Gemini].info.dates, image: require('@assets/image/gemini.svg') },
+    { sign: t('horoscope.leo'), date: signs[numSign.Leo].info.dates, image: require('@assets/image/leo.svg') },
+    { sign: t('horoscope.libra'), date: signs[numSign.Libra].info.dates, image: require('@assets/image/libra.svg') },
+    { sign: t('horoscope.pisces'), date: signs[numSign.Pisces].info.dates, image: require('@assets/image/pisces.svg') },
+    { sign: t('horoscope.sagittarius'), date: signs[numSign.Sagittarius].info.dates, image: require('@assets/image/sagittarius.svg') },
+    { sign: t('horoscope.scorpio'), date: signs[numSign.Scorpio].info.dates, image: require('@assets/image/scorpio.svg') },
+    { sign: t('horoscope.taurus'), date: signs[numSign.Taurus].info.dates, image: require('@assets/image/taurus.svg') },
+    { sign: t('horoscope.virgo'), date: signs[numSign.Virgo].info.dates, image: require('@assets/image/virgo.svg') },
+  ]
   return (
     <View>
-      {/* {loading ? <View style={{ width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
+      {loading ? <View style={{ width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
         <ActivityIndicator size="large" color={colors.text} />
       </View> :
         <>
@@ -68,10 +55,10 @@ const GuideScreen = () => {
             keyExtractor={(item) => item.sign}
             showsVerticalScrollIndicator={false}
             scrollEnabled
-            contentContainerStyle={{ paddingBottom: 150, paddingTop: 10 }}
+            contentContainerStyle={{ paddingBottom: 200, paddingTop: 10 }}
             style={{ marginVertical: 10 }}
           />
-        </>} */}
+        </>}
     </View>
   )
 }

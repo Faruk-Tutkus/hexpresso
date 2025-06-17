@@ -1,5 +1,6 @@
 import { db } from '@api/config.firebase';
 import { CustomButton, IconButton } from '@components';
+import { useFetchData } from '@hooks';
 import { useAuth, useTheme } from '@providers';
 import { useRouter } from 'expo-router';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
@@ -117,7 +118,19 @@ const Introduction = () => {
     }
   }, [date, time]);
   
-  console.log(fullAstro);
+  const [signs, setSigns] = useState<any[]>([]);
+  const [dataFetched, setDataFetched] = useState(false);
+  
+  useEffect(() => {
+    if (user && !dataFetched) {
+      useFetchData({ user, setLoading: setIsLoading, setSigns })
+        .then((success) => {
+          if (success) {
+            setDataFetched(true);
+          }
+        });
+    }
+  }, [user, dataFetched])
   const handleSave = async () => {
     try {
       setIsLoading(true);
@@ -160,7 +173,11 @@ const Introduction = () => {
             newUser: false,
           });
         }
-        router.replace('/src/screens/main/navigator');
+        const fetchSuccess = await useFetchData({ user: user, setLoading: setIsLoading, setSigns });
+          if (fetchSuccess) {
+            setDataFetched(true);
+            router.replace('/src/screens/main/navigator/(tabs)/HomeScreen');
+          }
       }
     } catch (error) {
       console.log(error);

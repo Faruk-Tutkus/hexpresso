@@ -1,17 +1,15 @@
-import { db } from "@api/config.firebase";
 import { Animation } from "@components";
+import { useFetchData } from "@hooks";
 import { useAuth, useTheme } from "@providers";
 import { useRouter } from "expo-router";
-import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
-import { MMKV } from 'react-native-mmkv';
 import styles from "./styles";
 
-const  SplashScreen = () => {
+const SplashScreen = () => {
   const router = useRouter()
   const { theme, colors } = useTheme()
-  const { user } = useAuth()
+  const { user, loading } = useAuth()
   const [texts] = useState([
     "Sana bir sır fısıldayacağım, hazır ol...",
     "Bugün kaderini değiştirecek bir şey olacak...",
@@ -32,60 +30,44 @@ const  SplashScreen = () => {
   ])
 
   const [signs, setSigns] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const storage = new MMKV({ id: 'signs_data' });
-
-  function cacheData(id: string, data: any) {
-    try {
-      storage.set(id, JSON.stringify(data));
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
+  const [isLoading, setIsLoading] = useState(true);
+  const [dataFetched, setDataFetched] = useState(false);
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const docRef = collection(db, "signs");
-        const docSnap = (await getDocs(docRef)).docs.map((item) => item.data())
-        
-        if (!docSnap || docSnap.length === 0) {
-          setLoading(true);
-          return;
-        }
-        
-        setSigns(docSnap);
-        setLoading(false);
-
-        // Eğer kullanıcı varsa veriyi cache'e kaydet
-        if (user) {
-          cacheData('signs_data', docSnap);
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setLoading(true);
-      }
+    if (user && !dataFetched) {
+      useFetchData({ user, setLoading: setIsLoading, setSigns })
+        .then((success) => {
+          if (success) {
+            setDataFetched(true);
+          }
+        });
     }
-    fetchData();
-  }, [user])
+  }, [user, dataFetched])
 
   // Data ve user durumuna göre yönlendirme
   useEffect(() => {
-    if (!loading && signs.length > 0) {
+    const checkData = async () => {
       if (user) {
-        router.replace("/src/screens/main/navigator/(tabs)/HomeScreen");
-      } else {
-        router.replace("/src/screens/side/StartScreen");
+        const fetchSuccess = await useFetchData({ user: user, setLoading: setIsLoading, setSigns });
+        if (fetchSuccess) {
+          setDataFetched(true);
+          router.replace('/src/screens/main/navigator/(tabs)/HomeScreen');
+        }
+      }
+      if (!user && !loading) {
+        setTimeout(() => {
+          router.replace("/src/screens/side/StartScreen");
+        }, 3000);
       }
     }
+    checkData();
     // Eğer data yok ve loading false ise splash screen'de kal
-  }, [loading, signs, user])
+  }, [isLoading, signs, user])
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <Animation
-        src = {theme === 'dark' ?
-          "https://lottie.host/c94da6c6-be00-4b27-a410-c168024457e2/vfhKoIwBCz.lottie":
+        src={theme === 'dark' ?
+          "https://lottie.host/c94da6c6-be00-4b27-a410-c168024457e2/vfhKoIwBCz.lottie" :
           "https://lottie.host/be109cbf-2c26-4b68-a18d-d1526e22752c/NIPHAUmyob.lottie"}
         contentStyle={styles.loading}
       />

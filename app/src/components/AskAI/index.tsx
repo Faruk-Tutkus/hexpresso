@@ -133,7 +133,7 @@ const AskAI = ({ type }: AskAIType) => {
     setIsLoading(true)
     try {
       const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash-preview-05-20",
+        model: "gemini-1.5-flash",
         contents: type === 'sign' ? value : JSON.stringify({
           userInfo: {
             name: userData.name,
@@ -208,10 +208,15 @@ const AskAI = ({ type }: AskAIType) => {
     }
   }
 
-  const animatedContainerStyle = useAnimatedStyle(() => {
+  const animatedResponseStyle = useAnimatedStyle(() => {
     return {
       maxHeight: interpolate(progress.value, [0, 1], [0, 300]),
       opacity: interpolate(progress.value, [0, 1], [0, 1])
+    }
+  })
+  const animatedContainerStyle = useAnimatedStyle(() => {
+    return {
+      maxHeight: interpolate(progress.value, [0, 0.4], [0, 300]),
     }
   })
   const handleSendSign = async () => {
@@ -246,7 +251,7 @@ const AskAI = ({ type }: AskAIType) => {
   }
 
   return (
-    <Animated.View style={[styles.container, { borderColor: colors.border }]}>
+    <Animated.View style={[styles.container, { borderColor: colors.border }, animatedContainerStyle]}>
       {type === 'sign' && (
         <FloatingLabelInput
         placeholder="Mordecai'ya sor"
@@ -273,7 +278,7 @@ const AskAI = ({ type }: AskAIType) => {
         style={[
           styles.responseContainer, 
           { borderColor: colors.border },
-          animatedContainerStyle
+          animatedResponseStyle
         ]}
       >
         <Text style={[styles.responseText, { color: colors.text }]}>{response}</Text>

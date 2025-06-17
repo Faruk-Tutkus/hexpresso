@@ -50,7 +50,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       <View style={[styles.content]}>
         {loading ? (
           <ActivityIndicator 
-            color={colors.surface} 
+            color={colors.background} 
             size="small" 
           />
         ) : (

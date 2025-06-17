@@ -1,3 +1,4 @@
+export { default as useFetchData } from './FetchData'
 export { FullAstroResult, getFullAstro, getSunSign } from './GetHoroscopeInfo'
 export { default as GetTimeBasedGreeting, default as useGetTime } from './GetTime'
 export { checkDatePeriod, formatDateToDisplay, getDateRangeForPeriod, isIsoDateInRange } from './IsDate'
