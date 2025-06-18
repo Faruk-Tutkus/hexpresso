@@ -1,5 +1,5 @@
 import { db } from "@api/config.firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { MMKV } from "react-native-mmkv";
 const storage = new MMKV({ id: 'signs_data' });
 interface FetchDataProps {
@@ -29,8 +29,13 @@ const fetchData = async ({ user, setLoading, setSigns }: FetchDataProps): Promis
       setSigns(docSnap);
       setLoading(false);
       const existingData = storage.getString('signs_data');
+
+      const docSet = doc(db, 'settings', 'update')
+      const docSnapSet = await getDoc(docSet)
+
+
       // Eğer kullanıcı varsa veriyi cache'e kaydet
-      if (!existingData) {
+      if (!existingData || docSnapSet?.data()?.update) {
         cacheData('signs_data', docSnap);
       }
       return true;

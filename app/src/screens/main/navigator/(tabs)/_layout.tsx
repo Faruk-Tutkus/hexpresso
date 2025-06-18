@@ -11,7 +11,7 @@ const TabLayout = () => {
   SystemUI.setBackgroundColorAsync(colors.background);
   const user = useAuth();
   const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
-    const filteredRoutes = state.routes.filter((route: any) => route.name !== 'HomeScreen/styles' && route.name !== 'GuideScreen/styles' && route.name !== 'SignComments/styles');
+    const filteredRoutes = state.routes.filter((route: any) => route.name !== 'HomeScreen/styles' && route.name !== 'GuideScreen/styles' && route.name !== 'SignComments/styles' && route.name !== 'Signs/styles' && route.name !== 'Signs/index');
     const animatedValues = useRef(filteredRoutes.map(() => new Animated.Value(1))).current;
     const transformY = useRef(filteredRoutes.map(() => new Animated.Value(0))).current;
 
@@ -165,6 +165,19 @@ const TabLayout = () => {
       />
       <Tabs.Screen 
         name="SignComments/styles"
+        options={{
+          href: null,
+        }} 
+      />
+      <Tabs.Screen 
+        name="Signs/index"
+        options={{
+          title: 'Burç Detayı',
+          href: null,
+        }} 
+      />
+      <Tabs.Screen 
+        name="Signs/styles"
         options={{
           href: null,
         }} 

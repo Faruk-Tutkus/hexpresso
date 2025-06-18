@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   sign: {
     fontFamily: 'Almendra-Regular',
     textAlign: "center",
-    fontSize: 25,
+    fontSize: 28,
   },
   date: {
     fontFamily: 'Domine-Regular',
@@ -35,6 +35,12 @@ const styles = StyleSheet.create({
   image: {
     width: 100,
     height: 80,
+  },
+  loadingContainer: {
+    width: 100,
+    height: 80,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

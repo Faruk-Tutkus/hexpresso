@@ -9,7 +9,7 @@ const Colors = {
     secondary: '#3DC8F1',
     border: '#4C4C4C',            
     text: '#FFFFFF',
-    secondaryText: '#9FA3C4',
+    secondaryText: '#ced0de',
     errorBorder: '#E23642',
     errorText: '#F0656D',
     
@@ -21,7 +21,7 @@ const Colors = {
     secondary: '#3DC8F1',            
     border: '#0f0f0f',              
     text: '#000000',                
-    secondaryText: '#202127',       
+    secondaryText: '#292a2c',       
     errorBorder: '#E23642',        
     errorText: '#F0656D',           
   }

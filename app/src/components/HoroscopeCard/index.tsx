@@ -1,26 +1,50 @@
 import { useTheme } from '@providers'
 import { Image } from 'expo-image'
-import React from 'react'
-import { Text, View } from 'react-native'
+import React, { useState } from 'react'
+import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native'
 import styles from './styles'
+
 interface HoroscopeCardProps {
   sign: string
   date: string,
-  image: string
+  image: string,
+  onPress: () => void
 }
 
-const HoroscopeCard = ({ sign, date, image }: HoroscopeCardProps) => {
+const HoroscopeCard = ({ sign, date, image, onPress }: HoroscopeCardProps) => {
   const { colors } = useTheme()
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handlePress = async () => {
+    setIsLoading(true)
+    try {
+      await onPress()
+    } finally {
+      // Reset loading after a short delay to ensure navigation is complete
+      setTimeout(() => setIsLoading(false), 1000)
+    }
+  }
+
   return (
-    <View style={[styles.container, { backgroundColor: colors.secondaryText }]}>
+    <TouchableOpacity 
+      style={[styles.container, { backgroundColor: colors.secondaryText, opacity: isLoading ? 0.7 : 1 }]} 
+      onPress={handlePress}
+      disabled={isLoading}
+    >
       <View style={styles.left}>
         <Text style={[styles.sign, { color: colors.background }]}>{sign}</Text>
         <Text style={[styles.date, { color: colors.background }]}>{date}</Text>
       </View>
       <View style={styles.right}>
-        <Image source={image} style={styles.image} tintColor={colors.background} contentFit="contain" />
+        {isLoading ? (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color={colors.background} />
+          </View>
+        ) : (
+          <Image source={image} style={styles.image} tintColor={colors.background} contentFit="contain" />
+        )}
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 
