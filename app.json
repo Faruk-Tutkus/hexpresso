@@ -12,7 +12,13 @@
       "typedRoutes": true
     },
     "plugins": [
-      "@react-native-google-signin/google-signin"
+      "@react-native-google-signin/google-signin",
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Hexpresso uygulaması konumunuzu kullanarak size daha iyi hizmet sunmak istiyor."
+        }
+      ]
     ],
     "android": {
       "package": "com.faruktutkus.hexpresso",
@@ -21,7 +27,22 @@
         "backgroundColor": "#000000"
       },
       "googleServicesFile": "./google-services.json",
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyAZruxpLeabIOgxb2_Ky6eXhwYLDbhZIGE"
+        }
+      },
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION"
+      ]
+    },
+    "ios": {
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Hexpresso uygulaması konumunuzu kullanarak size daha iyi hizmet sunmak istiyor.",
+        "NSLocationAlwaysUsageDescription": "Hexpresso uygulaması konumunuzu kullanarak size daha iyi hizmet sunmak istiyor."
+      }
     },
     "web": {
       "bundler": "metro",

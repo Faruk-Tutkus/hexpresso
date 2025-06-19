@@ -1,4 +1,4 @@
-import { FloatingDatePicker, FloatingLabelInput, FloatingLabelPicker, FloatingTimePicker } from '@components';
+import { FloatingDatePicker, FloatingLabelInput, FloatingLabelPicker, FloatingTimePicker, MapView } from '@components';
 import { useAuth, useTheme } from '@providers';
 import { useState } from 'react';
 
@@ -16,6 +16,7 @@ const useIntroductionData = () => {
     const [meaning, setMeaning] = useState('');
     const [experience, setExperience] = useState('');
     const [curious, setCurious] = useState('');
+    const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
     const [error, setError] = useState({
       name: '',
       date: '',
@@ -94,6 +95,23 @@ const useIntroductionData = () => {
       },
       {
         id: 4,
+        title: '📍 Nerede doğmuştun?',
+        description: 'Haritadan doğduğun yeri seç, böylece yıldızların o anki dizilimini tam yerinden hesaplayabilirim. Emin değilsen tahmini bir konum da iş görür.',
+        FloatingLabelInput: (
+          <MapView 
+            onLocationSelect={(latitude, longitude) => setLocation({ latitude, longitude })}
+            initialLatitude={41.0082}
+            initialLongitude={28.9784}
+          />
+        ),
+        button: {
+          onPress: () => {
+            
+          }
+        }
+      },
+      {
+        id: 5,
         title: '🌺 Enerjin hangi renkte?',
         description: 'Eril mi dişil mi yoksa bambaşka bir frekansta mısın?',
         FloatingLabelInput: (
@@ -119,7 +137,7 @@ const useIntroductionData = () => {
         }
       },
       {
-        id: 5,
+        id: 6,
         title: '💭 Ruhunu en çok ne yoruyor bugünlerde?',
         description: 'Dertlerini içime çekmeden sana fal bakamam canım. En çok hangi konu canını sıkıyor?',
         FloatingLabelInput: (
@@ -156,7 +174,7 @@ const useIntroductionData = () => {
         }
       },
       {
-        id: 6,
+        id: 7,
         title: '❤️ Kalbin ne diyor?',
         description: 'Aşk hayatın nasıl gidiyor tatlım?',
         FloatingLabelInput: (
@@ -188,7 +206,7 @@ const useIntroductionData = () => {
         }
       },
       {
-        id: 7,
+        id: 8,
         title: '🫶 En çok neye ihtiyaç duyuyorsun?',
         description: 'Şu an en çok ne seni iyi hissettirir?',
         FloatingLabelInput: (
@@ -221,7 +239,7 @@ const useIntroductionData = () => {
         }
       },
       {
-        id: 8,
+        id: 9,    
         title: '🌈 Bugün nasılsın?',
         description: 'Ruh halin bir şarkı olsaydı hangi tonda çalardı?',
         FloatingLabelInput: (
@@ -254,7 +272,7 @@ const useIntroductionData = () => {
         }
       },
       {
-        id: 9,
+        id: 10,
         title: '🪬 Rüyanda hangi semboller vardı?',
         description: 'Sana özel mesajlar hangi imgelerde saklıydı?',
         FloatingLabelInput: (
@@ -289,7 +307,7 @@ const useIntroductionData = () => {
         }
       },
       {
-        id: 10,
+        id: 11,
         title: '📖 Hayatında seni en çok etkileyen neydi?',
         description: 'Bir olay, bir kişi, bir an... Seni en çok şekillendiren şey neydi?',
         FloatingLabelInput: (
@@ -322,7 +340,7 @@ const useIntroductionData = () => {
         }
       },
       {
-        id: 11,
+        id: 12,
         title: '🔍 En çok neyi merak ediyorsun?',
         description: 'Geleceğinle ilgili seni en çok heyecanlandıran veya kafanı kurcalayan konu ne?',
         FloatingLabelInput: (
@@ -371,6 +389,7 @@ const useIntroductionData = () => {
       meaning,
       experience,
       curious,
+      location,
     };
 };
 

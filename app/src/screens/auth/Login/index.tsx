@@ -1,4 +1,4 @@
-import { ContainerButton, CustomButton, FloatingLabelInput, ForgotPassword } from '@components'
+import { ContainerButton, CustomButton, FloatingLabelInput, UnderLineText } from '@components'
 import { useFetchData, useSignInWithEmail, useSignInWithGoogle } from '@hooks'
 import { useAuth, useTheme, useToast } from '@providers'
 import { router, useLocalSearchParams } from 'expo-router'
@@ -129,7 +129,8 @@ const Login = () => {
           leftIcon="enter"
           loading={isLoading}
         />
-        <ForgotPassword title="Şifremi unuttum" />
+        <UnderLineText title="Hesabın Yok mu?" route="/src/screens/auth/Register"  contentStyle={{ marginTop: 10 }}/>
+        <UnderLineText title="Şifremi unuttum" route="/src/screens/auth/ForgotPassword" contentStyle={{ marginTop: 10, fontSize: 14 }}/>
         <View style={styles.socialMediaContainer}>
           <ContainerButton
             title="Google ile Giriş Yap"

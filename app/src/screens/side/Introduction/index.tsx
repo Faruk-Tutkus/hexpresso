@@ -16,7 +16,7 @@ const Introduction = () => {
   const { colors } = useTheme();
   const { user } = useAuth();
   const { width } = Dimensions.get('window');
-  const { data, name, date, gender, time, reason, love, need, mood, meaning, experience, curious } = useIntroductionData();
+  const { data, name, date, gender, time, reason, love, need, mood, meaning, experience, curious, location } = useIntroductionData();
   const flatListRef = useRef<FlatList>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const router = useRouter();
@@ -24,6 +24,7 @@ const Introduction = () => {
   const isAllFieldsFilled = () => {
     return name !== '' && 
            date !== '' && 
+           location !== null &&
            gender !== '' && 
            reason !== '' && 
            love !== '' && 
@@ -39,13 +40,14 @@ const Introduction = () => {
       if (
         (currentIndex === 0 && name === '') ||
         (currentIndex === 1 && date === '') ||
-        (currentIndex === 3 && gender === '') ||
-        (currentIndex === 4 && reason === '') ||
-        (currentIndex === 5 && love === '') ||
-        (currentIndex === 6 && need === '') ||
-        (currentIndex === 7 && mood === '') ||
-        (currentIndex === 8 && meaning === '') ||
-        (currentIndex === 9 && experience === '')
+        (currentIndex === 3 && location === null) ||
+        (currentIndex === 4 && gender === '') ||
+        (currentIndex === 5 && reason === '') ||
+        (currentIndex === 6 && love === '') ||
+        (currentIndex === 7 && need === '') ||
+        (currentIndex === 8 && mood === '') ||
+        (currentIndex === 9 && meaning === '') ||
+        (currentIndex === 10 && experience === '')
       ) {
         return false;
       }
@@ -58,13 +60,14 @@ const Introduction = () => {
       if (
         (currentIndex === 1 && name === '') ||
         (currentIndex === 2 && date === '') ||
-        (currentIndex === 4 && gender === '') ||
-        (currentIndex === 5 && reason === '') ||
-        (currentIndex === 6 && love === '') ||
-        (currentIndex === 7 && need === '') ||
-        (currentIndex === 8 && mood === '') ||
-        (currentIndex === 9 && meaning === '') ||
-        (currentIndex === 10 && experience === '')
+        (currentIndex === 4 && location === null) ||
+        (currentIndex === 5 && gender === '') ||
+        (currentIndex === 6 && reason === '') ||
+        (currentIndex === 7 && love === '') ||
+        (currentIndex === 8 && need === '') ||
+        (currentIndex === 9 && mood === '') ||
+        (currentIndex === 10 && meaning === '') ||
+        (currentIndex === 11 && experience === '')
       ) {
         return false;
       }
@@ -105,13 +108,13 @@ const Introduction = () => {
     birthWeekday: '',
     daysToNextBirthday: 0
   });
-  
+  console.log(location);
   useEffect(() => {
     if (date instanceof Date) {
       const { sunSign, ascendantSign, moonSign, age, birthWeekday, daysToNextBirthday } = getFullAstro(
         date.toISOString(),
         time instanceof Date ? time.toISOString() : date.toISOString(),
-        { latitude: 0, longitude: 0 }
+        { latitude: location?.latitude || 0, longitude: location?.longitude || 0 }
       );
 
       setFullAstro({ sunSign, ascendantSign, moonSign, age, birthWeekday, daysToNextBirthday });
@@ -171,6 +174,10 @@ const Introduction = () => {
             experience,
             curious,
             newUser: false,
+            location: {
+              latitude: location?.latitude || 0,
+              longitude: location?.longitude || 0,
+            },
           });
         }
         const fetchSuccess = await useFetchData({ user: user, setLoading: setIsLoading, setSigns });

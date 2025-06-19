@@ -52,6 +52,9 @@ const SplashScreen = () => {
           setDataFetched(true);
           router.replace('/src/screens/main/navigator/(tabs)/HomeScreen');
         }
+        else {
+          router.replace('/src/screens/side/Introduction');
+        }
       }
       if (!user && !loading) {
         setTimeout(() => {

@@ -16,6 +16,10 @@ function cacheData(id: string, data: any) {
 }
 const fetchData = async ({ user, setLoading, setSigns }: FetchDataProps): Promise<boolean> => {
   if (user) {
+    const userDoc = await getDoc(doc(db, 'users', user.uid));
+    if (userDoc.data()?.newUser) {
+      return false;
+    }
     try {
       setLoading(true);
       const docRef = collection(db, "signs");

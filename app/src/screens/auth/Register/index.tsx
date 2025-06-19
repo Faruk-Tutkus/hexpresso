@@ -1,4 +1,4 @@
-import { ContainerButton, CustomButton, FloatingLabelInput } from '@components'
+import { ContainerButton, CustomButton, FloatingLabelInput, UnderLineText } from '@components'
 import { useFetchData, useSignInWithGoogle, useSignUpWithEmail } from '@hooks'
 import { useAuth, useTheme, useToast } from '@providers'
 import { router, useLocalSearchParams } from 'expo-router'
@@ -155,6 +155,7 @@ const Register = () => {
           leftIcon="enter"
           loading={isLoading}
         />
+        <UnderLineText title="Zaten bir hesabın var mı?" route="/src/screens/auth/Login"  contentStyle={{ marginTop: 10 }}/>
         <View style={styles.socialMediaContainer}>
           <ContainerButton
             title="Google ile Giriş Yap"
