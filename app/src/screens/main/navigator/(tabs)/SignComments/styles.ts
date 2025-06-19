@@ -60,15 +60,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Domine-Regular',
     fontSize: 12,
     textAlign: 'center',
-    fontWeight: '600',
-  },
-  signCardGlow: {
-    position: 'absolute',
-    bottom: 0,
-    left: '25%',
-    right: '25%',
-    height: 3,
-    borderRadius: 2,
   },
 
   // Comment Card Styles
@@ -122,6 +113,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginVertical: 15,
+    paddingHorizontal: 10,
   },
   dailyNavButton: {
     flexDirection: 'row',
@@ -143,7 +135,6 @@ const styles = StyleSheet.create({
   todayText: {
     fontFamily: 'Almendra-Regular',
     fontSize: 16,
-    fontWeight: 'bold',
   },
 
   // Stars Rating Styles
@@ -171,7 +162,6 @@ const styles = StyleSheet.create({
   starValue: {
     fontFamily: 'Almendra-Regular',
     fontSize: 16,
-    fontWeight: 'bold',
   },
 
   // Matches Styles
@@ -199,20 +189,6 @@ const styles = StyleSheet.create({
   matchValue: {
     fontFamily: 'Almendra-Regular',
     fontSize: 14,
-    fontWeight: 'bold',
-  },
-
-  // AI Help Button Styles (Removed as AI is now at top)
-  aiHelpButton: {
-    padding: 15,
-    borderRadius: 12,
-    alignItems: 'center',
-    marginTop: 10,
-  },
-  aiHelpText: {
-    fontFamily: 'Domine-Regular',
-    fontSize: 16,
-    fontWeight: '600',
   },
 })
 

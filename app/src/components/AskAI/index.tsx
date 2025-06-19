@@ -30,7 +30,7 @@ const AskAI = ({ type }: AskAIType) => {
   const user = useAuth().user
   const [isLoading, setIsLoading] = React.useState(false)
   const [error, setError] = React.useState<string>('')
-  console.log(getDateRangeForPeriod('weekly', new Date().toISOString()))
+  console.log(getDateRangeForPeriod('daily', new Date().toISOString()))
   const getResponse = async () => {
     try {
       setIsLoading(true)

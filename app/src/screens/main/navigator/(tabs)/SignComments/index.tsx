@@ -1,15 +1,16 @@
+import { db } from '@api/config.firebase'
 import Icon from '@assets/icons'
 import { AskAI } from '@components'
 import { Ionicons } from '@expo/vector-icons'
 import { getDateRangeForPeriod } from '@hooks'
 import { useAuth, useTheme } from '@providers'
-import React, { useEffect, useState } from 'react'
+import { doc, getDoc } from 'firebase/firestore'
+import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ActivityIndicator, FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import Animated, { Easing, interpolate, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 import loadCache from 'src/hooks/LoadCache'
 import styles from './styles'
-
 type PeriodType = 'daily' | 'weekly' | 'monthly' | 'yearly'
 
 interface CommentCard {
@@ -43,6 +44,8 @@ const SignComments = () => {
   const [commentCards, setCommentCards] = useState<CommentCard[]>([])
   const [expandedCard, setExpandedCard] = useState<string | null>(null)
   const [currentDate, setCurrentDate] = useState(new Date())
+  const [hasNavigatedToFuture, setHasNavigatedToFuture] = useState(false)
+  const flatListRef = useRef<FlatList>(null)
 
   // Animation values for each card
   const animationValues = {
@@ -124,23 +127,60 @@ const SignComments = () => {
 
   // Zodiac signs data with their names and icon names for the Icon component
   const zodiacSigns = [
-    { name: t('horoscope.aquarius'), iconName: 'zodiac-aquarius', index: 0 },
-    { name: t('horoscope.aries'), iconName: 'zodiac-aries', index: 1 },
-    { name: t('horoscope.cancer'), iconName: 'zodiac-cancer', index: 2 },
-    { name: t('horoscope.capricorn'), iconName: 'zodiac-capricorn', index: 3 },
-    { name: t('horoscope.gemini'), iconName: 'zodiac-gemini', index: 4 },
-    { name: t('horoscope.leo'), iconName: 'zodiac-leo', index: 5 },
-    { name: t('horoscope.libra'), iconName: 'zodiac-libra', index: 6 },
-    { name: t('horoscope.pisces'), iconName: 'zodiac-pisces', index: 7 },
-    { name: t('horoscope.sagittarius'), iconName: 'zodiac-sagittarius', index: 8 },
-    { name: t('horoscope.scorpio'), iconName: 'zodiac-scorpio', index: 9 },
-    { name: t('horoscope.taurus'), iconName: 'zodiac-taurus', index: 10 },
-    { name: t('horoscope.virgo'), iconName: 'zodiac-virgo', index: 11 },
+    { name: t('horoscope.aquarius'), iconName: 'zodiac-aquarius', index: 0, englishName: 'Aquarius' },
+    { name: t('horoscope.aries'), iconName: 'zodiac-aries', index: 1, englishName: 'Aries' },
+    { name: t('horoscope.cancer'), iconName: 'zodiac-cancer', index: 2, englishName: 'Cancer' },
+    { name: t('horoscope.capricorn'), iconName: 'zodiac-capricorn', index: 3, englishName: 'Capricorn' },
+    { name: t('horoscope.gemini'), iconName: 'zodiac-gemini', index: 4, englishName: 'Gemini' },
+    { name: t('horoscope.leo'), iconName: 'zodiac-leo', index: 5, englishName: 'Leo' },
+    { name: t('horoscope.libra'), iconName: 'zodiac-libra', index: 6, englishName: 'Libra' },
+    { name: t('horoscope.pisces'), iconName: 'zodiac-pisces', index: 7, englishName: 'Pisces' },
+    { name: t('horoscope.sagittarius'), iconName: 'zodiac-sagittarius', index: 8, englishName: 'Sagittarius' },
+    { name: t('horoscope.scorpio'), iconName: 'zodiac-scorpio', index: 9, englishName: 'Scorpio' },
+    { name: t('horoscope.taurus'), iconName: 'zodiac-taurus', index: 10, englishName: 'Taurus' },
+    { name: t('horoscope.virgo'), iconName: 'zodiac-virgo', index: 11, englishName: 'Virgo' },
   ]
 
   useEffect(() => {
     loadCache({ id: 'signs_data', setSigns, setLoading });
   }, [])
+
+  // Set initial selected sign based on user's sunSign
+  useEffect(() => {
+    const fetchUserSign = async () => {
+      if (user) {
+        try {
+          setLoading(true)
+          const userDoc = await getDoc(doc(db, 'users', user.uid))
+          const userData = userDoc.data()
+          
+          if (userData?.sunSign) {
+            const userSignIndex = zodiacSigns.findIndex(
+              sign => sign.englishName.toLowerCase() === userData.sunSign.toLowerCase()
+            )
+            
+            if (userSignIndex !== -1) {
+              setSelectedSignIndex(userSignIndex)
+              // Scroll to the user's sign after a short delay
+              setTimeout(() => {
+                flatListRef.current?.scrollToIndex({
+                  index: userSignIndex,
+                  animated: true,
+                  viewPosition: 0.5 // Center the item
+                })
+              }, 500)
+            }
+          }
+        } catch (error) {
+          console.error('Error fetching user sign:', error)
+        } finally {
+          setLoading(false)
+        }
+      }
+    }
+    
+    fetchUserSign()
+  }, [user])
 
   useEffect(() => {
     if (signs.length > 0) {
@@ -245,14 +285,33 @@ const SignComments = () => {
     }
   }
 
+  const goToToday = () => {
+    setCurrentDate(new Date())
+    setHasNavigatedToFuture(false)
+  }
+
   const navigateDay = (direction: 'prev' | 'next') => {
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    
     const newDate = new Date(currentDate)
+    
     if (direction === 'prev') {
       newDate.setDate(newDate.getDate() - 1)
-    } else {
-      newDate.setDate(newDate.getDate() + 1)
+      setCurrentDate(newDate)
+    } else if (direction === 'next') {
+      // Check if we can navigate to future
+      const nextDay = new Date(currentDate)
+      nextDay.setDate(nextDay.getDate() + 1)
+      nextDay.setHours(0, 0, 0, 0)
+      
+      const canNavigateToFuture = !hasNavigatedToFuture && nextDay <= new Date(today.setDate(today.getDate() + 1))
+      
+      if (canNavigateToFuture) {
+        setCurrentDate(nextDay)
+        setHasNavigatedToFuture(true)
+      }
     }
-    setCurrentDate(newDate)
   }
 
   const renderSignCard = ({ item, index }: { item: any, index: number }) => {
@@ -269,7 +328,7 @@ const SignComments = () => {
           { 
             backgroundColor: isSelected ? colors.primary + '20' : colors.surface + '30',
             borderColor: isSelected ? colors.primary : colors.border,
-            transform: [{ scale: isSelected ? 1.1 : 1 }],
+            borderRadius: isSelected ? 20 : 0 ,
             opacity: isSelected ? 1 : 0.7
           }
         ]}>
@@ -285,9 +344,6 @@ const SignComments = () => {
           ]}>
             {sign.name}
           </Text>
-          {isSelected && (
-            <View style={[styles.signCardGlow, { backgroundColor: colors.primary }]} />
-          )}
         </View>
       </TouchableOpacity>
     )
@@ -295,14 +351,13 @@ const SignComments = () => {
 
   const renderCommentCard = ({ item }: { item: CommentCard }) => {
     const isExpanded = expandedCard === item.id
-    const isDailyCard = item.type === 'daily'
     const { cardAnimatedStyle, contentAnimatedStyle } = getAnimatedStyles(item.type)
 
     const cardColors = {
       daily: colors.primary,
       weekly: colors.secondary, 
-      monthly: '#FF6B6B',
-      yearly: '#4ECDC4'
+      monthly: colors.errorText,
+      yearly: colors.surface
     }
 
     return (
@@ -346,19 +401,19 @@ const SignComments = () => {
                 <Text style={[styles.starsTitle, { color: colors.text }]}>Yıldızlar</Text>
                 <View style={styles.starsGrid}>
                   <View style={styles.starItem}>
-                    <Text style={[styles.starLabel, { color: colors.secondaryText }]}>Enerji</Text>
+                    <Text style={[styles.starLabel, { color: colors.text }]}>Enerji</Text>
                     <Text style={[styles.starValue, { color: cardColors[item.type] }]}>{item.stars.hustle}/5</Text>
                   </View>
                   <View style={styles.starItem}>
-                    <Text style={[styles.starLabel, { color: colors.secondaryText }]}>Aşk</Text>
+                    <Text style={[styles.starLabel, { color: colors.text }]}>Aşk</Text>
                     <Text style={[styles.starValue, { color: cardColors[item.type] }]}>{item.stars.sex}/5</Text>
                   </View>
                   <View style={styles.starItem}>
-                    <Text style={[styles.starLabel, { color: colors.secondaryText }]}>Başarı</Text>
+                    <Text style={[styles.starLabel, { color: colors.text }]}>Başarı</Text>
                     <Text style={[styles.starValue, { color: cardColors[item.type] }]}>{item.stars.success}/5</Text>
                   </View>
                   <View style={styles.starItem}>
-                    <Text style={[styles.starLabel, { color: colors.secondaryText }]}>Ruh hali</Text>
+                    <Text style={[styles.starLabel, { color: colors.text }]}>Ruh hali</Text>
                     <Text style={[styles.starValue, { color: cardColors[item.type] }]}>{item.stars.vibe}/5</Text>
                   </View>
                 </View>
@@ -371,15 +426,15 @@ const SignComments = () => {
                 <Text style={[styles.matchesTitle, { color: colors.text }]}>Uyumlu Burçlar</Text>
                 <View style={styles.matchesGrid}>
                   <View style={styles.matchItem}>
-                    <Text style={[styles.matchLabel, { color: colors.secondaryText }]}>Kariyer</Text>
+                    <Text style={[styles.matchLabel, { color: colors.text }]}>Kariyer</Text>
                     <Text style={[styles.matchValue, { color: cardColors[item.type] }]}>{item.matches.career}</Text>
                   </View>
                   <View style={styles.matchItem}>
-                    <Text style={[styles.matchLabel, { color: colors.secondaryText }]}>Arkadaşlık</Text>
+                    <Text style={[styles.matchLabel, { color: colors.text }]}>Arkadaşlık</Text>
                     <Text style={[styles.matchValue, { color: cardColors[item.type] }]}>{item.matches.friendship}</Text>
                   </View>
                   <View style={styles.matchItem}>
-                    <Text style={[styles.matchLabel, { color: colors.secondaryText }]}>Aşk</Text>
+                    <Text style={[styles.matchLabel, { color: colors.text }]}>Aşk</Text>
                     <Text style={[styles.matchValue, { color: cardColors[item.type] }]}>{item.matches.love}</Text>
                   </View>
                 </View>
@@ -389,30 +444,6 @@ const SignComments = () => {
             <Text style={[styles.commentText, { color: colors.text }]}>
               {item.content}
             </Text>
-
-            {isDailyCard && (
-              <View style={styles.dailyNavigation}>
-                <TouchableOpacity
-                  style={[styles.dailyNavButton, { borderColor: colors.border }]}
-                  onPress={() => navigateDay('prev')}
-                >
-                  <Ionicons name="chevron-back" size={20} color={colors.secondaryText} />
-                  <Text style={[styles.dailyNavText, { color: colors.secondaryText }]}>Dün</Text>
-                </TouchableOpacity>
-                
-                <View style={[styles.todayIndicator, { backgroundColor: cardColors[item.type] }]}>
-                  <Text style={[styles.todayText, { color: colors.background }]}>Bugün</Text>
-                </View>
-                
-                <TouchableOpacity
-                  style={[styles.dailyNavButton, { borderColor: colors.border }]}
-                  onPress={() => navigateDay('next')}
-                >
-                  <Text style={[styles.dailyNavText, { color: colors.secondaryText }]}>Yarın</Text>
-                  <Ionicons name="chevron-forward" size={20} color={colors.secondaryText} />
-                </TouchableOpacity>
-              </View>
-            )}
         </Animated.View>
       </Animated.View>
     )
@@ -432,7 +463,6 @@ const SignComments = () => {
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        
         {/* AI Assistant Section - Now at the top */}
         <View style={styles.aiSection}>
           <AskAI type="comment" />
@@ -442,6 +472,7 @@ const SignComments = () => {
         <View style={styles.signsSection}>
           <Text style={[styles.sectionTitle, { color: colors.text }]}>Burç Seçimi</Text>
           <FlatList
+            ref={flatListRef}
             data={zodiacSigns}
             renderItem={renderSignCard}
             keyExtractor={(item, index) => index.toString()}
@@ -449,7 +480,42 @@ const SignComments = () => {
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.signsListContainer}
             ItemSeparatorComponent={() => <View style={{ width: 15 }} />}
+            initialScrollIndex={selectedSignIndex}
+            onScrollToIndexFailed={(info) => {
+              // Handle scroll failure
+              setTimeout(() => {
+                flatListRef.current?.scrollToIndex({
+                  index: info.index,
+                  animated: true,
+                  viewPosition: 1
+                })
+              }, 350)
+            }}
           />
+          <View style={styles.dailyNavigation}>
+            <TouchableOpacity
+              style={[styles.dailyNavButton, { borderColor: colors.border }]}
+              onPress={() => navigateDay('prev')}
+            >
+              <Ionicons name="chevron-back" size={20} color={colors.secondaryText} />
+              <Text style={[styles.dailyNavText, { color: colors.secondaryText }]}>Dün</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity
+              style={[styles.todayIndicator, { backgroundColor: colors.secondary }]}
+              onPress={goToToday}
+            >
+              <Text style={[styles.todayText, { color: colors.background }]}>Bugün</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity
+              style={[styles.dailyNavButton, { borderColor: colors.border }]}
+              onPress={() => navigateDay('next')}
+            >
+              <Text style={[styles.dailyNavText, { color: colors.secondaryText }]}>Yarın</Text>
+              <Ionicons name="chevron-forward" size={20} color={colors.secondaryText} />
+            </TouchableOpacity>
+          </View>
         </View>
 
         {/* Comment Cards */}
