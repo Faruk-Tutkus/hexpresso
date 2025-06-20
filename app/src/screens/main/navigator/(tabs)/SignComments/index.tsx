@@ -521,7 +521,7 @@ const SignComments = () => {
         {/* Comment Cards */}
         <View style={styles.commentsSection}>
           <Text style={[styles.sectionTitle, { color: colors.text }]}>
-            {zodiacSigns[selectedSignIndex].name} Yorumları
+            {zodiacSigns[selectedSignIndex].name} yorumları
           </Text>
           
           <FlatList

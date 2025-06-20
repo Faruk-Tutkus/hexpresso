@@ -170,13 +170,13 @@ const AskAI = ({ type }: AskAIType) => {
 
   const animatedResponseStyle = useAnimatedStyle(() => {
     return {
-      maxHeight: interpolate(progress.value, [0, 1], [0, 300]),
+      maxHeight: interpolate(progress.value, [0, 1], [100, 300]),
       opacity: interpolate(progress.value, [0, 1], [0, 1])
     }
   })
   const animatedContainerStyle = useAnimatedStyle(() => {
     return {
-      maxHeight: interpolate(progress.value, [0, 0.4], [0, 300]),
+      maxHeight: interpolate(progress.value, [0, 0.4], [100, 300]),
     }
   })
   const handleSendSign = async () => {

@@ -110,16 +110,25 @@ const Introduction = () => {
   });
   console.log(location);
   useEffect(() => {
-    if (date instanceof Date) {
-      const { sunSign, ascendantSign, moonSign, age, birthWeekday, daysToNextBirthday } = getFullAstro(
-        date.toISOString(),
-        time instanceof Date ? time.toISOString() : date.toISOString(),
-        { latitude: location?.latitude || 0, longitude: location?.longitude || 0 }
-      );
+    if (date instanceof Date && !isNaN(date.getTime()) && location) {
+      try {
+        const dateString = date.toISOString();
+        const timeString = time instanceof Date && !isNaN(time.getTime()) 
+          ? time.toISOString() 
+          : dateString;
+        
+        const { sunSign, ascendantSign, moonSign, age, birthWeekday, daysToNextBirthday } = getFullAstro(
+          dateString,
+          timeString,
+          { latitude: location.latitude, longitude: location.longitude }
+        );
 
-      setFullAstro({ sunSign, ascendantSign, moonSign, age, birthWeekday, daysToNextBirthday });
+        setFullAstro({ sunSign, ascendantSign, moonSign, age, birthWeekday, daysToNextBirthday });
+      } catch (error) {
+        console.error('Error calculating astro in introduction:', error);
+      }
     }
-  }, [date, time]);
+  }, [date, time, location]);
   
   const [signs, setSigns] = useState<any[]>([]);
   const [dataFetched, setDataFetched] = useState(false);
@@ -163,8 +172,8 @@ const Introduction = () => {
               q11: "Kullanıcının " + description[10] + " sorusuna cevabı: " + curious,
             },
             name,
-            date,
-            time,
+            date: date instanceof Date && !isNaN(date.getTime()) ? date.toISOString() : null,
+            time: time instanceof Date && !isNaN(time.getTime()) ? time.toISOString() : null,
             gender,
             reason,
             love,

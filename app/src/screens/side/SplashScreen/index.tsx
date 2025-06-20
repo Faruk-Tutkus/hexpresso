@@ -56,7 +56,7 @@ const SplashScreen = () => {
           router.replace('/src/screens/side/Introduction');
         }
       }
-      if (!user && !loading) {
+      if (!user && !loading && !dataFetched) {
         setTimeout(() => {
           router.replace("/src/screens/side/StartScreen");
         }, 3000);

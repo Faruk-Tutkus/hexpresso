@@ -66,38 +66,66 @@ export function getSunSign(d: Date): string {
 
 /** Ay burcu */
 function getMoonSign(date: string, time: string): string {
-  const datetime = new Date(
-    `${date.split("T")[0]}T${time.split("T")[1]}`
-  );
+  try {
+    const datetime = new Date(
+      `${date.split("T")[0]}T${time.split("T")[1]}`
+    );
 
-  const jd = getJulian(datetime);
-  const D = jd - 2451543.5;
-  const lon = (218.316 + 13.176396 * D) % 360;
+    // Geçersiz tarih kontrolü
+    if (isNaN(datetime.getTime())) {
+      console.warn('Invalid datetime for moon sign calculation');
+      return 'aries';
+    }
 
-  return zodiacFromDeg(lon);
+    const jd = getJulian(datetime);
+    const D = jd - 2451543.5;
+    const lon = (218.316 + 13.176396 * D) % 360;
+
+    return zodiacFromDeg(lon);
+  } catch (error) {
+    console.error('Error calculating moon sign:', error);
+    return 'aries';
+  }
 }
 
 /** Yükselen burç */
 function getAscendant(date: string, time: string, { latitude: φ,longitude }: Coord): string {
-  const datetime = new Date(
-    `${date.split("T")[0]}T${time.split("T")[1]}`
-  );
+  try {
+    const datetime = new Date(
+      `${date.split("T")[0]}T${time.split("T")[1]}`
+    );
 
-  const jd = getJulian(datetime);
-  const GST = (280.46061837 + 360.98564736629 * (jd - 2451545.0)) % 360;
-  const RAMC = GST +longitude;
+    // Geçersiz tarih kontrolü
+    if (isNaN(datetime.getTime())) {
+      console.warn('Invalid datetime for ascendant calculation');
+      return 'aries';
+    }
 
-  const ε = 23.437 * Math.PI/180;
-  const φr = φ * Math.PI/180;
-  const rRamc = RAMC * Math.PI/180;
+    // Koordinat kontrolü
+    if (!Number.isFinite(φ) || !Number.isFinite(longitude)) {
+      console.warn('Invalid coordinates for ascendant calculation');
+      return 'aries';
+    }
 
-  const num = Math.cos(rRamc);
-  const den = -(Math.sin(ε)*Math.tan(φr) + Math.cos(ε)*Math.sin(rRamc));
+    const jd = getJulian(datetime);
+    const GST = (280.46061837 + 360.98564736629 * (jd - 2451545.0)) % 360;
+    const RAMC = GST + longitude;
 
-  let asc = Math.atan2(num, den) * 180/Math.PI;
-  if (asc < 0) asc += 360;
+    const ε = 23.437 * Math.PI/180;
+    const φr = φ * Math.PI/180;
+    const rRamc = RAMC * Math.PI/180;
 
-  return zodiacFromDeg(asc);
+    const num = Math.cos(rRamc);
+    const den = -(Math.sin(ε)*Math.tan(φr) + Math.cos(ε)*Math.sin(rRamc));
+
+    let asc = Math.atan2(num, den) * 180/Math.PI;
+    if (asc < 0) asc += 360;
+
+    return zodiacFromDeg(asc);
+  } catch (error) {
+    console.error('Error calculating ascendant:', error);
+    return 'aries';
+  }
 }
 
 /** Doğum Günü */
@@ -162,6 +190,23 @@ function getJulian(d: Date): number {
 }
 
 function zodiacFromDeg(deg: number): string {
-  const idx = Math.floor(deg / 30) % 12;
-  return ['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces'][idx];
+  // NaN veya infinite değerleri kontrol et
+  if (!Number.isFinite(deg)) {
+    console.warn('Invalid degree value for zodiac calculation:', deg);
+    return 'aries'; // varsayılan değer
+  }
+  
+  // Derece değerini 0-360 aralığına normalize et
+  const normalizedDeg = ((deg % 360) + 360) % 360;
+  const idx = Math.floor(normalizedDeg / 30) % 12;
+  
+  const signs = ['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces'];
+  
+  // Index kontrolü
+  if (idx < 0 || idx >= signs.length) {
+    console.warn('Invalid zodiac index:', idx, 'for degree:', deg);
+    return 'aries'; // varsayılan değer
+  }
+  
+  return signs[idx];
 }

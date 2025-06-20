@@ -115,7 +115,7 @@ const Header = ({ user, onPress }: HeaderProps) => {
         </TouchableOpacity>
         <View style={styles.titleContainer}>
           {horoscopeInfo ? <Reanimated.Text entering={FadeIn.duration(1000)} style={[styles.title, { color: colors.text }]}>{GetTimeBasedGreeting() + ' ' + t('horoscope.' + horoscopeInfo)}</Reanimated.Text> : <Text style={[styles.title, { color: colors.text }]}></Text>}
-          <Animated.View
+          {/* <Animated.View
             style={{
               transform: [{ translateY: slideAnim }],
               opacity: fadeAnim,
@@ -125,7 +125,7 @@ const Header = ({ user, onPress }: HeaderProps) => {
             <Text style={[styles.message, { color: colors.text }]}>
               {messages[currentMessageIndex]}
             </Text>
-          </Animated.View>
+          </Animated.View> */}
         </View>
       </View>
       <View style={styles.rightContainer}>

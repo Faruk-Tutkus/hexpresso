@@ -1,10 +1,10 @@
 import { AskAI, HoroscopeCard } from '@components';
+import { loadCache } from '@hooks';
 import { useTheme } from '@providers';
 import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, FlatList, View } from 'react-native';
-import loadCache from 'src/hooks/LoadCache';
 
 enum numSign {
   Aquarius = 0,
@@ -70,7 +70,7 @@ const GuideScreen = () => {
             keyExtractor={(item) => item.sign}
             showsVerticalScrollIndicator={false}
             scrollEnabled
-            contentContainerStyle={{ paddingBottom: 200, paddingTop: 10 }}
+            contentContainerStyle={{ paddingBottom: 100, paddingTop: 10 }}
             style={{ marginVertical: 10 }}
             // Performance optimizations
             removeClippedSubviews={true}

@@ -24,11 +24,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   commentsSection: {
-    marginBottom: 25,
     paddingHorizontal: 20,
   },
   aiSection: {
-    paddingHorizontal: 20,
     marginBottom: 25,
   },
   sectionTitle: {
