@@ -1,5 +1,6 @@
 // ThemeContext.tsx
 import { Colors } from '@constants'
+import { loadTheme, updateTheme } from '@hooks'
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { useColorScheme } from 'react-native'
 
@@ -14,21 +15,33 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
-export const ThemeProvider = ({ children, themeColor }: { children: React.ReactNode, themeColor?: Theme }) => {
+export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const deviceTheme = useColorScheme()
-  const [theme, setTheme] = useState<Theme>(themeColor || 'dark')
+  const [theme, setTheme] = useState<Theme>('dark')
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
-    if (deviceTheme) {
-      setTheme(themeColor || deviceTheme)
-    }
-  }, [deviceTheme])
+    // Uygulama başladığında cache'den tema tercihini yükle
+    const savedTheme = loadTheme({ 
+      setTheme, 
+      defaultTheme: deviceTheme || 'dark' 
+    })
+    setIsLoaded(true)
+  }, [])
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'))
+    const newTheme = theme === 'light' ? 'dark' : 'light'
+    setTheme(newTheme)
+    // Tema değişikliğini cache'e kaydet
+    updateTheme(newTheme)
   }
 
   const colors = theme === 'dark' ? Colors.dark : Colors.light
+
+  // Tema yüklenene kadar bekle
+  if (!isLoaded) {
+    return null
+  }
 
   return (
     <ThemeContext.Provider value={{ theme, colors, toggleTheme, isDark: theme === 'dark' }}>

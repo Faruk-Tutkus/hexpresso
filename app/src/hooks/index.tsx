@@ -9,5 +9,6 @@ export { useSignInWithEmail } from './SignInWithEmail'
 export { useSignInWithFacebook } from './SignInWithFacebook'
 export { useSignInWithGoogle } from './SignInWithGoogle'
 export { useSignUpWithEmail } from './SignUpWithEmail'
+export { clearThemeCache, getCachedTheme, loadTheme, updateTheme } from './ThemeData'
 export { default as useToggleKeyboard } from './ToggleKeyboard'
 

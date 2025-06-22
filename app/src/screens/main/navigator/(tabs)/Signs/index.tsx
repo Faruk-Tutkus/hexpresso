@@ -1,5 +1,6 @@
 import { Ionicons } from '@expo/vector-icons'
 import { useTheme } from '@providers'
+import '@utils/i18n'
 import { Image } from 'expo-image'
 import { useLocalSearchParams } from 'expo-router'
 import React, { useEffect, useState } from 'react'
@@ -125,7 +126,7 @@ const Signs = () => {
         {careers?.key?.slice(0, 4).map((career: string, index: number) => (
           <View key={index} style={[styles.careerItem, { backgroundColor: colors.secondary + '40' }]}>
             <Ionicons name="star" size={20} color={colors.text} />
-            <Text style={[styles.careerText, { color: colors.text }]}>{career}</Text>
+            <Text style={[styles.careerText, { color: colors.text }]}>{career ? career.length > 30 ? career.substring(0, 30) + '...' : career : ''}</Text>
           </View>
         ))}
         {careers?.key?.length > 4 && (

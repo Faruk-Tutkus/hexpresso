@@ -1,15 +1,15 @@
 import { ContainerButton, CustomButton, FloatingLabelInput, UnderLineText } from '@components'
 import { useFetchData, useSignInWithApple, useSignInWithEmail, useSignInWithFacebook, useSignInWithGoogle } from '@hooks'
 import { useAuth, useTheme, useToast } from '@providers'
+import '@utils/i18n'
 import { router, useLocalSearchParams } from 'expo-router'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
-import '../../../utils/i18n'
 import styles from './styles'
 const Login = () => {
-  const { theme, colors, toggleTheme } = useTheme()
+  const { colors } = useTheme()
   const { email: emailParam, password: passwordParam, displayName: displayNameParam } = useLocalSearchParams()
   const [email, setEmail] = useState(emailParam as string)
   const [password, setPassword] = useState(passwordParam as string)

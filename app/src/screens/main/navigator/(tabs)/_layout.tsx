@@ -5,9 +5,11 @@ import { Tabs } from "expo-router";
 import * as SystemUI from 'expo-system-ui';
 import { useEffect, useRef } from 'react';
 import { Animated, TouchableOpacity, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const TabLayout = () => {
   const { theme, colors } = useTheme();
+  const insets = useSafeAreaInsets();
   SystemUI.setBackgroundColorAsync(colors.background);
   const user = useAuth();
   const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
@@ -56,8 +58,8 @@ const TabLayout = () => {
         width: '90%',
         borderRadius: 20,
         alignSelf: 'center',
-        marginBottom: 30,
-        marginTop: 5,
+        marginBottom: insets.bottom + 10,
+        marginTop: insets.top + 5,
       }}>
         {filteredRoutes.map((route: any, index: number) => {
           const originalIndex = state.routes.findIndex(r => r.name === route.name);

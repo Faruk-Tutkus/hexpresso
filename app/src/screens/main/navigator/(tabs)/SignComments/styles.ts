@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   signCard: {
-    width: 120,
+    width: 115,
     height: 120,
     borderRadius: 15,
     padding: 15,

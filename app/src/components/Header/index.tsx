@@ -4,7 +4,7 @@ import { GetTimeBasedGreeting } from '@hooks';
 import { useTheme } from '@providers';
 import { Image } from 'expo-image';
 import { User } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, onSnapshot } from 'firebase/firestore';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Animated, Text, TouchableOpacity, View } from 'react-native';
@@ -19,14 +19,22 @@ interface HeaderProps {
 const Header = ({ user, onPress }: HeaderProps) => {
   const { colors } = useTheme();
   const [horoscopeInfo, setHoroscopeInfo] = useState<string>('')
+  const [updatedAt, setUpdatedAt] = useState<any>(null)
   const { t } = useTranslation()
   useEffect(() => {
-    const fetchHoroscopeInfo = async () => {
-      const userDoc = await getDoc(doc(db, 'users', user?.uid as string))
-      const horoscopeInfo = userDoc.data()?.sunSign
-      setHoroscopeInfo(horoscopeInfo)
-    }
-    fetchHoroscopeInfo()
+    if (!user?.uid) return;
+    
+    // Real-time listener for user document changes
+    const unsubscribe = onSnapshot(doc(db, 'users', user.uid), (doc) => {
+      if (doc.exists()) {
+        const data = doc.data();
+        setHoroscopeInfo(data?.sunSign || '');
+        setUpdatedAt(data?.updatedAt || null);
+      }
+    });
+
+    // Cleanup listener on unmount
+    return () => unsubscribe();
   }, [user])
   // Mesaj listesi
   const messages = [

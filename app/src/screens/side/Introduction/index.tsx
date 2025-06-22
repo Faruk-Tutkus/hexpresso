@@ -187,6 +187,7 @@ const Introduction = () => {
               latitude: location?.latitude || 0,
               longitude: location?.longitude || 0,
             },
+            updatedAt: new Date(),
           });
         }
         const fetchSuccess = await useFetchData({ user: user, setLoading: setIsLoading, setSigns });

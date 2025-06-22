@@ -4,7 +4,8 @@ import { AskAI } from '@components'
 import { Ionicons } from '@expo/vector-icons'
 import { getDateRangeForPeriod } from '@hooks'
 import { useAuth, useTheme } from '@providers'
-import { doc, getDoc } from 'firebase/firestore'
+import '@utils/i18n'
+import { doc, onSnapshot } from 'firebase/firestore'
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ActivityIndicator, FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native'
@@ -147,39 +148,57 @@ const SignComments = () => {
 
   // Set initial selected sign based on user's sunSign
   useEffect(() => {
-    const fetchUserSign = async () => {
-      if (user) {
-        try {
-          setLoading(true)
-          const userDoc = await getDoc(doc(db, 'users', user.uid))
-          const userData = userDoc.data()
-          
-          if (userData?.sunSign) {
-            const userSignIndex = zodiacSigns.findIndex(
-              sign => sign.englishName.toLowerCase() === userData.sunSign.toLowerCase()
-            )
+    if (!user) return
+    
+    let unsubscribe: (() => void) | null = null
+    
+    const setupListener = () => {
+      try {
+        setLoading(true)
+        
+        // Real-time listener for user document changes
+        unsubscribe = onSnapshot(doc(db, 'users', user.uid), (docSnapshot) => {
+          if (docSnapshot.exists()) {
+            const userData = docSnapshot.data()
             
-            if (userSignIndex !== -1) {
-              setSelectedSignIndex(userSignIndex)
-              // Scroll to the user's sign after a short delay
-              setTimeout(() => {
-                flatListRef.current?.scrollToIndex({
-                  index: userSignIndex,
-                  animated: true,
-                  viewPosition: 0.5 // Center the item
-                })
-              }, 500)
+            if (userData?.sunSign) {
+              const userSignIndex = zodiacSigns.findIndex(
+                sign => sign.englishName.toLowerCase() === userData.sunSign.toLowerCase()
+              )
+              
+              if (userSignIndex !== -1) {
+                setSelectedSignIndex(userSignIndex)
+                // Scroll to the user's sign after a short delay
+                setTimeout(() => {
+                  if (flatListRef.current) {
+                    flatListRef.current.scrollToOffset({
+                      offset: userSignIndex * 130, // 115 (card width) + 15 (separator)
+                      animated: true
+                    })
+                  }
+                }, 1000)
+              }
             }
           }
-        } catch (error) {
-          console.error('Error fetching user sign:', error)
-        } finally {
           setLoading(false)
-        }
+        }, (error) => {
+          console.error('Error listening to user sign:', error)
+          setLoading(false)
+        })
+      } catch (error) {
+        console.error('Error setting up listener:', error)
+        setLoading(false)
       }
     }
     
-    fetchUserSign()
+    setupListener()
+    
+    // Cleanup listener on unmount
+    return () => {
+      if (unsubscribe) {
+        unsubscribe()
+      }
+    }
   }, [user])
 
   useEffect(() => {
@@ -329,7 +348,8 @@ const SignComments = () => {
             backgroundColor: isSelected ? colors.primary + '20' : colors.surface + '30',
             borderColor: isSelected ? colors.primary : colors.border,
             borderRadius: isSelected ? 20 : 0 ,
-            opacity: isSelected ? 1 : 0.7
+            opacity: isSelected ? 1 : 0.7,
+            width: 115, // Fixed width for consistent layout
           }
         ]}>
           <Icon 
@@ -480,17 +500,22 @@ const SignComments = () => {
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.signsListContainer}
             ItemSeparatorComponent={() => <View style={{ width: 15 }} />}
-            initialScrollIndex={selectedSignIndex}
+            getItemLayout={(data, index) => ({
+              length: 115, // card width
+              offset: 130 * index, // card width + separator
+              index,
+            })}
             onScrollToIndexFailed={(info) => {
-              // Handle scroll failure
-              setTimeout(() => {
-                flatListRef.current?.scrollToIndex({
-                  index: info.index,
+              const wait = new Promise(resolve => setTimeout(resolve, 500));
+              wait.then(() => {
+                flatListRef.current?.scrollToIndex({ 
+                  index: info.index, 
                   animated: true,
-                  viewPosition: 1
-                })
-              }, 350)
+                  viewPosition: 0.5
+                });
+              });
             }}
+            removeClippedSubviews={false}
           />
           <View style={styles.dailyNavigation}>
             <TouchableOpacity

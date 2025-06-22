@@ -245,6 +245,7 @@ const Profile = () => {
         age: profileData.age,
         birthWeekday: profileData.birthWeekday,
         daysToNextBirthday: profileData.daysToNextBirthday,
+        updatedAt: new Date(),
       };
 
       await updateDoc(doc(db, 'users', user.uid), updateData);
@@ -592,29 +593,29 @@ const Profile = () => {
 
           {/* Astroloji Bilgileri */}
           {profileData.sunSign && (
-            <Animated.View entering={FadeIn.delay(200)} style={styles.section}>
+            <Animated.View entering={FadeIn.delay(200)} style={[styles.section, { borderColor: colors.border }]}>
               <Text style={[styles.sectionTitle, { color: colors.primary }]}>🔮 Astroloji Haritam</Text>
               
               <View style={styles.astroGrid}>
-                <View style={[styles.astroCard, { backgroundColor: colors.surface + '20', borderColor: colors.border }]}>
+                <View style={[styles.astroCard, { backgroundColor: colors.surface + '20'}]}>
                   <Text style={[styles.astroLabel, { color: colors.secondaryText }]}>☀️ Güneş Burcum</Text>
                   <Text style={[styles.astroValue, { color: colors.text }]}>
                     {getZodiacSignName(profileData.sunSign)}
                   </Text>
                 </View>
-                <View style={[styles.astroCard, { backgroundColor: colors.surface + '20', borderColor: colors.border }]}>
+                <View style={[styles.astroCard, { backgroundColor: colors.surface + '20'}]}>
                   <Text style={[styles.astroLabel, { color: colors.secondaryText }]}>🌙 Ay Burcum</Text>
                   <Text style={[styles.astroValue, { color: colors.text }]}>
                     {getZodiacSignName(profileData.moonSign)}
                   </Text>
                 </View>
-                <View style={[styles.astroCard, { backgroundColor: colors.surface + '20', borderColor: colors.border }]}>
+                <View style={[styles.astroCard, { backgroundColor: colors.surface + '20'}]}>
                   <Text style={[styles.astroLabel, { color: colors.secondaryText }]}>⬆️ Yükselenim</Text>
                   <Text style={[styles.astroValue, { color: colors.text }]}>
                     {getZodiacSignName(profileData.ascendantSign)}
                   </Text>
                 </View>
-                <View style={[styles.astroCard, { backgroundColor: colors.surface + '20', borderColor: colors.border }]}>
+                <View style={[styles.astroCard, { backgroundColor: colors.surface + '20'}]}>
                   <Text style={[styles.astroLabel, { color: colors.secondaryText }]}>🎂 Yaşım</Text>
                   <Text style={[styles.astroValue, { color: colors.text }]}>
                     {profileData.age} yaşında

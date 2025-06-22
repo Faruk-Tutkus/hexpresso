@@ -8,6 +8,7 @@ import * as SystemUI from 'expo-system-ui';
 import { User } from 'firebase/auth';
 import { Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { FadeIn, FadeInDown, FadeInRight, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function Layout() {
   const { user } = useAuth();
@@ -15,7 +16,7 @@ export default function Layout() {
   const router = useRouter();
   const pathname = usePathname();
   SystemUI.setBackgroundColorAsync(colors.background);
-
+  const insets = useSafeAreaInsets();
   const drawerItems = [
     { 
       name: '(tabs)', 
@@ -68,10 +69,8 @@ export default function Layout() {
   ];
 
   const CustomDrawerContent = (props: any) => {
-    const activeOpacity = useSharedValue(1);
-    
     return (
-      <View style={{ flex: 1, backgroundColor: colors.background }}>
+      <View style={{ flex: 1, backgroundColor: colors.background, paddingBottom: insets.bottom - 10}}>
         {/* Header with user info */}
         <LinearGradient
           colors={[colors.background, colors.surface]}

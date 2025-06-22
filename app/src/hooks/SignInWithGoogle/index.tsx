@@ -39,6 +39,7 @@ export const useSignInWithGoogle = () => {
           displayName: user.displayName,
           photoURL: user.photoURL,
           createdAt: new Date(),
+          updatedAt: new Date(),
           newUser: true,
         });
         return {
