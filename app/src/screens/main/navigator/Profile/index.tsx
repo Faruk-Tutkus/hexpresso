@@ -453,7 +453,7 @@ const Profile = () => {
             <Text style={[styles.subtitle, { color: colors.secondaryText }]}>
               {isEditing 
                 ? 'Bilgilerini güncelleyerek yıldızlar seninle daha uyumlu olsun ✨' 
-                : 'Yıldızların seninle nasıl dans ettiğini gör 🌟'
+                : 'Yıldızların seninle nasıl dans ettiğini gör'
               }
             </Text>
           </Animated.View>
@@ -461,19 +461,23 @@ const Profile = () => {
           <Animated.View entering={FadeIn.delay(500)} style={styles.actionSection}>
             {!isEditing ? (
               <CustomButton
-                title="📝 Profili Düzenle"
+                title="Profili Düzenle"
+                leftIcon='pencil'
                 onPress={() => setIsEditing(true)}
                 loading={false}
               />
             ) : (
               <View style={styles.actionButtons}>
                 <CustomButton
-                  title="❌ İptal"
+                  title="İptal"
+                  variant="secondary"
+                  leftIcon='close'
                   onPress={() => setShowCancelModal(true)}
                   loading={false}
                 />
                 <CustomButton
-                  title="💫 Kaydet"
+                  title="Kaydet"
+                  leftIcon='save'
                   onPress={handleUpdateProfile}
                   loading={isLoading}
                 />

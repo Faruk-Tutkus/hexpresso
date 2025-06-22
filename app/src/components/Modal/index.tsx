@@ -34,16 +34,16 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
       onRequestClose={onClose}
     >
       <View style={styles.modalOverlay}>
-        <View style={[styles.modalContent, { backgroundColor: colors.surface }]}>
+        <View style={[styles.modalContent, { backgroundColor: colors.background }]}>
           <View style={styles.modalIcon}>
-            <Ionicons name={iconName} size={50} color={colors.secondaryText} />
+            <Ionicons name={iconName} size={50} color={colors.text} />
           </View>
           
           <Text style={[styles.modalTitle, { color: colors.text }]}>
             {title}
           </Text>
           
-          <Text style={[styles.modalDescription, { color: colors.secondaryText }]}>
+          <Text style={[styles.modalDescription, { color: colors.text }]}>
             {message}
           </Text>
           

@@ -1,14 +1,11 @@
-import { Ionicons } from '@expo/vector-icons'
-import { useTheme } from '@providers'
+import { Modal } from '@components'
+import { useTheme, useToast } from '@providers'
 import * as Location from 'expo-location'
 import React, { useEffect, useState } from 'react'
 import {
   ActivityIndicator,
-  Alert,
-  Modal,
   Platform,
   Text,
-  TouchableOpacity,
   View
 } from 'react-native'
 import MapView, { MapPressEvent, Marker, PROVIDER_GOOGLE } from 'react-native-maps'
@@ -26,7 +23,7 @@ const MapViewComponent: React.FC<MapViewComponentProps> = ({
   initialLongitude = 28.9784
 }) => {
   const { colors } = useTheme()
-  
+  const { showToast } = useToast()
   const [isLoading, setIsLoading] = useState(true)
   const [showLocationModal, setShowLocationModal] = useState(false)
   const [locationPermissionStatus, setLocationPermissionStatus] = useState<string | null>(null)
@@ -69,11 +66,7 @@ const MapViewComponent: React.FC<MapViewComponentProps> = ({
         setShowLocationModal(false)
         await getCurrentLocation()
       } else {
-        Alert.alert(
-          'Konum İzni',
-          'Konumunuzu görmek için ayarlardan konum iznini açmanız gerekiyor.',
-          [{ text: 'Tamam' }]
-        )
+        showToast('Konum izni verilmedi', 'error')
       }
     } catch (error) {
       console.error('Permission request error:', error)
@@ -90,7 +83,7 @@ const MapViewComponent: React.FC<MapViewComponentProps> = ({
         longitude: location.coords.longitude
       })
     } catch (error) {
-      console.error('Get location error:', error)
+      showToast('Konum alınamadı', 'error')
     }
   }
 
@@ -122,49 +115,17 @@ const MapViewComponent: React.FC<MapViewComponentProps> = ({
   return (
     <View style={styles.container}>
       {/* Konum İzni Modal */}
+      
       <Modal
         visible={showLocationModal}
-        transparent
-        animationType="fade"
-        onRequestClose={handleCloseModal}
-      >
-        <View style={styles.modalOverlay}>
-          <View style={[styles.modalContent, { backgroundColor: colors.surface }]}>
-            <View style={styles.modalIcon}>
-              <Ionicons name="location" size={50} color={colors.secondary} />
-            </View>
-            
-            <Text style={[styles.modalTitle, { color: colors.text }]}>
-              Konum Erişimi
-            </Text>
-            
-            <Text style={[styles.modalDescription, { color: colors.secondaryText }]}>
-              Harita özelliklerini kullanabilmek için konumunuza erişim izni vermeniz gerekmektedir.
-            </Text>
-            
-            <View style={styles.modalButtons}>
-              <TouchableOpacity 
-                style={[styles.modalButton, styles.cancelButton, { borderColor: colors.border }]}
-                onPress={handleCloseModal}
-              >
-                <Text style={[styles.modalButtonText, { color: colors.text }]}>
-                  İptal
-                </Text>
-              </TouchableOpacity>
-              
-              <TouchableOpacity 
-                style={[styles.modalButton, styles.allowButton, { backgroundColor: colors.primary }]}
-                onPress={requestLocationPermission}
-              >
-                <Text style={[styles.modalButtonText, { color: '#FFFFFF' }]}>
-                  İzin Ver
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
-
+        onClose={handleCloseModal}
+        onConfirm={requestLocationPermission}
+        title="Konum İzni"
+        message="Konumunuzu görmek için ayarlardan konum iznini açmanız gerekiyor."
+        confirmText="Tamam"
+        cancelText="İptal"
+        iconName="warning"
+      />
       {/* Harita */}
       <MapView
         provider={Platform.OS === 'android' ? PROVIDER_GOOGLE : undefined}

@@ -1,5 +1,5 @@
 import { ContainerButton, CustomButton, FloatingLabelInput, UnderLineText } from '@components'
-import { useFetchData, useSignInWithEmail, useSignInWithGoogle } from '@hooks'
+import { useFetchData, useSignInWithApple, useSignInWithEmail, useSignInWithFacebook, useSignInWithGoogle } from '@hooks'
 import { useAuth, useTheme, useToast } from '@providers'
 import { router, useLocalSearchParams } from 'expo-router'
 import React, { useEffect, useState } from 'react'
@@ -17,9 +17,13 @@ const Login = () => {
   const { showToast } = useToast()
   const { signIn } = useSignInWithEmail()
   const { signInGoogle } = useSignInWithGoogle()
+  const { signInFacebook } = useSignInWithFacebook()
+  const { signInApple } = useSignInWithApple()
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isGoogleLoading, setIsGoogleLoading] = useState(false)
+  const [isFacebookLoading, setIsFacebookLoading] = useState(false)
+  const [isAppleLoading, setIsAppleLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState({
     email: '',
     password: '',
@@ -39,6 +43,7 @@ const Login = () => {
         });
     }
   }, [user, dataFetched])
+  
   const handleSignIn = async () => {
     try {
       setIsLoading(true);
@@ -77,6 +82,7 @@ const Login = () => {
       setIsLoading(false);
     }
   };
+  
   const handleSignInGoogle = async () => {
     try {
       setIsGoogleLoading(true);
@@ -101,6 +107,57 @@ const Login = () => {
       setIsGoogleLoading(false);
     }
   }
+
+  const handleSignInFacebook = async () => {
+    try {
+      setIsFacebookLoading(true);
+      const result = await signInFacebook();
+      console.log(result.newUser);
+      if (result.user) {
+        if (result.newUser) {
+          router.replace('/src/screens/side/Introduction');
+        } else {
+          // Veri fetch işlemini bekle
+          const fetchSuccess = await useFetchData({ user: result.user, setLoading: setIsLoading, setSigns });
+          if (fetchSuccess) {
+            setDataFetched(true);
+            router.replace('/src/screens/main/navigator/(tabs)/HomeScreen');
+          }
+        }
+      }
+    } catch (error: any) {
+      console.log(error);
+      showToast(t('auth.auth/facebook-sign-in-error'), 'error');
+    } finally {
+      setIsFacebookLoading(false);
+    }
+  }
+
+  const handleSignInApple = async () => {
+    try {
+      setIsAppleLoading(true);
+      const result = await signInApple();
+      console.log(result.newUser);
+      if (result.user) {
+        if (result.newUser) {
+          router.replace('/src/screens/side/Introduction');
+        } else {
+          // Veri fetch işlemini bekle
+          const fetchSuccess = await useFetchData({ user: result.user, setLoading: setIsLoading, setSigns });
+          if (fetchSuccess) {
+            setDataFetched(true);
+            router.replace('/src/screens/main/navigator/(tabs)/HomeScreen');
+          }
+        }
+      }
+    } catch (error: any) {
+      console.log(error);
+      showToast(t('auth.auth/apple-sign-in-error'), 'error');
+    } finally {
+      setIsAppleLoading(false);
+    }
+  }
+
   return (
     <Animated.View entering={FadeIn} exiting={FadeOut} style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.content}>
@@ -142,17 +199,19 @@ const Login = () => {
           />
           <ContainerButton
             title="Facebook ile Giriş Yap"
-            onPress={() => { }}
+            onPress={handleSignInFacebook}
             variant="primary"
             size="medium"
             leftImage={require('@assets/image/facebook.png')}
+            loading={isFacebookLoading}
           />
           <ContainerButton
             title="Apple ile Giriş Yap"
-            onPress={() => { }}
+            onPress={handleSignInApple}
             variant="primary"
             size="medium"
             leftImage={require('@assets/image/apple.png')}
+            loading={isAppleLoading}
           />
         </View>
       </View>

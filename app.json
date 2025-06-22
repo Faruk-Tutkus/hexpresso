@@ -18,6 +18,14 @@
         {
           "locationAlwaysAndWhenInUsePermission": "Hexpresso uygulaması konumunuzu kullanarak size daha iyi hizmet sunmak istiyor."
         }
+      ],
+      [
+        "react-native-fbsdk-next",
+        {
+          "appID": "1347955562982110",
+          "clientToken": "69b436333e6e48d8c44c585c3ee9373f",
+          "displayName": "Hexpresso"
+        }
       ]
     ],
     "android": {
