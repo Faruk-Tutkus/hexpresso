@@ -1,7 +1,7 @@
 import { db } from '@api/config.firebase';
 import { CustomButton, IconButton } from '@components';
 import { useFetchData } from '@hooks';
-import { useAuth, useTheme } from '@providers';
+import { useAuth, useTheme, useToast } from '@providers';
 import { useRouter } from 'expo-router';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { useEffect, useRef, useState } from 'react';
@@ -15,6 +15,7 @@ import styles from './styles';
 const Introduction = () => {
   const { colors } = useTheme();
   const { user } = useAuth();
+  const { showToast } = useToast();
   const { width } = Dimensions.get('window');
   const { data, name, date, gender, time, reason, love, need, mood, meaning, experience, curious, location } = useIntroductionData();
   const flatListRef = useRef<FlatList>(null);
@@ -126,6 +127,7 @@ const Introduction = () => {
         setFullAstro({ sunSign, ascendantSign, moonSign, age, birthWeekday, daysToNextBirthday });
       } catch (error) {
         console.error('Error calculating astro in introduction:', error);
+        showToast('Hata oluştu', 'error')
       }
     }
   }, [date, time, location]);
@@ -198,7 +200,7 @@ const Introduction = () => {
       }
     } catch (error) {
       console.log(error);
-    } finally {
+      showToast('Hata oluştu', 'error')
       setIsLoading(false);
     }
   }
