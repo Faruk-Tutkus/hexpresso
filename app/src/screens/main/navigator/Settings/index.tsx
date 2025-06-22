@@ -41,7 +41,7 @@ const SettingsScreen = () => {
 
     const trackStyle = useAnimatedStyle(() => {
       return {
-        backgroundColor: interpolateColor(translate.value, [0, 1], [colors.border, colors.secondary]),
+        backgroundColor: interpolateColor(translate.value, [0, 1], [colors.background, colors.background]),
       }
     })
 

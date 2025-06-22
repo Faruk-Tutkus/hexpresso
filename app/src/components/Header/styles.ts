@@ -5,7 +5,8 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'space-between',
         flexDirection: 'row',
-        paddingVertical: 36,
+        paddingTop: 36,
+        paddingBottom: 24,
         paddingHorizontal: 16,
         borderBottomLeftRadius: 16,
         borderBottomRightRadius: 16,
@@ -35,6 +36,8 @@ const styles = StyleSheet.create({
     rightContainer: {
         flexDirection: 'row',
         alignItems: 'center',
+        marginTop: 24,
+        justifyContent: 'center',
         gap: 8,
     },
     iconText: {

@@ -5,7 +5,7 @@ export default StyleSheet.create({
         padding: 20,
         borderRadius: 16,
         justifyContent: 'center',
-        alignItems: 'flex-start',
+        alignItems: 'center',
         gap: 10,
         textAlign: 'center',
     }
