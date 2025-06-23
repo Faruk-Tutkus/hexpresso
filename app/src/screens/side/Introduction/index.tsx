@@ -190,6 +190,7 @@ const Introduction = () => {
               longitude: location?.longitude || 0,
             },
             updatedAt: new Date(),
+            coins: 50,
           });
         }
         const fetchSuccess = await useFetchData({ user: user, setLoading: setIsLoading, setSigns });

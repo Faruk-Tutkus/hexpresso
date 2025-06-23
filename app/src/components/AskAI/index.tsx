@@ -2,9 +2,9 @@ import { db } from '@api/config.firebase'
 import { CustomButton, FloatingLabelInput } from '@components'
 import { GoogleGenAI, HarmBlockThreshold, HarmCategory, Type } from "@google/genai"
 import { getDateRangeForPeriod } from '@hooks'
-import { useAuth, useTheme } from '@providers'
-import { doc, getDoc } from "firebase/firestore"
-import React from 'react'
+import { useAuth, useTheme, useToast } from '@providers'
+import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore"
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Text } from 'react-native'
 import Animated, {
@@ -30,7 +30,25 @@ const AskAI = ({ type }: AskAIType) => {
   const user = useAuth().user
   const [isLoading, setIsLoading] = React.useState(false)
   const [error, setError] = React.useState<string>('')
-  console.log(getDateRangeForPeriod('daily', new Date().toISOString()))
+  const [coins, setCoins] = React.useState<number>(0)
+  const { showToast } = useToast()
+  //console.log(getDateRangeForPeriod('daily', new Date().toISOString()))
+
+  useEffect(() => {
+    if (!user?.uid) return;
+    
+    // Real-time listener for user document changes
+    const unsubscribe = onSnapshot(doc(db, 'users', user.uid), (doc) => {
+      if (doc.exists()) {
+        const data = doc.data();
+        setCoins(data?.coins || 0);
+      }
+    });
+
+    // Cleanup listener on unmount
+    return () => unsubscribe();
+  }, [user])
+
   const getResponse = async () => {
     try {
       setIsLoading(true)
@@ -170,16 +188,20 @@ const AskAI = ({ type }: AskAIType) => {
 
   const animatedResponseStyle = useAnimatedStyle(() => {
     return {
-      maxHeight: interpolate(progress.value, [0, 1], [100, 300]),
+      maxHeight: interpolate(progress.value, [0, 1], [125, 450]),
       opacity: interpolate(progress.value, [0, 1], [0, 1])
     }
   })
   const animatedContainerStyle = useAnimatedStyle(() => {
     return {
-      maxHeight: interpolate(progress.value, [0, 0.4], [100, 300]),
+      maxHeight: interpolate(progress.value, [0, 0.4], [125, 450]),
     }
   })
   const handleSendSign = async () => {
+    if (coins < 25 || !user?.uid) {
+      showToast('Yetersiz kredi en az 25 kredi gerekiyor', 'error')
+      return;
+    }
     if (!value.trim() && type === 'sign') {
       setTimeout(() => {
         setError('Lütfen geçerli bir prompt giriniz.')
@@ -188,8 +210,13 @@ const AskAI = ({ type }: AskAIType) => {
       return;
     }
     progress.value = withTiming(0, { duration: 1250 });
-    
+    if (user?.uid && coins >= 25) {
+      await updateDoc(doc(db, 'users', user?.uid), {
+        coins: coins - 25
+      })
+    }
     const userData = await getResponse();
+
     if (userData) {
       const aiResponse = await getAIResponse(userData);
       progress.value = withTiming(1, { duration: 3000 });
@@ -199,6 +226,15 @@ const AskAI = ({ type }: AskAIType) => {
   }
 
   const handleSendComment = async () => {
+    if (coins < 100 || !user?.uid) {
+      showToast('Yetersiz kredi en az 100 kredi gerekiyor', 'error')
+      return;
+    }
+    if (user?.uid && coins >= 100) {
+      await updateDoc(doc(db, 'users', user?.uid), {
+        coins: coins - 100
+      })
+    }
     progress.value = withTiming(0, { duration: 1250 });
     
     const userData = await getResponse();

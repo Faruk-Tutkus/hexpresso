@@ -20,6 +20,7 @@ const Header = ({ user, onPress }: HeaderProps) => {
   const { colors } = useTheme();
   const [horoscopeInfo, setHoroscopeInfo] = useState<string>('')
   const [updatedAt, setUpdatedAt] = useState<any>(null)
+  const [coins, setCoins] = useState<number>(0)
   const { t } = useTranslation()
   useEffect(() => {
     if (!user?.uid) return;
@@ -30,12 +31,15 @@ const Header = ({ user, onPress }: HeaderProps) => {
         const data = doc.data();
         setHoroscopeInfo(data?.sunSign || '');
         setUpdatedAt(data?.updatedAt || null);
+        setCoins(data?.coins || 0);
       }
     });
 
     // Cleanup listener on unmount
     return () => unsubscribe();
   }, [user])
+
+
   // Mesaj listesi
   const messages = [
     'Selam sana',
@@ -137,9 +141,15 @@ const Header = ({ user, onPress }: HeaderProps) => {
         </View>
       </View>
       <View style={styles.rightContainer}>
-        <Text style={[styles.iconText, { color: colors.text }]}>1000</Text>
+        <Text style={[styles.iconText, { color: colors.text }]}>{coins}</Text>
         <Image
-          source={require('@assets/image/coin_one.png')}
+          source={
+            coins >= 0 && coins < 100
+              ? require('@assets/image/coin_one.png')
+              : coins >= 100 && coins < 200
+                ? require('@assets/image/coin_two.png')
+                : require('@assets/image/coin_three.png')
+          }
           contentFit="contain"
           style={styles.logo}
         />

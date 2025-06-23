@@ -32,7 +32,7 @@ const GuideScreen = () => {
   useEffect(() => {
     loadCache({ id: 'signs_data', setSigns, setLoading });
   }, [])
-
+  
   // Ultra-fast navigation - only pass index
   const navigateToSignDetail = (signIndex: number) => {
     router.push({
@@ -64,15 +64,15 @@ const GuideScreen = () => {
         <ActivityIndicator size="large" color={colors.text} />
       </View> :
         <>
-          <AskAI type="sign" />
+          
           <FlatList
+            ListHeaderComponent={<AskAI type="sign" />}
             data={data}
             renderItem={({ item }) => <HoroscopeCard sign={item.sign} date={item.date} image={item.image} onPress={() => navigateToSignDetail(item.index)} />}
             keyExtractor={(item) => item.sign}
             showsVerticalScrollIndicator={false}
             scrollEnabled
-            contentContainerStyle={{ paddingBottom: 100, paddingTop: 10 }}
-            style={{ marginVertical: 10 }}
+            contentContainerStyle={{ paddingBottom: 10 }}
             // Performance optimizations
             removeClippedSubviews={true}
             maxToRenderPerBatch={10}

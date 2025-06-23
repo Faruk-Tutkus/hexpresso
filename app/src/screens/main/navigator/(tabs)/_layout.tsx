@@ -4,7 +4,7 @@ import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Tabs } from "expo-router";
 import * as SystemUI from 'expo-system-ui';
 import { useEffect, useRef } from 'react';
-import { Animated, TouchableOpacity, View } from 'react-native';
+import { Animated, Easing, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const TabLayout = () => {
@@ -14,23 +14,36 @@ const TabLayout = () => {
   const user = useAuth();
   const CustomTabBar = ({ state, navigation }: BottomTabBarProps) => {
     const filteredRoutes = state.routes.filter((route: any) => route.name !== 'HomeScreen/styles' && route.name !== 'GuideScreen/styles' && route.name !== 'SignComments/styles' && route.name !== 'Signs/styles' && route.name !== 'Signs/index');
-    const animatedValues = useRef(filteredRoutes.map(() => new Animated.Value(1))).current;
-    const transformY = useRef(filteredRoutes.map(() => new Animated.Value(0))).current;
+    const animatedValues = useRef(
+      filteredRoutes.map((_: any, idx: number) =>
+        new Animated.Value(
+          state.routes.findIndex(r => r.name === filteredRoutes[idx].name) === state.index ? 1.2 : 1
+        )
+      )
+    ).current;
+
+    const transformY = useRef(
+      filteredRoutes.map((_: any, idx: number) =>
+        new Animated.Value(
+          state.routes.findIndex(r => r.name === filteredRoutes[idx].name) === state.index ? -10 : 0
+        )
+      )
+    ).current;
 
     useEffect(() => {
       filteredRoutes.forEach((_: any, index: number) => {
         const isCurrentlyFocused = state.routes.findIndex(route => route.name === filteredRoutes[index].name) === state.index;
-        Animated.spring(animatedValues[index], {
+        Animated.timing(animatedValues[index], {
           toValue: isCurrentlyFocused ? 1.2 : 1,
+          duration: 220,
+          easing: Easing.out(Easing.ease),
           useNativeDriver: true,
-          tension: 50,
-          friction: 7,
         }).start();
-        Animated.spring(transformY[index], {
+        Animated.timing(transformY[index], {
           toValue: isCurrentlyFocused ? -10 : 0,
+          duration: 220,
+          easing: Easing.out(Easing.ease),
           useNativeDriver: true,
-          tension: 7,
-          friction: 1,
         }).start();
       });
     }, [state.index]);
@@ -59,7 +72,7 @@ const TabLayout = () => {
         borderRadius: 20,
         alignSelf: 'center',
         marginBottom: insets.bottom + 10,
-        marginTop: insets.top + 5,
+        marginTop: 5,
       }}>
         {filteredRoutes.map((route: any, index: number) => {
           const originalIndex = state.routes.findIndex(r => r.name === route.name);
