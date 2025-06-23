@@ -1,7 +1,7 @@
 import { db } from '@api/config.firebase'
 import { CustomButton, FloatingLabelInput } from '@components'
 import { GoogleGenAI, HarmBlockThreshold, HarmCategory, Type } from "@google/genai"
-import { getDateRangeForPeriod } from '@hooks'
+import { canRequestHoroscopeToday, getDateRangeForPeriod, markHoroscopeRequestedToday } from '@hooks'
 import { useAuth, useTheme, useToast } from '@providers'
 import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore"
 import React, { useEffect } from 'react'
@@ -188,13 +188,13 @@ const AskAI = ({ type }: AskAIType) => {
 
   const animatedResponseStyle = useAnimatedStyle(() => {
     return {
-      maxHeight: interpolate(progress.value, [0, 1], [125, 450]),
+      maxHeight: interpolate(progress.value, [0, 1], [110, 450]),
       opacity: interpolate(progress.value, [0, 1], [0, 1])
     }
   })
   const animatedContainerStyle = useAnimatedStyle(() => {
     return {
-      maxHeight: interpolate(progress.value, [0, 0.4], [125, 450]),
+      maxHeight: interpolate(progress.value, [0, 0.4], [110, 450]),
     }
   })
   const handleSendSign = async () => {
@@ -226,11 +226,26 @@ const AskAI = ({ type }: AskAIType) => {
   }
 
   const handleSendComment = async () => {
-    if (coins < 100 || !user?.uid) {
-      showToast('Yetersiz kredi en az 100 kredi gerekiyor', 'error')
+    setIsLoading(true)
+    const allowed = await canRequestHoroscopeToday(user?.uid || '')
+    if (!allowed.lastRequest) {
+      showToast('Bugün zaten bir burç yorumu istediniz. Lütfen daha sonra tekrar deneyiniz.', 'error')
+      if (allowed.lastResponse) {
+        console.log(allowed.lastResponse)
+        progress.value = withTiming(1, { duration: 3000 });
+        setResponse(allowed.lastResponse)
+        setIsLoading(false)
+        return;
+      }
+      setIsLoading(false)
       return;
     }
-    if (user?.uid && coins >= 100) {
+    if (coins < 50 || !user?.uid) {
+      showToast('Yetersiz kredi en az 50 kredi gerekiyor', 'error')
+      setIsLoading(false)
+      return;
+    }
+    if (user?.uid && coins >= 50) {
       await updateDoc(doc(db, 'users', user?.uid), {
         coins: coins - 100
       })
@@ -242,6 +257,7 @@ const AskAI = ({ type }: AskAIType) => {
       const aiResponse = await getAIResponse(userData);
       progress.value = withTiming(1, { duration: 3000 });
       setResponse(aiResponse || '');
+      await markHoroscopeRequestedToday(user?.uid || '', aiResponse)
       setIsLoading(false)
     }
   }
@@ -263,11 +279,12 @@ const AskAI = ({ type }: AskAIType) => {
       )}
       {type === 'comment' && (
         <CustomButton
-          title="Mordecai'ya sor"
+          title="Özel Burç Yorumun"
           onPress={handleSendComment}
           leftIcon="search"
-          variant="third"
+          variant="primary"
           loading={isLoading}
+          contentStyle={{width: '60%', marginTop: 16}}
         />
       )}
       <Animated.View 

@@ -1,10 +1,11 @@
 import { FloatingDatePicker, FloatingLabelInput, FloatingLabelPicker, FloatingTimePicker, MapView } from '@components';
-import { useAuth, useTheme } from '@providers';
+import { useAuth, useTheme, useToast } from '@providers';
 import { useState } from 'react';
 
 const useIntroductionData = () => {
     const { colors } = useTheme();
     const { user } = useAuth();
+    const { showToast } = useToast();
     const [name, setName] = useState(user?.displayName || '');
     const [gender, setGender] = useState('');
     const [date, setDate] = useState<Date | ''>('');
@@ -28,6 +29,7 @@ const useIntroductionData = () => {
       meaning: '',
       experience: '',
       curious: '',
+      location: '',
     });
   
     const data = [
@@ -106,7 +108,9 @@ const useIntroductionData = () => {
         ),
         button: {
           onPress: () => {
-            
+            if (!location) {
+              showToast('Lütfen bir konum seçiniz', 'error')
+            }
           }
         }
       },

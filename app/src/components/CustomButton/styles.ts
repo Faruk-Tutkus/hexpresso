@@ -1,7 +1,8 @@
 import { StyleSheet } from "react-native";
 export default StyleSheet.create({
     container: {
-      padding: 10,
+      paddingHorizontal: 10,
+      paddingVertical: 10,
       overflow: 'hidden',
       borderRadius: 8,
       width: '50%',
@@ -15,7 +16,6 @@ export default StyleSheet.create({
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      gap: 10,
     },
     text: {
       fontSize: 16,
@@ -29,6 +29,6 @@ export default StyleSheet.create({
       marginRight: 8,
     },
     rightIcon: {
-      marginLeft: 8,
+      marginRight: 8,
     },
   });

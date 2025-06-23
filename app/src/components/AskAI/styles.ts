@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
         borderLeftWidth: 1,
         borderRightWidth: 1,
         marginTop: 8,
-        paddingBottom: 16,
-        paddingHorizontal: 24,
+        paddingBottom: 8,
+        paddingHorizontal: 18,
         justifyContent: 'flex-start',
     },
     responseText: {

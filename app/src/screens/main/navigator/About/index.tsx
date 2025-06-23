@@ -1,5 +1,5 @@
 import { ContainerButton } from '@components';
-import { useTheme } from '@providers';
+import { useTheme, useToast } from '@providers';
 import * as Linking from 'expo-linking';
 import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
@@ -8,11 +8,14 @@ import styles from './styles';
 
 const About = () => {
   const { colors } = useTheme();
-
+  const { showToast } = useToast();
   const openURL = async (url: string) => {
     const supported = await Linking.canOpenURL(url);
     if (supported) {
       await Linking.openURL(url);
+    }
+    else {
+      showToast('Bu linki açmak için tarayıcınızı açınız.', 'error')
     }
   };
 
