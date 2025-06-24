@@ -26,6 +26,12 @@
           "clientToken": "69b436333e6e48d8c44c585c3ee9373f",
           "displayName": "Hexpresso"
         }
+      ],
+      [
+        "react-native-google-mobile-ads",
+        {
+          "androidAppId": "ca-app-pub-2363017162977044~8550998696"
+        }
       ]
     ],
     "android": {

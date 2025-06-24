@@ -21,6 +21,7 @@ interface AskAIType {
   type: 'sign' | 'comment'
 }
 
+
 const AskAI = ({ type }: AskAIType) => {
   const [value, onChangeText] = React.useState('')
   const { colors } = useTheme()
@@ -247,7 +248,7 @@ const AskAI = ({ type }: AskAIType) => {
     }
     if (user?.uid && coins >= 50) {
       await updateDoc(doc(db, 'users', user?.uid), {
-        coins: coins - 100
+        coins: coins - 50
       })
     }
     progress.value = withTiming(0, { duration: 1250 });

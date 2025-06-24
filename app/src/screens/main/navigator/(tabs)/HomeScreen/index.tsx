@@ -1,12 +1,10 @@
-import { useAuth } from '@providers';
 import React from 'react';
 import { View } from 'react-native';
-const Home = () => {
-  const user = useAuth();
 
+const Home = () => {
   return (
     <View>
-      
+
     </View>
   )
 }

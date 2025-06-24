@@ -3,13 +3,15 @@ import Icon from '@assets/icons';
 import { GetTimeBasedGreeting } from '@hooks';
 import { useTheme } from '@providers';
 import { Image } from 'expo-image';
+import { router } from 'expo-router';
 import { User } from 'firebase/auth';
 import { doc, onSnapshot } from 'firebase/firestore';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Animated, Text, TouchableOpacity, View } from 'react-native';
 import Reanimated, { FadeIn } from 'react-native-reanimated';
-import styles from './styles';
+import { breathingAnimation, shakeAnimation, styles } from './styles';
+
 
 interface HeaderProps {
   user: User
@@ -24,7 +26,7 @@ const Header = ({ user, onPress }: HeaderProps) => {
   const { t } = useTranslation()
   useEffect(() => {
     if (!user?.uid) return;
-    
+
     // Real-time listener for user document changes
     const unsubscribe = onSnapshot(doc(db, 'users', user.uid), (doc) => {
       if (doc.exists()) {
@@ -39,6 +41,32 @@ const Header = ({ user, onPress }: HeaderProps) => {
     return () => unsubscribe();
   }, [user])
 
+  const shakeAnimationValue = useRef(new Animated.Value(0)).current;
+  const breathingAnimationValue = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    let breathingAnim: Animated.CompositeAnimation | null = null;
+
+    if (coins < 25) {
+      shakeAnimation(shakeAnimationValue).start();
+      breathingAnim = breathingAnimation(breathingAnimationValue);
+      breathingAnim.start();
+    } else {
+      breathingAnimationValue.setValue(0);
+    }
+
+    return () => {
+      breathingAnim?.stop();
+    };
+  }, [coins]);
+
+  const containerStyle = {
+    transform: [{ translateX: shakeAnimationValue }],
+  };
+
+  const textColor = breathingAnimationValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [colors.errorBorder, colors.errorBorder + '80'],
+  });
 
   // Mesaj listesi
   const messages = [
@@ -140,20 +168,22 @@ const Header = ({ user, onPress }: HeaderProps) => {
           </Animated.View>
         </View>
       </View>
-      <View style={styles.rightContainer}>
-        <Text style={[styles.iconText, { color: colors.text }]}>{coins}</Text>
-        <Image
-          source={
-            coins >= 0 && coins < 100
-              ? require('@assets/image/coin_one.png')
-              : coins >= 100 && coins < 200
-                ? require('@assets/image/coin_two.png')
-                : require('@assets/image/coin_three.png')
-          }
-          contentFit="contain"
-          style={styles.logo}
-        />
-      </View>
+      <TouchableOpacity onPress={() => router.push('/src/screens/main/navigator/Coins')}>
+        <Animated.View style={[styles.rightContainer, containerStyle]}>
+          <Animated.Text style={[styles.iconText, { color: coins < 25 ? textColor : colors.text }]}>{coins}</Animated.Text>
+          <Image
+            source={
+              coins >= 0 && coins < 100
+                ? require('@assets/image/coin_one.png')
+                : coins >= 100 && coins < 200
+                  ? require('@assets/image/coin_two.png')
+                  : require('@assets/image/coin_three.png')
+            }
+            contentFit="contain"
+            style={styles.logo}
+          />
+        </Animated.View>
+      </TouchableOpacity>
     </Reanimated.View>
   )
 }

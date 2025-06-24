@@ -14,7 +14,8 @@
       "@utils/*": ["src/utils/*"],
       "@constants": ["src/constants/index"],
       "@hooks": ["src/hooks/index"],
-      "@providers": ["src/providers/index"]
+      "@providers": ["src/providers/index"],
+      "@ads": ["src/ads/index"]
     }
   },
   "include": [

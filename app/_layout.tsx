@@ -3,12 +3,15 @@ import { useFonts } from 'expo-font';
 import { Stack } from "expo-router";
 import * as SystemUI from 'expo-system-ui';
 import { useEffect } from "react";
+import mobileAds from 'react-native-google-mobile-ads';
 
 export function AppContent() {
   const { theme, colors } = useTheme();
+  
   useEffect(() => {
     SystemUI.setBackgroundColorAsync(colors.background);
   }, [colors.background]);
+  
   const [fontsLoaded, fontError] = useFonts({
     'Almendra-Regular': require('./src/assets/fonts/Almendra-Regular.ttf'),
     'CroissantOne-Regular': require('./src/assets/fonts/CroissantOne-Regular.ttf'),
@@ -18,10 +21,19 @@ export function AppContent() {
     'Domine-Bold': require('./src/assets/fonts/Domine-Bold.ttf'),
   });
   
+  useEffect(() => {
+    mobileAds()
+    .initialize()
+    .then(adapterStatuses => {
+      console.log('Initialization complete!', adapterStatuses);
+    });
+  }, []);
+  
   // Font loading hatası durumunda da uygulamayı başlat
   if (!fontsLoaded && !fontError) {
     return null;
   }
+
   return (
     <Stack
       //initialRouteName="src/screens/main/navigator"

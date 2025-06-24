@@ -51,12 +51,12 @@ export default function Layout() {
       description: 'Uygulama ayarları'
     },
     { 
-      name: 'Help', 
-      title: 'Yardım', 
-      icon: 'help-circle',
-      route: '/src/screens/main/navigator/Help',
+      name: 'Coins', 
+      title: 'Altın Kazan', 
+      icon: 'play-circle',
+      route: '/src/screens/main/navigator/Coins',
       colors: ['#FA709A', '#FEE140'],
-      description: 'Destek ve SSS'
+      description: 'Altın kazanma yolları'
     },
     { 
       name: 'Logout', 
@@ -179,13 +179,14 @@ export default function Layout() {
                       </LinearGradient>
                       
                       <View style={styles.menuTextContainer}>
-                        <Text style={[
+                        <Animated.Text style={[
                           styles.menuTitle,
                           { color: colors.text },
-                          isActive && styles.activeMenuTitle
+                          isActive && styles.activeMenuTitle,
+                          item.name === 'Coins' && { color: colors.errorBorder}
                         ]}>
                           {item.title}
-                        </Text>
+                        </Animated.Text>
                         <Text style={[
                           styles.menuDescription,
                           { color: colors.text + '80' }

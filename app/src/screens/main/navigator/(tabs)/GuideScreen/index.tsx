@@ -1,3 +1,4 @@
+import { Banner } from '@ads';
 import { AskAI, HoroscopeCard } from '@components';
 import { loadCache } from '@hooks';
 import { useTheme } from '@providers';
@@ -64,7 +65,7 @@ const GuideScreen = () => {
         <ActivityIndicator size="large" color={colors.text} />
       </View> :
         <>
-          
+          <Banner adType='banner' />
           <FlatList
             ListHeaderComponent={<AskAI type="sign" />}
             data={data}
@@ -72,7 +73,7 @@ const GuideScreen = () => {
             keyExtractor={(item) => item.sign}
             showsVerticalScrollIndicator={false}
             scrollEnabled
-            contentContainerStyle={{ paddingBottom: 10 }}
+            contentContainerStyle={{ paddingBottom: 60 }}
             // Performance optimizations
             removeClippedSubviews={true}
             maxToRenderPerBatch={10}
