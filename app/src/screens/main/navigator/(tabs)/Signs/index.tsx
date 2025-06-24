@@ -1,9 +1,10 @@
+import { Banner } from '@ads'
 import { Ionicons } from '@expo/vector-icons'
 import { useTheme } from '@providers'
 import '@utils/i18n'
 import { Image } from 'expo-image'
 import { useLocalSearchParams } from 'expo-router'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ActivityIndicator, Modal, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import loadCache from 'src/hooks/LoadCache'
@@ -17,7 +18,8 @@ const Signs = () => {
   const [modalContent, setModalContent] = useState<{ title: string, content: string, items: any[], type: string, icon: string }>({ title: '', content: '', items: [], type: 'text', icon: 'information-circle' })
   const [signs, setSigns] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
-  
+  const scrollViewRef = useRef<ScrollView>(null)
+
   useEffect(() => {
     loadCache({ id: 'signs_data', setSigns, setLoading });
   }, [])
@@ -72,7 +74,7 @@ const Signs = () => {
   }
 
   const InfoCard = ({ title, content, icon, backgroundColor }: any) => (
-    <TouchableOpacity 
+    <TouchableOpacity
       style={[styles.infoCard, { backgroundColor: backgroundColor || colors.surface + '20', marginBottom: title === 'Ruh Eşi' ? -25 : 20 }]}
       onPress={() => openModal(title, content, icon)}
       activeOpacity={0.7}
@@ -88,7 +90,7 @@ const Signs = () => {
   )
 
   const GridCard = ({ title, items, icon, backgroundColor }: any) => (
-    <TouchableOpacity 
+    <TouchableOpacity
       style={[styles.gridCard, { backgroundColor: backgroundColor || colors.surface + '20' }]}
       onPress={() => openModal(title, '', icon, items, 'list')}
       activeOpacity={0.7}
@@ -113,7 +115,7 @@ const Signs = () => {
   )
 
   const CareerCard = ({ careers }: any) => (
-    <TouchableOpacity 
+    <TouchableOpacity
       style={[styles.careerCard, { backgroundColor: colors.secondary + '20' }]}
       onPress={() => openModal('Kariyer', '', 'briefcase', careers?.key, 'careers')}
       activeOpacity={0.7}
@@ -140,7 +142,7 @@ const Signs = () => {
   )
 
   const FamousCard = ({ famous }: any) => (
-    <TouchableOpacity 
+    <TouchableOpacity
       style={[styles.famousCard, { backgroundColor: colors.primary + '20' }]}
       onPress={() => openModal('Ünlüler', '', 'star', famous?.key, 'famous')}
       activeOpacity={0.7}
@@ -149,6 +151,7 @@ const Signs = () => {
         <Ionicons name="star" size={24} color={colors.text} />
         <Text style={[styles.cardTitle, { color: colors.text }]}>Ünlüler</Text>
       </View>
+
       <View style={styles.famousGrid}>
         {famous?.key?.slice(0, 4).map((person: string, index: number) => (
           <View key={index} style={[styles.famousItem, { backgroundColor: colors.background }]}>
@@ -170,7 +173,7 @@ const Signs = () => {
   )
 
   const HalfCard = ({ title, content, icon, backgroundColor, onPress }: any) => (
-    <TouchableOpacity 
+    <TouchableOpacity
       style={[styles.halfCard, { backgroundColor }]}
       onPress={onPress}
       activeOpacity={0.7}
@@ -180,7 +183,7 @@ const Signs = () => {
         <Text style={[styles.smallCardTitle, { color: colors.text }]}>{title}</Text>
       </View>
       <Text style={[styles.smallCardContent, { color: colors.text }]} numberOfLines={4}>
-        {title === 'ELEMENT' 
+        {title === 'ELEMENT'
           ? content
           : (content?.length > 150 ? content.substring(0, 150) + '...' : content)
         }
@@ -235,12 +238,18 @@ const Signs = () => {
     }
   }
 
+  useEffect(() => {
+    if (scrollViewRef.current) {
+      scrollViewRef.current.scrollTo({ x: 0, y: 0, animated: true })
+    }
+  }, [signIndex])
+
   if (loading) {
     return (
       <View style={[styles.loadingContainer, { backgroundColor: colors.background }]}>
-        <Image 
-          source={getSignImage(signIndex as string)} 
-          style={styles.loadingImage} 
+        <Image
+          source={getSignImage(signIndex as string)}
+          style={styles.loadingImage}
           tintColor={colors.primary}
           contentFit="contain"
         />
@@ -251,12 +260,16 @@ const Signs = () => {
   }
 
   return (
-    <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
+    <ScrollView 
+      style={[styles.container, { backgroundColor: colors.background }]}
+      contentOffset={{ x: 0, y: 0 }}
+      ref={scrollViewRef}
+    >
       {/* Header Section */}
       <View style={[styles.header, { backgroundColor: colors.secondaryText }]}>
-        <Image 
-          source={getSignImage(signIndex as string)} 
-          style={styles.signImage} 
+        <Image
+          source={getSignImage(signIndex as string)}
+          style={styles.signImage}
           tintColor={colors.background}
           contentFit="contain"
         />
@@ -265,7 +278,7 @@ const Signs = () => {
         </Text>
         <Text style={[styles.signDates, { color: colors.background }]}>{data.dates}</Text>
       </View>
-
+      <Banner adType='banner' />
       {/* About Section */}
       <InfoCard
         title="Hakkında"
@@ -292,13 +305,13 @@ const Signs = () => {
           onPress={() => openModal('Düşmanlar', data.enemy, 'warning')}
         />
       </View>
-
+      <Banner adType='banner' />
       {/* Careers Section */}
       <CareerCard careers={data.careers} />
 
       {/* Famous People */}
       <FamousCard famous={data.famous} />
-
+      <Banner adType='banner' />
       {/* What Makes Happy */}
       <View style={styles.twoColumnContainer}>
         <HalfCard
@@ -314,11 +327,11 @@ const Signs = () => {
           content={`🌟 Element: ${data.element || 'Bilinmiyor'}\n🪐 Gezegen: ${data.planet || 'Bilinmiyor'}\n⚡ Modalite: ${data.modality || 'Bilinmiyor'}\n🔮 Sembol: ${data.symbol || 'Bilinmiyor'}`}
           icon="planet"
           backgroundColor={colors.surface + '20'}
-          onPress={() => openModal('Element Bilgileri', 
+          onPress={() => openModal('Element Bilgileri',
             `🌟 Element: ${data.element || 'Bilinmiyor'}\n\n` +
             `🪐 Gezegen: ${data.planet || 'Bilinmiyor'}\n\n` +
             `⚡ Modalite: ${data.modality || 'Bilinmiyor'}\n\n` +
-            `🔮 Sembol: ${data.symbol || 'Bilinmiyor'}`, 
+            `🔮 Sembol: ${data.symbol || 'Bilinmiyor'}`,
             'planet')}
         />
       </View>
@@ -338,7 +351,7 @@ const Signs = () => {
         icon="heart-circle"
         backgroundColor={colors.secondary + '20'}
       />
-
+      <Banner adType='banner' />
       {/* Friends */}
       <InfoCard
         title="Arkadaşlık"
@@ -356,7 +369,7 @@ const Signs = () => {
       />
 
       <View style={{ height: 50 }} />
-
+      <Banner adType='interstitial' />
       {/* Enhanced Modal */}
       <Modal
         animationType="fade"
@@ -375,8 +388,8 @@ const Signs = () => {
                 <Ionicons name="close" size={28} color={colors.text} />
               </TouchableOpacity>
             </View>
-            <ScrollView 
-              style={styles.modalBody} 
+            <ScrollView
+              style={styles.modalBody}
               showsVerticalScrollIndicator={true}
               contentContainerStyle={{ paddingBottom: 20 }}
             >

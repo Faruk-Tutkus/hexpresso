@@ -70,12 +70,20 @@ const Header = ({ user, onPress }: HeaderProps) => {
 
   // Mesaj listesi
   const messages = [
-    'Selam sana',
-    'Hoş geldin',
-    'Güzel bir gün',
-    'Başarılar dilerim',
-    'İyi çalışmalar'
-  ];
+    'Bugün yıldızlar seninle',
+    'Fal yorumun hazır dostum',
+    'Gökyüzü sırlarını fısıldıyor',
+    'Kaderini birlikte çözelim',
+    'Burcunda sürprizler var',
+    'Evren seninle konuşuyor',
+    'Sezgilerini takip et',
+    'Zihin ve kalp bir olsun',
+    'Gizli işaretler seni bekler',
+    'Yorumlar seni şaşırtacak'
+  ]
+  
+  
+  
 
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const slideAnim = useRef(new Animated.Value(0)).current;

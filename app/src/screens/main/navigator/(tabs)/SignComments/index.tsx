@@ -1,3 +1,4 @@
+import { Banner, useInterstitial } from '@ads'
 import { db } from '@api/config.firebase'
 import Icon from '@assets/icons'
 import { AskAI } from '@components'
@@ -47,6 +48,8 @@ const SignComments = () => {
   const [currentDate, setCurrentDate] = useState(new Date())
   const [hasNavigatedToFuture, setHasNavigatedToFuture] = useState(false)
   const flatListRef = useRef<FlatList>(null)
+
+  const { showInterstitial } = useInterstitial({})
 
   // Animation values for each card
   const animationValues = {
@@ -149,23 +152,23 @@ const SignComments = () => {
   // Set initial selected sign based on user's sunSign
   useEffect(() => {
     if (!user) return
-    
+
     let unsubscribe: (() => void) | null = null
-    
+
     const setupListener = () => {
       try {
         setLoading(true)
-        
+
         // Real-time listener for user document changes
         unsubscribe = onSnapshot(doc(db, 'users', user.uid), (docSnapshot) => {
           if (docSnapshot.exists()) {
             const userData = docSnapshot.data()
-            
+
             if (userData?.sunSign) {
               const userSignIndex = zodiacSigns.findIndex(
                 sign => sign.englishName.toLowerCase() === userData.sunSign.toLowerCase()
               )
-              
+
               if (userSignIndex !== -1) {
                 setSelectedSignIndex(userSignIndex)
                 // Scroll to the user's sign after a short delay
@@ -190,9 +193,9 @@ const SignComments = () => {
         setLoading(false)
       }
     }
-    
+
     setupListener()
-    
+
     // Cleanup listener on unmount
     return () => {
       if (unsubscribe) {
@@ -215,7 +218,6 @@ const SignComments = () => {
     const weekRange = getDateRangeForPeriod('weekly', today)
     const monthRange = getDateRangeForPeriod('monthly', today)
     const yearRange = getDateRangeForPeriod('yearly', today)
-
     // Get current sign data from cache
     const currentSignData = signs[selectedSignIndex]
     if (!currentSignData) return
@@ -280,9 +282,9 @@ const SignComments = () => {
     // Close all other cards
     Object.keys(animationValues).forEach(key => {
       if (key !== cardId) {
-        animationValues[key as PeriodType].value = withTiming(0, { 
-          duration: 300, 
-          easing: Easing.out(Easing.quad) 
+        animationValues[key as PeriodType].value = withTiming(0, {
+          duration: 300,
+          easing: Easing.out(Easing.quad)
         })
       }
     })
@@ -290,16 +292,16 @@ const SignComments = () => {
     if (expandedCard === cardId) {
       // Close this card
       setExpandedCard(null)
-      animationValues[cardId as PeriodType].value = withTiming(0, { 
-        duration: 300, 
-        easing: Easing.out(Easing.quad) 
+      animationValues[cardId as PeriodType].value = withTiming(0, {
+        duration: 300,
+        easing: Easing.out(Easing.quad)
       })
     } else {
       // Open this card
       setExpandedCard(cardId)
-      animationValues[cardId as PeriodType].value = withTiming(1, { 
-        duration: 400, 
-        easing: Easing.out(Easing.quad) 
+      animationValues[cardId as PeriodType].value = withTiming(1, {
+        duration: 400,
+        easing: Easing.out(Easing.quad)
       })
     }
   }
@@ -312,10 +314,11 @@ const SignComments = () => {
   const navigateDay = (direction: 'prev' | 'next') => {
     const today = new Date()
     today.setHours(0, 0, 0, 0)
-    
+
     const newDate = new Date(currentDate)
-    
+
     if (direction === 'prev') {
+      showInterstitial()
       newDate.setDate(newDate.getDate() - 1)
       setCurrentDate(newDate)
     } else if (direction === 'next') {
@@ -323,10 +326,11 @@ const SignComments = () => {
       const nextDay = new Date(currentDate)
       nextDay.setDate(nextDay.getDate() + 1)
       nextDay.setHours(0, 0, 0, 0)
-      
+
       const canNavigateToFuture = !hasNavigatedToFuture && nextDay <= new Date(today.setDate(today.getDate() + 1))
-      
+
       if (canNavigateToFuture) {
+        showInterstitial()
         setCurrentDate(nextDay)
         setHasNavigatedToFuture(true)
       }
@@ -344,15 +348,15 @@ const SignComments = () => {
       >
         <View style={[
           styles.signCard,
-          { 
+          {
             backgroundColor: isSelected ? colors.primary + '20' : colors.surface + '30',
             borderColor: isSelected ? colors.primary : colors.border,
-            borderRadius: isSelected ? 20 : 0 ,
+            borderRadius: isSelected ? 20 : 0,
             opacity: isSelected ? 1 : 0.7,
             width: 115, // Fixed width for consistent layout
           }
         ]}>
-          <Icon 
+          <Icon
             name={sign.iconName}
             size={40}
             color={isSelected ? colors.primary : colors.text}
@@ -375,7 +379,7 @@ const SignComments = () => {
 
     const cardColors = {
       daily: colors.primary,
-      weekly: colors.secondary, 
+      weekly: colors.secondary,
       monthly: colors.errorText,
       yearly: colors.surface
     }
@@ -383,7 +387,7 @@ const SignComments = () => {
     return (
       <Animated.View style={[
         styles.commentCard,
-        { 
+        {
           backgroundColor: cardColors[item.type] + '20',
           overflow: 'hidden'
         },
@@ -407,63 +411,63 @@ const SignComments = () => {
               </Text>
             </View>
           </View>
-          <Ionicons 
-            name={isExpanded ? "chevron-up" : "chevron-down"} 
-            size={24} 
-            color={colors.secondaryText} 
+          <Ionicons
+            name={isExpanded ? "chevron-up" : "chevron-down"}
+            size={24}
+            color={colors.secondaryText}
           />
         </TouchableOpacity>
-
         <Animated.View style={[styles.commentCardContent, contentAnimatedStyle]}>
-            {/* Stars Rating */}
-            {item.stars && (
-              <View style={styles.starsContainer}>
-                <Text style={[styles.starsTitle, { color: colors.text }]}>Yıldızlar</Text>
-                <View style={styles.starsGrid}>
-                  <View style={styles.starItem}>
-                    <Text style={[styles.starLabel, { color: colors.text }]}>Enerji</Text>
-                    <Text style={[styles.starValue, { color: cardColors[item.type] }]}>{item.stars.hustle}/5</Text>
-                  </View>
-                  <View style={styles.starItem}>
-                    <Text style={[styles.starLabel, { color: colors.text }]}>Aşk</Text>
-                    <Text style={[styles.starValue, { color: cardColors[item.type] }]}>{item.stars.sex}/5</Text>
-                  </View>
-                  <View style={styles.starItem}>
-                    <Text style={[styles.starLabel, { color: colors.text }]}>Başarı</Text>
-                    <Text style={[styles.starValue, { color: cardColors[item.type] }]}>{item.stars.success}/5</Text>
-                  </View>
-                  <View style={styles.starItem}>
-                    <Text style={[styles.starLabel, { color: colors.text }]}>Ruh hali</Text>
-                    <Text style={[styles.starValue, { color: cardColors[item.type] }]}>{item.stars.vibe}/5</Text>
-                  </View>
+
+          {/* Stars Rating */}
+          {item.stars && (
+            <View style={styles.starsContainer}>
+              <Text style={[styles.starsTitle, { color: colors.text }]}>Yıldızlar</Text>
+              <View style={styles.starsGrid}>
+                <View style={styles.starItem}>
+                  <Text style={[styles.starLabel, { color: colors.text }]}>Enerji</Text>
+                  <Text style={[styles.starValue, { color: cardColors[item.type] }]}>{item.stars.hustle}/5</Text>
+                </View>
+                <View style={styles.starItem}>
+                  <Text style={[styles.starLabel, { color: colors.text }]}>Aşk</Text>
+                  <Text style={[styles.starValue, { color: cardColors[item.type] }]}>{item.stars.sex}/5</Text>
+                </View>
+                <View style={styles.starItem}>
+                  <Text style={[styles.starLabel, { color: colors.text }]}>Başarı</Text>
+                  <Text style={[styles.starValue, { color: cardColors[item.type] }]}>{item.stars.success}/5</Text>
+                </View>
+                <View style={styles.starItem}>
+                  <Text style={[styles.starLabel, { color: colors.text }]}>Ruh hali</Text>
+                  <Text style={[styles.starValue, { color: cardColors[item.type] }]}>{item.stars.vibe}/5</Text>
                 </View>
               </View>
-            )}
+            </View>
+          )}
 
-            {/* Matches */}
-            {item.matches && (
-              <View style={styles.matchesContainer}>
-                <Text style={[styles.matchesTitle, { color: colors.text }]}>Uyumlu Burçlar</Text>
-                <View style={styles.matchesGrid}>
-                  <View style={styles.matchItem}>
-                    <Text style={[styles.matchLabel, { color: colors.text }]}>Kariyer</Text>
-                    <Text style={[styles.matchValue, { color: cardColors[item.type] }]}>{item.matches.career}</Text>
-                  </View>
-                  <View style={styles.matchItem}>
-                    <Text style={[styles.matchLabel, { color: colors.text }]}>Arkadaşlık</Text>
-                    <Text style={[styles.matchValue, { color: cardColors[item.type] }]}>{item.matches.friendship}</Text>
-                  </View>
-                  <View style={styles.matchItem}>
-                    <Text style={[styles.matchLabel, { color: colors.text }]}>Aşk</Text>
-                    <Text style={[styles.matchValue, { color: cardColors[item.type] }]}>{item.matches.love}</Text>
-                  </View>
+          {/* Matches */}
+          {item.matches && (
+            <View style={styles.matchesContainer}>
+              <Text style={[styles.matchesTitle, { color: colors.text }]}>Uyumlu Burçlar</Text>
+              <View style={styles.matchesGrid}>
+                <View style={styles.matchItem}>
+                  <Text style={[styles.matchLabel, { color: colors.text }]}>Kariyer</Text>
+                  <Text style={[styles.matchValue, { color: cardColors[item.type] }]}>{item.matches.career}</Text>
+                </View>
+                <View style={styles.matchItem}>
+                  <Text style={[styles.matchLabel, { color: colors.text }]}>Arkadaşlık</Text>
+                  <Text style={[styles.matchValue, { color: cardColors[item.type] }]}>{item.matches.friendship}</Text>
+                </View>
+                <View style={styles.matchItem}>
+                  <Text style={[styles.matchLabel, { color: colors.text }]}>Aşk</Text>
+                  <Text style={[styles.matchValue, { color: cardColors[item.type] }]}>{item.matches.love}</Text>
                 </View>
               </View>
-            )}
+            </View>
+          )}
 
-            <Text style={[styles.commentText, { color: colors.text }]}>
-              {item.content}
-            </Text>
+          <Text style={[styles.commentText, { color: colors.text }]}>
+            {item.content}
+          </Text>
         </Animated.View>
       </Animated.View>
     )
@@ -482,6 +486,7 @@ const SignComments = () => {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
+      <Banner />
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* AI Assistant Section - Now at the top */}
         <View style={styles.aiSection}>
@@ -508,8 +513,8 @@ const SignComments = () => {
             onScrollToIndexFailed={(info) => {
               const wait = new Promise(resolve => setTimeout(resolve, 500));
               wait.then(() => {
-                flatListRef.current?.scrollToIndex({ 
-                  index: info.index, 
+                flatListRef.current?.scrollToIndex({
+                  index: info.index,
                   animated: true,
                   viewPosition: 0.5
                 });
@@ -525,14 +530,14 @@ const SignComments = () => {
               <Ionicons name="chevron-back" size={20} color={colors.secondaryText} />
               <Text style={[styles.dailyNavText, { color: colors.secondaryText }]}>Dün</Text>
             </TouchableOpacity>
-            
+
             <TouchableOpacity
               style={[styles.todayIndicator, { backgroundColor: colors.secondary }]}
               onPress={goToToday}
             >
               <Text style={[styles.todayText, { color: colors.background }]}>Bugün</Text>
             </TouchableOpacity>
-            
+
             <TouchableOpacity
               style={[styles.dailyNavButton, { borderColor: colors.border }]}
               onPress={() => navigateDay('next')}
@@ -542,13 +547,13 @@ const SignComments = () => {
             </TouchableOpacity>
           </View>
         </View>
-
+        <Banner adType='banner' />
         {/* Comment Cards */}
         <View style={styles.commentsSection}>
           <Text style={[styles.sectionTitle, { color: colors.text }]}>
             {zodiacSigns[selectedSignIndex].name} yorumları
           </Text>
-          
+
           <FlatList
             data={commentCards}
             renderItem={renderCommentCard}
@@ -559,6 +564,7 @@ const SignComments = () => {
         </View>
 
         <View style={{ height: 50 }} />
+        <Banner adType='banner' />
       </ScrollView>
     </View>
   )

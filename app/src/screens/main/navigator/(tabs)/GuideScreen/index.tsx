@@ -1,4 +1,4 @@
-import { Banner } from '@ads';
+import { Banner, useInterstitial } from '@ads';
 import { AskAI, HoroscopeCard } from '@components';
 import { loadCache } from '@hooks';
 import { useTheme } from '@providers';
@@ -29,11 +29,12 @@ const GuideScreen = () => {
   const router = useRouter();
   const [signs, setSigns] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  
   useEffect(() => {
     loadCache({ id: 'signs_data', setSigns, setLoading });
   }, [])
-  
+
+  const { showInterstitial } = useInterstitial({})
+
   // Ultra-fast navigation - only pass index
   const navigateToSignDetail = (signIndex: number) => {
     router.push({
@@ -58,7 +59,7 @@ const GuideScreen = () => {
     { sign: t('horoscope.taurus'), date: signs[numSign.Taurus].info.dates, image: require('@assets/image/taurus.svg'), index: numSign.Taurus },
     { sign: t('horoscope.virgo'), date: signs[numSign.Virgo].info.dates, image: require('@assets/image/virgo.svg'), index: numSign.Virgo },
   ]
-  
+
   return (
     <View>
       {loading ? <View style={{ width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
@@ -69,7 +70,12 @@ const GuideScreen = () => {
           <FlatList
             ListHeaderComponent={<AskAI type="sign" />}
             data={data}
-            renderItem={({ item }) => <HoroscopeCard sign={item.sign} date={item.date} image={item.image} onPress={() => navigateToSignDetail(item.index)} />}
+            renderItem={({ item }) => <HoroscopeCard sign={item.sign} date={item.date} image={item.image} onPress={() => {
+              showInterstitial()
+              setTimeout(() => {
+                navigateToSignDetail(item.index)
+              }, 3000)
+            }} />}
             keyExtractor={(item) => item.sign}
             showsVerticalScrollIndicator={false}
             scrollEnabled
