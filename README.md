@@ -6,6 +6,7 @@ Bu proje, Expo ve React Native kullanılarak geliştirilmiş, modern ve ölçekl
 - npx npm-check-updates -u - → Update package.json
 - npx expo prebuild
 - npx expo run:android
+- ./gradlew assembleRelease
 ## 🚀 Teknolojiler
 
 - [Expo](https://expo.dev) - React Native geliştirme platformu

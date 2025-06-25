@@ -1,4 +1,5 @@
 import { AuthProvider, ThemeProvider, ToastProvider, useTheme } from "@providers";
+import '@utils/i18n';
 import { useFonts } from 'expo-font';
 import { Stack } from "expo-router";
 import * as SystemUI from 'expo-system-ui';

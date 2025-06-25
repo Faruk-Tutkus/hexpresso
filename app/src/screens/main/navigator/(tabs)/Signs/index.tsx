@@ -1,7 +1,6 @@
 import { Banner } from '@ads'
 import { Ionicons } from '@expo/vector-icons'
 import { useTheme } from '@providers'
-import '@utils/i18n'
 import { Image } from 'expo-image'
 import { useLocalSearchParams } from 'expo-router'
 import React, { useEffect, useRef, useState } from 'react'

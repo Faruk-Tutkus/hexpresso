@@ -6,61 +6,63 @@ import { usePathname, useRouter } from 'expo-router';
 import { Drawer } from 'expo-router/drawer';
 import * as SystemUI from 'expo-system-ui';
 import { User } from 'firebase/auth';
+import { useEffect, useState } from 'react';
 import { Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { FadeIn, FadeInDown, FadeInRight, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function Layout() {
   const { user } = useAuth();
-  const { theme, colors } = useTheme();
+  const { colors } = useTheme();
   const router = useRouter();
   const pathname = usePathname();
   SystemUI.setBackgroundColorAsync(colors.background);
   const insets = useSafeAreaInsets();
+
   const drawerItems = [
-    { 
-      name: '(tabs)', 
-      title: 'Ana Sayfa', 
+    {
+      name: '(tabs)',
+      title: 'Ana Sayfa',
       icon: 'home',
       route: '/src/screens/main/navigator/(tabs)',
       colors: ['#FF6B6B', '#FF8E53'],
       description: 'Günlük burç yorumlarınız'
     },
-    { 
-      name: 'Profile', 
-      title: 'Profilim', 
+    {
+      name: 'Profile',
+      title: 'Profilim',
       icon: 'person',
       route: '/src/screens/main/navigator/Profile',
       colors: ['#4ECDC4', '#44A08D'],
       description: 'Kişisel bilgileriniz'
     },
-    { 
-      name: 'About', 
-      title: 'Hakkımızda', 
+    {
+      name: 'About',
+      title: 'Hakkımızda',
       icon: 'information-circle',
       route: '/src/screens/main/navigator/About',
       colors: ['#667EEA', '#764BA2'],
       description: 'Uygulama hakkında'
     },
-    { 
-      name: 'Settings', 
-      title: 'Ayarlar', 
+    {
+      name: 'Settings',
+      title: 'Ayarlar',
       icon: 'settings',
       route: '/src/screens/main/navigator/Settings',
       colors: ['#F093FB', '#F5576C'],
       description: 'Uygulama ayarları'
     },
-    { 
-      name: 'Coins', 
-      title: 'Altın Kazan', 
+    {
+      name: 'Coins',
+      title: 'Altın Kazan',
       icon: 'play-circle',
       route: '/src/screens/main/navigator/Coins',
       colors: ['#FA709A', '#FEE140'],
       description: 'Altın kazanma yolları'
     },
-    { 
-      name: 'Logout', 
-      title: 'Çıkış Yap', 
+    {
+      name: 'Logout',
+      title: 'Çıkış Yap',
       icon: 'exit',
       route: '/src/screens/main/navigator/Logout',
       colors: ['#FF4B2B', '#FF416C'],
@@ -68,9 +70,30 @@ export default function Layout() {
     },
   ];
 
+  // Animation control state
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  // Hook'ları her item için ayrı ayrı çağırıyoruz
+  const scale0 = useSharedValue(1);
+  const scale1 = useSharedValue(1);
+  const scale2 = useSharedValue(1);
+  const scale3 = useSharedValue(1);
+  const scale4 = useSharedValue(1);
+  const scale5 = useSharedValue(1);
+  const scaleValues = [scale0, scale1, scale2, scale3, scale4, scale5];
+
+  useEffect(() => {
+    // İlk animasyon tamamlandıktan sonra hasAnimated'ı true yap
+    const timer = setTimeout(() => {
+      setHasAnimated(true);
+    }, 1000); // Animasyon süresi + biraz buffer
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const CustomDrawerContent = (props: any) => {
     return (
-      <View style={{ flex: 1, backgroundColor: colors.background, paddingBottom: insets.bottom - 10}}>
+      <View style={{ flex: 1, backgroundColor: colors.background, paddingBottom: insets.bottom - 10 }}>
         {/* Header with user info */}
         <LinearGradient
           colors={[colors.background, colors.surface]}
@@ -78,14 +101,14 @@ export default function Layout() {
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
         >
-          <Animated.View 
-            entering={FadeInDown.delay(100).duration(600)}
+          <Animated.View
+            entering={!hasAnimated ? FadeInDown.delay(100).duration(600) : undefined}
             style={styles.userContainer}
           >
             <View style={styles.avatarContainer}>
               {user?.photoURL ? (
-                <Image 
-                  source={{ uri: user.photoURL }} 
+                <Image
+                  source={{ uri: user.photoURL }}
                   style={styles.avatar}
                 />
               ) : (
@@ -100,7 +123,7 @@ export default function Layout() {
               )}
               <View style={styles.onlineIndicator} />
             </View>
-            
+
             <View style={styles.userInfo}>
               <Text style={styles.userName}>
                 {user?.displayName || 'Hoş Geldiniz'}
@@ -113,29 +136,29 @@ export default function Layout() {
         </LinearGradient>
 
         {/* Menu items */}
-        <ScrollView 
+        <ScrollView
           style={styles.menuContainer}
           showsVerticalScrollIndicator={false}
         >
           {drawerItems.map((item, index) => {
             // Aktif sayfa kontrolü - daha detaylı
             let isActive = false;
-            
+
             if (item.name === '(tabs)') {
               // Ana sayfa için: tabs içindeki herhangi bir sayfa veya boş pathname
-              isActive = pathname.includes('(tabs)') || 
-                        pathname.includes('HomeScreen') || 
-                        pathname.includes('GuideScreen') ||
-                        pathname.includes('SignComments') ||
-                        pathname.includes('Signs') ||
-                        pathname === '/' ||
-                        pathname === '';
+              isActive = pathname.includes('(tabs)') ||
+                pathname.includes('HomeScreen') ||
+                pathname.includes('GuideScreen') ||
+                pathname.includes('SignComments') ||
+                pathname.includes('Signs') ||
+                pathname === '/' ||
+                pathname === '';
             } else {
               // Diğer sayfalar için pathname'de sayfa adı var mı kontrol et
               isActive = pathname.toLowerCase().includes(item.name.toLowerCase());
             }
-            
-            const scale = useSharedValue(1);
+
+            const scale = scaleValues[index];
 
             const animatedStyle = useAnimatedStyle(() => {
               return {
@@ -146,7 +169,7 @@ export default function Layout() {
             return (
               <Animated.View
                 key={item.name}
-                entering={FadeInRight.delay(100 + index * 50).duration(400)}
+                entering={!hasAnimated ? FadeInRight.delay(100 + index * 50).duration(400) : undefined}
               >
                 <TouchableOpacity
                   activeOpacity={0.7}
@@ -154,9 +177,9 @@ export default function Layout() {
                     scale.value = withSpring(0.95);
                   }}
                   onPressOut={() => {
+                    props.navigation.closeDrawer();
                     scale.value = withSpring(1);
                     router.push(item.route as any);
-                    props.navigation.closeDrawer();
                   }}
                 >
                   <Animated.View style={animatedStyle}>
@@ -171,19 +194,19 @@ export default function Layout() {
                         start={{ x: 0, y: 0 }}
                         end={{ x: 1, y: 1 }}
                       >
-                        <Icon 
-                          name={item.icon as any} 
-                          size={25} 
+                        <Icon
+                          name={item.icon as any}
+                          size={25}
                           color={isActive ? '#ffffff' : colors.text}
                         />
                       </LinearGradient>
-                      
+
                       <View style={styles.menuTextContainer}>
                         <Animated.Text style={[
                           styles.menuTitle,
                           { color: colors.text },
                           isActive && styles.activeMenuTitle,
-                          item.name === 'Coins' && { color: colors.errorBorder}
+                          item.name === 'Coins' && { color: colors.errorBorder }
                         ]}>
                           {item.title}
                         </Animated.Text>
@@ -207,8 +230,8 @@ export default function Layout() {
         </ScrollView>
 
         {/* Footer */}
-        <Animated.View 
-          entering={FadeIn.delay(500).duration(400)}
+        <Animated.View
+          entering={!hasAnimated ? FadeIn.delay(500).duration(400) : undefined}
           style={[styles.footer, { borderTopColor: colors.border }]}
         >
           <Text style={[styles.footerText, { color: colors.text + '60' }]}>

@@ -2,7 +2,6 @@ import { Banner, useInterstitial } from '@ads';
 import { AskAI, HoroscopeCard } from '@components';
 import { loadCache } from '@hooks';
 import { useTheme } from '@providers';
-import '@utils/i18n';
 import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';

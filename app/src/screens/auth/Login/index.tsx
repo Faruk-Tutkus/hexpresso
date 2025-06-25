@@ -1,7 +1,6 @@
 import { ContainerButton, CustomButton, FloatingLabelInput, UnderLineText } from '@components'
 import { useFetchData, useSignInWithApple, useSignInWithEmail, useSignInWithFacebook, useSignInWithGoogle } from '@hooks'
 import { useAuth, useTheme, useToast } from '@providers'
-import '@utils/i18n'
 import { router, useLocalSearchParams } from 'expo-router'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
