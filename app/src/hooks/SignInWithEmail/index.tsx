@@ -1,5 +1,5 @@
-import { db } from "@api/config.firebase";
-import { getAuth, signInWithEmailAndPassword, UserCredential } from "firebase/auth";
+import { auth, db } from "@api/config.firebase";
+import { signInWithEmailAndPassword, UserCredential } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useState } from "react";
 interface SignInResult {
@@ -18,7 +18,6 @@ export const useSignInWithEmail = () => {
   const signIn = async (email: string, password: string) => {
     try {
       setResult(prev => ({ ...prev, loading: true, error: null }));
-      const auth = getAuth();
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       if (user.emailVerified) {

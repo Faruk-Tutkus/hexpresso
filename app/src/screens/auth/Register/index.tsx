@@ -2,7 +2,7 @@ import { ContainerButton, CustomButton, FloatingLabelInput, UnderLineText } from
 import { useFetchData, useSignInWithGoogle, useSignUpWithEmail } from '@hooks'
 import { useAuth, useTheme, useToast } from '@providers'
 import { router, useLocalSearchParams } from 'expo-router'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import '../../../utils/i18n'
@@ -27,18 +27,6 @@ const Register = () => {
     displayName: '',
   })
   const { user } = useAuth();
-  const [dataFetched, setDataFetched] = useState(false);
-  const [signs, setSigns] = useState<any[]>([]);
-  useEffect(() => {
-    if (user && !dataFetched) {
-      useFetchData({ user, setLoading: setIsLoading, setSigns })
-        .then((success) => {
-          if (success) {
-            setDataFetched(true);
-          }
-        });
-    }
-  }, [user, dataFetched])
   const validation = () => {
     if (password !== rePassword) {
       setErrorMessage(prev => ({ ...prev, password: t('auth.auth/password-not-match') }))
@@ -96,9 +84,8 @@ const Register = () => {
         if (result.newUser) {
           router.replace('/src/screens/side/Introduction');
         } else {
-          const fetchSuccess = await useFetchData({ user: result.user, setLoading: setIsLoading, setSigns });
+          const fetchSuccess = await useFetchData({ user: result.user, setLoading: setIsLoading, setSigns: () => { } });
           if (fetchSuccess) {
-            setDataFetched(true);
             router.replace('/src/screens/main/navigator/(tabs)/HomeScreen');
           }
         }

@@ -36,7 +36,7 @@ const data = [
 
 
 const StartScreen = () => {
-  const { colors, theme } = useTheme();
+  const { theme } = useTheme();
   const flatListRef = useRef<FlatList>(null);
   const width = Dimensions.get('window').width;
   const [currentIndex, setCurrentIndex] = useState(0);

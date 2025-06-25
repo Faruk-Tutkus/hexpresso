@@ -45,7 +45,6 @@ const SignComments = () => {
   const [commentCards, setCommentCards] = useState<CommentCard[]>([])
   const [expandedCard, setExpandedCard] = useState<string | null>(null)
   const [currentDate, setCurrentDate] = useState(new Date())
-  const [hasNavigatedToFuture, setHasNavigatedToFuture] = useState(false)
   const flatListRef = useRef<FlatList>(null)
 
   const { showInterstitial } = useInterstitial({})
@@ -282,7 +281,7 @@ const SignComments = () => {
     Object.keys(animationValues).forEach(key => {
       if (key !== cardId) {
         animationValues[key as PeriodType].value = withTiming(0, {
-          duration: 300,
+          duration: 1000,
           easing: Easing.out(Easing.quad)
         })
       }
@@ -292,47 +291,73 @@ const SignComments = () => {
       // Close this card
       setExpandedCard(null)
       animationValues[cardId as PeriodType].value = withTiming(0, {
-        duration: 300,
+        duration: 1000,
         easing: Easing.out(Easing.quad)
       })
     } else {
       // Open this card
       setExpandedCard(cardId)
       animationValues[cardId as PeriodType].value = withTiming(1, {
-        duration: 400,
+        duration: 1000,
         easing: Easing.out(Easing.quad)
       })
     }
   }
-
+  const [days, setDays] = useState<0 | 1 | 2>(1);
   const goToToday = () => {
     setCurrentDate(new Date())
-    setHasNavigatedToFuture(false)
+    setDays(1)
   }
 
   const navigateDay = (direction: 'prev' | 'next') => {
     const today = new Date()
     today.setHours(0, 0, 0, 0)
 
-    const newDate = new Date(currentDate)
+    const currentDateCopy = new Date(currentDate)
+    currentDateCopy.setHours(0, 0, 0, 0)
+
+    // Calculate days difference from today
+    const diffTime = currentDateCopy.getTime() - today.getTime()
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
 
     if (direction === 'prev') {
-      showInterstitial()
+      // Check if we can go back more (max 5 days back)
+      if (diffDays <= -5) {
+        setTimeout(() => {
+          const nextDay = new Date(currentDate)
+          nextDay.setDate(nextDay.getDate() - 1)
+          nextDay.setHours(0, 0, 0, 0)
+          setCurrentDate(nextDay)
+          setDays(0)
+        }, 3000)
+        showInterstitial()
+        return
+      }
+      
+      const newDate = new Date(currentDate)
       newDate.setDate(newDate.getDate() - 1)
       setCurrentDate(newDate)
+      setDays(0)
     } else if (direction === 'next') {
-      // Check if we can navigate to future
+      // Check if we can go forward more (max 1 day forward)
+      if (diffDays >= 1) {
+        setTimeout(() => {
+          const nextDay = new Date(currentDate)
+          nextDay.setDate(nextDay.getDate() + 1)
+          nextDay.setHours(0, 0, 0, 0)
+          setCurrentDate(nextDay)
+          setDays(2)
+        }, 3000)
+        showInterstitial()
+        return
+      }
+      
       const nextDay = new Date(currentDate)
       nextDay.setDate(nextDay.getDate() + 1)
       nextDay.setHours(0, 0, 0, 0)
 
-      const canNavigateToFuture = !hasNavigatedToFuture && nextDay <= new Date(today.setDate(today.getDate() + 1))
-
-      if (canNavigateToFuture) {
-        showInterstitial()
-        setCurrentDate(nextDay)
-        setHasNavigatedToFuture(true)
-      }
+      setCurrentDate(nextDay)
+      setDays(2)
     }
   }
 
@@ -343,7 +368,10 @@ const SignComments = () => {
     return (
       <TouchableOpacity
         activeOpacity={0.8}
-        onPress={() => setSelectedSignIndex(index)}
+        onPress={() => {
+          setSelectedSignIndex(index)
+          showInterstitial()
+        }}
       >
         <View style={[
           styles.signCard,
@@ -375,7 +403,7 @@ const SignComments = () => {
   const renderCommentCard = ({ item }: { item: CommentCard }) => {
     const isExpanded = expandedCard === item.id
     const { cardAnimatedStyle, contentAnimatedStyle } = getAnimatedStyles(item.type)
-
+    
     const cardColors = {
       daily: colors.primary,
       weekly: colors.secondary,
@@ -394,7 +422,9 @@ const SignComments = () => {
       ]}>
         <TouchableOpacity
           activeOpacity={0.8}
-          onPress={() => handleCardPress(item.id)}
+          onPress={() => {
+            handleCardPress(item.id)
+          }}
           style={styles.commentCardHeader}
         >
           <View style={styles.commentCardHeaderLeft}>
@@ -523,7 +553,7 @@ const SignComments = () => {
           />
           <View style={styles.dailyNavigation}>
             <TouchableOpacity
-              style={[styles.dailyNavButton, { borderColor: colors.border }]}
+              style={[styles.dailyNavButton, { borderColor: colors.border, backgroundColor: days === 0 ? colors.secondary : colors.surface + '30' }]}
               onPress={() => navigateDay('prev')}
             >
               <Ionicons name="chevron-back" size={20} color={colors.secondaryText} />
@@ -531,22 +561,22 @@ const SignComments = () => {
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={[styles.todayIndicator, { backgroundColor: colors.secondary }]}
+              style={[styles.todayIndicator, { backgroundColor: days === 1 ? colors.secondary : colors.surface + '30' }]}
               onPress={goToToday}
             >
-              <Text style={[styles.todayText, { color: colors.background }]}>Bugün</Text>
+              <Text style={[styles.todayText, { color: colors.text }]}>Bugün</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={[styles.dailyNavButton, { borderColor: colors.border }]}
+              style={[styles.dailyNavButton, { borderColor: colors.border, backgroundColor: days === 2 ? colors.secondary : colors.surface + '30' }]}
               onPress={() => navigateDay('next')}
             >
               <Text style={[styles.dailyNavText, { color: colors.secondaryText }]}>Yarın</Text>
               <Ionicons name="chevron-forward" size={20} color={colors.secondaryText} />
             </TouchableOpacity>
           </View>
+          <Text style={[styles.dailyDate, { color: colors.text }]}>{currentDate.toLocaleDateString()}</Text>
         </View>
-        <Banner adType='banner' />
         {/* Comment Cards */}
         <View style={styles.commentsSection}>
           <Text style={[styles.sectionTitle, { color: colors.text }]}>
@@ -563,7 +593,7 @@ const SignComments = () => {
         </View>
 
         <View style={{ height: 50 }} />
-        <Banner adType='banner' />
+        <Banner adType='interstitial' />
       </ScrollView>
     </View>
   )

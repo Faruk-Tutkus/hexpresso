@@ -29,19 +29,16 @@ const SplashScreen = () => {
     "Yarın için heyecanlı mısın?",
   ])
 
+  const [randomText, setRandomText] = useState('');
+
+  useEffect(() => {
+    const index = Math.floor(Math.random() * texts.length);
+    setRandomText(texts[index]);
+  }, []);
+
   const [signs, setSigns] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [dataFetched, setDataFetched] = useState(false);
-  useEffect(() => {
-    if (user && !dataFetched) {
-      useFetchData({ user, setLoading: setIsLoading, setSigns })
-        .then((success) => {
-          if (success) {
-            setDataFetched(true);
-          }
-        });
-    }
-  }, [user, dataFetched])
 
   // Data ve user durumuna göre yönlendirme
   useEffect(() => {
@@ -75,7 +72,7 @@ const SplashScreen = () => {
         contentStyle={styles.loading}
       />
       <Text style={[styles.text, { color: colors.text }]}>
-        {texts[Math.floor(Math.random() * texts.length)]}
+        {randomText}
       </Text>
     </View>
   )

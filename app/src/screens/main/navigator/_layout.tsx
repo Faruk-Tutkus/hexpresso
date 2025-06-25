@@ -8,7 +8,7 @@ import * as SystemUI from 'expo-system-ui';
 import { User } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 import { Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Animated, { FadeIn, FadeInDown, FadeInRight, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function Layout() {
@@ -101,8 +101,7 @@ export default function Layout() {
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
         >
-          <Animated.View
-            entering={!hasAnimated ? FadeInDown.delay(100).duration(600) : undefined}
+          <View
             style={styles.userContainer}
           >
             <View style={styles.avatarContainer}>
@@ -132,7 +131,7 @@ export default function Layout() {
                 {user?.email}
               </Text>
             </View>
-          </Animated.View>
+          </View>
         </LinearGradient>
 
         {/* Menu items */}
@@ -167,10 +166,7 @@ export default function Layout() {
             });
 
             return (
-              <Animated.View
-                key={item.name}
-                entering={!hasAnimated ? FadeInRight.delay(100 + index * 50).duration(400) : undefined}
-              >
+              <View key={item.name}>
                 <TouchableOpacity
                   activeOpacity={0.7}
                   onPressIn={() => {
@@ -224,14 +220,13 @@ export default function Layout() {
                     </View>
                   </Animated.View>
                 </TouchableOpacity>
-              </Animated.View>
+              </View>
             );
           })}
         </ScrollView>
 
         {/* Footer */}
-        <Animated.View
-          entering={!hasAnimated ? FadeIn.delay(500).duration(400) : undefined}
+        <View
           style={[styles.footer, { borderTopColor: colors.border }]}
         >
           <Text style={[styles.footerText, { color: colors.text + '60' }]}>
@@ -240,7 +235,7 @@ export default function Layout() {
           <Text style={[styles.footerText, { color: colors.text + '60' }]}>
             Made By Faruk TUTKUS
           </Text>
-        </Animated.View>
+        </View>
       </View>
     );
   };
@@ -256,7 +251,7 @@ export default function Layout() {
         },
         drawerType: 'slide',
         drawerStyle: {
-          width: '75%',
+          width: '80%',
           backgroundColor: colors.background,
         },
         drawerStatusBarAnimation: 'slide',

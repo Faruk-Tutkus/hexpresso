@@ -28,7 +28,7 @@ const ROUTE_CONFIG = {
 
 // Animation constants for better performance
 const ANIMATION_CONFIG = {
-  duration: 280,
+  duration: 1000,
   easing: Easing.bezier(0.4, 0.0, 0.2, 1), // Material Design easing
   scale: {
     inactive: 1,

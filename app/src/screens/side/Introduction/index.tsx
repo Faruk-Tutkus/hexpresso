@@ -132,19 +132,6 @@ const Introduction = () => {
     }
   }, [date, time, location]);
   
-  const [signs, setSigns] = useState<any[]>([]);
-  const [dataFetched, setDataFetched] = useState(false);
-  
-  useEffect(() => {
-    if (user && !dataFetched) {
-      useFetchData({ user, setLoading: setIsLoading, setSigns })
-        .then((success) => {
-          if (success) {
-            setDataFetched(true);
-          }
-        });
-    }
-  }, [user, dataFetched])
   const handleSave = async () => {
     try {
       setIsLoading(true);
@@ -193,9 +180,8 @@ const Introduction = () => {
             coins: 50,
           });
         }
-        const fetchSuccess = await useFetchData({ user: user, setLoading: setIsLoading, setSigns });
+        const fetchSuccess = await useFetchData({ user: user, setLoading: setIsLoading, setSigns: () => { } });
           if (fetchSuccess) {
-            setDataFetched(true);
             router.replace('/src/screens/main/navigator/(tabs)/HomeScreen');
           }
       }

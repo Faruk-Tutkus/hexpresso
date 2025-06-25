@@ -1,27 +1,21 @@
-import { db } from "@api/config.firebase";
+import { auth, db } from "@api/config.firebase";
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { getAuth, GoogleAuthProvider, signInWithCredential, UserCredential } from "firebase/auth";
+import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 
-interface SignInResult {
-  user: UserCredential | null;
-  newUser: boolean;
-  error: string | null;
-  loading: boolean;
-}
+
 
 export const useSignInWithGoogle = () => {
   GoogleSignin.configure({
     webClientId: '503552610366-cncgkggphfoi53jna1euf5qsmpnl46oe.apps.googleusercontent.com',
     scopes: ['https://www.googleapis.com/auth/drive'], // what API you want to access on behalf of the user, default is email and profile
-    offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
+    offlineAccess: false, // if you want to access Google API on behalf of the user FROM YOUR SERVER
   });
   const signInGoogle = async () => {
     try {
       await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
       const signInResult = await GoogleSignin.signIn();
       let idToken = signInResult.data?.idToken;
-      const auth = getAuth();
       if (!idToken) {
         idToken = signInResult.data?.idToken;
       }

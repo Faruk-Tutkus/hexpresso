@@ -1,8 +1,8 @@
 import { ContainerButton, CustomButton, FloatingLabelInput, UnderLineText } from '@components'
 import { useFetchData, useSignInWithApple, useSignInWithEmail, useSignInWithFacebook, useSignInWithGoogle } from '@hooks'
-import { useAuth, useTheme, useToast } from '@providers'
+import { useTheme, useToast } from '@providers'
 import { router, useLocalSearchParams } from 'expo-router'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
@@ -28,20 +28,6 @@ const Login = () => {
     password: '',
     general: '',
   })
-  const [signs, setSigns] = useState<any[]>([]);
-  const [dataFetched, setDataFetched] = useState(false);
-  const { user } = useAuth();
-  
-  useEffect(() => {
-    if (user && !dataFetched) {
-      useFetchData({ user, setLoading: setIsLoading, setSigns })
-        .then((success) => {
-          if (success) {
-            setDataFetched(true);
-          }
-        });
-    }
-  }, [user, dataFetched])
   
   const handleSignIn = async () => {
     try {
@@ -54,9 +40,8 @@ const Login = () => {
         router.replace('/src/screens/side/Introduction');
       } else if (userCredential?.user?.emailVerified && !userCredential.newUser) {
         // Data fetch işlemini bekle
-        const fetchSuccess = await useFetchData({ user: userCredential.user, setLoading: setIsLoading, setSigns });
+        const fetchSuccess = await useFetchData({ user: userCredential.user, setLoading: setIsLoading, setSigns: () => { } });
         if (fetchSuccess) {
-          setDataFetched(true);
           router.replace('/src/screens/main/navigator/(tabs)/HomeScreen');
         }
       }
@@ -92,9 +77,8 @@ const Login = () => {
           router.replace('/src/screens/side/Introduction');
         } else {
           // Veri fetch işlemini bekle
-          const fetchSuccess = await useFetchData({ user: result.user, setLoading: setIsLoading, setSigns });
+          const fetchSuccess = await useFetchData({ user: result.user, setLoading: setIsLoading, setSigns: () => { } });
           if (fetchSuccess) {
-            setDataFetched(true);
             router.replace('/src/screens/main/navigator/(tabs)/HomeScreen');
           }
         }
@@ -117,9 +101,8 @@ const Login = () => {
           router.replace('/src/screens/side/Introduction');
         } else {
           // Veri fetch işlemini bekle
-          const fetchSuccess = await useFetchData({ user: result.user, setLoading: setIsLoading, setSigns });
+          const fetchSuccess = await useFetchData({ user: result.user, setLoading: setIsLoading, setSigns: () => { } });
           if (fetchSuccess) {
-            setDataFetched(true);
             router.replace('/src/screens/main/navigator/(tabs)/HomeScreen');
           }
         }
@@ -142,9 +125,8 @@ const Login = () => {
           router.replace('/src/screens/side/Introduction');
         } else {
           // Veri fetch işlemini bekle
-          const fetchSuccess = await useFetchData({ user: result.user, setLoading: setIsLoading, setSigns });
+          const fetchSuccess = await useFetchData({ user: result.user, setLoading: setIsLoading, setSigns: () => { } });
           if (fetchSuccess) {
-            setDataFetched(true);
             router.replace('/src/screens/main/navigator/(tabs)/HomeScreen');
           }
         }

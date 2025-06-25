@@ -113,6 +113,13 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     paddingHorizontal: 10,
   },
+  dailyDate: {
+    fontFamily: 'Almendra-Regular',
+    fontSize: 32,
+    textAlign: 'center',
+    marginBottom: 15,
+    paddingHorizontal: 10,
+  },
   dailyNavButton: {
     flexDirection: 'row',
     alignItems: 'center',
