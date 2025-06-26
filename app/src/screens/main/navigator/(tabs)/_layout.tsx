@@ -14,9 +14,9 @@ const ROUTE_CONFIG = {
     title: 'Burçlar',
     id: 'guide'
   },
-  'HomeScreen/index': {
-    icon: 'home',
-    title: 'Hexpresso',
+  'FortuneTellingScreen/index': {
+    icon: 'planet',
+    title: 'Fallar',
     id: 'home'
   },
   'SignComments/index': {
@@ -232,13 +232,13 @@ const TabLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="HomeScreen/index"
+        name="FortuneTellingScreen/index"
         options={{
-          title: 'Home',
+          title: 'Fallar',
         }}
       />
       <Tabs.Screen
-        name="HomeScreen/styles"
+        name="FortuneTellingScreen/styles"
         options={{
           href: null,
         }}

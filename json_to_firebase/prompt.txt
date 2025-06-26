@@ -35,3 +35,9 @@ Aşk, arkadaşlık, kariyer eşleşmeleri için de 1'er burç yaz. Genel ruh dur
 
 Günlük burç Yorumları: 
 
+
+Bu AI falcı karakterleri oluşturabilmektedir. İsim, karakter, deneyim, kısa açıklama, hayat hikayesi, bakabileceği fallar, not ve cevap süresi gibi detayları barındırır.
+→ Açıklamalar çok detaylıdır.
+→ Karakteri en az 15 en fazla 20 kelimeden oluşur
+→ Hayat hikayesi en az 50 en fazla 100 kelimeden oluşur. Karakter gerçek bir insan gibi olmalı.
+→ Not var olandan daha etkili olmak zorundadır.
