@@ -1,3 +1,4 @@
+import { db } from '@api/config.firebase';
 import Icon from '@assets/icons';
 import { Header } from '@components';
 import { useAuth, useTheme } from '@providers';
@@ -6,6 +7,7 @@ import { usePathname, useRouter } from 'expo-router';
 import { Drawer } from 'expo-router/drawer';
 import * as SystemUI from 'expo-system-ui';
 import { User } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
@@ -22,11 +24,11 @@ export default function Layout() {
   const drawerItems = [
     {
       name: '(tabs)',
-      title: 'Ana Sayfa',
-      icon: 'home',
+      title: 'Fallar ve Burçlar',
+      icon: 'cards-playing',
       route: '/src/screens/main/navigator/(tabs)',
       colors: ['#FF6B6B', '#FF8E53'],
-      description: 'Günlük burç yorumlarınız'
+      description: 'Fal ve burç rehberiniz'
     },
     {
       name: 'Profile',
@@ -91,6 +93,19 @@ export default function Layout() {
     return () => clearTimeout(timer);
   }, []);
 
+
+  const [userName, setUserName] = useState<any>(null);
+  const getUserInfo = async () => {
+    const userRef = doc(db, 'users', user?.uid as string);
+    const userDoc = await getDoc(userRef);
+    const userName = userDoc.data()?.name;
+    setUserName(userName);
+  }
+
+  useEffect(() => {
+    getUserInfo();
+  }, [user]);
+
   const CustomDrawerContent = (props: any) => {
     return (
       <View style={{ flex: 1, backgroundColor: colors.background, paddingBottom: insets.bottom - 10 }}>
@@ -125,7 +140,7 @@ export default function Layout() {
 
             <View style={styles.userInfo}>
               <Text style={styles.userName}>
-                {user?.displayName || 'Hoş Geldiniz'}
+                {userName || 'Hoş Geldiniz'}
               </Text>
               <Text style={styles.userEmail}>
                 {user?.email}
@@ -146,7 +161,7 @@ export default function Layout() {
             if (item.name === '(tabs)') {
               // Ana sayfa için: tabs içindeki herhangi bir sayfa veya boş pathname
               isActive = pathname.includes('(tabs)') ||
-                pathname.includes('HomeScreen') ||
+                pathname.includes('FortuneTellingScreen') ||
                 pathname.includes('GuideScreen') ||
                 pathname.includes('SignComments') ||
                 pathname.includes('Signs') ||
@@ -192,6 +207,7 @@ export default function Layout() {
                       >
                         <Icon
                           name={item.icon as any}
+                          zodiac={item.icon === 'cards-playing' ? true : false}
                           size={25}
                           color={isActive ? '#ffffff' : colors.text}
                         />

@@ -15,12 +15,15 @@
       "@constants": ["src/constants/index"],
       "@hooks": ["src/hooks/index"],
       "@providers": ["src/providers/index"],
-      "@ads": ["src/ads/index"]
+      "@ads": ["src/ads/index"],
+      "@json/*": ["../json/*"],
+
     }
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
+    "../json/**/*.json",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
   ]

@@ -36,32 +36,32 @@ const SplashScreen = () => {
     setRandomText(texts[index]);
   }, []);
 
-  const [signs, setSigns] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [dataFetched, setDataFetched] = useState(false);
+  // Yeni hook yapısı - FetchSeers ile aynı
+  const { signs, loading: dataLoading, error } = useFetchData(user);
 
   // Data ve user durumuna göre yönlendirme
   useEffect(() => {
-    const checkData = async () => {
-      if (user) {
-        const fetchSuccess = await useFetchData({ user: user, setLoading: setIsLoading, setSigns });
-        if (fetchSuccess) {
-          setDataFetched(true);
-          router.replace('/src/screens/main/navigator/(tabs)/HomeScreen');
-        }
-        else {
+    const checkData = () => {
+      if (user && !dataLoading) {
+        if (signs && signs.length > 0) {
+          console.log('✅ SplashScreen: Veri yüklendi, ana ekrana yönlendiriliyor');
+          router.replace('/src/screens/main/navigator/FortuneTellingScreen');
+        } else if (error) {
+          console.log('⚠️ SplashScreen: Veri yüklenemedi, Introduction\'a yönlendiriliyor');
           router.replace('/src/screens/side/Introduction');
         }
       }
-      if (!user && !loading && !dataFetched) {
+      
+      if (!user && !loading) {
+        console.log('👤 SplashScreen: User yok, StartScreen\'e yönlendiriliyor');
         setTimeout(() => {
           router.replace("/src/screens/side/StartScreen");
         }, 3000);
       }
-    }
+    };
+    
     checkData();
-    // Eğer data yok ve loading false ise splash screen'de kal
-  }, [isLoading, signs, user])
+  }, [user, loading, dataLoading, signs, error]);
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>

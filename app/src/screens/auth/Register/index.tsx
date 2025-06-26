@@ -1,5 +1,5 @@
 import { ContainerButton, CustomButton, FloatingLabelInput, UnderLineText } from '@components'
-import { useFetchData, useSignInWithGoogle, useSignUpWithEmail } from '@hooks'
+import { fetchData, useSignInWithGoogle, useSignUpWithEmail } from '@hooks'
 import { useAuth, useTheme, useToast } from '@providers'
 import { router, useLocalSearchParams } from 'expo-router'
 import React, { useState } from 'react'
@@ -84,9 +84,9 @@ const Register = () => {
         if (result.newUser) {
           router.replace('/src/screens/side/Introduction');
         } else {
-          const fetchSuccess = await useFetchData({ user: result.user, setLoading: setIsLoading, setSigns: () => { } });
+          const fetchSuccess = await fetchData({ user: result.user, setLoading: setIsLoading, setSigns: () => { } });
           if (fetchSuccess) {
-            router.replace('/src/screens/main/navigator/(tabs)/HomeScreen');
+            router.replace('/src/screens/main/navigator/FortuneTellingScreen');
           }
         }
       }

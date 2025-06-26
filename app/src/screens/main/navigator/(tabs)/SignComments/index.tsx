@@ -3,14 +3,13 @@ import { db } from '@api/config.firebase'
 import Icon from '@assets/icons'
 import { AskAI } from '@components'
 import { Ionicons } from '@expo/vector-icons'
-import { getDateRangeForPeriod } from '@hooks'
+import { getDateRangeForPeriod, useFetchData } from '@hooks'
 import { useAuth, useTheme } from '@providers'
 import { doc, onSnapshot } from 'firebase/firestore'
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ActivityIndicator, FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, FlatList, RefreshControl, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import Animated, { Easing, interpolate, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
-import loadCache from 'src/hooks/LoadCache'
 import styles from './styles'
 type PeriodType = 'daily' | 'weekly' | 'monthly' | 'yearly'
 
@@ -40,12 +39,13 @@ const SignComments = () => {
   const { t } = useTranslation()
   const { user } = useAuth()
   const [selectedSignIndex, setSelectedSignIndex] = useState(0)
-  const [signs, setSigns] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
   const [commentCards, setCommentCards] = useState<CommentCard[]>([])
   const [expandedCard, setExpandedCard] = useState<string | null>(null)
   const [currentDate, setCurrentDate] = useState(new Date())
   const flatListRef = useRef<FlatList>(null)
+
+  // Modern hook yapısı - FetchSeers ile aynı
+  const { signs, loading, error, refetch } = useFetchData(user);
 
   const { showInterstitial } = useInterstitial({})
 
@@ -143,10 +143,6 @@ const SignComments = () => {
     { name: t('horoscope.virgo'), iconName: 'zodiac-virgo', index: 11, englishName: 'Virgo' },
   ]
 
-  useEffect(() => {
-    loadCache({ id: 'signs_data', setSigns, setLoading });
-  }, [])
-
   // Set initial selected sign based on user's sunSign
   useEffect(() => {
     if (!user) return
@@ -155,8 +151,6 @@ const SignComments = () => {
 
     const setupListener = () => {
       try {
-        setLoading(true)
-
         // Real-time listener for user document changes
         unsubscribe = onSnapshot(doc(db, 'users', user.uid), (docSnapshot) => {
           if (docSnapshot.exists()) {
@@ -169,26 +163,14 @@ const SignComments = () => {
 
               if (userSignIndex !== -1) {
                 setSelectedSignIndex(userSignIndex)
-                // Scroll to the user's sign after a short delay
-                setTimeout(() => {
-                  if (flatListRef.current) {
-                    flatListRef.current.scrollToOffset({
-                      offset: userSignIndex * 130, // 115 (card width) + 15 (separator)
-                      animated: true
-                    })
-                  }
-                }, 1000)
               }
             }
           }
-          setLoading(false)
         }, (error) => {
           console.error('Error listening to user sign:', error)
-          setLoading(false)
         })
       } catch (error) {
         console.error('Error setting up listener:', error)
-        setLoading(false)
       }
     }
 
@@ -201,6 +183,24 @@ const SignComments = () => {
       }
     }
   }, [user])
+
+  // Separate useEffect for scroll to selected sign - çalışır hem ilk yüklemede hem refresh sonrası
+  useEffect(() => {
+    if (!loading && signs.length > 0 && flatListRef.current) {
+      console.log('🎯 ScrollToSign: Seçili burca scroll ediliyor...', selectedSignIndex);
+      
+      // Kısa bir delay ile scroll işlemi yap
+      const scrollTimer = setTimeout(() => {
+        flatListRef.current?.scrollToOffset({
+          offset: selectedSignIndex * 130, // 115 (card width) + 15 (separator)
+          animated: true
+        })
+        console.log('✅ ScrollToSign: Scroll işlemi tamamlandı');
+      }, 500)
+
+      return () => clearTimeout(scrollTimer)
+    }
+  }, [selectedSignIndex, loading, signs.length]) // loading false olduğunda ve signs yüklendiğinde scroll et
 
   useEffect(() => {
     if (signs.length > 0) {
@@ -516,7 +516,19 @@ const SignComments = () => {
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <Banner />
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView 
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={loading}
+            onRefresh={refetch}
+            colors={[colors.primary]}
+            tintColor={colors.primary}
+            title="Yorumlar güncelleniyor..."
+            titleColor={colors.text}
+          />
+        }
+      >
         {/* AI Assistant Section - Now at the top */}
         <View style={styles.aiSection}>
           <AskAI type="comment" />

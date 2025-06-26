@@ -1,5 +1,5 @@
 import { ContainerButton, CustomButton, FloatingLabelInput, UnderLineText } from '@components'
-import { useFetchData, useSignInWithApple, useSignInWithEmail, useSignInWithFacebook, useSignInWithGoogle } from '@hooks'
+import { fetchData, useSignInWithApple, useSignInWithEmail, useSignInWithFacebook, useSignInWithGoogle } from '@hooks'
 import { useTheme, useToast } from '@providers'
 import { router, useLocalSearchParams } from 'expo-router'
 import React, { useState } from 'react'
@@ -40,9 +40,9 @@ const Login = () => {
         router.replace('/src/screens/side/Introduction');
       } else if (userCredential?.user?.emailVerified && !userCredential.newUser) {
         // Data fetch işlemini bekle
-        const fetchSuccess = await useFetchData({ user: userCredential.user, setLoading: setIsLoading, setSigns: () => { } });
+        const fetchSuccess = await fetchData({ user: userCredential.user, setLoading: setIsLoading, setSigns: () => { } });
         if (fetchSuccess) {
-          router.replace('/src/screens/main/navigator/(tabs)/HomeScreen');
+          router.replace('/src/screens/main/navigator/(tabs)/GuideScreen');
         }
       }
     } catch (error: any) {
@@ -77,9 +77,9 @@ const Login = () => {
           router.replace('/src/screens/side/Introduction');
         } else {
           // Veri fetch işlemini bekle
-          const fetchSuccess = await useFetchData({ user: result.user, setLoading: setIsLoading, setSigns: () => { } });
+          const fetchSuccess = await fetchData({ user: result.user, setLoading: setIsLoading, setSigns: () => { } });
           if (fetchSuccess) {
-            router.replace('/src/screens/main/navigator/(tabs)/HomeScreen');
+            router.replace('/src/screens/main/navigator/FortuneTellingScreen');
           }
         }
       }
@@ -101,9 +101,9 @@ const Login = () => {
           router.replace('/src/screens/side/Introduction');
         } else {
           // Veri fetch işlemini bekle
-          const fetchSuccess = await useFetchData({ user: result.user, setLoading: setIsLoading, setSigns: () => { } });
+          const fetchSuccess = await fetchData({ user: result.user, setLoading: setIsLoading, setSigns: () => { } });
           if (fetchSuccess) {
-            router.replace('/src/screens/main/navigator/(tabs)/HomeScreen');
+            router.replace('/src/screens/main/navigator/FortuneTellingScreen');
           }
         }
       }
@@ -125,9 +125,9 @@ const Login = () => {
           router.replace('/src/screens/side/Introduction');
         } else {
           // Veri fetch işlemini bekle
-          const fetchSuccess = await useFetchData({ user: result.user, setLoading: setIsLoading, setSigns: () => { } });
+          const fetchSuccess = await fetchData({ user: result.user, setLoading: setIsLoading, setSigns: () => { } });
           if (fetchSuccess) {
-            router.replace('/src/screens/main/navigator/(tabs)/HomeScreen');
+            router.replace('/src/screens/main/navigator/FortuneTellingScreen');
           }
         }
       }

@@ -13,7 +13,7 @@ admin.initializeApp({
 // Firestore db instance
 const firestore = admin.firestore();
 
-const directoryPath = path.join(__dirname, "files");
+const directoryPath = path.join(__dirname, "signs");
 
 fs.readdir(directoryPath, function (err, files) {
   if (err) {

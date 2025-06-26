@@ -1,4 +1,5 @@
-export { default as useFetchData } from './FetchData'
+export { fetchData, default as useFetchData } from './FetchData'
+export { default as useFetchSeers, type Seer } from './FetchSeers'
 export { FullAstroResult, getFullAstro, getSunSign } from './GetHoroscopeInfo'
 export { default as GetTimeBasedGreeting, default as useGetTime } from './GetTime'
 export { checkDatePeriod, formatDateToDisplay, getDateRangeForPeriod, isIsoDateInRange } from './IsDate'

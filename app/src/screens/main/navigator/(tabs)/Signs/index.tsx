@@ -1,27 +1,25 @@
 import { Banner } from '@ads'
 import { Ionicons } from '@expo/vector-icons'
-import { useTheme } from '@providers'
+import { useFetchData } from '@hooks'
+import { useAuth, useTheme } from '@providers'
 import { Image } from 'expo-image'
 import { useLocalSearchParams } from 'expo-router'
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ActivityIndicator, Modal, ScrollView, Text, TouchableOpacity, View } from 'react-native'
-import loadCache from 'src/hooks/LoadCache'
+import { ActivityIndicator, Modal, RefreshControl, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import styles from './styles'
 
 const Signs = () => {
   const { colors } = useTheme()
   const { t } = useTranslation()
+  const { user } = useAuth()
   const { signIndex } = useLocalSearchParams()
   const [modalVisible, setModalVisible] = useState(false)
   const [modalContent, setModalContent] = useState<{ title: string, content: string, items: any[], type: string, icon: string }>({ title: '', content: '', items: [], type: 'text', icon: 'information-circle' })
-  const [signs, setSigns] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
   const scrollViewRef = useRef<ScrollView>(null)
 
-  useEffect(() => {
-    loadCache({ id: 'signs_data', setSigns, setLoading });
-  }, [])
+  // Modern hook yapısı - FetchSeers ile aynı
+  const { signs, loading, error, refetch } = useFetchData(user);
 
   const data = signs[parseInt(signIndex as string)]?.info || {}
   const signName = getSignName(parseInt(signIndex as string))
@@ -239,9 +237,19 @@ const Signs = () => {
 
   useEffect(() => {
     if (scrollViewRef.current) {
-      scrollViewRef.current.scrollTo({ x: 0, y: 0, animated: true })
+      console.log('🎯 ScrollToTop: Signs sayfası başa scroll ediliyor...');
+      
+      // Refresh sonrası da çalışması için loading check ekle
+      if (!loading) {
+        const scrollTimer = setTimeout(() => {
+          scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: true })
+          console.log('✅ ScrollToTop: Scroll işlemi tamamlandı');
+        }, 300)
+
+        return () => clearTimeout(scrollTimer)
+      }
     }
-  }, [signIndex])
+  }, [signIndex, loading]) // loading değişiminde de scroll et
 
   if (loading) {
     return (
@@ -263,6 +271,16 @@ const Signs = () => {
       style={[styles.container, { backgroundColor: colors.background }]}
       contentOffset={{ x: 0, y: 0 }}
       ref={scrollViewRef}
+      refreshControl={
+        <RefreshControl
+          refreshing={loading}
+          onRefresh={refetch}
+          colors={[colors.primary]}
+          tintColor={colors.primary}
+          title="Burç bilgileri güncelleniyor..."
+          titleColor={colors.text}
+        />
+      }
     >
       {/* Header Section */}
       <View style={[styles.header, { backgroundColor: colors.secondaryText }]}>

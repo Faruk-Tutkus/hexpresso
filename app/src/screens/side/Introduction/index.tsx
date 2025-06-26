@@ -1,6 +1,6 @@
 import { db } from '@api/config.firebase';
 import { CustomButton, IconButton } from '@components';
-import { useFetchData } from '@hooks';
+import { fetchData } from '@hooks';
 import { useAuth, useTheme, useToast } from '@providers';
 import { useRouter } from 'expo-router';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
@@ -179,11 +179,20 @@ const Introduction = () => {
             updatedAt: new Date(),
             coins: 50,
           });
-        }
-        const fetchSuccess = await useFetchData({ user: user, setLoading: setIsLoading, setSigns: () => { } });
+          
+          console.log('🚀 Introduction: Kullanıcı kaydedildi, cache için veri yükleniyor...');
+          
+          // Kullanıcı kaydedildikten sonra cache'e veri yükle
+          const fetchSuccess = await fetchData({ user: user, setLoading: () => {}, setSigns: () => {} });
+          
           if (fetchSuccess) {
-            router.replace('/src/screens/main/navigator/(tabs)/HomeScreen');
+            console.log('✅ Introduction: Cache\'e veri başarıyla eklendi');
+            router.replace('/src/screens/main/navigator/FortuneTellingScreen');
+          } else {
+            console.log('⚠️ Introduction: Cache yüklemesi başarısız, yine de devam ediliyor');
+            router.replace('/src/screens/main/navigator/FortuneTellingScreen');
           }
+        }
       }
     } catch (error) {
       console.log(error);
