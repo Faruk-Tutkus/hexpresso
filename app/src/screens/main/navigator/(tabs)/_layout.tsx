@@ -4,7 +4,7 @@ import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Tabs } from "expo-router";
 import * as SystemUI from 'expo-system-ui';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
-import { Animated, Easing, TouchableOpacity, View } from 'react-native';
+import { Animated, Easing, InteractionManager, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // Route configuration for cleaner management
@@ -78,34 +78,54 @@ const TabLayout = () => {
 
     // Optimize animation triggers
     useEffect(() => {
-      filteredRoutes.forEach((route) => {
-        const isActive = state.routes.findIndex(r => r.name === route.name) === state.index;
-        const animations = animatedValues[route.name];
-        
-        if (!animations) return;
+      // Use InteractionManager to ensure animations run after interactions
+      const task = InteractionManager.runAfterInteractions(() => {
+        filteredRoutes.forEach((route) => {
+          const isActive = state.routes.findIndex(r => r.name === route.name) === state.index;
+          const animations = animatedValues[route.name];
+          
+          if (!animations) return;
 
-        // Run animations in parallel for better performance
-        Animated.parallel([
-          Animated.timing(animations.scale, {
-            toValue: isActive ? ANIMATION_CONFIG.scale.active : ANIMATION_CONFIG.scale.inactive,
-            duration: ANIMATION_CONFIG.duration,
-            easing: ANIMATION_CONFIG.easing,
-            useNativeDriver: true,
-          }),
-          Animated.timing(animations.translateY, {
-            toValue: isActive ? ANIMATION_CONFIG.translateY.active : ANIMATION_CONFIG.translateY.inactive,
-            duration: ANIMATION_CONFIG.duration,
-            easing: ANIMATION_CONFIG.easing,
-            useNativeDriver: true,
-          }),
-          Animated.timing(animations.opacity, {
-            toValue: isActive ? ANIMATION_CONFIG.opacity.active : ANIMATION_CONFIG.opacity.inactive,
-            duration: ANIMATION_CONFIG.duration,
-            easing: ANIMATION_CONFIG.easing,
-            useNativeDriver: true,
-          })
-        ]).start();
+          // Fix for release mode: use InteractionManager and more conservative settings
+          const animationPromise = new Promise<void>((resolve) => {
+            Animated.parallel([
+              Animated.timing(animations.scale, {
+                toValue: isActive ? ANIMATION_CONFIG.scale.active : ANIMATION_CONFIG.scale.inactive,
+                duration: __DEV__ ? ANIMATION_CONFIG.duration : ANIMATION_CONFIG.duration * 0.8,
+                easing: ANIMATION_CONFIG.easing,
+                useNativeDriver: false, // Changed to false for release compatibility
+              }),
+              Animated.timing(animations.translateY, {
+                toValue: isActive ? ANIMATION_CONFIG.translateY.active : ANIMATION_CONFIG.translateY.inactive,
+                duration: __DEV__ ? ANIMATION_CONFIG.duration : ANIMATION_CONFIG.duration * 0.8,
+                easing: ANIMATION_CONFIG.easing,
+                useNativeDriver: true, // Keep true for transform animations
+              }),
+              Animated.timing(animations.opacity, {
+                toValue: isActive ? ANIMATION_CONFIG.opacity.active : ANIMATION_CONFIG.opacity.inactive,
+                duration: __DEV__ ? ANIMATION_CONFIG.duration : ANIMATION_CONFIG.duration * 0.8,
+                easing: ANIMATION_CONFIG.easing,
+                useNativeDriver: true, // Keep true for opacity
+              })
+            ]).start(() => resolve());
+          });
+
+          // Ensure animations complete properly
+          animationPromise.catch(() => {
+            // Fallback: Set values directly if animation fails
+            animations.scale.setValue(isActive ? ANIMATION_CONFIG.scale.active : ANIMATION_CONFIG.scale.inactive);
+            animations.translateY.setValue(isActive ? ANIMATION_CONFIG.translateY.active : ANIMATION_CONFIG.translateY.inactive);
+            animations.opacity.setValue(isActive ? ANIMATION_CONFIG.opacity.active : ANIMATION_CONFIG.opacity.inactive);
+          });
+        });
       });
+
+      // Cleanup function
+      return () => {
+        if (task && task.cancel) {
+          task.cancel();
+        }
+      };
     }, [state.index, filteredRoutes]);
 
     // Optimize onPress with useCallback

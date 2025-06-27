@@ -7,7 +7,7 @@ import { usePathname, useRouter } from 'expo-router';
 import { Drawer } from 'expo-router/drawer';
 import * as SystemUI from 'expo-system-ui';
 import { User } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, onSnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
@@ -26,7 +26,7 @@ export default function Layout() {
       name: '(tabs)',
       title: 'Fallar ve Burçlar',
       icon: 'cards-playing',
-      route: '/src/screens/main/navigator/(tabs)',
+      route: '/src/screens/main/navigator/(tabs)/FortuneTellingScreen',
       colors: ['#FF6B6B', '#FF8E53'],
       description: 'Fal ve burç rehberiniz'
     },
@@ -72,9 +72,6 @@ export default function Layout() {
     },
   ];
 
-  // Animation control state
-  const [hasAnimated, setHasAnimated] = useState(false);
-
   // Hook'ları her item için ayrı ayrı çağırıyoruz
   const scale0 = useSharedValue(1);
   const scale1 = useSharedValue(1);
@@ -83,15 +80,6 @@ export default function Layout() {
   const scale4 = useSharedValue(1);
   const scale5 = useSharedValue(1);
   const scaleValues = [scale0, scale1, scale2, scale3, scale4, scale5];
-
-  useEffect(() => {
-    // İlk animasyon tamamlandıktan sonra hasAnimated'ı true yap
-    const timer = setTimeout(() => {
-      setHasAnimated(true);
-    }, 1000); // Animasyon süresi + biraz buffer
-
-    return () => clearTimeout(timer);
-  }, []);
 
 
   const [userName, setUserName] = useState<any>(null);
@@ -103,7 +91,16 @@ export default function Layout() {
   }
 
   useEffect(() => {
+    if (!user?.uid) return;
+    const unsubscribe = onSnapshot(doc(db, 'users', user.uid), (doc) => {
+      if (doc.exists()) {
+        const data = doc.data();
+        setUserName(data?.name || null);
+      }
+    });
     getUserInfo();
+
+    return () => unsubscribe();
   }, [user]);
 
   const CustomDrawerContent = (props: any) => {

@@ -2,6 +2,7 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
+    "jsx": "react-jsx",
     "baseUrl": "./app",
     "paths": {
       "@api/*": ["src/api/*"],
@@ -16,8 +17,7 @@
       "@hooks": ["src/hooks/index"],
       "@providers": ["src/providers/index"],
       "@ads": ["src/ads/index"],
-      "@json/*": ["../json/*"],
-
+      "@json/*": ["../json/*"]
     }
   },
   "include": [

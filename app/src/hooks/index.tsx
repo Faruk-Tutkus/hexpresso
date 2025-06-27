@@ -1,3 +1,4 @@
+export { default as useAITaskValidator, type AIValidationResponse, type TaskValidationResult } from './AITaskValidator'
 export { fetchData, default as useFetchData } from './FetchData'
 export { default as useFetchSeers, type Seer } from './FetchSeers'
 export { FullAstroResult, getFullAstro, getSunSign } from './GetHoroscopeInfo'
@@ -11,6 +12,7 @@ export { useSignInWithEmail } from './SignInWithEmail'
 export { useSignInWithFacebook } from './SignInWithFacebook'
 export { useSignInWithGoogle } from './SignInWithGoogle'
 export { useSignUpWithEmail } from './SignUpWithEmail'
+export { useTaskManager, type Task, type UserTaskData } from './TaskManager'
 export { clearThemeCache, getCachedTheme, loadTheme, updateTheme } from './ThemeData'
 export { default as useToggleKeyboard } from './ToggleKeyboard'
 

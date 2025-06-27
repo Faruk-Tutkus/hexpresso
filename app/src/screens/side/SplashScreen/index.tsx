@@ -1,7 +1,9 @@
+import { db } from "@api/config.firebase";
 import { Animation } from "@components";
 import { useFetchData } from "@hooks";
 import { useAuth, useTheme } from "@providers";
 import { useRouter } from "expo-router";
+import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import styles from "./styles";
@@ -41,7 +43,9 @@ const SplashScreen = () => {
 
   // Data ve user durumuna göre yönlendirme
   useEffect(() => {
-    const checkData = () => {
+    const checkData = async () => {
+      const userRef = doc(db, "users", user?.uid as string)
+      const docRef = await getDoc(userRef)
       if (user && !dataLoading) {
         if (signs && signs.length > 0) {
           console.log('✅ SplashScreen: Veri yüklendi, ana ekrana yönlendiriliyor');
@@ -52,7 +56,7 @@ const SplashScreen = () => {
         }
       }
       
-      if (!user && !loading) {
+      if (!user || (user && docRef.data()?.newUser)) {
         console.log('👤 SplashScreen: User yok, StartScreen\'e yönlendiriliyor');
         setTimeout(() => {
           router.replace("/src/screens/side/StartScreen");

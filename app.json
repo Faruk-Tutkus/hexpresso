@@ -32,6 +32,12 @@
         {
           "androidAppId": "ca-app-pub-2363017162977044~8550998696"
         }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Hexpresso uygulaması fotoğrafınızı kullanarak size daha iyi hizmet sunmak istiyor."
+        }
       ]
     ],
     "android": {
