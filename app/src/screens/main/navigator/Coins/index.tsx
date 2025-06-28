@@ -112,16 +112,6 @@ const Coins = () => {
     setModalVisible(true);
   };
 
-  const handleTaskComplete = async (taskId: string) => {
-    const success = await completeTask(taskId);
-    if (success) {
-      const task = tasks.find(t => t.id === taskId);
-      showToast(`Tebrikler! ${task?.reward} coin kazandınız!`, 'success');
-    } else {
-      showToast('Görev tamamlanamadı. Tekrar deneyin.', 'error');
-    }
-  };
-
   // AI ile task doğrulama
   const handleAIValidation = async (task: Task) => {
     console.log('AI Validation started for task:', task.id);
@@ -464,7 +454,7 @@ const Coins = () => {
         <View style={styles.scrollContainer}>
           
           {/* Header */}
-          <View style={[styles.header, { backgroundColor: colors.surface }]}>
+          <View style={[styles.header, { backgroundColor: colors.secondaryText }]}>
             <Text style={[styles.headerTitle, { color: colors.background }]}>
               Coin Kazan
             </Text>

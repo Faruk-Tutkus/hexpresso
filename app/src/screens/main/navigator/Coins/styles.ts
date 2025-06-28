@@ -7,14 +7,15 @@ export default StyleSheet.create({
     flex: 1,
   },
   scrollContainer: {
-    padding: 20,
+    paddingHorizontal: 20,
     gap: 20,
   },
   header: {
     alignItems: 'center',
     paddingVertical: 30,
     paddingHorizontal: 20,
-    borderRadius: 25,
+    borderBottomLeftRadius: 25,
+    borderBottomRightRadius: 25,
     marginBottom: 10,
   },
   headerTitle: {
@@ -79,14 +80,15 @@ export default StyleSheet.create({
     lineHeight: 18,
   },
   taskReward: {
+    marginTop: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     gap: 5,
   },
   rewardText: {
     fontFamily: 'Domine-Bold',
-    fontSize: 16,
+    fontSize: 18,
   },
   rewardCoin: {
     width: 18,
