@@ -112,8 +112,8 @@ const AskAI = ({ type }: AskAIType) => {
     setIsLoading(true)
     try {
       const response = await ai.models.generateContent({
-        model: "gemini-1.5-flash",
-        contents: type === 'sign' ? value : JSON.stringify({
+        model: "gemini-2.5-flash",
+        contents: value + JSON.stringify({
           userInfo: {
             name: userData.name,
             sunSign: userData.sunSign,
@@ -264,7 +264,7 @@ const AskAI = ({ type }: AskAIType) => {
   }
 
   return (
-    <Animated.View style={[styles.container, { borderColor: colors.border }, animatedContainerStyle]}>
+    <Animated.View style={[styles.container, { borderColor: colors.border,backgroundColor: colors.secondaryText }, animatedContainerStyle]}>
       {type === 'sign' && (
         <FloatingLabelInput
         placeholder="Mordecai'ya sor"
@@ -276,6 +276,7 @@ const AskAI = ({ type }: AskAIType) => {
         onRightIconPress={handleSendSign}
         loading={isLoading}
         error={error}
+        isAi={true}
       />
       )}
       {type === 'comment' && (
@@ -295,7 +296,7 @@ const AskAI = ({ type }: AskAIType) => {
           animatedResponseStyle
         ]}
       >
-        <Text style={[styles.responseText, { color: colors.text }]}>{response}</Text>
+        <Text style={[styles.responseText, { color: colors.background }]}>{response}</Text>
       </Animated.View>
     </Animated.View>
   )

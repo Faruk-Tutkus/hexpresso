@@ -17,6 +17,7 @@ interface FloatingLabelInputProps {
   onBlur?: () => void;
   onRightIconPress?: () => void;
   loading?: boolean;
+  isAi?: boolean;
 }
 
 const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
@@ -31,7 +32,8 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
   onFocus,
   onBlur,
   onRightIconPress,
-  loading = false
+  loading = false,
+  isAi = false
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -116,14 +118,14 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
       ]}>
         {leftIcon && (
           <View style={styles.iconContainer}>
-            <Icon name={leftIcon as any} size={24} color={colors.text} />
+            <Icon name={leftIcon as any} size={24} color={isAi ? colors.background : colors.text} />
           </View>
         )}
-        <Animated.View style={[styles.label, labelStyle, { backgroundColor: colors.background }]}>
-          <Text style={{ color: colors.text }}>{placeholder}</Text>
+        <Animated.View style={[styles.label, labelStyle, { backgroundColor: isAi ? colors.secondaryText : colors.background }]}>
+          <Text style={{ color: isAi ? colors.background : colors.text }}>{placeholder}</Text>
         </Animated.View>
         <TextInput
-          style={[styles.input, { color: colors.text }]}
+          style={[styles.input, { color: isAi ? colors.background : colors.text }]}
           value={value}
           onChangeText={handleChangeText}
           onFocus={() => {
@@ -152,7 +154,7 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
           </TouchableOpacity>
         ) : rightIcon ? (
           <TouchableOpacity style={styles.iconContainer} onPress={onRightIconPress} disabled={loading}>
-            {loading ? <ActivityIndicator size="small" color={colors.text} /> : <Icon name={rightIcon as any} size={24} color={colors.text} />}
+            {loading ? <ActivityIndicator size="small" color={isAi ? colors.background : colors.text} /> : <Icon name={rightIcon as any} size={24} color={isAi ? colors.background : colors.text} />}
           </TouchableOpacity>
         ) : null}
       </Animated.View>
