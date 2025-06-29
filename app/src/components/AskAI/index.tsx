@@ -112,7 +112,7 @@ const AskAI = ({ type }: AskAIType) => {
     setIsLoading(true)
     try {
       const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-1.5-flash",
         contents: value + JSON.stringify({
           userInfo: {
             name: userData.name,
@@ -215,6 +215,11 @@ const AskAI = ({ type }: AskAIType) => {
       await updateDoc(doc(db, 'users', user?.uid), {
         coins: coins - 25
       })
+      const userDoc = await getDoc(doc(db, 'users', user?.uid))
+      const userData = userDoc.data()?.profileCompletionRewardGiven
+      if (!userData) {
+        showToast('Daha iyi bir yorum almak için profilini tamamla!', 'error')
+      }
     }
     const userData = await getResponse();
 
@@ -250,6 +255,11 @@ const AskAI = ({ type }: AskAIType) => {
       await updateDoc(doc(db, 'users', user?.uid), {
         coins: coins - 50
       })
+      const userDoc = await getDoc(doc(db, 'users', user?.uid))
+      const userData = userDoc.data()?.profileCompletionRewardGiven
+      if (!userData) {
+        showToast('Daha iyi bir yorum almak için profilini tamamla!', 'error')
+      }
     }
     progress.value = withTiming(0, { duration: 1250 });
     
