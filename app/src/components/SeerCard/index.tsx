@@ -3,6 +3,7 @@ import { CustomButton } from '@components';
 import { Seer } from '@hooks';
 import { useTheme, useToast } from '@providers';
 import { Image } from 'expo-image';
+import { router } from 'expo-router';
 import React, { memo, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import Animated, {
@@ -83,12 +84,29 @@ const SeerCard: React.FC<SeerCardProps> = memo(({ seer, isExpanded, onPress }) =
 			return;
 		};
 		
-		showToast(
-			`${seer.name} ile ${selectedFortuneWithCoin.fortune} için ${selectedFortuneWithCoin.coin} coin ile fal seansı başlatılıyor...`,
-			'success'
-		);
+		const seerDataParam = encodeURIComponent(JSON.stringify(seer));
+		let routePath = '';
 		
-		// TODO: Fal sayfasına yönlendirme
+		switch (selectedFortuneWithCoin.fortune.toLowerCase()) {
+			case 'kahve falı':
+				routePath = `/src/screens/main/navigator/FortuneScreens/CoffeeFortune?seerData=${seerDataParam}`;
+				break;
+			case 'el falı':
+				routePath = `/src/screens/main/navigator/FortuneScreens/HandFortune?seerData=${seerDataParam}`;
+				break;
+			case 'rüya yorumu':
+				routePath = `/src/screens/main/navigator/FortuneScreens/DreamFortune?seerData=${seerDataParam}`;
+				break;
+			case 'tarot':
+			case 'tarot falı':
+				routePath = `/src/screens/main/navigator/FortuneScreens/CoffeeFortune?seerData=${seerDataParam}`;
+				break;
+			default:
+				showToast('Bu fal türü henüz desteklenmiyor', 'error');
+				return;
+		}
+		
+		router.push(routePath as any);
 	};
 
 	return (

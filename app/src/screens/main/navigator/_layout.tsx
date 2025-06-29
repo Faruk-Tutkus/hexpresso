@@ -1,6 +1,7 @@
 import { db } from '@api/config.firebase';
 import Icon from '@assets/icons';
 import { Header } from '@components';
+import { useFortuneProcessor } from '@hooks';
 import { useAuth, useTheme } from '@providers';
 import { LinearGradient } from 'expo-linear-gradient';
 import { usePathname, useRouter } from 'expo-router';
@@ -18,6 +19,10 @@ export default function Layout() {
   const { colors } = useTheme();
   const router = useRouter();
   const pathname = usePathname();
+  
+  // Initialize Fortune Processor for automatic AI processing
+  useFortuneProcessor();
+  
   SystemUI.setBackgroundColorAsync(colors.background);
   const insets = useSafeAreaInsets();
 
@@ -315,6 +320,14 @@ export default function Layout() {
         name="Logout"
         options={{
           title: 'Logout',
+          headerShown: false,
+          drawerItemStyle: { display: 'none' }
+        }}
+      />
+      <Drawer.Screen
+        name="MyFortunes/index"
+        options={{
+          title: 'Fallarım',
           headerShown: false,
           drawerItemStyle: { display: 'none' }
         }}

@@ -11,7 +11,7 @@ export { default as Header } from "./Header";
 export { default as HoroscopeCard } from "./HoroscopeCard";
 export { default as IconButton } from "./IconButton";
 export { default as MapView } from "./MapView";
-export { default as Modal } from "./Modal";
+export { default as Modal, PhotoPickerModal } from "./Modal";
 export { default as SeerCard } from "./SeerCard";
 export { default as Toast } from "./Toast";
 export { default as UnderLineText } from "./UnderLineText";

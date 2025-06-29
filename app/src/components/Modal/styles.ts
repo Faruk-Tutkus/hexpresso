@@ -56,6 +56,40 @@ const styles = StyleSheet.create({
     fontFamily: 'Domine-SemiBold',
     textAlign: 'center' as const,
   },
+  // Photo picker modal styles
+  photoPickerButtons: {
+    flexDirection: 'row' as const,
+    gap: 15,
+    width: '100%',
+    marginBottom: 20,
+  },
+  photoPickerOption: {
+    flex: 1,
+    flexDirection: 'row' as const,
+    alignItems: 'center' as const,
+    justifyContent: 'center' as const,
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderRadius: 12,
+    gap: 8,
+  },
+  photoPickerText: {
+    fontSize: 16,
+    fontFamily: 'Domine-SemiBold',
+    textAlign: 'center' as const,
+  },
+  cancelOptionButton: {
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 8,
+    borderWidth: 1,
+    backgroundColor: 'transparent',
+  },
+  cancelOptionText: {
+    fontSize: 16,
+    fontFamily: 'Domine-Medium',
+    textAlign: 'center' as const,
+  },
 
 })
 

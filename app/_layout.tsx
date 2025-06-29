@@ -55,6 +55,10 @@ export function AppContent() {
       <Stack.Screen name="src/screens/side/StartScreen/index" />
       <Stack.Screen name="src/screens/side/Introduction/index" />
       <Stack.Screen name="src/screens/main/navigator" />
+      <Stack.Screen name="src/screens/main/navigator/FortuneScreens/DreamFortune/index" />
+      <Stack.Screen name="src/screens/main/navigator/FortuneScreens/HandFortune/index" />
+      <Stack.Screen name="src/screens/main/navigator/FortuneScreens/CoffeeFortune/index" />
+      <Stack.Screen name="src/screens/main/navigator/(tabs)/MyFortunes/index" />
     </Stack>
   )
 }

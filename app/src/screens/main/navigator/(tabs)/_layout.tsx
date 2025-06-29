@@ -19,6 +19,11 @@ const ROUTE_CONFIG = {
     title: 'Fallar',
     id: 'home'
   },
+  'MyFortunes/index': {
+    icon: 'heart',
+    title: 'Fallarım',
+    id: 'myfortunes'
+  },
   'SignComments/index': {
     icon: 'star',
     title: 'Burç Yorumları',
@@ -259,6 +264,18 @@ const TabLayout = () => {
       />
       <Tabs.Screen
         name="FortuneTellingScreen/styles"
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="MyFortunes/index"
+        options={{
+          title: 'Fallarım',
+        }}
+      />
+      <Tabs.Screen
+        name="MyFortunes/styles"
         options={{
           href: null,
         }}
