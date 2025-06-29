@@ -102,6 +102,8 @@ export default StyleSheet.create({
   primaryButton: {
     width: width * 0.75,
     height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 12,
     marginBottom: 20,
     borderWidth: 2,
@@ -119,6 +121,8 @@ export default StyleSheet.create({
   secondaryButton: {
     width: width * 0.75,
     height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 12,
     marginBottom: 20,
     borderWidth: 2,
