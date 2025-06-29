@@ -1,14 +1,14 @@
 import { ContainerButton, CustomButton, FloatingLabelInput, UnderLineText } from '@components'
-import { fetchData, useSignInWithGoogle, useSignUpWithEmail } from '@hooks'
+import { useFetchData, useFetchSeers, useSignInWithGoogle, useSignUpWithEmail } from '@hooks'
 import { useAuth, useTheme, useToast } from '@providers'
 import { router, useLocalSearchParams } from 'expo-router'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import '../../../utils/i18n'
 import styles from './styles'
 const Register = () => {
-  const { theme, colors, toggleTheme } = useTheme()
+  const { colors } = useTheme()
   const { name } = useLocalSearchParams()
   const [displayName, setDisplayName] = useState(name)
   const [email, setEmail] = useState('')
@@ -17,7 +17,7 @@ const Register = () => {
   const { t } = useTranslation()
   const { showToast } = useToast()
   const { signInGoogle } = useSignInWithGoogle()
-  const { signUp, loading } = useSignUpWithEmail()
+  const { signUp } = useSignUpWithEmail()
   const [isLoading, setIsLoading] = useState(false)
   const [isGoogleLoading, setIsGoogleLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState({
@@ -27,6 +27,8 @@ const Register = () => {
     displayName: '',
   })
   const { user } = useAuth();
+  const { loading: dataLoading} = useFetchData(user);
+  const { loading: seersLoading, error: seersError } = useFetchSeers(user);
   const validation = () => {
     if (password !== rePassword) {
       setErrorMessage(prev => ({ ...prev, password: t('auth.auth/password-not-match') }))
@@ -84,8 +86,8 @@ const Register = () => {
         if (result.newUser) {
           router.replace('/src/screens/side/Introduction');
         } else {
-          const fetchSuccess = await fetchData({ user: result.user, setLoading: setIsLoading, setSigns: () => { } });
-          if (fetchSuccess) {
+          if (!dataLoading && !seersLoading && !seersError) {
+            showToast("İlk yükleme uzun sürebilir, lütfen bekleyiniz", 'success')
             router.replace('/src/screens/main/navigator/FortuneTellingScreen');
           }
         }

@@ -8,5 +8,6 @@ export default StyleSheet.create({
         alignItems: 'center',
         gap: 10,
         textAlign: 'center',
+        borderWidth: 1,
     }
 })

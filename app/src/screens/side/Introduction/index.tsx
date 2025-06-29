@@ -1,6 +1,6 @@
 import { db } from '@api/config.firebase';
 import { CustomButton, IconButton } from '@components';
-import { fetchData } from '@hooks';
+import { useFetchData, useFetchSeers } from '@hooks';
 import { useAuth, useTheme, useToast } from '@providers';
 import { useRouter } from 'expo-router';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
@@ -22,6 +22,8 @@ const Introduction = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const { loading: dataLoading} = useFetchData(user);
+  const { loading: seersLoading, error: seersError } = useFetchSeers(user);
   const isAllFieldsFilled = () => {
     return name !== '' && 
            date !== '' && 
@@ -183,9 +185,8 @@ const Introduction = () => {
           console.log('🚀 Introduction: Kullanıcı kaydedildi, cache için veri yükleniyor...');
           
           // Kullanıcı kaydedildikten sonra cache'e veri yükle
-          const fetchSuccess = await fetchData({ user: user, setLoading: () => {}, setSigns: () => {} });
           
-          if (fetchSuccess) {
+          if (!dataLoading && !seersLoading && !seersError) {
             console.log('✅ Introduction: Cache\'e veri başarıyla eklendi');
             router.replace('/src/screens/main/navigator/FortuneTellingScreen');
           } else {

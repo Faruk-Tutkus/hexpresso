@@ -19,6 +19,7 @@ export interface Seer {
   responsetime: number;
   url: string;
   id?: string;
+  user: any;
 }
 
 interface UseFetchSeersReturn {
@@ -56,7 +57,8 @@ const getLocalSeersData = (): Seer[] => {
   try {
     const localSeers = seersLocalData.seer.map((seer, index) => ({
       id: seer.name.toLowerCase().replace(/\s+/g, "_"),
-      ...seer
+      ...seer,
+      user: null
     }));
     console.log('📁 Local JSON\'dan veri okundu:', localSeers.length, 'seer');
     return localSeers;
@@ -66,12 +68,15 @@ const getLocalSeersData = (): Seer[] => {
   }
 };
 
-export const useFetchSeers = (): UseFetchSeersReturn => {
+export const useFetchSeers = (user: any): UseFetchSeersReturn => {
   const [seers, setSeers] = useState<Seer[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchSeersFromFirebase = async (): Promise<Seer[]> => {
+  const fetchSeersFromFirebase = async (user: any): Promise<Seer[]> => {
+    if (!user) {
+      return [];
+    }
     try {
       console.log('🔥 Firebase bağlantısı deneniyor...');
       const seersCollection = collection(db, "seer"); // "seers" değil "seer" olmalı
@@ -104,7 +109,7 @@ export const useFetchSeers = (): UseFetchSeersReturn => {
     
     try {
       console.log('🔄 Veri yenileme başladı...');
-      const data = await fetchSeersFromFirebase();
+      const data = await fetchSeersFromFirebase(user);
       
       if (data && data.length > 0) {
         setSeers(data);
@@ -152,7 +157,7 @@ export const useFetchSeers = (): UseFetchSeersReturn => {
         
         // Arka planda güncel veriyi getir
         try {
-          const freshData = await fetchSeersFromFirebase();
+          const freshData = await fetchSeersFromFirebase(user);
           if (freshData && freshData.length > 0) {
             setSeers(freshData);
             cacheSeersData(freshData);

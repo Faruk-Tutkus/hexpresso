@@ -1,112 +1,272 @@
-import { Animation, CustomButton } from '@components';
+import { CustomButton } from '@components';
 import { useTheme } from '@providers';
+import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
-import { Dimensions, FlatList, Text, View } from 'react-native';
-import { styles } from './styles';
+import {
+  Animated,
+  Easing,
+  StatusBar,
+  Text,
+  View
+} from 'react-native';
+import styles from './styles';
 
-const data = [
-  { id: 1, symbol: '🔮' },
-  { id: 2, symbol: '🌙' },
-  { id: 3, symbol: '✨' },
-  { id: 4, symbol: '🌟' },
-  { id: 5, symbol: '🪐' },
-  { id: 6, symbol: '💫' },
-  { id: 7, symbol: '🌌' },
-  { id: 8, symbol: '♈' },
-  { id: 9, symbol: '♉' },
-  { id: 10, symbol: '♊' },
-  { id: 11, symbol: '♋' },
-  { id: 12, symbol: '♌' },
-  { id: 13, symbol: '♍' },
-  { id: 14, symbol: '♎' },
-  { id: 15, symbol: '♏' },
-  { id: 16, symbol: '♐' },
-  { id: 17, symbol: '♑' },
-  { id: 18, symbol: '♒' },
-  { id: 19, symbol: '♓' },
-  { id: 20, symbol: '🧿' },
-  { id: 21, symbol: '🪄' },
-  { id: 22, symbol: '🔭' },
-  { id: 23, symbol: '🧘‍♀️' },
-  { id: 24, symbol: '🕯️' },
-  { id: 25, symbol: '🖐️' },
-  { id: 26, symbol: '🪬' },
+const emojiList = [
+  { symbol: '🔮' },
+  { symbol: '🌙' },
+  { symbol: '✨' },
+  { symbol: '🌟' },
+  { symbol: '🪐' },
+  { symbol: '💫' },
+  { symbol: '🌞' },
+  { symbol: '🧿' },
+  { symbol: '🔭' },
+  { symbol: '🧘‍♀️' },
+  { symbol: '🕯️' },
+  { symbol: '🌑' },
 ];
 
-
 const StartScreen = () => {
-  const { theme } = useTheme();
-  const flatListRef = useRef<FlatList>(null);
-  const width = Dimensions.get('window').width;
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const { colors, isDark } = useTheme();
+  
+  // Animasyon değerleri
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const slideAnim = useRef(new Animated.Value(50)).current;
+  const scaleAnim = useRef(new Animated.Value(0.8)).current;
+  const rotateAnim = useRef(new Animated.Value(0)).current;
+  const emojiOpacity = useRef(new Animated.Value(0)).current;
+
+  // Rastgele emoji state
+  const [currentEmoji, setCurrentEmoji] = useState('');
+
+  // Rastgele emoji seçme fonksiyonu
+  const getRandomEmoji = () => {
+    const randomIndex = Math.floor(Math.random() * emojiList.length);
+    return emojiList[randomIndex].symbol;
+  };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (flatListRef.current) {
-        const nextIndex = (currentIndex + 1) % data.length;
-        setCurrentIndex(nextIndex);
-        flatListRef.current.scrollToIndex({
-          index: nextIndex,
-          animated: true
+    // İlk emoji'yi seç
+    setCurrentEmoji(getRandomEmoji());
+
+    // Başlangıç animasyonları
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
+        easing: Easing.out(Easing.cubic),
+      }),
+      Animated.timing(slideAnim, {
+        toValue: 0,
+        duration: 800,
+        delay: 200,
+        useNativeDriver: true,
+        easing: Easing.out(Easing.back(1.7)),
+      }),
+      Animated.timing(scaleAnim, {
+        toValue: 1,
+        duration: 600,
+        delay: 400,
+        useNativeDriver: true,
+        easing: Easing.out(Easing.back(1.7)),
+      }),
+      Animated.timing(emojiOpacity, {
+        toValue: 1,
+        duration: 800,
+        delay: 600,
+        useNativeDriver: true,
+        easing: Easing.out(Easing.cubic),
+      }),
+    ]).start();
+
+    // Dönen animasyon ve emoji değiştirme
+    const startEmojiRotation = () => {
+      const rotationLoop = () => {
+        // Emoji fade out
+        Animated.timing(emojiOpacity, {
+          toValue: 0,
+          duration: 300,
+          useNativeDriver: true,
+        }).start(() => {
+          // Yeni emoji seç
+          setCurrentEmoji(getRandomEmoji());
+          
+          // Emoji fade in ile birlikte döndürme başlat
+          Animated.parallel([
+            Animated.timing(emojiOpacity, {
+              toValue: 1,
+              duration: 300,
+              useNativeDriver: true,
+            }),
+            Animated.timing(rotateAnim, {
+              toValue: 1,
+              duration: 8000,
+              useNativeDriver: true,
+              easing: Easing.linear,
+            }),
+          ]).start(() => {
+            // Döndürme tamamlandığında rotateAnim'i sıfırla ve tekrar başlat
+            rotateAnim.setValue(0);
+            rotationLoop();
+          });
         });
-      }
-    }, 2500);
+      };
 
-    return () => clearInterval(interval);
-  }, [currentIndex]);
+      // İlk döngüyü başlat
+      const timer = setTimeout(rotationLoop, 800);
+      return timer;
+    };
 
-  const renderItem = ({ item }: { item: { id: number; symbol: string } }) => {
-    return (
-      <View style={[styles.emojiContainer, { width }]}>
-        <Text style={styles.emojiText}>{item.symbol}</Text>
-      </View>
-    )
-  }
+    const timer = startEmojiRotation();
+    return () => clearTimeout(timer);
+  }, []);
+
+  const gradientColors = isDark 
+    ? ['#1A1A1A', '#2D1B69', '#1A1A1A'] as const
+    : ['#F8F9FA', '#E3F2FD', '#F8F9FA'] as const;
+
+  const spin = rotateAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg'],
+  });
 
   return (
-    <View style={styles.container}>
-      <View style={styles.animationContainer}>
-        <Animation
-          src = { theme === 'dark' ? 'https://lottie.host/1a9e6fe7-c012-4f16-b085-710037385a28/c6F9SxqUBQ.lottie' : 'https://lottie.host/1a53bb28-6dbd-464c-9b5a-916adba3fd60/mtEnuhqqhw.lottie'}
-          contentStyle={styles.animation}
-        />
-      </View>
-      <FlatList
-        ref={flatListRef}
-        contentContainerStyle={[styles.flatList]}
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        scrollEnabled={false}
-        pagingEnabled
-        initialNumToRender={4}        
-        maxToRenderPerBatch={4}
-        windowSize={4} 
-        removeClippedSubviews={true}
-        getItemLayout={(_, index) => ({
-          length: width,            // her item'ın genişliği
-          offset: width * index,    // offset = index * genişlik
-          index,
-        })}
+    <>
+      <StatusBar 
+        barStyle={isDark ? 'light-content' : 'dark-content'} 
+        backgroundColor="transparent" 
+        translucent 
       />
-      <View style={styles.buttonContainer}>
-        <CustomButton
-          title='Benim için bir hesap oluştur'
-          variant='secondary'
-          onPress={() => {router.push('/src/screens/auth/Register')}}
-          contentStyle={styles.button}
-        />
-        <CustomButton
-          title='Zaten buraya aitim'
-          variant='primary'
-          onPress={() => {router.push('/src/screens/auth/Login')}}
-          contentStyle={styles.button}
-        />
-      </View>
-    </View>
+      <LinearGradient
+        colors={gradientColors}
+        locations={[0, 0.5, 1]}
+        style={styles.container}
+      >
+        <View style={styles.content}>
+          {/* Üst Boşluk */}
+          <View style={styles.topSpacer} />
+          
+          {/* Ana İçerik */}
+          <View style={styles.mainContent}>
+            {/* Başlık Bölümü */}
+            <Animated.View 
+              style={[
+                styles.headerSection,
+                {
+                  opacity: fadeAnim,
+                  transform: [{ translateY: slideAnim }]
+                }
+              ]}
+            >
+              <Text style={[styles.mainTitle, { color: colors.text }]}>
+                Hoş Geldin!
+              </Text>
+              <Text style={[styles.subtitle, { color: colors.secondaryText }]}>
+                Yıldızların sana ne söylediğini keşfet
+              </Text>
+            </Animated.View>
+
+            {/* Hex Animasyon Bölümü */}
+            <Animated.View 
+              style={[
+                styles.animationSection,
+                {
+                  opacity: fadeAnim,
+                  transform: [{ scale: scaleAnim }]
+                }
+              ]}
+            >
+              <View style={styles.hexBackground}>
+                <Animated.View 
+                  style={[
+                    styles.hexShape,
+                    {
+                      transform: [{ rotate: spin }]
+                    }
+                  ]}
+                >
+                  <View style={[styles.hexInner, { borderColor: colors.primary }]}>
+                    <Animated.Text 
+                      style={[
+                        styles.hexSymbol, 
+                        { 
+                          color: colors.primary,
+                          opacity: emojiOpacity
+                        }
+                      ]}
+                    >
+                      {currentEmoji}
+                    </Animated.Text>
+                  </View>
+                </Animated.View>
+              </View>
+            </Animated.View>
+
+            {/* Açıklama */}
+            <Animated.View 
+              style={[
+                styles.descriptionSection,
+                {
+                  opacity: fadeAnim,
+                  transform: [{ translateY: slideAnim }]
+                }
+              ]}
+            >
+              <Text style={[styles.description, { color: colors.secondaryText }]}>
+                Kişiselleştirilmiş astroloji rehberin{'\n'}
+                seni bekliyor
+              </Text>
+            </Animated.View>
+          </View>
+
+          {/* Buton Bölümü */}
+          <Animated.View 
+            style={[
+              styles.buttonSection,
+              {
+                opacity: fadeAnim,
+                transform: [{ translateY: slideAnim }]
+              }
+            ]}
+          >
+            <CustomButton
+              title='Yeni Hesap Oluştur'
+              variant='primary'
+              onPress={() => {router.push('/src/screens/auth/Register')}}
+              contentStyle={styles.primaryButton}
+            />
+            <CustomButton
+              title='Giriş Yap'
+              variant='secondary'
+              onPress={() => {router.push('/src/screens/auth/Login')}}
+              contentStyle={styles.secondaryButton}
+            />
+            
+            <View style={styles.termsContainer}>
+              <Text style={[styles.termsText, { color: colors.secondaryText }]}>
+                Devam ederek{' '}
+                <Text 
+                  style={[styles.termsLink, { color: colors.primary }]}
+                  onPress={() => router.push('/src/screens/side/StartScreen/Terms' as any)}
+                >
+                  Kullanım Şartları
+                </Text>
+                {' '}ve{' '}
+                <Text 
+                  style={[styles.termsLink, { color: colors.primary }]}
+                  onPress={() => router.push('/src/screens/side/StartScreen/Privacy' as any)}
+                >
+                  Gizlilik Politikası
+                </Text>
+                {'\'nı kabul etmiş olursunuz'}
+              </Text>
+            </View>
+          </Animated.View>
+        </View>
+      </LinearGradient>
+    </>
   )
 }
 

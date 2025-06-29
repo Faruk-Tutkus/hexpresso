@@ -145,7 +145,7 @@ export const useFetchData = (user: any): UseFetchDataReturn => {
   useEffect(() => {
     const initializeData = async () => {
       if (!user) {
-        console.log('❌ User bulunamadı');
+        console.log('⏳ FetchData: User bekleniyor...');
         setLoading(false);
         return;
       }
@@ -206,90 +206,5 @@ export const useFetchData = (user: any): UseFetchDataReturn => {
   };
 };
 
-// Backward compatibility için eski fetchData fonksiyonunu da export et
-export const fetchData = async ({ user, setLoading, setSigns }: { user: any; setLoading: (loading: boolean) => void; setSigns: (signs: any[]) => void; }): Promise<boolean> => {
-  console.log('⚠️ Deprecated: fetchData fonksiyonu kullanılıyor, useFetchData hook\'una geçin');
-  
-  if (!user) {
-    console.log('❌ User bulunamadı');
-    return false;
-  }
-
-  try {
-    const userDoc = await getDoc(doc(db, 'users', user.uid));
-    if (userDoc.data()?.newUser) {
-      console.log('👤 Yeni kullanıcı, veri yükleme atlanıyor');
-      return false;
-    }
-  } catch (error) {
-    console.error('❌ User dokümanı kontrol hatası:', error);
-  }
-
-  console.log('🚀 Signs veri yükleme başlıyor...');
-  
-  // Önce cache'deki veriyi kontrol et
-  const cachedData = getCachedSignsData();
-  if (cachedData && cachedData.length > 0) {
-    setSigns(cachedData);
-    setLoading(false);
-    console.log('⚡ Cache\'den hızlı signs yükleme tamamlandı');
-    
-    // Arka planda güncel veriyi getir
-    try {
-      console.log('🔄 Arka plan signs güncellemesi başlıyor...');
-      const freshData = await fetchSignsFromFirebase();
-      
-      // Update kontrolü
-      const docSet = doc(db, 'settings', 'update');
-      const docSnapSet = await getDoc(docSet);
-      const shouldUpdate = docSnapSet?.data()?.update;
-      
-      if (freshData && freshData.length > 0 && (!cachedData || shouldUpdate)) {
-        setSigns(freshData);
-        cacheSignsData(freshData);
-        console.log('🔄 Arka plan signs güncellemesi tamamlandı');
-      }
-    } catch (err) {
-      console.log('⚠️ Arka plan signs güncellemesi başarısız, cache verisi kullanılıyor');
-    }
-    
-    return true;
-  }
-
-  // Cache'de veri yoksa Firebase'den dene
-  setLoading(true);
-  
-  try {
-    console.log('🔥 Firebase\'den signs verisi getiriliyor...');
-    const firebaseData = await fetchSignsFromFirebase();
-    
-    if (firebaseData && firebaseData.length > 0) {
-      setSigns(firebaseData);
-      cacheSignsData(firebaseData);
-      setLoading(false);
-      console.log('✅ Firebase\'den signs verisi başarıyla yüklendi');
-      return true;
-    } else {
-      throw new Error('Firebase\'den boş signs verisi geldi');
-    }
-  } catch (error) {
-    console.log('⚠️ Firebase signs hatası, alternatif kaynaklar deneniyor...');
-    console.error('Firebase error:', error);
-    
-    // Firebase başarısız, local veriyi dene
-    const localData = getLocalSignsData();
-    if (localData && localData.length > 0) {
-      setSigns(localData);
-      cacheSignsData(localData);
-      setLoading(false);
-      console.log('✅ Local signs verisi yüklendi');
-      return true;
-    }
-    
-    console.error('❌ Tüm signs veri kaynakları başarısız');
-    setLoading(false);
-    return false;
-  }
-};
 
 export default useFetchData;

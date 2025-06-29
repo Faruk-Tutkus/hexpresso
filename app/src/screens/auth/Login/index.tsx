@@ -1,8 +1,8 @@
 import { ContainerButton, CustomButton, FloatingLabelInput, UnderLineText } from '@components'
-import { fetchData, useSignInWithApple, useSignInWithEmail, useSignInWithFacebook, useSignInWithGoogle } from '@hooks'
-import { useTheme, useToast } from '@providers'
+import { useFetchData, useFetchSeers, useSignInWithApple, useSignInWithEmail, useSignInWithFacebook, useSignInWithGoogle } from '@hooks'
+import { useAuth, useTheme, useToast } from '@providers'
 import { router, useLocalSearchParams } from 'expo-router'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
@@ -12,7 +12,7 @@ const Login = () => {
   const { email: emailParam, password: passwordParam, displayName: displayNameParam } = useLocalSearchParams()
   const [email, setEmail] = useState(emailParam as string)
   const [password, setPassword] = useState(passwordParam as string)
-  const [displayName, setDisplayName] = useState(displayNameParam as string)
+  const { user } = useAuth()
   const { showToast } = useToast()
   const { signIn } = useSignInWithEmail()
   const { signInGoogle } = useSignInWithGoogle()
@@ -28,6 +28,9 @@ const Login = () => {
     password: '',
     general: '',
   })
+
+  const { loading: dataLoading} = useFetchData(user);
+  const { loading: seersLoading, error: seersError } = useFetchSeers(user);
   
   const handleSignIn = async () => {
     try {
@@ -39,9 +42,9 @@ const Login = () => {
       if (userCredential?.user?.emailVerified && userCredential.newUser) {
         router.replace('/src/screens/side/Introduction');
       } else if (userCredential?.user?.emailVerified && !userCredential.newUser) {
-        // Data fetch işlemini bekle
-        const fetchSuccess = await fetchData({ user: userCredential.user, setLoading: setIsLoading, setSigns: () => { } });
-        if (fetchSuccess) {
+        // Data fetch işlemini bekle  
+        
+        if (!dataLoading && !seersLoading && !seersError) {
           router.replace('/src/screens/main/navigator/(tabs)/GuideScreen');
         }
       }
@@ -77,8 +80,7 @@ const Login = () => {
           router.replace('/src/screens/side/Introduction');
         } else {
           // Veri fetch işlemini bekle
-          const fetchSuccess = await fetchData({ user: result.user, setLoading: setIsLoading, setSigns: () => { } });
-          if (fetchSuccess) {
+          if (!dataLoading && !seersLoading && !seersError) {
             router.replace('/src/screens/main/navigator/FortuneTellingScreen');
           }
         }
@@ -101,8 +103,7 @@ const Login = () => {
           router.replace('/src/screens/side/Introduction');
         } else {
           // Veri fetch işlemini bekle
-          const fetchSuccess = await fetchData({ user: result.user, setLoading: setIsLoading, setSigns: () => { } });
-          if (fetchSuccess) {
+          if (!dataLoading && !seersLoading && !seersError) {
             router.replace('/src/screens/main/navigator/FortuneTellingScreen');
           }
         }
@@ -125,8 +126,7 @@ const Login = () => {
           router.replace('/src/screens/side/Introduction');
         } else {
           // Veri fetch işlemini bekle
-          const fetchSuccess = await fetchData({ user: result.user, setLoading: setIsLoading, setSigns: () => { } });
-          if (fetchSuccess) {
+          if (!dataLoading && !seersLoading && !seersError) {
             router.replace('/src/screens/main/navigator/FortuneTellingScreen');
           }
         }
