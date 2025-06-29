@@ -1,6 +1,6 @@
 import { SeerCard } from '@components';
 import { useFetchSeers } from '@hooks';
-import { useTheme, useToast } from '@providers';
+import { useAuth, useTheme, useToast } from '@providers';
 import React, { useCallback, useState } from 'react';
 import { ActivityIndicator, FlatList, Platform, RefreshControl, Text, UIManager, View } from 'react-native';
 import Animated, {
@@ -39,7 +39,8 @@ const FortuneTellingHeader = React.memo(() => {
 });
 
 const FortuneTellingScreen = () => {
-  const { seers, loading, error, refetch } = useFetchSeers();
+  const { user } = useAuth();
+  const { seers, loading, error, refetch } = useFetchSeers(user);
   const { colors } = useTheme();
   const { showToast } = useToast();
   const [activeIndex, setActiveIndex] = useState<number | null>(null);

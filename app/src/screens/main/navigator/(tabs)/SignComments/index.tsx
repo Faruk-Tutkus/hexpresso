@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { getDateRangeForPeriod, useFetchData } from '@hooks'
 import { useAuth, useTheme } from '@providers'
 import { doc, onSnapshot } from 'firebase/firestore'
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ActivityIndicator, FlatList, RefreshControl, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import Animated, { Easing, interpolate, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
@@ -129,18 +129,18 @@ const SignComments = () => {
 
   // Zodiac signs data with their names and icon names for the Icon component
   const zodiacSigns = [
-    { name: t('horoscope.aquarius'), iconName: 'zodiac-aquarius', index: 0, englishName: 'Aquarius' },
-    { name: t('horoscope.aries'), iconName: 'zodiac-aries', index: 1, englishName: 'Aries' },
-    { name: t('horoscope.cancer'), iconName: 'zodiac-cancer', index: 2, englishName: 'Cancer' },
-    { name: t('horoscope.capricorn'), iconName: 'zodiac-capricorn', index: 3, englishName: 'Capricorn' },
-    { name: t('horoscope.gemini'), iconName: 'zodiac-gemini', index: 4, englishName: 'Gemini' },
-    { name: t('horoscope.leo'), iconName: 'zodiac-leo', index: 5, englishName: 'Leo' },
+    { name: t('horoscope.aries'), iconName: 'zodiac-aries', index: 0, englishName: 'Aries' },
+    { name: t('horoscope.taurus'), iconName: 'zodiac-taurus', index: 1, englishName: 'Taurus' },
+    { name: t('horoscope.gemini'), iconName: 'zodiac-gemini', index: 2, englishName: 'Gemini' },
+    { name: t('horoscope.cancer'), iconName: 'zodiac-cancer', index: 3, englishName: 'Cancer' },
+    { name: t('horoscope.leo'), iconName: 'zodiac-leo', index: 4, englishName: 'Leo' },
+    { name: t('horoscope.virgo'), iconName: 'zodiac-virgo', index: 5, englishName: 'Virgo' },
     { name: t('horoscope.libra'), iconName: 'zodiac-libra', index: 6, englishName: 'Libra' },
-    { name: t('horoscope.pisces'), iconName: 'zodiac-pisces', index: 7, englishName: 'Pisces' },
+    { name: t('horoscope.scorpio'), iconName: 'zodiac-scorpio', index: 7, englishName: 'Scorpio' },
     { name: t('horoscope.sagittarius'), iconName: 'zodiac-sagittarius', index: 8, englishName: 'Sagittarius' },
-    { name: t('horoscope.scorpio'), iconName: 'zodiac-scorpio', index: 9, englishName: 'Scorpio' },
-    { name: t('horoscope.taurus'), iconName: 'zodiac-taurus', index: 10, englishName: 'Taurus' },
-    { name: t('horoscope.virgo'), iconName: 'zodiac-virgo', index: 11, englishName: 'Virgo' },
+    { name: t('horoscope.capricorn'), iconName: 'zodiac-capricorn', index: 9, englishName: 'Capricorn' },
+    { name: t('horoscope.aquarius'), iconName: 'zodiac-aquarius', index: 10, englishName: 'Aquarius' },
+    { name: t('horoscope.pisces'), iconName: 'zodiac-pisces', index: 11, englishName: 'Pisces' },
   ]
 
   // Set initial selected sign based on user's sunSign

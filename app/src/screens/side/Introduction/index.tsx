@@ -1,5 +1,6 @@
 import { db } from '@api/config.firebase';
 import { CustomButton, IconButton } from '@components';
+import { PROMPT_DESCRIPTIONS } from '@constants';
 import { useFetchData, useFetchSeers } from '@hooks';
 import { useAuth, useTheme, useToast } from '@providers';
 import { useRouter } from 'expo-router';
@@ -17,7 +18,7 @@ const Introduction = () => {
   const { user } = useAuth();
   const { showToast } = useToast();
   const { width } = Dimensions.get('window');
-  const { data, name, date, gender, time, reason, love, need, mood, meaning, experience, curious, location } = useIntroductionData();
+  const { data, name, date, gender, time, location } = useIntroductionData();
   const flatListRef = useRef<FlatList>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const router = useRouter();
@@ -28,14 +29,7 @@ const Introduction = () => {
     return name !== '' && 
            date !== '' && 
            location !== null &&
-           gender !== '' && 
-           reason !== '' && 
-           love !== '' && 
-           need !== '' && 
-           mood !== '' && 
-           meaning !== '' && 
-           experience !== '' &&
-           curious !== '';
+           gender !== '';
   };
   // Sadece kontrol için
   const canScroll = (direction: 'next' | 'prev') => {
@@ -44,13 +38,7 @@ const Introduction = () => {
         (currentIndex === 0 && name === '') ||
         (currentIndex === 1 && date === '') ||
         (currentIndex === 3 && location === null) ||
-        (currentIndex === 4 && gender === '') ||
-        (currentIndex === 5 && reason === '') ||
-        (currentIndex === 6 && love === '') ||
-        (currentIndex === 7 && need === '') ||
-        (currentIndex === 8 && mood === '') ||
-        (currentIndex === 9 && meaning === '') ||
-        (currentIndex === 10 && experience === '')
+        (currentIndex === 4 && gender === '')
       ) {
         return false;
       }
@@ -64,13 +52,7 @@ const Introduction = () => {
         (currentIndex === 1 && name === '') ||
         (currentIndex === 2 && date === '') ||
         (currentIndex === 4 && location === null) ||
-        (currentIndex === 5 && gender === '') ||
-        (currentIndex === 6 && reason === '') ||
-        (currentIndex === 7 && love === '') ||
-        (currentIndex === 8 && need === '') ||
-        (currentIndex === 9 && mood === '') ||
-        (currentIndex === 10 && meaning === '') ||
-        (currentIndex === 11 && experience === '')
+        (currentIndex === 5 && gender === '')
       ) {
         return false;
       }
@@ -102,7 +84,7 @@ const Introduction = () => {
     }
     return false;
   };
-  const [description] = useState(data.map(item => item.description));
+
   const [fullAstro, setFullAstro] = useState<FullAstroResult>({
     sunSign: '',
     moonSign: '',
@@ -150,29 +132,29 @@ const Introduction = () => {
             birthWeekday: fullAstro.birthWeekday,
             daysToNextBirthday: fullAstro.daysToNextBirthday,
             prompt: {
-              q1: "Kullanıcının " + description[0] + " sorusuna cevabı: " + name,
-              q2: "Kullanıcının " + description[1] + " sorusuna cevabı: " + date,
-              q3: "Kullanıcının " + description[2] + " sorusuna cevabı: " + time,
-              q4: "Kullanıcının " + description[3] + " sorusuna cevabı: " + gender,
-              q5: "Kullanıcının " + description[4] + " sorusuna cevabı: " + reason,
-              q6: "Kullanıcının " + description[5] + " sorusuna cevabı: " + love,
-              q7: "Kullanıcının " + description[6] + " sorusuna cevabı: " + need,
-              q8: "Kullanıcının " + description[7] + " sorusuna cevabı: " + mood,
-              q9: "Kullanıcının " + description[8] + " sorusuna cevabı: " + meaning,
-              q10: "Kullanıcının " + description[9] + " sorusuna cevabı: " + experience,
-              q11: "Kullanıcının " + description[10] + " sorusuna cevabı: " + curious,
+              q1: "Kullanıcının " + PROMPT_DESCRIPTIONS[0] + " sorusuna cevabı: " + name,
+              q2: "Kullanıcının " + PROMPT_DESCRIPTIONS[1] + " sorusuna cevabı: " + date,
+              q3: "Kullanıcının " + PROMPT_DESCRIPTIONS[2] + " sorusuna cevabı: " + time,
+              q4: "Kullanıcının " + PROMPT_DESCRIPTIONS[3] + " sorusuna cevabı: " + gender,
+              q5: "Kullanıcının " + PROMPT_DESCRIPTIONS[4] + " sorusuna cevabı: " + '',
+              q6: "Kullanıcının " + PROMPT_DESCRIPTIONS[5] + " sorusuna cevabı: " + '',
+              q7: "Kullanıcının " + PROMPT_DESCRIPTIONS[6] + " sorusuna cevabı: " + '',
+              q8: "Kullanıcının " + PROMPT_DESCRIPTIONS[7] + " sorusuna cevabı: " + '',
+              q9: "Kullanıcının " + PROMPT_DESCRIPTIONS[8] + " sorusuna cevabı: " + '',
+              q10: "Kullanıcının " + PROMPT_DESCRIPTIONS[9] + " sorusuna cevabı: " + '',
+              q11: "Kullanıcının " + PROMPT_DESCRIPTIONS[10] + " sorusuna cevabı: " + '',
             },
             name,
             date: date instanceof Date && !isNaN(date.getTime()) ? date.toISOString() : null,
             time: time instanceof Date && !isNaN(time.getTime()) ? time.toISOString() : null,
             gender,
-            reason,
-            love,
-            need,
-            mood,
-            meaning,
-            experience,
-            curious,
+            reason: '',
+            love: '',
+            need: '',
+            mood: '',
+            meaning: '',
+            experience: '',
+            curious: '',
             newUser: false,
             location: {
               latitude: location?.latitude || 0,
@@ -253,6 +235,7 @@ const Introduction = () => {
                   //   }
                     
                   // });
+                  showToast('Profilini profilim sayfasında görebilirsin!', 'success');
                   handleSave();
                 }}
                 loading={isLoading}
@@ -296,4 +279,4 @@ const Introduction = () => {
   )
 }
 
-export default Introduction
+export default Introduction 

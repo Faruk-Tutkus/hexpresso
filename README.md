@@ -7,6 +7,8 @@ Bu proje, Expo ve React Native kullanılarak geliştirilmiş, modern ve ölçekl
 - npx expo prebuild
 - npx expo run:android
 - ./gradlew assembleRelease
+- $sourceFiles = Get-ChildItem -Recurse -File | Where-Object { $_.FullName -notmatch 'node_modules|\.git|build|gradle|\.expo|\.cxx|\.vscode|package-lock\.json' -and $_.Extension -match '\.(tsx|ts|js|kt|java)$' }; Write-Host "Gerçek kaynak kod dosya sayısı: $($sourceFiles.Count)"; $totalLines = 0; foreach($file in $sourceFiles) { try { $lines = (Get-Content $file.FullName).Count; $totalLines += $lines } catch {} }; Write-Host "Sadece kaynak kodların toplam satır sayısı: $totalLines"
+- Write-Host "Proje Dosya Türleri Analizi:"; Write-Host "------------------------"; $allFiles = Get-ChildItem -Recurse -File | Where-Object { $_.FullName -notmatch 'node_modules|\.git|build|gradle|\.expo|\.cxx|\.vscode' }; $extensions = $allFiles | Group-Object Extension | Sort-Object Count -Descending; foreach($ext in $extensions[0..10]) { Write-Host "$($ext.Name): $($ext.Count) dosya" }
 ## 🚀 Teknolojiler
 
 - [Expo](https://expo.dev) - React Native geliştirme platformu

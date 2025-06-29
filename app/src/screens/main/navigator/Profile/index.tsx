@@ -8,11 +8,12 @@ import {
   MapView,
   Modal
 } from '@components';
+import { PROMPT_DESCRIPTIONS } from '@constants';
 import { useAuth, useTheme, useToast } from '@providers';
 import { useRouter } from 'expo-router';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
-import { KeyboardAvoidingView, Platform, ScrollView, Text, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, RefreshControl, ScrollView, Text, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { FullAstroResult, getFullAstro } from 'src/hooks/GetHoroscopeInfo';
 import styles from './styles';
@@ -45,6 +46,8 @@ const Profile = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [hasReceivedCompletionCoins, setHasReceivedCompletionCoins] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   
   // Modal states
   const [showGoBackModal, setShowGoBackModal] = useState(false);
@@ -82,6 +85,91 @@ const Profile = () => {
     experience: '',
     curious: '',
   });
+
+  // Profil tamamlanma yüzdesini hesapla
+  const calculateProfileCompletion = (data: UserProfileData): number => {
+    const totalFields = 12;
+    let filledFields = 0;
+
+    // Gerekli alanları kontrol et
+    if (data.name.trim()) filledFields++;
+    if (data.date instanceof Date && !isNaN(data.date.getTime())) filledFields++;
+    if (data.time instanceof Date && !isNaN(data.time.getTime())) filledFields++;
+    if (data.gender.trim()) filledFields++;
+    if (data.reason.trim()) filledFields++;
+    if (data.love.trim()) filledFields++;
+    if (data.need.trim()) filledFields++;
+    if (data.mood.trim()) filledFields++;
+    if (data.meaning.trim()) filledFields++;
+    if (data.experience.trim()) filledFields++;
+    if (data.curious.trim()) filledFields++;
+    if (data.location && data.location.latitude && data.location.longitude) filledFields++;
+
+    return Math.round((filledFields / totalFields) * 100);
+  };
+
+  const profileCompletionPercentage = calculateProfileCompletion(profileData);
+  const isProfileComplete = profileCompletionPercentage === 100;
+
+  // Progress Bar Componenti
+  const ProgressBar = ({ percentage }: { percentage: number }) => (
+    <Animated.View entering={FadeIn} style={[styles.progressContainer, { borderColor: colors.border }]}>
+      <View style={styles.progressHeader}>
+        <Text style={[styles.progressTitle, { color: colors.text }]}>
+          🎯 Profil Tamamlanma Durumu
+        </Text>
+        <Text style={[styles.progressPercentage, { color: colors.primary }]}>
+          %{percentage}
+        </Text>
+      </View>
+      <View style={[styles.progressBarBackground, { backgroundColor: colors.surface + '40' }]}>
+        <Animated.View 
+          entering={FadeIn.delay(300)}
+          style={[
+            styles.progressBarFill, 
+            { 
+              width: `${percentage}%`,
+              backgroundColor: percentage === 100 ? '#4CAF50' : colors.primary
+            }
+          ]} 
+        />
+      </View>
+      <Text style={[styles.progressSubtext, { color: colors.secondaryText }]}>
+        {percentage === 100 
+          ? '🎉 Tebrikler! Profin tamamen dolu. Yıldızlar artık seninle tam uyumda! ✨' 
+          : `${12 - Math.round((percentage / 100) * 12)} alan daha doldur ve 250 coin kazan! 💰`
+        }
+      </Text>
+    </Animated.View>
+  );
+
+  // Coin ödülü ver
+  const giveCompletionReward = async (isManualSave: boolean = false) => {
+    if (!user || hasReceivedCompletionCoins || !isProfileComplete) return;
+    
+    // Sadece manuel kaydet işleminde coin ver
+    if (!isManualSave) return;
+
+    try {
+      const userDocRef = doc(db, 'users', user.uid);
+      const userDoc = await getDoc(userDocRef);
+      
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        const currentCoins = userData.coins || 0;
+        
+        await updateDoc(userDocRef, {
+          coins: currentCoins + 250,
+          profileCompletionRewardGiven: true
+        });
+
+        setHasReceivedCompletionCoins(true);
+        showToast('🎉 Profil tamamlama ödülü: 250 coin kazandın! 💰', 'success');
+      }
+    } catch (error) {
+      console.error('Error giving completion reward:', error);
+    }
+  };
 
   // Kullanıcı verilerini yükle
   useEffect(() => {
@@ -124,6 +212,9 @@ const Profile = () => {
             birthWeekday: data.birthWeekday || '',
             daysToNextBirthday: data.daysToNextBirthday || 0
           });
+
+          // Coin ödülü verilmiş mi kontrolü
+          setHasReceivedCompletionCoins(data.profileCompletionRewardGiven || false);
         }
       } catch (error) {
         console.error('Error loading user data:', error);
@@ -135,6 +226,60 @@ const Profile = () => {
 
     loadUserData();
   }, [user]);
+
+  // Refetch fonksiyonu - kullanıcı verilerini yeniden yükle
+  const handleRefresh = async () => {
+    if (!user || isRefreshing) return;
+    
+    try {
+      setIsRefreshing(true);
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
+      
+      if (userDoc.exists()) {
+        const data = userDoc.data();
+        
+        const dateFromDB = data.date ? new Date(data.date) : null;
+        const timeFromDB = data.time ? new Date(data.time) : null;
+        
+        // Time değeri gelecekte veya mantıksızsa ignore et
+        const isValidTime = timeFromDB && 
+          !isNaN(timeFromDB.getTime()) && 
+          timeFromDB.getFullYear() <= new Date().getFullYear() &&
+          timeFromDB.getFullYear() >= 1900;
+        
+        setProfileData({
+          name: data.name || '',
+          date: (dateFromDB && !isNaN(dateFromDB.getTime())) ? dateFromDB : '',
+          time: isValidTime ? timeFromDB : '',
+          gender: data.gender || '',
+          reason: data.reason || '',
+          love: data.love || '',
+          need: data.need || '',
+          mood: data.mood || '',
+          meaning: data.meaning || '',
+          experience: data.experience || '',
+          curious: data.curious || '',
+          location: data.location || null,
+          sunSign: data.sunSign || '',
+          moonSign: data.moonSign || '',
+          ascendantSign: data.ascendantSign || '',
+          age: data.age || 0,
+          birthWeekday: data.birthWeekday || '',
+          daysToNextBirthday: data.daysToNextBirthday || 0
+        });
+
+        // Coin ödülü verilmiş mi kontrolü
+        setHasReceivedCompletionCoins(data.profileCompletionRewardGiven || false);
+        
+        showToast('Profil bilgileriniz güncellendi! ✨', 'success');
+      }
+    } catch (error) {
+      console.error('Error refreshing user data:', error);
+      showToast('Veriler yenilenirken bir hata oluştu.', 'error');
+    } finally {
+      setIsRefreshing(false);
+    }
+  };
 
   // Astroloji bilgilerini güncelle
   const updateAstrologyInfo = (date: Date | '', time: Date | '', location: { latitude: number; longitude: number }) => {
@@ -189,6 +334,30 @@ const Profile = () => {
     }
   };
 
+  // Prompt'ları güncelle fonksiyonu
+  const updatePrompts = (data: UserProfileData) => {
+    const formattedDate = data.date instanceof Date && !isNaN(data.date.getTime()) 
+      ? data.date.toLocaleDateString('tr-TR') 
+      : '';
+    const formattedTime = data.time instanceof Date && !isNaN(data.time.getTime())
+      ? data.time.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit', hour12: false })
+      : '';
+
+    return {
+      q1: "Kullanıcının " + PROMPT_DESCRIPTIONS[0] + " sorusuna cevabı: " + data.name,
+      q2: "Kullanıcının " + PROMPT_DESCRIPTIONS[1] + " sorusuna cevabı: " + formattedDate,
+      q3: "Kullanıcının " + PROMPT_DESCRIPTIONS[2] + " sorusuna cevabı: " + formattedTime,
+      q4: "Kullanıcının " + PROMPT_DESCRIPTIONS[3] + " sorusuna cevabı: " + getReadableValue('gender', data.gender),
+      q5: "Kullanıcının " + PROMPT_DESCRIPTIONS[4] + " sorusuna cevabı: " + getReadableValue('reason', data.reason),
+      q6: "Kullanıcının " + PROMPT_DESCRIPTIONS[5] + " sorusuna cevabı: " + getReadableValue('love', data.love),
+      q7: "Kullanıcının " + PROMPT_DESCRIPTIONS[6] + " sorusuna cevabı: " + getReadableValue('need', data.need),
+      q8: "Kullanıcının " + PROMPT_DESCRIPTIONS[7] + " sorusuna cevabı: " + getReadableValue('mood', data.mood),
+      q9: "Kullanıcının " + PROMPT_DESCRIPTIONS[8] + " sorusuna cevabı: " + getReadableValue('meaning', data.meaning),
+      q10: "Kullanıcının " + PROMPT_DESCRIPTIONS[9] + " sorusuna cevabı: " + getReadableValue('experience', data.experience),
+      q11: "Kullanıcının " + PROMPT_DESCRIPTIONS[10] + " sorusuna cevabı: " + getReadableValue('curious', data.curious),
+    };
+  };
+
   // Profil güncelleme
   const handleUpdateProfile = async () => {
     if (!user) return;
@@ -226,6 +395,9 @@ const Profile = () => {
         );
       }
 
+      // Güncellenmiş prompt'ları oluştur
+      const updatedPrompts = updatePrompts(profileData);
+
       const updateData = {
         name: profileData.name,
         date: profileData.date instanceof Date && !isNaN(profileData.date.getTime()) ? profileData.date.toISOString() : null,
@@ -245,13 +417,21 @@ const Profile = () => {
         age: profileData.age,
         birthWeekday: profileData.birthWeekday,
         daysToNextBirthday: profileData.daysToNextBirthday,
+        prompt: updatedPrompts, // Güncellenmiş prompt'ları ekle
         updatedAt: new Date(),
       };
 
       await updateDoc(doc(db, 'users', user.uid), updateData);
       
       setIsEditing(false);
-      showToast('Profiliniz başarıyla güncellendi! ✨', 'success');
+      
+      // Profil tamamlandığında coin ödülü kontrol et (sadece kaydet butonunda)
+      const newCompletionPercentage = calculateProfileCompletion(profileData);
+      if (newCompletionPercentage === 100 && !hasReceivedCompletionCoins) {
+        await giveCompletionReward(true);
+      }
+      
+      showToast('Profiliniz ve prompt\'larınız başarıyla güncellendi! ✨', 'success');
     } catch (error) {
       console.error('Error updating profile:', error);
       showToast('Profil güncellenirken bir hata oluştu.', 'error');
@@ -444,7 +624,16 @@ const Profile = () => {
       >
         <ScrollView
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.scrollContent}
+          contentContainerStyle={[styles.scrollContent, { paddingBottom: isEditing ? 80 : 60 }]}
+          refreshControl={
+            <RefreshControl
+              refreshing={isRefreshing}
+              onRefresh={handleRefresh}
+              colors={[colors.primary]}
+              tintColor={colors.primary}
+              progressBackgroundColor={colors.surface}
+            />
+          }
         >
           {/* Başlık */}
           <Animated.View entering={FadeIn} style={[styles.headerSection]}>
@@ -458,6 +647,10 @@ const Profile = () => {
               }
             </Text>
           </Animated.View>
+
+          {/* Progress Bar */}
+          <ProgressBar percentage={profileCompletionPercentage} />
+
           {/* Aksiyonlar */}
           <Animated.View entering={FadeIn.delay(500)} style={styles.actionSection}>
             {!isEditing ? (
@@ -467,24 +660,9 @@ const Profile = () => {
                 onPress={() => setIsEditing(true)}
                 loading={false}
               />
-            ) : (
-              <View style={styles.actionButtons}>
-                <CustomButton
-                  title="İptal"
-                  variant="secondary"
-                  leftIcon='close'
-                  onPress={() => setShowCancelModal(true)}
-                  loading={false}
-                />
-                <CustomButton
-                  title="Kaydet"
-                  leftIcon='save'
-                  onPress={handleUpdateProfile}
-                  loading={isLoading}
-                />
-              </View>
-            )}
+            ) : null}
           </Animated.View>
+
           {/* Kişisel Bilgiler */}
           <Animated.View entering={FadeIn.delay(100)} style={[styles.section, { borderColor: colors.border }]}>
             <Text style={[styles.sectionTitle, { color: colors.primary }]}>🌟 Kişisel Bilgiler</Text>
@@ -818,6 +996,27 @@ const Profile = () => {
           </Animated.View>
         </ScrollView>
       </KeyboardAvoidingView>
+      
+      {/* Fixed Footer - Edit Mode Actions */}
+      {isEditing && (
+        <Animated.View entering={FadeIn} style={[styles.footer, { backgroundColor: colors.background, borderTopColor: colors.border }]}>
+          <View style={styles.footerActions}>
+            <CustomButton
+              title="İptal"
+              variant="secondary"
+              leftIcon='close'
+              onPress={() => setShowCancelModal(true)}
+              loading={false}
+            />
+            <CustomButton
+              title="Kaydet"
+              leftIcon='save'
+              onPress={handleUpdateProfile}
+              loading={isLoading}
+            />
+          </View>
+        </Animated.View>
+      )}
       
       {/* Go Back Modal */}
       <Modal

@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   scrollContent: {
     flexGrow: 1,
     paddingHorizontal: 20,
-    paddingBottom: 30,
+    paddingBottom: 60,
   },
   headerSection: {
     paddingVertical: 25,
@@ -102,6 +102,74 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     gap: 15,
+  },
+  // Progress Bar styles
+  progressContainer: {
+    marginBottom: 25,
+    backgroundColor: 'transparent',
+    borderRadius: 16,
+    padding: 20,
+    borderWidth: 1,
+  },
+  progressHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  progressTitle: {
+    fontSize: 16,
+    fontFamily: 'Domine-SemiBold',
+    flex: 1,
+  },
+  progressPercentage: {
+    fontSize: 20,
+    fontFamily: 'CroissantOne-Regular',
+    marginLeft: 10,
+  },
+  progressBarBackground: {
+    height: 8,
+    borderRadius: 4,
+    marginBottom: 12,
+    overflow: 'hidden',
+  },
+  progressBarFill: {
+    height: '100%',
+    borderRadius: 4,
+    minWidth: 2,
+  },
+  progressSubtext: {
+    fontSize: 14,
+    fontFamily: 'Domine-Regular',
+    textAlign: 'center',
+    lineHeight: 20,
+  },
+  // Footer styles
+  footer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    paddingBottom: 30, // Extra padding for safe area
+    borderTopWidth: 1,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: -2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 5,
+  },
+  footerActions: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: 15,
+  },
+  footerButton: {
+    flex: 1,
   },
   // Modal styles
   modalOverlay: {
