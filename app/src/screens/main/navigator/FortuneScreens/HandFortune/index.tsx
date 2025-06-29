@@ -217,7 +217,9 @@ const HandFortune = () => {
       const validation = await validateHandImages(leftHandImage, rightHandImage);
       
       if (!validation.isValid) {
-        showToast(`Geçersiz görüntü: ${validation.reason}`, 'error');
+        setTimeout(() => {
+          showToast(`Geçersiz görüntü: ${validation.reason}`, 'error');
+        }, 1000);
         return;
       }
       
@@ -259,7 +261,7 @@ const HandFortune = () => {
         throw uploadError;
       }
 
-      showToast('Falınız hazırlanıyor...', 'info');
+      showToast('Falınız hazırlanıyor bu işlem biraz zaman alabilir...', 'info');
 
       // Generate AI interpretation immediately
       const aiResult = await generateFortuneInterpretation({
@@ -281,7 +283,7 @@ const HandFortune = () => {
         status: 'pending' as const,
         responseTime: seer.responsetime,
         estimatedCompletionTime: new Date(Date.now() + seer.responsetime * 60 * 1000),
-        coin: fortuneCost,
+        coins: fortuneCost,
         result: aiResult ? JSON.stringify(aiResult) : null
       };
 

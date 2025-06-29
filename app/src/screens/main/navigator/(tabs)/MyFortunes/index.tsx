@@ -27,7 +27,7 @@ interface FortuneRecord {
   status: 'pending' | 'completed' | 'processing';
   responseTime: number;
   estimatedCompletionTime: any;
-  coin: number;
+  coins: number;
   result?: string;
   completedAt?: any;
 }
@@ -369,13 +369,13 @@ const FortuneCardContent = ({
 
     return (
       <Animated.View
-        style={[styles.resultContainer, { backgroundColor: colors.surface, borderColor: colors.border }]}
+        style={[styles.resultContainer, { borderColor: colors.border }]}
         entering={SlideInDown.duration(500).springify()}
         exiting={FadeOut.duration(300)}
       >
         <View style={styles.resultHeader}>
           <Icon name="sparkles-outline" size={20} color={colors.primary} />
-          <Text style={[styles.resultTitle, { color: colors.background }]}>
+          <Text style={[styles.resultTitle, { color: colors.text }]}>
             {fortune.seerData.name}
           </Text>
         </View>
@@ -390,7 +390,7 @@ const FortuneCardContent = ({
           <View style={styles.sectionIcon}>
             <Icon name="eye-outline" size={16} color={colors.primary} />
           </View>
-          <Text style={[styles.interpretationText, { color: colors.background }]}>
+          <Text style={[styles.interpretationText, { color: colors.text }]}>
             {parsedResult.interpretation}
           </Text>
         </Animated.View>
@@ -405,7 +405,7 @@ const FortuneCardContent = ({
               <Icon name="bulb-outline" size={16} color={colors.secondary} />
               <Text style={[styles.sectionLabel, { color: colors.secondary }]}>Tavsiyeler</Text>
             </View>
-            <Text style={[styles.sectionText, { color: colors.background }]}>
+            <Text style={[styles.sectionText, { color: colors.text }]}>
               {parsedResult.advice}
             </Text>
           </Animated.View>
@@ -421,7 +421,7 @@ const FortuneCardContent = ({
               <Icon name="time-outline" size={16} color={colors.secondary} />
               <Text style={[styles.sectionLabel, { color: colors.secondary }]}>Zaman Çerçevesi</Text>
             </View>
-            <Text style={[styles.sectionText, { color: colors.background }]}>
+            <Text style={[styles.sectionText, { color: colors.text }]}>
               {parsedResult.timeframe}
             </Text>
           </Animated.View>
@@ -474,7 +474,6 @@ const FortuneCardContent = ({
       </Animated.View>
     );
   };
-
   return (
     <View style={styles.cardContent}>
       <View style={styles.cardHeader}>
@@ -499,7 +498,7 @@ const FortuneCardContent = ({
         <View style={styles.coinBadge}>
           <Icon name="logo-bitcoin" size={16} color={colors.secondary} />
           <Text style={[styles.coinText, { color: colors.secondary }]}>
-            {fortune.coin}
+            {fortune.coins}
           </Text>
         </View>
       </View>

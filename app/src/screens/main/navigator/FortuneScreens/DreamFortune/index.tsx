@@ -47,7 +47,7 @@ const DreamFortune = () => {
       }
       
       const userData = userDoc.data();
-      const currentCoins = userData.coin || 0;
+      const currentCoins = userData.coins || 0;
       
       if (currentCoins < fortuneCost) {
         showToast(`Yetersiz coin! Bu fal için ${fortuneCost} coin gerekli, mevcut: ${currentCoins}`, 'error');
@@ -56,7 +56,7 @@ const DreamFortune = () => {
       
       // Deduct coins immediately
       await updateDoc(doc(db, 'users', user.uid), {
-        coin: currentCoins - fortuneCost
+        coins: currentCoins - fortuneCost
       });
       
       showToast(`${fortuneCost} coin harcandı. Rüya falınız hazırlanıyor...`, 'info');
@@ -78,7 +78,7 @@ const DreamFortune = () => {
         status: 'pending' as const,
         responseTime: seer.responsetime,
         estimatedCompletionTime: new Date(Date.now() + seer.responsetime * 60 * 1000),
-        coin: fortuneCost,
+        coins: fortuneCost,
         result: aiResult ? JSON.stringify(aiResult) : null
       };
 
