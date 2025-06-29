@@ -87,7 +87,7 @@ const Register = () => {
           router.replace('/src/screens/side/Introduction');
         } else {
           if (!dataLoading && !seersLoading && !seersError) {
-            showToast("İlk yükleme uzun sürebilir, lütfen bekleyiniz", 'success')
+           //showToast("İlk yükleme uzun sürebilir, lütfen bekleyiniz", 'success')
             router.replace('/src/screens/main/navigator/FortuneTellingScreen');
           }
         }
