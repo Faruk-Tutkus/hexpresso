@@ -61,16 +61,22 @@ const DreamFortune = () => {
       
       showToast(`${fortuneCost} coin harcandı. Rüya falınız hazırlanıyor...`, 'info');
 
+      // Get user data for personalization
+      const userDocRef = doc(db, 'users', user.uid);
+      const userDocExists = await getDoc(userDocRef);
+      const userDataExists = userDocExists.exists() ? userDocExists.data() : {};
+
       // Generate AI interpretation immediately
       const aiResult = await generateFortuneInterpretation({
         fortuneType: 'Rüya Yorumu',
         seerData: seer,
-        dreamText: dreamText.trim()
+        dreamText: dreamText.trim(),
+        userData: userDataExists
       });
 
       // Create fortune record with AI result but pending status
       const fortuneRecord = {
-        id: Date.now().toString(),
+        id: `${Date.now()}_${Math.random().toString(36).slice(2,9)}_dream`,
         seerData: seer,
         fortuneType: 'Rüya Yorumu',
         dreamText: dreamText.trim(),
@@ -79,7 +85,7 @@ const DreamFortune = () => {
         responseTime: seer.responsetime,
         estimatedCompletionTime: new Date(Date.now() + seer.responsetime * 60 * 1000),
         coins: fortuneCost,
-        result: aiResult ? JSON.stringify(aiResult) : null
+        result: aiResult
       };
 
       // Add to user's document fortunerecord array
@@ -104,7 +110,7 @@ const DreamFortune = () => {
   };
 
   // AI interpretation function
-  const generateFortuneInterpretation = async ({ fortuneType, seerData, dreamText }: any) => {
+  const generateFortuneInterpretation = async ({ fortuneType, seerData, dreamText, userData }: any) => {
     try {
       const { GoogleGenAI, HarmBlockThreshold, HarmCategory } = require('@google/genai');
       const ai = new GoogleGenAI({ apiKey: "AIzaSyBeAM7n8yGpXmNJfDL7WkUcC09m0fKEQNo" });
@@ -112,9 +118,33 @@ const DreamFortune = () => {
       const prompt = `
 Sen ${seerData.name} adında bir falcısın. Karakter: "${seerData.character}"
 Hayat hikayen: "${seerData.lifestory}"
-Deneyimlerin: "${seerData.experiences}"
 
 ${fortuneType} yapacaksın.
+
+Yorum yaparken kendi özünü ve bilgilerini kullan ancak bunları kullanıcıya hissettirme.
+
+KULLANICI BİLGİLERİ:
+- Yaş: ${userData?.age || 'bilinmiyor'}
+- Burç: ${userData?.sunSign || 'bilinmiyor'}
+- Yükselen: ${userData?.ascendantSign || 'bilinmiyor'}
+- Cinsiyet: ${userData?.gender || 'bilinmiyor'}
+- Q1: ${userData?.prompt?.q1 || 'bilinmiyor'}
+- Q2: ${userData?.prompt?.q2 || 'bilinmiyor'}
+- Q3: ${userData?.prompt?.q3 || 'bilinmiyor'}
+- Q4: ${userData?.prompt?.q4 || 'bilinmiyor'}
+- Q5: ${userData?.prompt?.q5 || 'bilinmiyor'}
+- Q6: ${userData?.prompt?.q6 || 'bilinmiyor'}
+- Q7: ${userData?.prompt?.q7 || 'bilinmiyor'}
+- Q8: ${userData?.prompt?.q8 || 'bilinmiyor'}
+- Q9: ${userData?.prompt?.q9 || 'bilinmiyor'}
+- Q10: ${userData?.prompt?.q10 || 'bilinmiyor'}
+- Q11: ${userData?.prompt?.q11 || 'bilinmiyor'}
+
+Bu bilgileri de kullanarak yorumunu daha kişisel ve anlamlı yap.
+Kişinin bilgilerini direkt kullanıcıya söyleme.
+Kullanıcı bilgileri harmanlayarak yorumunu daha kişisel ve anlamlı yap.
+
+Bu bilgileri de kullanarak yorumunu daha kişisel ve anlamlı yap.
 
 ÇOK ÖNEMLİ: Yanıtını SADECE JSON formatında ver, başka hiçbir metin ekleme:
 

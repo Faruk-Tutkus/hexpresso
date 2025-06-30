@@ -1,8 +1,7 @@
 import { db } from '@api/config.firebase';
 import Icon from '@assets/icons';
-import { useAuth, useTheme, useToast } from '@providers';
+import { useAuth, useTheme } from '@providers';
 import { Image } from 'expo-image';
-import { useRouter } from 'expo-router';
 import { arrayRemove, arrayUnion, doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { useCallback, useEffect, useState } from 'react';
 import { FlatList, RefreshControl, Text, TouchableOpacity, View } from 'react-native';
@@ -28,19 +27,18 @@ interface FortuneRecord {
   responseTime: number;
   estimatedCompletionTime: any;
   coins: number;
-  result?: string;
+  result?: any;
   completedAt?: any;
 }
 
 const MyFortunes = () => {
   const { colors } = useTheme();
   const { user } = useAuth();
-  const { showToast } = useToast();
-  const router = useRouter();
   const [fortunes, setFortunes] = useState<FortuneRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [expandedCardId, setExpandedCardId] = useState<string | null>(null);
+
 
   // Real-time timer check for immediate status updates
   useEffect(() => {
@@ -105,8 +103,13 @@ const MyFortunes = () => {
         const userData = doc.data();
         const fortuneRecords = userData.fortunerecord || [];
         
+        // Remove duplicates based on ID and ensure unique keys
+        const uniqueFortunes = fortuneRecords.filter((fortune: FortuneRecord, index: number, self: FortuneRecord[]) => 
+          index === self.findIndex((f: FortuneRecord) => f.id === fortune.id)
+        );
+        
         // Sort by creation date (newest first)
-        const sortedFortunes = fortuneRecords.sort((a: FortuneRecord, b: FortuneRecord) => {
+        const sortedFortunes = uniqueFortunes.sort((a: FortuneRecord, b: FortuneRecord) => {
           const aTime = a.createdAt?.toDate ? a.createdAt.toDate().getTime() : new Date(a.createdAt).getTime();
           const bTime = b.createdAt?.toDate ? b.createdAt.toDate().getTime() : new Date(b.createdAt).getTime();
           return bTime - aTime;
@@ -186,7 +189,7 @@ const MyFortunes = () => {
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <FlatList
         data={fortunes}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item, index) => `${item.id}_${index}`}
         renderItem={renderFortuneCard}
         ListHeaderComponent={ScrollableHeader}
         ListEmptyComponent={renderEmptyState}
@@ -287,85 +290,59 @@ const FortuneCardContent = ({
     }
   };
 
-  const parseFortuneResult = (result: string | any) => {
-    console.log('Raw result:', result);
-    console.log('Result type:', typeof result);
+  const parseFortuneResult = (result: any) => {
+    //console.log('Raw result:', result);
+    //console.log('Result type:', typeof result);
 
-    try {
-      // Eğer result zaten bir object ise, direkt döndür
-      if (typeof result === 'object' && result !== null) {
-        return {
-          interpretation: result.interpretation || result.yorum || JSON.stringify(result),
-          advice: result.advice || result.tavsiye || '',
-          timeframe: result.timeframe || result.zaman || '',
-          warnings: Array.isArray(result.warnings) ? result.warnings : (result.uyarilar || []),
-          positiveAspects: Array.isArray(result.positiveAspects) ? result.positiveAspects : (result.olumluYonler || [])
-        };
-      }
-
-      // String ise temizle ve parse et
-      let cleanResult = result;
-
-      if (typeof result === 'string') {
-        // Remove outer quotes if they exist
-        cleanResult = result.replace(/^["']|["']$/g, '');
-
-        // Fix escaped characters
-        cleanResult = cleanResult
-          .replace(/\\"/g, '"')
-          .replace(/\\'/g, "'")
-          .replace(/\\\\/g, '\\')
-          .replace(/\\n/g, '\n')
-          .replace(/\\r/g, '\r')
-          .replace(/\\t/g, '\t');
-
-        // Handle markdown code blocks
-        const codeBlockMatch = cleanResult.match(/```(?:json)?\s*([\s\S]*?)\s*```/);
-        if (codeBlockMatch) {
-          cleanResult = codeBlockMatch[1].trim();
-          console.log('Extracted from code block:', cleanResult);
-        }
-
-        // Extract JSON object from text
-        const jsonMatch = cleanResult.match(/\{[\s\S]*\}/);
-        if (jsonMatch) {
-          cleanResult = jsonMatch[0];
-          console.log('Extracted JSON object:', cleanResult);
-        }
-      }
-
-      console.log('Cleaned result:', cleanResult);
-
-      const parsed = JSON.parse(cleanResult);
-      console.log('Parsed result:', parsed);
-
+    // Eğer result zaten bir object ise, direkt döndür
+    if (typeof result === 'object' && result !== null) {
       return {
-        interpretation: parsed.interpretation || parsed.yorum || cleanResult,
-        advice: parsed.advice || parsed.tavsiye || '',
-        timeframe: parsed.timeframe || parsed.zaman || '',
-        warnings: Array.isArray(parsed.warnings) ? parsed.warnings : (parsed.uyarilar || []),
-        positiveAspects: Array.isArray(parsed.positiveAspects) ? parsed.positiveAspects : (parsed.olumluYonler || [])
-      };
-    } catch (error) {
-      console.error('Parse error:', error);
-      console.log('Fallback to plain text');
-
-      // JSON parse edilemezse, düz metin olarak döndür
-      return {
-        interpretation: result,
-        advice: '',
-        timeframe: '',
-        warnings: [],
-        positiveAspects: []
+        interpretation: result.interpretation || result.yorum || 'Yorum bulunamadı',
+        advice: result.advice || result.tavsiye || '',
+        timeframe: result.timeframe || result.zaman || '',
+        warnings: Array.isArray(result.warnings) ? result.warnings : (result.uyarilar || []),
+        positiveAspects: Array.isArray(result.positiveAspects) ? result.positiveAspects : (result.olumluYonler || [])
       };
     }
+
+    // Legacy: String formatındaki eski veriler için basit JSON parse
+    if (typeof result === 'string') {
+      try {
+        const parsed = JSON.parse(result);
+        return {
+          interpretation: parsed.interpretation || parsed.yorum || result,
+          advice: parsed.advice || parsed.tavsiye || '',
+          timeframe: parsed.timeframe || parsed.zaman || '',
+          warnings: Array.isArray(parsed.warnings) ? parsed.warnings : (parsed.uyarilar || []),
+          positiveAspects: Array.isArray(parsed.positiveAspects) ? parsed.positiveAspects : (parsed.olumluYonler || [])
+        };
+      } catch (error) {
+        console.error('JSON parse error:', error);
+        return {
+          interpretation: result,
+          advice: '',
+          timeframe: '',
+          warnings: [],
+          positiveAspects: []
+        };
+      }
+    }
+
+    // Fallback
+    return {
+      interpretation: 'Sonuç yüklenemedi',
+      advice: '',
+      timeframe: '',
+      warnings: [],
+      positiveAspects: []
+    };
   };
 
   const renderResultSection = () => {
     if (!fortune.result) return null;
-    console.log(fortune.result);
+    //console.log(fortune.result);
     const parsedResult = parseFortuneResult(fortune.result);
-    console.log('Parsed for display:', parsedResult);
+    //console.log('Parsed for display:', parsedResult);
 
     return (
       <Animated.View
