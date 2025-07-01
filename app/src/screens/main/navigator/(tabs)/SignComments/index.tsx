@@ -5,10 +5,11 @@ import { AskAI } from '@components'
 import { Ionicons } from '@expo/vector-icons'
 import { getDateRangeForPeriod, useFetchData } from '@hooks'
 import { useAuth, useTheme } from '@providers'
+import DatePicker from '@react-native-community/datetimepicker'
 import { doc, onSnapshot } from 'firebase/firestore'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ActivityIndicator, FlatList, RefreshControl, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, FlatList, Platform, RefreshControl, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import Animated, { Easing, interpolate, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 import styles from './styles'
 type PeriodType = 'daily' | 'weekly' | 'monthly' | 'yearly'
@@ -42,6 +43,7 @@ const SignComments = () => {
   const [commentCards, setCommentCards] = useState<CommentCard[]>([])
   const [expandedCard, setExpandedCard] = useState<string | null>(null)
   const [currentDate, setCurrentDate] = useState(new Date())
+  const [showDatePicker, setShowDatePicker] = useState(false)
   const flatListRef = useRef<FlatList>(null)
 
   // Modern hook yapısı - FetchSeers ile aynı
@@ -361,6 +363,28 @@ const SignComments = () => {
     }
   }
 
+  // Handle date selection
+  const onDateChange = (event: any, selectedDate?: Date) => {
+    setShowDatePicker(false)
+    if (selectedDate) {
+      setCurrentDate(selectedDate)
+      if (selectedDate.toDateString() === new Date().toDateString()) {
+        setDays(1) // Today
+      } else if (selectedDate < new Date()) {
+        setDays(0) // Past date
+      } else {
+        setDays(2) // Future date
+      }
+    }
+  }
+
+  const openDatePicker = () => {
+    showInterstitial()
+    setTimeout(() => {
+      setShowDatePicker(true)
+    }, 3000)
+  }
+
   const renderSignCard = ({ item, index }: { item: any, index: number }) => {
     const isSelected = index === selectedSignIndex
     const sign = zodiacSigns[index]
@@ -568,7 +592,7 @@ const SignComments = () => {
               style={[styles.dailyNavButton, { borderColor: colors.border, backgroundColor: days === 0 ? colors.secondary : colors.surface + '30' }]}
               onPress={() => navigateDay('prev')}
             >
-              <Ionicons name="chevron-back" size={20} color={colors.secondaryText} />
+              <Icon name="chevron-back" size={20} color={colors.secondaryText} />
               <Text style={[styles.dailyNavText, { color: colors.secondaryText }]}>Dün</Text>
             </TouchableOpacity>
 
@@ -584,10 +608,25 @@ const SignComments = () => {
               onPress={() => navigateDay('next')}
             >
               <Text style={[styles.dailyNavText, { color: colors.secondaryText }]}>Yarın</Text>
-              <Ionicons name="chevron-forward" size={20} color={colors.secondaryText} />
+              <Icon name="chevron-forward" size={20} color={colors.secondaryText} />
             </TouchableOpacity>
           </View>
-          <Text style={[styles.dailyDate, { color: colors.text }]}>{currentDate.toLocaleDateString()}</Text>
+          <TouchableOpacity onPress={openDatePicker} style={styles.datePickerButton}>
+            <Text style={[styles.dailyDate, { color: colors.text }]}>{currentDate.toLocaleDateString()}</Text>
+            <Icon name="calendar" size={24} color={colors.text} style={{ marginLeft: 6, marginTop: 7 }} />
+          </TouchableOpacity>
+          {showDatePicker && (
+            <DatePicker
+              value={currentDate}
+              mode="date"
+              display={Platform.OS === "ios" ? "spinner" : "default"}
+              onChange={onDateChange}
+              minimumDate={new Date(new Date().getFullYear(), 0, 1)}
+              maximumDate={new Date(new Date().getFullYear(), 11, 31)}
+              // For iOS, the DatePicker is shown inline
+              // For Android, it's shown as a modal and automatically dismissed after selection
+            />
+          )}
         </View>
         {/* Comment Cards */}
         <View style={styles.commentsSection}>

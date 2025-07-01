@@ -2,9 +2,9 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
-
     width: '100%',
     height: 250,
+    position: 'relative',
   },
   map: {
     width: '100%',
@@ -18,6 +18,24 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 16,
     fontWeight: '500',
+  },
+  currentLocationButton: {
+    position: 'absolute',
+    bottom: 16,
+    right: 16,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
   // Modal Styles
   modalOverlay: {

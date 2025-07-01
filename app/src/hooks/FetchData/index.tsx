@@ -52,19 +52,20 @@ const getCachedSignsData = (): any[] | null => {
 
 const getLocalSignsData = (): any[] => {
   try {
+    // Order them according to the app's order (Aries, Taurus, Gemini, etc.)
     const localSigns = [
-      aquariusData,
-      ariesData,
-      cancerData,
-      capricornData,
-      geminiData,
-      leoData,
-      libraData,
-      piscesData,
-      sagittariusData,
-      scorpioData,
-      taurusData,
-      virgoData
+      ariesData,        // 0: Aries
+      taurusData,       // 1: Taurus
+      geminiData,       // 2: Gemini
+      cancerData,       // 3: Cancer
+      leoData,          // 4: Leo
+      virgoData,        // 5: Virgo
+      libraData,        // 6: Libra
+      scorpioData,      // 7: Scorpio
+      sagittariusData,  // 8: Sagittarius
+      capricornData,    // 9: Capricorn
+      aquariusData,     // 10: Aquarius
+      piscesData        // 11: Pisces
     ];
     console.log('📁 Local signs verisi yüklendi:', localSigns.length, 'sign');
     return localSigns;
@@ -89,6 +90,47 @@ const fetchSignsFromFirebase = async (): Promise<any[]> => {
     });
     
     console.log('✅ Toplam signs verisi:', signsData.length);
+
+    // Remap Firebase data to our application's order
+    // Firebase order: alphabetical (Aquarius, Aries, Cancer, Capricorn, Gemini, Leo, Libra, Pisces, Sagittarius, Scorpio, Taurus, Virgo)
+    // App order: (Aries, Taurus, Gemini, Cancer, Leo, Virgo, Libra, Scorpio, Sagittarius, Capricorn, Aquarius, Pisces)
+    
+    // Create a map for the expected order
+    const remappedSignsData = [];
+    
+    // Firebase indices to our app's indices mapping
+    // 0:Aquarius -> 10:Aquarius
+    // 1:Aries -> 0:Aries
+    // 2:Cancer -> 3:Cancer
+    // 3:Capricorn -> 9:Capricorn
+    // 4:Gemini -> 2:Gemini
+    // 5:Leo -> 4:Leo
+    // 6:Libra -> 6:Libra
+    // 7:Pisces -> 11:Pisces
+    // 8:Sagittarius -> 8:Sagittarius
+    // 9:Scorpio -> 7:Scorpio
+    // 10:Taurus -> 1:Taurus
+    // 11:Virgo -> 5:Virgo
+    
+    // Map to desired order (if data exists)
+    if (signsData && signsData.length >= 12) {
+      remappedSignsData[0] = signsData[1];  // Aries
+      remappedSignsData[1] = signsData[10]; // Taurus
+      remappedSignsData[2] = signsData[4];  // Gemini
+      remappedSignsData[3] = signsData[2];  // Cancer
+      remappedSignsData[4] = signsData[5];  // Leo
+      remappedSignsData[5] = signsData[11]; // Virgo
+      remappedSignsData[6] = signsData[6];  // Libra
+      remappedSignsData[7] = signsData[9];  // Scorpio
+      remappedSignsData[8] = signsData[8];  // Sagittarius
+      remappedSignsData[9] = signsData[3];  // Capricorn
+      remappedSignsData[10] = signsData[0]; // Aquarius
+      remappedSignsData[11] = signsData[7]; // Pisces
+      
+      console.log('🔄 Signs verisi uygulama sırasına dönüştürüldü');
+      return remappedSignsData;
+    }
+    
     return signsData;
   } catch (err) {
     console.error('❌ Firebase signs hatası:', err);

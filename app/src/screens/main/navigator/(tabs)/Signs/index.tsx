@@ -26,18 +26,18 @@ const Signs = () => {
 
   function getSignName(index: number) {
     const signNames = [
-      t('horoscope.aquarius'),   // 0
-      t('horoscope.aries'),      // 1  
-      t('horoscope.cancer'),     // 2
-      t('horoscope.capricorn'),  // 3
-      t('horoscope.gemini'),     // 4
-      t('horoscope.leo'),        // 5
+      t('horoscope.aries'),      // 0
+      t('horoscope.taurus'),     // 1
+      t('horoscope.gemini'),     // 2
+      t('horoscope.cancer'),     // 3
+      t('horoscope.leo'),        // 4
+      t('horoscope.virgo'),      // 5
       t('horoscope.libra'),      // 6
-      t('horoscope.pisces'),     // 7
+      t('horoscope.scorpio'),    // 7
       t('horoscope.sagittarius'), // 8
-      t('horoscope.scorpio'),    // 9
-      t('horoscope.taurus'),     // 10
-      t('horoscope.virgo'),      // 11
+      t('horoscope.capricorn'),  // 9
+      t('horoscope.aquarius'),   // 10
+      t('horoscope.pisces'),     // 11
     ]
     return signNames[index] || 'Burç'
   }
@@ -45,20 +45,20 @@ const Signs = () => {
   // Get sign image based on index
   const getSignImage = (index: string) => {
     const imageMap: { [key: string]: any } = {
-      '0': require('@assets/image/aquarius.svg'),     // Aquarius
-      '1': require('@assets/image/aries.svg'),        // Aries
-      '2': require('@assets/image/cancer.svg'),       // Cancer
-      '3': require('@assets/image/capricorn.svg'),    // Capricorn
-      '4': require('@assets/image/gemini.svg'),       // Gemini
-      '5': require('@assets/image/leo.svg'),          // Leo
+      '0': require('@assets/image/aries.svg'),        // Aries
+      '1': require('@assets/image/taurus.svg'),       // Taurus
+      '2': require('@assets/image/gemini.svg'),       // Gemini
+      '3': require('@assets/image/cancer.svg'),       // Cancer
+      '4': require('@assets/image/leo.svg'),          // Leo
+      '5': require('@assets/image/virgo.svg'),        // Virgo
       '6': require('@assets/image/libra.svg'),        // Libra
-      '7': require('@assets/image/pisces.svg'),       // Pisces
+      '7': require('@assets/image/scorpio.svg'),      // Scorpio
       '8': require('@assets/image/sagittarius.svg'),  // Sagittarius
-      '9': require('@assets/image/scorpio.svg'),      // Scorpio
-      '10': require('@assets/image/taurus.svg'),      // Taurus
-      '11': require('@assets/image/virgo.svg'),       // Virgo
+      '9': require('@assets/image/capricorn.svg'),    // Capricorn
+      '10': require('@assets/image/aquarius.svg'),    // Aquarius
+      '11': require('@assets/image/pisces.svg'),      // Pisces
     }
-    return imageMap[index] || require('@assets/image/aquarius.svg')
+    return imageMap[index] || require('@assets/image/aries.svg')  // Default to Aries
   }
 
   const openModal = (title: string, content: string, icon: string = 'information-circle', items: any[] = [], type: string = 'text') => {

@@ -62,8 +62,12 @@ function getWeekRange(date: Date): { start: Date; end: Date } {
   const day = d.getDay();
   const diff = d.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is Sunday
   
-  const start = new Date(d.setDate(diff));
-  const end = new Date(d.setDate(diff + 6));
+  // Create separate date objects for start and end
+  const start = new Date(d);
+  start.setDate(diff);
+  
+  const end = new Date(d);
+  end.setDate(diff + 6);
   
   return { start, end };
 }
@@ -76,18 +80,6 @@ function getWeekRange(date: Date): { start: Date; end: Date } {
 function getMonthRange(date: Date): { start: Date; end: Date } {
   const start = new Date(date.getFullYear(), date.getMonth(), 1);
   const end = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-  
-  return { start, end };
-}
-
-/**
- * Gets the start and end of the year for a given date
- * @param date - Date object
- * @returns Object with start and end Date objects
- */
-function getYearRange(date: Date): { start: Date; end: Date } {
-  const start = new Date(date.getFullYear(), 0, 1);
-  const end = new Date(date.getFullYear(), 11, 31);
   
   return { start, end };
 }

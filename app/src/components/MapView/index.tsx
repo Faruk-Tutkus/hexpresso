@@ -1,14 +1,15 @@
 import { Modal } from '@components'
 import { useTheme, useToast } from '@providers'
 import * as Location from 'expo-location'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
   ActivityIndicator,
   Platform,
   Text,
+  TouchableOpacity,
   View
 } from 'react-native'
-import MapView, { MapPressEvent, Marker, PROVIDER_GOOGLE } from 'react-native-maps'
+import MapView, { MapPressEvent, Marker, PROVIDER_GOOGLE, Region } from 'react-native-maps'
 import styles from './styles'
 
 interface MapViewComponentProps {
@@ -30,11 +31,15 @@ const MapViewComponent: React.FC<MapViewComponentProps> = ({
   const [currentLocation, setCurrentLocation] = useState<{
     latitude: number
     longitude: number
-  } | null>(null)
+  }>({
+    latitude: initialLatitude,
+    longitude: initialLongitude
+  })
   const [markerCoordinate, setMarkerCoordinate] = useState<{
     latitude: number
     longitude: number
   } | null>(null)
+  const mapRef = useRef<MapView>(null)
 
   useEffect(() => {
     checkLocationPermission()
@@ -78,18 +83,46 @@ const MapViewComponent: React.FC<MapViewComponentProps> = ({
       const location = await Location.getCurrentPositionAsync({
         accuracy: Location.Accuracy.High
       })
-      setCurrentLocation({
+      
+      const newLocation = {
         latitude: location.coords.latitude,
         longitude: location.coords.longitude
+      }
+      
+      setCurrentLocation(newLocation)
+      setMarkerCoordinate(newLocation)
+      
+      if (onLocationSelect) {
+        onLocationSelect(newLocation.latitude, newLocation.longitude)
+      }
+      
+      // Animate map to current location
+      animateToRegion({
+        latitude: newLocation.latitude,
+        longitude: newLocation.longitude,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
       })
     } catch (error) {
       showToast('Konum alınamadı', 'error')
     }
   }
 
+  const animateToRegion = (region: Region) => {
+    mapRef.current?.animateToRegion(region, 1000)
+  }
+
   const handleMapPress = (event: MapPressEvent) => {
     const { coordinate } = event.nativeEvent
     setMarkerCoordinate(coordinate)
+    
+    // Animate to the selected position for better user feedback
+    animateToRegion({
+      latitude: coordinate.latitude,
+      longitude: coordinate.longitude,
+      latitudeDelta: 0.0922,
+      longitudeDelta: 0.0421,
+    })
     
     if (onLocationSelect) {
       onLocationSelect(coordinate.latitude, coordinate.longitude)
@@ -99,6 +132,14 @@ const MapViewComponent: React.FC<MapViewComponentProps> = ({
   const handleCloseModal = () => {
     setShowLocationModal(false)
     setIsLoading(false)
+  }
+  
+  const handleCurrentLocationPress = () => {
+    if (locationPermissionStatus === 'granted') {
+      getCurrentLocation()
+    } else {
+      requestLocationPermission()
+    }
   }
 
   if (isLoading) {
@@ -126,19 +167,21 @@ const MapViewComponent: React.FC<MapViewComponentProps> = ({
         cancelText="İptal"
         iconName="warning"
       />
+      
       {/* Harita */}
       <MapView
+        ref={mapRef}
         provider={Platform.OS === 'android' ? PROVIDER_GOOGLE : undefined}
         style={styles.map}
         initialRegion={{
-          latitude: currentLocation?.latitude || initialLatitude,
-          longitude: currentLocation?.longitude || initialLongitude,
+          latitude: currentLocation.latitude,
+          longitude: currentLocation.longitude,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
         onPress={handleMapPress}
         showsUserLocation={locationPermissionStatus === 'granted'}
-        showsMyLocationButton={locationPermissionStatus === 'granted'}
+        showsMyLocationButton={false}
       >
         {markerCoordinate && (
           <Marker
@@ -148,6 +191,14 @@ const MapViewComponent: React.FC<MapViewComponentProps> = ({
           />
         )}
       </MapView>
+      
+      {/* Custom Current Location Button */}
+      <TouchableOpacity 
+        style={[styles.currentLocationButton, { backgroundColor: colors.background }]}
+        onPress={handleCurrentLocationPress}
+      >
+        <Text style={{ color: colors.primary }}>📍</Text>
+      </TouchableOpacity>
     </View>
   )
 }

@@ -117,8 +117,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Almendra-Regular',
     fontSize: 32,
     textAlign: 'center',
-    marginBottom: 15,
-    paddingHorizontal: 10,
+
   },
   dailyNavButton: {
     flexDirection: 'row',
@@ -140,6 +139,13 @@ const styles = StyleSheet.create({
   todayText: {
     fontFamily: 'Almendra-Regular',
     fontSize: 16,
+  },
+  datePickerButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 5,
+    paddingHorizontal: 10,
   },
 
   // Stars Rating Styles
