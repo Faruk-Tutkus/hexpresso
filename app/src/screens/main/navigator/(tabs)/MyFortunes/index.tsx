@@ -102,12 +102,12 @@ const MyFortunes = () => {
       if (doc.exists()) {
         const userData = doc.data();
         const fortuneRecords = userData.fortunerecord || [];
-        
+
         // Remove duplicates based on ID and ensure unique keys
-        const uniqueFortunes = fortuneRecords.filter((fortune: FortuneRecord, index: number, self: FortuneRecord[]) => 
+        const uniqueFortunes = fortuneRecords.filter((fortune: FortuneRecord, index: number, self: FortuneRecord[]) =>
           index === self.findIndex((f: FortuneRecord) => f.id === fortune.id)
         );
-        
+
         // Sort by creation date (newest first)
         const sortedFortunes = uniqueFortunes.sort((a: FortuneRecord, b: FortuneRecord) => {
           const aTime = a.createdAt?.toDate ? a.createdAt.toDate().getTime() : new Date(a.createdAt).getTime();
@@ -158,9 +158,9 @@ const MyFortunes = () => {
         style={[styles.fortuneCard, { backgroundColor: colors.background, borderColor: colors.border }]}
         entering={SlideInRight.delay(index * 100).springify()}
       >
-        <FortuneCardContent 
-          fortune={item} 
-          colors={colors} 
+        <FortuneCardContent
+          fortune={item}
+          colors={colors}
           isExpanded={expandedCardId === item.id}
           onToggle={() => toggleCardExpansion(item.id)}
         />
@@ -263,8 +263,8 @@ const FortuneCardContent = ({
   const getStatusText = () => {
     switch (fortune.status) {
       case 'pending':
-        return timeRemaining === 'Hazır!' 
-          ? 'Falınız hazır!' 
+        return timeRemaining === 'Hazır!'
+          ? 'Falınız hazır!'
           : `Mistik güçler çalışıyor... ${timeRemaining}`;
       case 'processing':
         return 'Kaderin yorumlanıyor...';
@@ -338,10 +338,20 @@ const FortuneCardContent = ({
     };
   };
 
+
+
+  const getCoinIcon = (coin: number): string => {
+    if (coin >= 500) return 'diamond-outline';
+    if (coin >= 200) return 'trophy-outline';
+    if (coin >= 150) return 'medal-outline';
+    if (coin >= 100) return 'cash-outline';
+    return 'logo-bitcoin';
+  };
   const renderResultSection = () => {
     if (!fortune.result) return null;
     //console.log(fortune.result);
     const parsedResult = parseFortuneResult(fortune.result);
+
     //console.log('Parsed for display:', parsedResult);
 
     return (
@@ -473,7 +483,7 @@ const FortuneCardContent = ({
           </Text>
         </View>
         <View style={styles.coinBadge}>
-          <Icon name="logo-bitcoin" size={16} color={colors.secondary} />
+          <Icon name={getCoinIcon(fortune.coins)} size={16} color={colors.secondary} />
           <Text style={[styles.coinText, { color: colors.secondary }]}>
             {fortune.coins}
           </Text>
@@ -481,20 +491,20 @@ const FortuneCardContent = ({
       </View>
 
       {/* Enhanced Status Badge */}
-      <Animated.View 
+      <Animated.View
         style={[
-          styles.statusBadge, 
-          { 
-            backgroundColor: fortune.status === 'completed' 
-              ? `${colors.secondary}20` 
-              : fortune.status === 'pending' 
-              ? `${colors.primary}15` 
-              : `${colors.errorText}15`,
-            borderColor: fortune.status === 'completed' 
-              ? colors.secondary 
-              : fortune.status === 'pending' 
-              ? colors.primary 
-              : colors.errorText
+          styles.statusBadge,
+          {
+            backgroundColor: fortune.status === 'completed'
+              ? `${colors.secondary}20`
+              : fortune.status === 'pending'
+                ? `${colors.primary}15`
+                : `${colors.errorText}15`,
+            borderColor: fortune.status === 'completed'
+              ? colors.secondary
+              : fortune.status === 'pending'
+                ? colors.primary
+                : colors.errorText
           }
         ]}
         entering={FadeIn.delay(200).springify()}
@@ -503,12 +513,12 @@ const FortuneCardContent = ({
           <View style={styles.statusIcon}>
             {getStatusIcon()}
           </View>
-          <Text style={[styles.statusMessage, { 
-            color: fortune.status === 'completed' 
-              ? colors.secondary 
-              : fortune.status === 'pending' 
-              ? colors.primary 
-              : colors.errorText
+          <Text style={[styles.statusMessage, {
+            color: fortune.status === 'completed'
+              ? colors.secondary
+              : fortune.status === 'pending'
+                ? colors.primary
+                : colors.errorText
           }]}>
             {getStatusText()}
           </Text>
@@ -527,10 +537,10 @@ const FortuneCardContent = ({
         <Animated.View
           entering={FadeIn.delay(400).springify()}
         >
-          <TouchableOpacity 
+          <TouchableOpacity
             style={[
-              styles.enhancedResultButton, 
-              { 
+              styles.enhancedResultButton,
+              {
                 backgroundColor: isExpanded ? colors.secondaryText : colors.primary,
                 shadowColor: colors.primary,
               }
@@ -540,20 +550,20 @@ const FortuneCardContent = ({
           >
             <View style={styles.resultButtonContent}>
               <View style={styles.resultButtonLeft}>
-                <View style={[styles.resultIconContainer, { 
+                <View style={[styles.resultIconContainer, {
                   backgroundColor: isExpanded ? colors.primary : colors.background
                 }]}>
-                  <Icon 
-                    name="book-outline" 
-                    size={18} 
-                    color={isExpanded ? colors.background : colors.primary} 
+                  <Icon
+                    name="book-outline"
+                    size={18}
+                    color={isExpanded ? colors.background : colors.primary}
                   />
                 </View>
                 <View style={styles.resultButtonTextContainer}>
                   <Text style={[styles.resultButtonTitle, { color: colors.background }]}>
                     {isExpanded ? 'Sonucu Gizle' : 'Sonucu Görüntüle'}
                   </Text>
-                  <Text style={[styles.resultButtonSubtitle, { 
+                  <Text style={[styles.resultButtonSubtitle, {
                     color: colors.background,
                     opacity: 0.8
                   }]}>
@@ -561,13 +571,13 @@ const FortuneCardContent = ({
                   </Text>
                 </View>
               </View>
-              <View style={[styles.chevronContainer, { 
+              <View style={[styles.chevronContainer, {
                 backgroundColor: isExpanded ? colors.primary : colors.background
               }]}>
-                <Icon 
-                  name={isExpanded ? "chevron-up" : "chevron-down"} 
-                  size={16} 
-                  color={isExpanded ? colors.background : colors.primary} 
+                <Icon
+                  name={isExpanded ? "chevron-up" : "chevron-down"}
+                  size={16}
+                  color={isExpanded ? colors.background : colors.primary}
                 />
               </View>
             </View>

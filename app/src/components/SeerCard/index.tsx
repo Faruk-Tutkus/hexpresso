@@ -45,9 +45,10 @@ const getFortuneIcon = (fortune: string): string => {
 };
 
 const getCoinIcon = (coin: number): string => {
-	if (coin >= 200) return 'diamond-outline';
-	if (coin >= 150) return 'trophy-outline';
-	if (coin >= 120) return 'medal-outline';
+	if (coin >= 500) return 'diamond-outline';
+	if (coin >= 200) return 'trophy-outline';
+	if (coin >= 150) return 'medal-outline';
+	if (coin >= 100) return 'cash-outline';
 	return 'logo-bitcoin';
 };
 
@@ -79,14 +80,14 @@ const SeerCard: React.FC<SeerCardProps> = memo(({ seer, isExpanded, onPress }) =
 	};
 
 	const handleFalBaktir = () => {
-		if (!selectedFortuneWithCoin){
+		if (!selectedFortuneWithCoin) {
 			showToast('Lütfen bir fal türü seçiniz', 'error');
 			return;
 		};
-		
+
 		const seerDataParam = encodeURIComponent(JSON.stringify(seer));
 		let routePath = '';
-		
+
 		switch (selectedFortuneWithCoin.fortune.toLowerCase()) {
 			case 'kahve falı':
 				routePath = `/src/screens/main/navigator/FortuneScreens/CoffeeFortune?seerData=${seerDataParam}`;
@@ -105,26 +106,26 @@ const SeerCard: React.FC<SeerCardProps> = memo(({ seer, isExpanded, onPress }) =
 				showToast('Bu fal türü henüz desteklenmiyor', 'error');
 				return;
 		}
-		
+
 		router.push(routePath as any);
 	};
 
 	return (
 		<LayoutAnimationConfig skipEntering>
-			<Animated.View 
+			<Animated.View
 				style={[styles.card, { backgroundColor: colors.background, borderColor: colors.border }]}
 				entering={FadeIn.duration(600).springify()}
 			>
 				{/* Card Header */}
-				<TouchableOpacity 
-					style={styles.cardHeader} 
+				<TouchableOpacity
+					style={styles.cardHeader}
 					onPress={handleCardPress}
 					activeOpacity={0.8}
 				>
 					{isExpanded ? (
 						// Expanded Layout: Centered image with info below
 						<View style={styles.expandedHeaderLayout}>
-							<Animated.View 
+							<Animated.View
 								style={[styles.profileImageContainerExpanded, { borderColor: colors.primary }]}
 								entering={ZoomIn.delay(200).springify()}
 							>
@@ -136,8 +137,8 @@ const SeerCard: React.FC<SeerCardProps> = memo(({ seer, isExpanded, onPress }) =
 									transition={300}
 								/>
 							</Animated.View>
-							
-							<Animated.View 
+
+							<Animated.View
 								style={styles.expandedProfileInfo}
 								entering={SlideInDown.delay(300).springify()}
 							>
@@ -149,10 +150,10 @@ const SeerCard: React.FC<SeerCardProps> = memo(({ seer, isExpanded, onPress }) =
 								</Text>
 								<View style={styles.responseTimeContainer}>
 									<View style={styles.responseTimeIcon}>
-										<Icon 
-											name="flash-outline" 
-											size={14} 
-											color={colors.primary} 
+										<Icon
+											name="flash-outline"
+											size={14}
+											color={colors.primary}
 										/>
 									</View>
 									<Text style={[styles.responseTime, { color: colors.secondaryText }]}>
@@ -160,14 +161,14 @@ const SeerCard: React.FC<SeerCardProps> = memo(({ seer, isExpanded, onPress }) =
 									</Text>
 								</View>
 							</Animated.View>
-							
-							<Animated.View 
+
+							<Animated.View
 								style={[styles.expandButton, styles.expandButtonExpanded, { backgroundColor: colors.secondaryText }]}
 								entering={FadeIn.delay(400)}
 							>
-								<Icon 
-									name="chevron-up" 
-									size={20} 
+								<Icon
+									name="chevron-up"
+									size={20}
 									color={colors.background}
 								/>
 							</Animated.View>
@@ -175,7 +176,7 @@ const SeerCard: React.FC<SeerCardProps> = memo(({ seer, isExpanded, onPress }) =
 					) : (
 						// Collapsed Layout: Side by side
 						<View style={styles.profileSection}>
-							<Animated.View 
+							<Animated.View
 								style={[styles.profileImageContainer, { borderColor: colors.primary }]}
 								entering={ZoomIn.delay(200).springify()}
 							>
@@ -187,8 +188,8 @@ const SeerCard: React.FC<SeerCardProps> = memo(({ seer, isExpanded, onPress }) =
 									transition={300}
 								/>
 							</Animated.View>
-							
-							<Animated.View 
+
+							<Animated.View
 								style={styles.profileInfo}
 								entering={SlideInDown.delay(300).springify()}
 							>
@@ -200,10 +201,10 @@ const SeerCard: React.FC<SeerCardProps> = memo(({ seer, isExpanded, onPress }) =
 								</Text>
 								<View style={styles.responseTimeContainer}>
 									<View style={styles.responseTimeIcon}>
-										<Icon 
-											name="flash-outline" 
-											size={14} 
-											color={colors.primary} 
+										<Icon
+											name="flash-outline"
+											size={14}
+											color={colors.primary}
 										/>
 									</View>
 									<Text style={[styles.responseTime, { color: colors.secondaryText }]}>
@@ -211,14 +212,14 @@ const SeerCard: React.FC<SeerCardProps> = memo(({ seer, isExpanded, onPress }) =
 									</Text>
 								</View>
 							</Animated.View>
-							
-							<Animated.View 
+
+							<Animated.View
 								style={[styles.expandButton, { backgroundColor: colors.secondaryText }]}
 								entering={FadeIn.delay(400)}
 							>
-								<Icon 
-									name="chevron-down" 
-									size={20} 
+								<Icon
+									name="chevron-down"
+									size={20}
 									color={colors.background}
 								/>
 							</Animated.View>
@@ -228,15 +229,15 @@ const SeerCard: React.FC<SeerCardProps> = memo(({ seer, isExpanded, onPress }) =
 
 				{/* Expanded Content */}
 				{isExpanded && (
-					<Animated.View 
+					<Animated.View
 						style={styles.expandedContent}
 						entering={FadeInDown.duration(400).springify()}
 						exiting={FadeOut.duration(200)}
 					>
 						<View style={[styles.divider, { backgroundColor: colors.border }]} />
-						
+
 						{/* Character Description */}
-						<Animated.View 
+						<Animated.View
 							style={styles.section}
 							entering={FadeInDown.delay(100).springify()}
 						>
@@ -252,7 +253,7 @@ const SeerCard: React.FC<SeerCardProps> = memo(({ seer, isExpanded, onPress }) =
 						</Animated.View>
 
 						{/* Life Story */}
-						<Animated.View 
+						<Animated.View
 							style={styles.section}
 							entering={FadeInDown.delay(150).springify()}
 						>
@@ -268,7 +269,7 @@ const SeerCard: React.FC<SeerCardProps> = memo(({ seer, isExpanded, onPress }) =
 						</Animated.View>
 
 						{/* Note */}
-						<Animated.View 
+						<Animated.View
 							style={[styles.noteContainer, { backgroundColor: colors.background, borderColor: colors.border }]}
 							entering={FadeInDown.delay(200).springify()}
 						>
@@ -281,7 +282,7 @@ const SeerCard: React.FC<SeerCardProps> = memo(({ seer, isExpanded, onPress }) =
 						</Animated.View>
 
 						{/* Experience */}
-						<Animated.View 
+						<Animated.View
 							style={styles.section}
 							entering={FadeInDown.delay(250).springify()}
 						>
@@ -293,7 +294,7 @@ const SeerCard: React.FC<SeerCardProps> = memo(({ seer, isExpanded, onPress }) =
 							</View>
 							<View style={[styles.experienceGrid]}>
 								{seer.experience.map((exp, index) => (
-									<Animated.View 
+									<Animated.View
 										key={index}
 										style={[styles.experienceItem, { backgroundColor: colors.background, borderColor: colors.border }]}
 										entering={FadeIn.delay(300 + index * 50).springify()}
@@ -308,7 +309,7 @@ const SeerCard: React.FC<SeerCardProps> = memo(({ seer, isExpanded, onPress }) =
 						</Animated.View>
 
 						{/* Fortune Types with Coins */}
-						<Animated.View 
+						<Animated.View
 							style={styles.section}
 							entering={FadeInDown.delay(350).springify()}
 						>
@@ -327,12 +328,12 @@ const SeerCard: React.FC<SeerCardProps> = memo(({ seer, isExpanded, onPress }) =
 										<TouchableOpacity
 											style={[
 												styles.fortuneButton,
-												{ 
-													backgroundColor: selectedFortuneWithCoin?.fortune === item.fortune 
-														? colors.primary 
+												{
+													backgroundColor: selectedFortuneWithCoin?.fortune === item.fortune
+														? colors.primary
 														: colors.background,
-													borderColor: selectedFortuneWithCoin?.fortune === item.fortune 
-														? colors.primary 
+													borderColor: selectedFortuneWithCoin?.fortune === item.fortune
+														? colors.primary
 														: colors.border
 												}
 											]}
@@ -341,43 +342,43 @@ const SeerCard: React.FC<SeerCardProps> = memo(({ seer, isExpanded, onPress }) =
 										>
 											<View style={styles.fortuneButtonContent}>
 												<View style={styles.fortuneInfo}>
-													<Icon 
-														name={item.icon} 
-														size={16} 
-														color={selectedFortuneWithCoin?.fortune === item.fortune 
-															? colors.background 
+													<Icon
+														name={item.icon}
+														size={16}
+														color={selectedFortuneWithCoin?.fortune === item.fortune
+															? colors.background
 															: colors.text
 														}
 														zodiac={item.icon === 'cards-playing-outline' ? true : false}
 													/>
 													<Text style={[
 														styles.fortuneButtonText,
-														{ 
-															color: selectedFortuneWithCoin?.fortune === item.fortune 
-																? colors.background 
-																: colors.text 
+														{
+															color: selectedFortuneWithCoin?.fortune === item.fortune
+																? colors.background
+																: colors.text
 														}
 													]}
-													numberOfLines={2}
+														numberOfLines={2}
 													>
 														{item.fortune}
 													</Text>
 												</View>
 												<View style={styles.coinInfo}>
-													<Icon 
-														name={getCoinIcon(item.coin)} 
-														size={14} 
-														color={selectedFortuneWithCoin?.fortune === item.fortune 
-															? colors.background 
+													<Icon
+														name={getCoinIcon(item.coin)}
+														size={14}
+														color={selectedFortuneWithCoin?.fortune === item.fortune
+															? colors.background
 															: colors.secondary
-														} 
+														}
 													/>
 													<Text style={[
 														styles.coinText,
-														{ 
-															color: selectedFortuneWithCoin?.fortune === item.fortune 
-																? colors.background 
-																: colors.secondary 
+														{
+															color: selectedFortuneWithCoin?.fortune === item.fortune
+																? colors.background
+																: colors.secondary
 														}
 													]}>
 														{item.coin}
@@ -391,7 +392,7 @@ const SeerCard: React.FC<SeerCardProps> = memo(({ seer, isExpanded, onPress }) =
 						</Animated.View>
 
 						{/* Action Button */}
-						<Animated.View 
+						<Animated.View
 							style={[styles.actionSection, { borderColor: colors.border }]}
 							entering={FadeInDown.delay(550).springify()}
 						>
@@ -402,7 +403,7 @@ const SeerCard: React.FC<SeerCardProps> = memo(({ seer, isExpanded, onPress }) =
 								variant={selectedFortuneWithCoin ? "primary" : "secondary"}
 								contentStyle={[
 									styles.actionButton,
-									{ 
+									{
 										opacity: selectedFortuneWithCoin ? 1 : 0.5,
 										backgroundColor: selectedFortuneWithCoin ? colors.primary : colors.border
 									}

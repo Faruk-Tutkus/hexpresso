@@ -1,7 +1,7 @@
 import { ContainerButton } from '@components';
 import { useTheme, useToast } from '@providers';
 import * as Linking from 'expo-linking';
-import React from 'react';
+import { router } from 'expo-router';
 import { ScrollView, Text, View } from 'react-native';
 import Animated, { FadeIn, FadeInLeft, FadeInRight } from 'react-native-reanimated';
 import styles from './styles';
@@ -20,7 +20,7 @@ const About = () => {
   };
 
   return (
-    <ScrollView 
+    <ScrollView
       style={[styles.container, { backgroundColor: colors.background }]}
       showsVerticalScrollIndicator={false}
     >
@@ -39,7 +39,7 @@ const About = () => {
       {/* Intro */}
       <Animated.View entering={FadeInLeft.delay(200)} style={styles.section}>
         <Text style={[styles.introText, { color: colors.text }]}>
-          Kahve fincanından yıldız haritasına uzanan bu yolculukta, Hexpresso sana sadece günlük burç yorumları değil; 
+          Kahve fincanından yıldız haritasına uzanan bu yolculukta, Hexpresso sana sadece günlük burç yorumları değil;
           aynı zamanda senin için özel hazırlanmış, akıllı analizlerle dolu bir astroloji deneyimi sunar.
         </Text>
       </Animated.View>
@@ -59,7 +59,7 @@ const About = () => {
               Kişiselleştirilmiş Burç Yorumları
             </Text>
             <Text style={[styles.featureDescription, { color: colors.secondaryText }]}>
-              Her burç için günlük, haftalık, aylık ve yıllık analizler seni bekliyor. 
+              Her burç için günlük, haftalık, aylık ve yıllık analizler seni bekliyor.
               Sadece Güneş burcuna göre değil — yükselen ve ay burcuna göre de derinlemesine içerikler sunar.
             </Text>
           </View>
@@ -74,7 +74,7 @@ const About = () => {
               Zaman Yolculuğu Özelliği
             </Text>
             <Text style={[styles.featureDescription, { color: colors.secondaryText }]}>
-              Bugünü okudun, peki ya dün seni nasıl etkiledi? Yarın ne bekliyor? 
+              Bugünü okudun, peki ya dün seni nasıl etkiledi? Yarın ne bekliyor?
               Zaman aralığı butonlarıyla ileri-geri gezebilir, her günün enerjisini keşfedebilirsin.
             </Text>
           </View>
@@ -89,7 +89,7 @@ const About = () => {
               Gerçek Konum Tabanlı Astroloji
             </Text>
             <Text style={[styles.featureDescription, { color: colors.secondaryText }]}>
-              Doğduğun konumu harita üzerinden seçerek yıldızların o anki dizilimlerine göre daha net sonuçlar alırsın. 
+              Doğduğun konumu harita üzerinden seçerek yıldızların o anki dizilimlerine göre daha net sonuçlar alırsın.
               Sadece "Koç burcu şöyleymiş" gibi değil — senin "doğum anın" evrenin dilinde çözülür.
             </Text>
           </View>
@@ -104,7 +104,7 @@ const About = () => {
               Yıldızlar, Uyum ve Enerji Seviyeleri
             </Text>
             <Text style={[styles.featureDescription, { color: colors.secondaryText }]}>
-              Her yorumun yanında senin için hesaplanmış enerji, aşk, başarı ve ruh hali puanları yer alır. 
+              Her yorumun yanında senin için hesaplanmış enerji, aşk, başarı ve ruh hali puanları yer alır.
               Ayrıca o gün hangi burçlarla daha uyumlu olacağın da sana söylenir.
             </Text>
           </View>
@@ -119,7 +119,7 @@ const About = () => {
               Yapay Zekâ Destekli Astro Asistan (Mordecai)
             </Text>
             <Text style={[styles.featureDescription, { color: colors.secondaryText }]}>
-              Bir şey mi merak ettin? "Bu hafta risk almalı mıyım?", "Venüs retrosu beni nasıl etkiler?" 
+              Bir şey mi merak ettin? "Bu hafta risk almalı mıyım?", "Venüs retrosu beni nasıl etkiler?"
               gibi sorularına anında cevap veren akıllı astro asistanın 7/24 yanında.
             </Text>
           </View>
@@ -134,7 +134,7 @@ const About = () => {
               Detaylı Burç Analizleri
             </Text>
             <Text style={[styles.featureDescription, { color: colors.secondaryText }]}>
-              Her burcun karakteristik özellikleri, aşk hayatı, kariyerler, uyumlu burçlar, 
+              Her burcun karakteristik özellikleri, aşk hayatı, kariyerler, uyumlu burçlar,
               ünlü temsilciler ve daha fazlası kapsamlı şekilde sunulur.
             </Text>
           </View>
@@ -147,8 +147,8 @@ const About = () => {
           Neden Hexpresso?
         </Text>
         <Text style={[styles.bodyText, { color: colors.text }]}>
-          Bu uygulama; klasik burç uygulamalarının aksine, görselliğiyle, animasyonlu geçişleriyle ve 
-          kullanıcı deneyimiyle modern dünyanın ruhuna hitap eder. Sıkıcı duvar yazısı gibi burç yorumlarını değil, 
+          Bu uygulama; klasik burç uygulamalarının aksine, görselliğiyle, animasyonlu geçişleriyle ve
+          kullanıcı deneyimiyle modern dünyanın ruhuna hitap eder. Sıkıcı duvar yazısı gibi burç yorumlarını değil,
           gerçekten senin için yazılmış gibi hissettiren içgörüler sunar.
         </Text>
       </Animated.View>
@@ -159,7 +159,7 @@ const About = () => {
           Gizlilik ve Güvenlik
         </Text>
         <Text style={[styles.bodyText, { color: colors.text }]}>
-          Konum ve doğum bilgilerin yalnızca senin astrolojik haritani doğru hesaplamak için kullanılır. 
+          Konum ve doğum bilgilerin yalnızca senin astrolojik haritani doğru hesaplamak için kullanılır.
           Asla üçüncü taraflarla paylaşılmaz. Tüm veriler güvenle saklanır ve hiçbir zaman izinsiz şekilde işlenmez.
         </Text>
       </Animated.View>
@@ -175,7 +175,7 @@ const About = () => {
             Bu uygulama sadece Güneş burcuna mı göre çalışıyor?
           </Text>
           <Text style={[styles.faqAnswer, { color: colors.secondaryText }]}>
-            Hayır. Güneş, Ay ve Yükselen burç hesaplamaları doğum bilgilerin ve konumun temel alınarak yapılır. 
+            Hayır. Güneş, Ay ve Yükselen burç hesaplamaları doğum bilgilerin ve konumun temel alınarak yapılır.
             Mevcut özellikler sayesinde çok daha kişiselleştirilmiş sonuçlar alırsın.
           </Text>
         </View>
@@ -185,7 +185,7 @@ const About = () => {
             AI Asistan nasıl çalışıyor?
           </Text>
           <Text style={[styles.faqAnswer, { color: colors.secondaryText }]}>
-            Sorduğun sorular, gelişmiş yapay zeka modelleri ile analiz edilir ve doğrudan astrolojik kavramlara göre yorumlanır. 
+            Sorduğun sorular, gelişmiş yapay zeka modelleri ile analiz edilir ve doğrudan astrolojik kavramlara göre yorumlanır.
             Mordecai, ezberden konuşmaz - senin kişisel bilgilerinle harmanlayarak özel cevaplar verir.
           </Text>
         </View>
@@ -195,7 +195,7 @@ const About = () => {
             Verilerim güvende mi?
           </Text>
           <Text style={[styles.faqAnswer, { color: colors.secondaryText }]}>
-            Evet. Firebase altyapısı kullanılarak tüm veriler güvenli şekilde saklanır. 
+            Evet. Firebase altyapısı kullanılarak tüm veriler güvenli şekilde saklanır.
             Hiçbir kişisel bilgin üçüncü taraflarla paylaşılmaz.
           </Text>
         </View>
@@ -207,7 +207,7 @@ const About = () => {
           Hexpresso ile Evrenin Dilini Dinle
         </Text>
         <Text style={[styles.finalText, { color: colors.text }]}>
-          Yıldızlar boşuna orada değiller. Onlar sana bir şeyler anlatmaya çalışıyor. 
+          Yıldızlar boşuna orada değiller. Onlar sana bir şeyler anlatmaya çalışıyor.
           Hexpresso, bu mesajları senin için tercüme eder.
         </Text>
         <Text style={[styles.finalSubtext, { color: colors.secondaryText }]}>
@@ -215,6 +215,7 @@ const About = () => {
           Yolculuk şimdi başlıyor.
         </Text>
       </Animated.View>
+
 
       {/* Social Media */}
       <Animated.View entering={FadeIn.delay(1400)} style={styles.socialSection}>
@@ -227,21 +228,45 @@ const About = () => {
 
         <View style={styles.socialButtons}>
           <ContainerButton
-            title="Instagram'da Takip Et"
-            leftImage={require('@assets/image/floatingImage.png')}
+            title="Instagram'dan DM Gönder"
+            leftImage={require('@assets/image/instagram.png')}
             onPress={() => openURL('https://www.instagram.com/thefarukt')}
           />
-          
+
           <ContainerButton
             title="GitHub'da İncele"
             leftImage={require('@assets/image/github.png')}
             onPress={() => openURL('https://github.com/Faruk-Tutkus')}
           />
-          
+
           <ContainerButton
             title="E-posta Gönder"
             leftImage={require('@assets/image/gmail.png')}
             onPress={() => openURL('mailto:so38ware@gmail.com')}
+          />
+        </View>
+      </Animated.View>
+
+      {/* Privacy & Terms Section */}
+      <Animated.View entering={FadeIn.delay(1300)} style={styles.section}>
+        <Text style={[styles.sectionTitle, { color: colors.primary }]}>
+          📋 Yasal Bilgiler
+        </Text>
+        <Text style={[styles.bodyText, { color: colors.secondaryText }]}>
+          Kişisel verilerinizin korunması ve hizmet şartlarımız hakkında detaylı bilgi:
+        </Text>
+
+        <View style={styles.socialButtons}>
+          <ContainerButton
+            title="Gizlilik Politikası"
+            leftImage={require('@assets/image/privacy.png')}
+            onPress={() => router.push('/src/screens/side/StartScreen/Privacy')}
+          />
+
+          <ContainerButton
+            title="Kullanım Şartları"
+            leftImage={require('@assets/image/terms.png')}
+            onPress={() => router.push('/src/screens/side/StartScreen/Terms')}
           />
         </View>
       </Animated.View>

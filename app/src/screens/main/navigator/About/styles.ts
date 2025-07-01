@@ -25,6 +25,8 @@ export default StyleSheet.create({
     marginTop: 5,
   },
   section: {
+    justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: 30,
   },
   sectionTitle: {
