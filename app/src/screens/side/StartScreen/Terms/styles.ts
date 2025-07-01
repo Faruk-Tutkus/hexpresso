@@ -11,14 +11,6 @@ export default StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 12,
     paddingTop: 50,
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
   },
   backButton: {
     width: 40,
@@ -66,6 +58,7 @@ export default StyleSheet.create({
     fontFamily: 'Domine-Regular',
   },
   footerSection: {
+    width: '100%',
     marginTop: 20,
     paddingTop: 20,
     borderTopWidth: 1,

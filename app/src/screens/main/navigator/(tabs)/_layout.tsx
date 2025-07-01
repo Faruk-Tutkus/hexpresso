@@ -1,11 +1,16 @@
-import { Ionicons } from '@expo/vector-icons';
+import Icon from '@assets/icons';
 import { useTheme } from "@providers";
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Tabs } from "expo-router";
 import * as SystemUI from 'expo-system-ui';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
-import { Animated, Easing, InteractionManager, TouchableOpacity, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useCallback, useEffect, useMemo } from 'react';
+import { TouchableOpacity, View } from 'react-native';
+import Animated, {
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring
+} from 'react-native-reanimated';
 
 // Route configuration for cleaner management
 const ROUTE_CONFIG = {
@@ -25,16 +30,14 @@ const ROUTE_CONFIG = {
     id: 'myfortunes'
   },
   'SignComments/index': {
-    icon: 'star',
-    title: 'Burç Yorumları',
+    icon: 'comment',
+    title: 'Yorumlar',
     id: 'comments'
   }
 } as const;
 
-// Animation constants for better performance
+// Animation constants with Reanimated optimized values
 const ANIMATION_CONFIG = {
-  duration: 1000,
-  easing: Easing.bezier(0.4, 0.0, 0.2, 1), // Material Design easing
   scale: {
     inactive: 1,
     active: 1.15
@@ -46,12 +49,19 @@ const ANIMATION_CONFIG = {
   opacity: {
     inactive: 0.6,
     active: 1
+  },
+  spring: {
+    damping: 15,
+    stiffness: 150,
+    mass: 1,
+  },
+  timing: {
+    duration: 300,
   }
 };
 
 const TabLayout = () => {
   const { colors } = useTheme();
-  const insets = useSafeAreaInsets();
   
   useEffect(() => {
     SystemUI.setBackgroundColorAsync(colors.background);
@@ -68,70 +78,36 @@ const TabLayout = () => {
       return state.routes.filter(route => validRoutes.includes(route.name));
     }, [state.routes, validRoutes]);
 
-    // Initialize animation values with better performance
-    const animatedValues = useRef(
-      filteredRoutes.reduce((acc, route, index) => {
-        const isActive = state.routes.findIndex(r => r.name === route.name) === state.index;
-        acc[route.name] = {
-          scale: new Animated.Value(isActive ? ANIMATION_CONFIG.scale.active : ANIMATION_CONFIG.scale.inactive),
-          translateY: new Animated.Value(isActive ? ANIMATION_CONFIG.translateY.active : ANIMATION_CONFIG.translateY.inactive),
-          opacity: new Animated.Value(isActive ? ANIMATION_CONFIG.opacity.active : ANIMATION_CONFIG.opacity.inactive)
-        };
-        return acc;
-      }, {} as Record<string, { scale: Animated.Value; translateY: Animated.Value; opacity: Animated.Value }>)
-    ).current;
+    // Create shared values for each possible route at top level to follow Hook rules
+    const guideProgress = useSharedValue(state.index === state.routes.findIndex(r => r.name === 'GuideScreen/index') ? 1 : 0);
+    const fortuneProgress = useSharedValue(state.index === state.routes.findIndex(r => r.name === 'FortuneTellingScreen/index') ? 1 : 0);
+    const myFortunesProgress = useSharedValue(state.index === state.routes.findIndex(r => r.name === 'MyFortunes/index') ? 1 : 0);
+    const commentsProgress = useSharedValue(state.index === state.routes.findIndex(r => r.name === 'SignComments/index') ? 1 : 0);
 
-    // Optimize animation triggers
+    // Map route names to their respective progress values
+    const animationProgress = useMemo(() => ({
+      'GuideScreen/index': guideProgress,
+      'FortuneTellingScreen/index': fortuneProgress,
+      'MyFortunes/index': myFortunesProgress,
+      'SignComments/index': commentsProgress,
+    } as Record<string, any>), [guideProgress, fortuneProgress, myFortunesProgress, commentsProgress]);
+
+    // Update animations when active tab changes
     useEffect(() => {
-      // Use InteractionManager to ensure animations run after interactions
-      const task = InteractionManager.runAfterInteractions(() => {
-        filteredRoutes.forEach((route) => {
-          const isActive = state.routes.findIndex(r => r.name === route.name) === state.index;
-          const animations = animatedValues[route.name];
-          
-          if (!animations) return;
-
-          // Fix for release mode: use InteractionManager and more conservative settings
-          const animationPromise = new Promise<void>((resolve) => {
-            Animated.parallel([
-              Animated.timing(animations.scale, {
-                toValue: isActive ? ANIMATION_CONFIG.scale.active : ANIMATION_CONFIG.scale.inactive,
-                duration: __DEV__ ? ANIMATION_CONFIG.duration : ANIMATION_CONFIG.duration * 0.8,
-                easing: ANIMATION_CONFIG.easing,
-                useNativeDriver: false, // Changed to false for release compatibility
-              }),
-              Animated.timing(animations.translateY, {
-                toValue: isActive ? ANIMATION_CONFIG.translateY.active : ANIMATION_CONFIG.translateY.inactive,
-                duration: __DEV__ ? ANIMATION_CONFIG.duration : ANIMATION_CONFIG.duration * 0.8,
-                easing: ANIMATION_CONFIG.easing,
-                useNativeDriver: true, // Keep true for transform animations
-              }),
-              Animated.timing(animations.opacity, {
-                toValue: isActive ? ANIMATION_CONFIG.opacity.active : ANIMATION_CONFIG.opacity.inactive,
-                duration: __DEV__ ? ANIMATION_CONFIG.duration : ANIMATION_CONFIG.duration * 0.8,
-                easing: ANIMATION_CONFIG.easing,
-                useNativeDriver: true, // Keep true for opacity
-              })
-            ]).start(() => resolve());
+      filteredRoutes.forEach((route) => {
+        const isActive = state.routes.findIndex(r => r.name === route.name) === state.index;
+        const progress = animationProgress[route.name];
+        
+        if (progress) {
+          // Use spring animation for smooth, bouncy effect
+          progress.value = withSpring(isActive ? 1 : 0, {
+            damping: ANIMATION_CONFIG.spring.damping,
+            stiffness: ANIMATION_CONFIG.spring.stiffness,
+            mass: ANIMATION_CONFIG.spring.mass,
           });
-
-          // Ensure animations complete properly
-          animationPromise.catch(() => {
-            // Fallback: Set values directly if animation fails
-            animations.scale.setValue(isActive ? ANIMATION_CONFIG.scale.active : ANIMATION_CONFIG.scale.inactive);
-            animations.translateY.setValue(isActive ? ANIMATION_CONFIG.translateY.active : ANIMATION_CONFIG.translateY.inactive);
-            animations.opacity.setValue(isActive ? ANIMATION_CONFIG.opacity.active : ANIMATION_CONFIG.opacity.inactive);
-          });
-        });
-      });
-
-      // Cleanup function
-      return () => {
-        if (task && task.cancel) {
-          task.cancel();
         }
-      };
-    }, [state.index, filteredRoutes]);
+      });
+    }, [state.index, filteredRoutes, animationProgress]);
 
     // Optimize onPress with useCallback
     const handlePress = useCallback((route: any) => {
@@ -153,11 +129,11 @@ const TabLayout = () => {
         borderWidth: 1,
         borderColor: colors.border,
         paddingVertical: 16,
-        height: 75 + insets.bottom,
-        width: '92%',
+        height: 75,
+        marginBottom: 8,
+        width: '95%',
         borderRadius: 24,
         alignSelf: 'center',
-        marginBottom: 8,
         marginTop: 4,
         shadowColor: colors.text,
         shadowOffset: { width: 0, height: 2 },
@@ -169,9 +145,55 @@ const TabLayout = () => {
           const routeConfig = ROUTE_CONFIG[route.name as keyof typeof ROUTE_CONFIG];
           const originalIndex = state.routes.findIndex(r => r.name === route.name);
           const isFocused = state.index === originalIndex;
-          const animations = animatedValues[route.name];
+          const progress = animationProgress[route.name];
 
-          if (!routeConfig || !animations) return null;
+          if (!routeConfig || !progress) return null;
+
+          // Tab item animated styles
+          const animatedIconContainerStyle = useAnimatedStyle(() => {
+            const scale = interpolate(
+              progress.value,
+              [0, 1],
+              [ANIMATION_CONFIG.scale.inactive, ANIMATION_CONFIG.scale.active]
+            );
+            
+            const translateY = interpolate(
+              progress.value,
+              [0, 1],
+              [ANIMATION_CONFIG.translateY.inactive, ANIMATION_CONFIG.translateY.active]
+            );
+
+            return {
+              transform: [
+                { scale },
+                { translateY }
+              ]
+            };
+          });
+
+          const animatedIconStyle = useAnimatedStyle(() => {
+            const opacity = interpolate(
+              progress.value,
+              [0, 1],
+              [ANIMATION_CONFIG.opacity.inactive, ANIMATION_CONFIG.opacity.active]
+            );
+
+            return {
+              opacity
+            };
+          });
+
+          const animatedTextStyle = useAnimatedStyle(() => {
+            const opacity = interpolate(
+              progress.value,
+              [0, 1],
+              [ANIMATION_CONFIG.opacity.inactive, ANIMATION_CONFIG.opacity.active]
+            );
+
+            return {
+              opacity
+            };
+          });
 
           return (
             <TouchableOpacity
@@ -185,36 +207,40 @@ const TabLayout = () => {
               activeOpacity={0.7}
             >
               <Animated.View
-                style={{
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transform: [
-                    { scale: animations.scale },
-                    { translateY: animations.translateY }
-                  ]
-                }}
+                style={[
+                  {
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  },
+                  animatedIconContainerStyle
+                ]}
               >
                 <Animated.View
-                  style={{
-                    opacity: animations.opacity,
-                    marginBottom: 4,
-                  }}
+                  style={[
+                    {
+                      marginBottom: 4,
+                    },
+                    animatedIconStyle
+                  ]}
                 >
-                  <Ionicons
+                  <Icon
                     name={isFocused ? routeConfig.icon as any : `${routeConfig.icon}-outline` as any}
                     size={26}
                     color={isFocused ? colors.primary : colors.text}
+                    zodiac={true ? routeConfig.icon === 'comment' : false}
                   />
                 </Animated.View>
                 
                 <Animated.Text
-                  style={{
-                    color: isFocused ? colors.primary : colors.text,
-                    textAlign: 'center',
-                    fontSize: 11,
-                    fontWeight: isFocused ? '600' : '400',
-                    opacity: animations.opacity,
-                  }}
+                  style={[
+                    {
+                      color: isFocused ? colors.primary : colors.text,
+                      textAlign: 'center',
+                      fontSize: 11,
+                      fontWeight: isFocused ? '600' : '400',
+                    },
+                    animatedTextStyle
+                  ]}
                   numberOfLines={1}
                   adjustsFontSizeToFit
                 >

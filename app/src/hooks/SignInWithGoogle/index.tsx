@@ -10,10 +10,21 @@ export const useSignInWithGoogle = () => {
     webClientId: '503552610366-cncgkggphfoi53jna1euf5qsmpnl46oe.apps.googleusercontent.com',
     scopes: ['https://www.googleapis.com/auth/drive'], // what API you want to access on behalf of the user, default is email and profile
     offlineAccess: false, // if you want to access Google API on behalf of the user FROM YOUR SERVER
+    forceCodeForRefreshToken: true, // Her seferinde hesap seçme ekranı gelsin
   });
   const signInGoogle = async () => {
     try {
       await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+      
+      // Önce Google'dan çıkış yap ki hesap seçme ekranı gelsin
+      try {
+        await GoogleSignin.signOut();
+        console.log("Google'dan çıkış yapıldı");
+      } catch (signOutError) {
+        console.log("Google signOut hatası:", signOutError);
+        // Hata olsa bile devam et
+      }
+      
       const signInResult = await GoogleSignin.signIn();
       let idToken = signInResult.data?.idToken;
       if (!idToken) {

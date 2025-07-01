@@ -12,7 +12,6 @@ import { doc, getDoc, onSnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function Layout() {
   const { user } = useAuth();
@@ -24,7 +23,6 @@ export default function Layout() {
   useFortuneProcessor();
   
   SystemUI.setBackgroundColorAsync(colors.background);
-  const insets = useSafeAreaInsets();
 
   const drawerItems = [
     {
@@ -110,7 +108,7 @@ export default function Layout() {
 
   const CustomDrawerContent = (props: any) => {
     return (
-      <View style={{ flex: 1, backgroundColor: colors.background, paddingBottom: insets.bottom - 10 }}>
+      <View style={{ flex: 1, backgroundColor: colors.background }}>
         {/* Header with user info */}
         <LinearGradient
           colors={[colors.background, colors.surface]}

@@ -66,6 +66,7 @@ export default StyleSheet.create({
     fontFamily: 'Domine-Regular',
   },
   footerSection: {
+    width: '100%',
     marginTop: 20,
     paddingTop: 20,
     borderTopWidth: 1,

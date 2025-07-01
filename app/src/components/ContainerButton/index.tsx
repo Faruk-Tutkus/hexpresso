@@ -41,31 +41,35 @@ const ContainerButton: React.FC<ContainerButtonProps> = ({
         { backgroundColor: colors.secondaryText },
       ]}
     >
-      <View style={[styles.content, { left: loading ? -10 : 0 }]}>
+      <View style={[styles.content]}>
         {loading ? (
           <ActivityIndicator
-            color={variant === 'primary' ? colors.surface : colors.primary} 
-            size="small" 
+            color={variant === 'primary' ? colors.surface : colors.primary}
+            size="small"
           />
         ) : (
           <>
             {leftImage && (
-              <Image
-              style={[styles.image, { tintColor: colors.background }]}
-              source={leftImage}
-              contentFit="cover"
-              transition={1000}
-              />
+              <View style={styles.imageContainer}>
+                <Image
+                  style={[styles.image, { tintColor: colors.background }]}
+                  source={leftImage}
+                  contentFit="cover"
+                  transition={1000}
+                />
+              </View>
             )}
             <Text style={[styles.text, { color: colors.background }]}>{title}</Text>
             {rightImage && (
-              <Image
-                style={styles.image}
-                source={rightImage}
-                placeholder={{ blurhash: 'L3C00000' }}
-                contentFit="cover"
-                transition={1000}
-              />
+              <View style={styles.imageContainer}>
+                <Image
+                  style={styles.image}
+                  source={rightImage}
+                  placeholder={{ blurhash: 'L3C00000' }}
+                  contentFit="cover"
+                  transition={1000}
+                />
+              </View>
             )}
           </>
         )}

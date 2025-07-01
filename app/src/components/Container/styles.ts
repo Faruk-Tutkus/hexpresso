@@ -4,10 +4,10 @@ export default StyleSheet.create({
     container: {
         padding: 20,
         borderRadius: 16,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
         gap: 10,
-        textAlign: 'center',
+        textAlign: 'left',
         borderWidth: 1,
     }
 })

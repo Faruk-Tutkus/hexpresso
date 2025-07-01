@@ -4,7 +4,7 @@ import { useFetchData } from '@hooks'
 import { useAuth, useTheme } from '@providers'
 import { Image } from 'expo-image'
 import { useLocalSearchParams } from 'expo-router'
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ActivityIndicator, Modal, RefreshControl, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import styles from './styles'
@@ -273,13 +273,13 @@ const Signs = () => {
       ref={scrollViewRef}
       refreshControl={
         <RefreshControl
-          refreshing={loading}
-          onRefresh={refetch}
-          colors={[colors.primary]}
-          tintColor={colors.primary}
-          title="Burç bilgileri güncelleniyor..."
-          titleColor={colors.text}
-        />
+            refreshing={loading}
+            onRefresh={refetch}
+            colors={[colors.primary]}
+            tintColor={colors.primary}
+            title="Yorumlar güncelleniyor..."
+            titleColor={colors.text}
+          />
       }
     >
       {/* Header Section */}

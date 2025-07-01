@@ -5,14 +5,16 @@ import { Stack } from "expo-router";
 import * as SystemUI from 'expo-system-ui';
 import { useEffect } from "react";
 import mobileAds from 'react-native-google-mobile-ads';
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export function AppContent() {
   const { theme, colors } = useTheme();
-  
+  const insets = useSafeAreaInsets();
+
   useEffect(() => {
     SystemUI.setBackgroundColorAsync(colors.background);
   }, [colors.background]);
-  
+
   const [fontsLoaded, fontError] = useFonts({
     'Almendra-Regular': require('./src/assets/fonts/Almendra-Regular.ttf'),
     'CroissantOne-Regular': require('./src/assets/fonts/CroissantOne-Regular.ttf'),
@@ -21,15 +23,15 @@ export function AppContent() {
     'Domine-SemiBold': require('./src/assets/fonts/Domine-SemiBold.ttf'),
     'Domine-Bold': require('./src/assets/fonts/Domine-Bold.ttf'),
   });
-  
+
   useEffect(() => {
     mobileAds()
-    .initialize()
-    .then(adapterStatuses => {
-      console.log('Initialization complete!', adapterStatuses);
-    });
+      .initialize()
+      .then(adapterStatuses => {
+        console.log('Initialization complete!', adapterStatuses);
+      });
   }, []);
-  
+
   // Font loading hatası durumunda da uygulamayı başlat
   if (!fontsLoaded && !fontError) {
     return null;
@@ -46,6 +48,7 @@ export function AppContent() {
         statusBarBackgroundColor: colors.background,
         contentStyle: {
           backgroundColor: colors.background,
+          marginBottom: insets.bottom,
         },
       }}
     >
@@ -72,5 +75,5 @@ export default function RootLayout() {
         </AuthProvider>
       </ToastProvider>
     </ThemeProvider>
-);
+  );
 }

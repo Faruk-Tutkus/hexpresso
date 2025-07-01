@@ -151,10 +151,12 @@ const FortuneTellingScreen = () => {
         showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-            colors={[colors.text]}
-            progressBackgroundColor={colors.surface}
+            refreshing={loading}
+            onRefresh={refetch}
+            colors={[colors.primary]}
+            tintColor={colors.primary}
+            title="Yorumlar güncelleniyor..."
+            titleColor={colors.text}
           />
         }
         ItemSeparatorComponent={() => <View style={styles.separator} />}

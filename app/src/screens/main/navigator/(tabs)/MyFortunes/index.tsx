@@ -199,8 +199,8 @@ const MyFortunes = () => {
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefresh}
-            colors={[colors.primary]}
-            progressBackgroundColor={colors.surface}
+            colors={[colors.surface]}
+            progressBackgroundColor={colors.text}
           />
         }
         ItemSeparatorComponent={() => <View style={styles.separator} />}

@@ -1,15 +1,13 @@
 import { db } from '@api/config.firebase';
-import Icon from '@assets/icons';
 import { CustomButton } from '@components';
-import { Seer } from '@hooks';
+import { Seer, useToggleKeyboard } from '@hooks';
 import { useAuth, useTheme, useToast } from '@providers';
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
 import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { useState } from 'react';
-import { ScrollView, Text, TextInput, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, View } from 'react-native';
 import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './styles';
 
 const DreamFortune = () => {
@@ -21,7 +19,7 @@ const DreamFortune = () => {
   const { showToast } = useToast();
   const [dreamText, setDreamText] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const isKeyboardVisible = useToggleKeyboard();
   const submitFortune = async () => {
     if (dreamText.trim().length < 50) {
       showToast('Lütfen en az 50 karakter uzunluğunda rüyanızı anlatınız', 'error');
@@ -39,26 +37,26 @@ const DreamFortune = () => {
       const fortuneIndex = seer.fortunes.indexOf('Rüya Yorumu');
       const fortuneCost = seer.coins[fortuneIndex] || seer.coins[0];
 
-      
+
       // Check user's coin balance
       const userDoc = await getDoc(doc(db, 'users', user.uid));
       if (!userDoc.exists()) {
         throw new Error('Kullanıcı verisi bulunamadı');
       }
-      
+
       const userData = userDoc.data();
       const currentCoins = userData.coins || 0;
-      
+
       if (currentCoins < fortuneCost) {
         showToast(`Yetersiz coin! Bu fal için ${fortuneCost} coin gerekli, mevcut: ${currentCoins}`, 'error');
         return;
       }
-      
+
       // Deduct coins immediately
       await updateDoc(doc(db, 'users', user.uid), {
         coins: currentCoins - fortuneCost
       });
-      
+
       showToast(`${fortuneCost} coin harcandı. Rüya falınız hazırlanıyor...`, 'info');
 
       // Get user data for personalization
@@ -76,7 +74,7 @@ const DreamFortune = () => {
 
       // Create fortune record with AI result but pending status
       const fortuneRecord = {
-        id: `${Date.now()}_${Math.random().toString(36).slice(2,9)}_dream`,
+        id: `${Date.now()}_${Math.random().toString(36).slice(2, 9)}_dream`,
         seerData: seer,
         fortuneType: 'Rüya Yorumu',
         dreamText: dreamText.trim(),
@@ -92,13 +90,13 @@ const DreamFortune = () => {
       await updateDoc(doc(db, 'users', user.uid), {
         fortunerecord: arrayUnion(fortuneRecord)
       });
-      
+
       showToast('Rüya falınız başarıyla gönderildi!', 'success');
       router.replace('/src/screens/main/navigator/(tabs)/MyFortunes');
-      
+
     } catch (error) {
       console.error('Fortune submission error:', error);
-      
+
       if (error instanceof Error) {
         showToast(error.message, 'error');
       } else {
@@ -173,7 +171,7 @@ Falcı karakterin uygun dil kullan, Türkçe yaz, "sen" diye hitap et.
               interpretation: { type: 'string' },
               advice: { type: 'string' },
               timeframe: { type: 'string' },
-              warnings: { 
+              warnings: {
                 type: 'array',
                 items: { type: 'string' }
               },
@@ -206,7 +204,7 @@ Falcı karakterin uygun dil kullan, Türkçe yaz, "sen" diye hitap et.
 
       const responseText = response.candidates?.[0]?.content?.parts?.[0]?.text;
       console.log('DreamFortune AI Response:', responseText);
-      
+
       if (responseText) {
         try {
           const parsed = JSON.parse(responseText);
@@ -217,7 +215,7 @@ Falcı karakterin uygun dil kullan, Türkçe yaz, "sen" diye hitap et.
           return null;
         }
       }
-      
+
       return null;
     } catch (error) {
       console.error('AI generation error:', error);
@@ -226,133 +224,120 @@ Falcı karakterin uygun dil kullan, Türkçe yaz, "sen" diye hitap et.
   };
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
-      
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        {/* Seer Info */}
-        <Animated.View 
-          style={[styles.seerInfo, { backgroundColor: colors.secondaryText }]}
-          entering={FadeInDown.duration(800).springify()}
-        >
-          <Image
-            source={{ uri: seer.url }}
-            style={[styles.seerImage, { borderColor: colors.primary }]}
-            contentFit="cover"
-          />
-          <View style={styles.seerDetails}>
-            <Text style={[styles.seerName, { color: colors.background }]}>
-              {seer.name}
-            </Text>
-            <Text style={[styles.fortuneType, { color: colors.background }]}>
-              🌙 Rüya Yorumu
-            </Text>
-            <Text style={[styles.responseTime, { color: colors.background }]}>
-              ⏱️ {seer.responsetime} dakika içinde yanıt
-            </Text>
-          </View>
-        </Animated.View>
-
-        {/* Instructions */}
-        <Animated.View 
-          style={styles.instructions}
-          entering={FadeIn.delay(300).springify()}
-        >
-          <Text style={[styles.instructionTitle, { color: colors.primary }]}>
-            📋 Rüya Yorumu Talimatları
-          </Text>
-          <Text style={[styles.instructionText, { color: colors.text }]}>
-            Rüyanızı en detaylı şekilde anlatın. Ne kadar ayrıntılı anlatırsanız, yorum o kadar doğru olacaktır:
-          </Text>
-          <View style={styles.instructionList}>
-            <Text style={[styles.instructionItem, { color: colors.secondaryText }]}>
-              • 🕐 Rüyayı gördüğünüz zaman (gece/gündüz)
-            </Text>
-            <Text style={[styles.instructionItem, { color: colors.secondaryText }]}>
-              • 🎭 Rüyadaki kişiler ve karakterler
-            </Text>
-            <Text style={[styles.instructionItem, { color: colors.secondaryText }]}>
-              • 🏠 Rüyanın geçtiği yerler ve ortam
-            </Text>
-            <Text style={[styles.instructionItem, { color: colors.secondaryText }]}>
-              • 🎨 Gördüğünüz renkler ve objeler
-            </Text>
-            <Text style={[styles.instructionItem, { color: colors.secondaryText }]}>
-              • 💭 Rüyada hissettiğiniz duygular
-            </Text>
-            <Text style={[styles.instructionItem, { color: colors.secondaryText }]}>
-              • ⚡ Unutamadığınız önemli detaylar
-            </Text>
-          </View>
-        </Animated.View>
-
-        {/* Dream Text Input */}
-        <Animated.View 
-          style={styles.dreamSection}
-          entering={FadeIn.delay(500).springify()}
-        >
-          <Text style={[styles.dreamTitle, { color: colors.primary }]}>
-            🌙 Rüyanızı Anlatın
-          </Text>
-          <View style={[styles.textInputContainer, { borderColor: colors.border, backgroundColor: colors.background }]}>
-            <TextInput
-              style={[styles.textInput, { color: colors.text }]}
-              multiline
-              numberOfLines={10}
-              placeholder="Rüyanızı buraya detaylı şekilde yazın... (En az 50 karakter)"
-              placeholderTextColor={colors.secondaryText}
-              value={dreamText}
-              onChangeText={setDreamText}
-              textAlignVertical="top"
-              editable={!isSubmitting}
+    <KeyboardAvoidingView
+    style={{ flex: 1, paddingBottom: isKeyboardVisible ? 100 : 0 }}
+    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
+        <ScrollView style={styles.content} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
+          {/* Seer Info */}
+          <Animated.View
+            style={[styles.seerInfo, { backgroundColor: colors.secondaryText }]}
+            entering={FadeInDown.duration(800).springify()}
+          >
+            <Image
+              source={{ uri: seer.url }}
+              style={[styles.seerImage, { borderColor: colors.primary }]}
+              contentFit="cover"
             />
-            <View style={styles.characterCount}>
-              <Text style={[styles.characterCountText, { 
-                color: dreamText.length >= 50 ? colors.secondary : colors.errorText 
-              }]}>
-                {dreamText.length}/50 (minimum)
+            <View style={styles.seerDetails}>
+              <Text style={[styles.seerName, { color: colors.background }]}>
+                {seer.name}
+              </Text>
+              <Text style={[styles.fortuneType, { color: colors.background }]}>
+                🌙 Rüya Yorumu
+              </Text>
+              <Text style={[styles.responseTime, { color: colors.background }]}>
+                ⏱️ {seer.responsetime} dakika içinde yanıt
               </Text>
             </View>
-          </View>
-        </Animated.View>
+          </Animated.View>
 
-        {/* Tips Section */}
-        <Animated.View 
-          style={[styles.tipsSection, { backgroundColor: colors.surface, borderColor: colors.border }]}
-          entering={FadeIn.delay(700).springify()}
-        >
-          <View style={styles.tipHeader}>
-            <Icon name="bulb-outline" size={20} color={colors.background} />
-            <Text style={[styles.tipTitle, { color: colors.background }]}>
-              💡 İpuçları
+          {/* Instructions */}
+          <Animated.View
+            style={styles.instructions}
+            entering={FadeIn.delay(300).springify()}
+          >
+            <Text style={[styles.instructionTitle, { color: colors.primary }]}>
+              📋 Rüya Yorumu Talimatları
             </Text>
-          </View>
-          <Text style={[styles.tipText, { color: colors.background }]}>
-            Rüyanızı yazarken mümkün olduğunca detaya inin. Örneğin: "Evde vardım" yerine "Çocukluğumun geçtiği büyük, eski evde vardım, duvarlar sarı boyalıydı ve bir garip koku vardı" şeklinde anlatın.
-          </Text>
-        </Animated.View>
+            <Text style={[styles.instructionText, { color: colors.text }]}>
+              Rüyanızı en detaylı şekilde anlatın. Ne kadar ayrıntılı anlatırsanız, yorum o kadar doğru olacaktır:
+            </Text>
+            <View style={styles.instructionList}>
+              <Text style={[styles.instructionItem, { color: colors.secondaryText }]}>
+                • 🕐 Rüyayı gördüğünüz zaman (gece/gündüz)
+              </Text>
+              <Text style={[styles.instructionItem, { color: colors.secondaryText }]}>
+                • 🎭 Rüyadaki kişiler ve karakterler
+              </Text>
+              <Text style={[styles.instructionItem, { color: colors.secondaryText }]}>
+                • 🏠 Rüyanın geçtiği yerler ve ortam
+              </Text>
+              <Text style={[styles.instructionItem, { color: colors.secondaryText }]}>
+                • 🎨 Gördüğünüz renkler ve objeler
+              </Text>
+              <Text style={[styles.instructionItem, { color: colors.secondaryText }]}>
+                • 💭 Rüyada hissettiğiniz duygular
+              </Text>
+              <Text style={[styles.instructionItem, { color: colors.secondaryText }]}>
+                • ⚡ Unutamadığınız önemli detaylar
+              </Text>
+            </View>
+          </Animated.View>
+          {/* Dream Text Input */}
+          <Animated.View
+            style={styles.dreamSection}
+            entering={FadeIn.delay(500).springify()}
+          >
+            <Text style={[styles.dreamTitle, { color: colors.primary }]}>
+              🌙 Rüyanızı Anlatın
+            </Text>
+            <View style={[styles.textInputContainer, { borderColor: colors.border, backgroundColor: colors.background }]}>
+              <TextInput
+                style={[styles.textInput, { color: colors.text }]}
+                multiline
+                numberOfLines={10}
+                placeholder="Rüyanızı buraya detaylı şekilde yazın... (En az 50 karakter)"
+                placeholderTextColor={colors.secondaryText}
+                value={dreamText}
+                onChangeText={setDreamText}
+                textAlignVertical="top"
+                editable={!isSubmitting}
+              />
+              <View style={styles.characterCount}>
+                <Text style={[styles.characterCountText, {
+                  color: dreamText.length >= 50 ? colors.secondary : colors.errorText
+                }]}>
+                  {dreamText.length}/50 (minimum)
+                </Text>
+              </View>
+            </View>
+          </Animated.View>
 
-        {/* Submit Button */}
-        <Animated.View 
-          style={styles.submitSection}
-          entering={FadeIn.delay(900).springify()}
-        >
-          <CustomButton
-            title={isSubmitting ? "Gönderiliyor..." : "🔮 Rüya Yorumunu Gönder"}
-            onPress={submitFortune}
-            disabled={isSubmitting || dreamText.trim().length < 50}
-            variant="primary"
-            contentStyle={[
-              styles.submitButton,
-              { 
-                opacity: (dreamText.trim().length < 50 || isSubmitting) ? 0.5 : 1,
-                backgroundColor: colors.primary,
-                width: '80%'
-              }
-            ]}
-          />
-        </Animated.View>
-      </ScrollView>
-    </SafeAreaView>
+          {/* Submit Button */}
+          <Animated.View
+            style={styles.submitSection}
+            entering={FadeIn.delay(900).springify()}
+          >
+            <CustomButton
+              title={isSubmitting ? "Gönderiliyor..." : "🔮 Rüya Yorumunu Gönder"}
+              onPress={submitFortune}
+              disabled={isSubmitting || dreamText.trim().length < 50}
+              variant="primary"
+              contentStyle={[
+                styles.submitButton,
+                {
+                  opacity: (dreamText.trim().length < 50 || isSubmitting) ? 0.5 : 1,
+                  backgroundColor: colors.primary,
+                  width: '80%'
+                }
+              ]}
+            />
+          </Animated.View>
+        </ScrollView>
+      </View>
+    </KeyboardAvoidingView>
   );
 };
 

@@ -627,12 +627,13 @@ const Profile = () => {
           contentContainerStyle={[styles.scrollContent, { paddingBottom: isEditing ? 80 : 60 }]}
           refreshControl={
             <RefreshControl
-              refreshing={isRefreshing}
-              onRefresh={handleRefresh}
-              colors={[colors.primary]}
-              tintColor={colors.primary}
-              progressBackgroundColor={colors.surface}
-            />
+            refreshing={isRefreshing}
+            onRefresh={handleRefresh}
+            colors={[colors.primary]}
+            tintColor={colors.primary}
+            title="Yorumlar güncelleniyor..."
+            titleColor={colors.text}
+          />
           }
         >
           {/* Başlık */}

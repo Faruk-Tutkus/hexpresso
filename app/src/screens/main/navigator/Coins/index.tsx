@@ -442,11 +442,11 @@ const Coins = () => {
         showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl
-            refreshing={refreshing}
+            refreshing={loading}
             onRefresh={onRefresh}
-            colors={[colors.primary, colors.secondary]}
+            colors={[colors.primary]}
             tintColor={colors.primary}
-            title="Yenileniyor..."
+            title="Yorumlar güncelleniyor..."
             titleColor={colors.text}
           />
         }
