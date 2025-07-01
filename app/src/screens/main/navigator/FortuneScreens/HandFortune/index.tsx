@@ -21,6 +21,8 @@ const HandFortune = () => {
   const { showToast } = useToast();
   const [leftHandImage, setLeftHandImage] = useState<string>('');
   const [rightHandImage, setRightHandImage] = useState<string>('');
+  const [leftHandBase64, setLeftHandBase64] = useState<string>('');
+  const [rightHandBase64, setRightHandBase64] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadingHand, setUploadingHand] = useState<'left' | 'right' | null>(null);
   const [showPhotoModal, setShowPhotoModal] = useState(false);
@@ -64,14 +66,19 @@ const HandFortune = () => {
         quality: 0.8,
         aspect: [4, 3],
         allowsEditing: false,
+        base64: true,
       });
 
       if (!result.canceled && result.assets && result.assets[0]) {
         const imageUri = result.assets[0].uri;
+        const imageBase64 = result.assets[0].base64 || '';
+        
         if (hand === 'left') {
           setLeftHandImage(imageUri);
+          setLeftHandBase64(imageBase64);
         } else {
           setRightHandImage(imageUri);
+          setRightHandBase64(imageBase64);
         }
       }
     } catch (error) {
@@ -94,14 +101,19 @@ const HandFortune = () => {
         quality: 0.8,
         aspect: [4, 3],
         allowsEditing: false,
+        base64: true,
       });
 
       if (!result.canceled && result.assets && result.assets[0]) {
         const imageUri = result.assets[0].uri;
+        const imageBase64 = result.assets[0].base64 || '';
+        
         if (hand === 'left') {
           setLeftHandImage(imageUri);
+          setLeftHandBase64(imageBase64);
         } else {
           setRightHandImage(imageUri);
+          setRightHandBase64(imageBase64);
         }
       }
     } catch (error) {
@@ -211,15 +223,30 @@ const HandFortune = () => {
     }
 
     setIsSubmitting(true);
+
     try {
+      // Check if user has any pending fortunes
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
+      if (!userDoc.exists()) {
+        throw new Error('Kullanıcı verisi bulunamadı');
+      }
+      
+      const userData = userDoc.data();
+      const fortuneRecords = userData.fortunerecord || [];
+      
+      // Check for pending fortunes
+      const pendingFortunes = fortuneRecords.filter((fortune: any) => fortune.status === 'pending');
+      if (pendingFortunes.length > 0) {
+        showToast('Zaten beklemede olan bir falınız var. Lütfen önceki falınızın tamamlanmasını bekleyiniz.', 'error');
+        return;
+      }
+
       // Validate hand images with AI first
       showToast('Görüntüler doğrulanıyor...', 'info');
       const validation = await validateHandImages(leftHandImage, rightHandImage);
       
       if (!validation.isValid) {
-        setTimeout(() => {
-          showToast(`Geçersiz görüntü: ${validation.reason}`, 'error');
-        }, 1000);
+        showToast(`Geçersiz görüntü lütfen el fotoğrafınızı kontrol ediniz`, 'error');
         return;
       }
       
@@ -227,13 +254,6 @@ const HandFortune = () => {
       const fortuneIndex = seer.fortunes.indexOf('El Falı');
       const fortuneCost = seer.coins[fortuneIndex] || seer.coins[0];
       
-      // Check user's coin balance
-      const userDoc = await getDoc(doc(db, 'users', user.uid));
-      if (!userDoc.exists()) {
-        throw new Error('Kullanıcı verisi bulunamadı');
-      }
-      
-      const userData = userDoc.data();
       const currentCoins = userData.coins || 0;
       
       if (currentCoins < fortuneCost) {
@@ -247,7 +267,9 @@ const HandFortune = () => {
       });
       
       showToast(`${fortuneCost} coin harcandı. Fotoğraflar yükleniyor...`, 'info');
-      
+      setTimeout(()=> {
+        showToast('Fal hazırlama işlemi biraz zaman alabilir, lütfen bekleyiniz...', 'info');
+      }, 5000)
       // Upload images sequentially
       let leftHandUrl, rightHandUrl;
       try {
@@ -260,8 +282,6 @@ const HandFortune = () => {
         });
         throw uploadError;
       }
-
-      showToast('Falınız hazırlanıyor bu işlem biraz zaman alabilir...', 'info');
 
 
       // Generate AI interpretation immediately
@@ -316,6 +336,11 @@ const HandFortune = () => {
       const { GoogleGenAI, HarmBlockThreshold, HarmCategory } = require('@google/genai');
       const ai = new GoogleGenAI({ apiKey: "AIzaSyBeAM7n8yGpXmNJfDL7WkUcC09m0fKEQNo" });
 
+      if (!leftHandBase64 || !rightHandBase64) {
+        console.error('Base64 data is missing for hand images');
+        return;
+      }
+
       const prompt = `
 Sen ${seerData.name} adında bir falcısın. Karakter: "${seerData.character}"
 Hayat hikayen: "${seerData.lifestory}"
@@ -359,9 +384,23 @@ El çizgileri analizi: Yaşam, kalp, kafa ve kader çizgileri incelendi.
 Falcı karakterin uygun dil kullan, Türkçe yaz, "sen" diye hitap et.
 `;
 
+      const leftHandImage = {
+        inlineData: {
+          data: leftHandBase64,
+          mimeType: "image/jpeg"
+        }
+      };
+
+      const rightHandImage = {
+        inlineData: {
+          data: rightHandBase64,
+          mimeType: "image/jpeg"
+        }
+      };
+
       const response = await ai.models.generateContent({
         model: "gemini-2.5-flash",
-        contents: prompt,
+        contents: [prompt, leftHandImage, rightHandImage],
         config: {
           responseMimeType: 'application/json',
           responseSchema: {
@@ -423,43 +462,25 @@ Falcı karakterin uygun dil kullan, Türkçe yaz, "sen" diye hitap et.
     }
   };
 
-  // Convert image URI to base64
-  const imageToBase64 = async (uri: string): Promise<string> => {
-    try {
-      // For Expo managed workflow
-      const response = await fetch(uri);
-      const blob = await response.blob();
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          const base64 = (reader.result as string).split(',')[1];
-          resolve(base64);
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(blob);
-      });
-    } catch (error) {
-      console.error('Error converting image to base64:', error);
-      throw new Error('Görüntü işlenirken hata oluştu');
-    }
-  };
-
   // AI validation function for hand images
   const validateHandImages = async (leftHandUri: string, rightHandUri: string) => {
     try {
       const { GoogleGenAI, HarmBlockThreshold, HarmCategory } = require('@google/genai');
       const ai = new GoogleGenAI({ apiKey: "AIzaSyBeAM7n8yGpXmNJfDL7WkUcC09m0fKEQNo" });
 
-      // Convert images to base64
-      const leftHandBase64 = await imageToBase64(leftHandUri);
-      const rightHandBase64 = await imageToBase64(rightHandUri);
+      // Use the stored base64 data instead of converting
+      // If the base64 data isn't available for some reason, we'll just fail validation
+      if (!leftHandBase64 || !rightHandBase64) {
+        console.error('Base64 data is missing for hand images');
+        return { isValid: false };
+      }
 
       const systemInstruction = `
 Sen bir el falı uzmanısın. Görüntüleri analiz ederek el falı için uygun olup olmadığını değerlendiriyorsun.
 
 KONTROL KRİTERLERİ:
 - Gerçek insan eli avuç içi mi?
-- İnsan anatomisel yapısına uygun mu?
+- İnsan anatomisel yapısına uygun mu?"
 
 GEÇERSİZ DURUMLAR:
 - El değil farklı vücut parçası
@@ -468,7 +489,6 @@ GEÇERSİZ DURUMLAR:
 ÇOK ÖNEMLİ: Yanıtını SADECE JSON formatında ver:
 {
   "isValid": true/false,
-  "reason": "Açıklama mesajı"
 }
 `;
 
@@ -512,10 +532,9 @@ Avuç içi çizgilerinin net görünüp görünmediğini kontrol et.
                 type: 'array',
                 items: {
                   type: 'object',
-                  required: ['isValid', 'reason'],
+                  required: ['isValid'],
                   properties: {
-                    isValid: { type: 'boolean' },
-                    reason: { type: 'string' }
+                    isValid: { type: 'boolean' }
                   }
                 }
               }
@@ -557,14 +576,12 @@ Avuç içi çizgilerinin net görünüp görünmediğini kontrol et.
             if (invalidResult) {
               return {
                 isValid: false,
-                reason: invalidResult.reason
               };
             }
             
             // All results are valid
             return {
               isValid: true,
-              reason: 'Tüm görüntüler el falı için uygun'
             };
           }
           
@@ -574,7 +591,7 @@ Avuç içi çizgilerinin net görünüp görünmediğini kontrol et.
           }
           
           // Unknown structure
-          return { isValid: false, reason: 'AI yanıtı beklenmeyen formatta' };
+          return { isValid: false };
           
         } catch (parseError) {
           console.error('JSON parse failed for hand validation:', parseError);
@@ -593,12 +610,10 @@ Avuç içi çizgilerinin net görünüp görünmediğini kontrol et.
                 if (invalidResult) {
                   return {
                     isValid: false,
-                    reason: invalidResult.reason
                   };
                 }
                 return {
                   isValid: true,
-                  reason: 'Tüm görüntüler el falı için uygun'
                 };
               }
               
@@ -606,20 +621,20 @@ Avuç içi çizgilerinin net görünüp görünmediğini kontrol et.
                 return extracted;
               }
               
-              return { isValid: false, reason: 'Görüntü analizi başarısız oldu' };
+              return { isValid: false };
             } catch (e) {
               console.error('Failed to parse extracted JSON:', e);
             }
           }
           
-          return { isValid: false, reason: 'Görüntü analizi başarısız oldu' };
+          return { isValid: false };
         }
       }
       
-      return { isValid: false, reason: 'AI yanıtı alınamadı' };
+      return { isValid: false };
     } catch (error) {
       console.error('Hand validation error:', error);
-      return { isValid: false, reason: 'Görüntü doğrulama hatası' };
+      return { isValid: false };
     }
   };
 

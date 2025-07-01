@@ -20,6 +20,7 @@ const CoffeeFortune = () => {
   const { user } = useAuth();
   const { showToast } = useToast();
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
+  const [selectedImagesBase64, setSelectedImagesBase64] = useState<string[]>([]);
   const [uploadingIndex, setUploadingIndex] = useState<number | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPhotoModal, setShowPhotoModal] = useState(false);
@@ -63,13 +64,19 @@ const CoffeeFortune = () => {
         quality: 0.8,
         aspect: [4, 3],
         allowsEditing: false,
+        base64: true,
       });
 
       if (!result.canceled && result.assets && result.assets[0]) {
         const imageUri = result.assets[0].uri;
+        const imageBase64 = result.assets[0].base64 || '';
+        
         const newImages = [...selectedImages];
+        const newImagesBase64 = [...selectedImagesBase64];
         newImages[index] = imageUri;
+        newImagesBase64[index] = imageBase64;
         setSelectedImages(newImages);
+        setSelectedImagesBase64(newImagesBase64);
       }
     } catch (error) {
       console.error('Camera error:', error);
@@ -91,13 +98,19 @@ const CoffeeFortune = () => {
         quality: 0.8,
         aspect: [4, 3],
         allowsEditing: false,
+        base64: true,
       });
 
       if (!result.canceled && result.assets && result.assets[0]) {
         const imageUri = result.assets[0].uri;
+        const imageBase64 = result.assets[0].base64 || '';
+        
         const newImages = [...selectedImages];
+        const newImagesBase64 = [...selectedImagesBase64];
         newImages[index] = imageUri;
+        newImagesBase64[index] = imageBase64;
         setSelectedImages(newImages);
+        setSelectedImagesBase64(newImagesBase64);
       }
     } catch (error) {
       console.error('Gallery picker error:', error);
@@ -207,15 +220,29 @@ const CoffeeFortune = () => {
 
     setIsSubmitting(true);
     try {
+      // Check if user has any pending fortunes
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
+      if (!userDoc.exists()) {
+        throw new Error('Kullanıcı verisi bulunamadı');
+      }
+      
+      const userData = userDoc.data();
+      const fortuneRecords = userData.fortunerecord || [];
+      
+      // Check for pending fortunes
+      const pendingFortunes = fortuneRecords.filter((fortune: any) => fortune.status === 'pending');
+      if (pendingFortunes.length > 0) {
+        showToast('Zaten beklemede olan bir falınız var. Lütfen önceki falınızın tamamlanmasını bekleyiniz.', 'error');
+        return;
+      }
+
       // Validate coffee images with AI first
       showToast('Görüntüler doğrulanıyor...', 'info');
       const validImages = selectedImages.filter(img => img);
       const validation = await validateCoffeeImages(validImages);
       console.log(validation);
       if (!validation.isValid) {
-        setTimeout(() => {
-          showToast(`Geçersiz görüntü: ${validation.reason}`, 'error');
-        }, 1000);
+        showToast(`Geçersiz görüntü lütfen kahve fincanı fotoğrafınızı kontrol ediniz`, 'error');
         return;
       }
       
@@ -223,13 +250,6 @@ const CoffeeFortune = () => {
       const fortuneIndex = seer.fortunes.indexOf('Kahve Falı');
       const fortuneCost = seer.coins[fortuneIndex] || seer.coins[0];
       
-      // Check user's coin balance
-      const userDoc = await getDoc(doc(db, 'users', user.uid));
-      if (!userDoc.exists()) {
-        throw new Error('Kullanıcı verisi bulunamadı');
-      }
-      
-      const userData = userDoc.data();
       const currentCoins = userData.coins || 0;
       
       if (currentCoins < fortuneCost) {
@@ -243,6 +263,9 @@ const CoffeeFortune = () => {
       });
       
       showToast(`${fortuneCost} coin harcandı. Fotoğraflar yükleniyor...`, 'info');
+      setTimeout(()=> {
+        showToast('Fal hazırlama işlemi biraz zaman alabilir, lütfen bekleyiniz...', 'info');
+      }, 5000)
       
       // Upload all images sequentially to show progress
       const downloadUrls: string[] = [];
@@ -271,8 +294,6 @@ const CoffeeFortune = () => {
       }
 
       showToast('Falınız hazırlanıyor bu işlem biraz zaman alabilir...', 'info');
-
-      // Get user data for personalization
 
       // Generate AI interpretation immediately
       const aiResult = await generateFortuneInterpretation({
@@ -432,44 +453,21 @@ Falcı karakterin uygun dil kullan, Türkçe yaz, "sen" diye hitap et.
     }
   };
 
-  // Convert image URI to base64 - same as HandFortune
-  const imageToBase64 = async (uri: string): Promise<string> => {
-    try {
-      // For Expo managed workflow
-      const response = await fetch(uri);
-      const blob = await response.blob();
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          const base64 = (reader.result as string).split(',')[1];
-          resolve(base64);
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(blob);
-      });
-    } catch (error) {
-      console.error('Error converting image to base64:', error);
-      throw new Error('Görüntü işlenirken hata oluştu');
-    }
-  };
-
-  // AI validation function for coffee images - same approach as HandFortune
+  // AI validation function for coffee images
   const validateCoffeeImages = async (images: string[]) => {
     try {
       const { GoogleGenAI, HarmBlockThreshold, HarmCategory } = require('@google/genai');
       const ai = new GoogleGenAI({ apiKey: "AIzaSyBeAM7n8yGpXmNJfDL7WkUcC09m0fKEQNo" });
 
-      // Convert all images to base64
-      console.log(`🔄 Converting ${images.length} coffee images to base64...`);
-      const base64Images: string[] = [];
+      // Use the stored base64 data instead of converting
+      const validBase64Images = selectedImagesBase64.filter(base64 => base64);
       
-      for (let i = 0; i < images.length; i++) {
-        console.log(`🖼️ Converting image ${i + 1}/${images.length}...`);
-        const base64 = await imageToBase64(images[i]);
-        base64Images.push(base64);
+      if (validBase64Images.length < 4) {
+        console.error('Insufficient base64 data for coffee images');
+        return { isValid: false };
       }
 
-      console.log('🤖 Validating all coffee images with AI...');
+      console.log(`🤖 Validating ${validBase64Images.length} coffee images with AI...`);
 
       const systemInstruction = `
 Sen bir kahve falı uzmanısın. Görüntüleri analiz ederek kahve falı için uygun olup olmadığını değerlendiriyorsun.
@@ -493,25 +491,24 @@ GEÇERSİZ DURUMLAR:
 ÇOK ÖNEMLİ: Yanıtını SADECE JSON formatında ver:
 {
   "isValid": true/false,
-  "reason": "Açıklama mesajı"
 }
 `;
 
       const prompt = `
-Bu ${images.length} kahve fincanı görüntüsünü analiz et.
+Bu ${validBase64Images.length} kahve fincanı görüntüsünü analiz et.
 Her görüntünün kahve falı için uygun olup olmadığını değerlendir.
 Fincan içinde telve/tortu desenleri var mı?
 `;
 
       // Create image data objects
-      const imageData = base64Images.map(base64 => ({
+      const imageData = validBase64Images.map(base64 => ({
         inlineData: {
           data: base64,
           mimeType: "image/jpeg"
         }
       }));
 
-             const response = await ai.models.generateContent({
+      const response = await ai.models.generateContent({
         model: "gemini-1.5-flash",
         contents: [
           systemInstruction,
@@ -522,19 +519,9 @@ Fincan içinde telve/tortu desenleri var mı?
           responseMimeType: 'application/json',
           responseSchema: {
             type: 'object',
-            required: ["isValid", "reason"],
+            required: ["isValid"],
             properties: {
               isValid: { type: 'boolean' },
-              reason: { type: 'string' },
-              details: { type: 'string' },
-              validImages: { 
-                type: 'array',
-                items: { type: 'number' }
-              },
-              invalidImages: {
-                type: 'array',
-                items: { type: 'number' }
-              }
             },
           },
           safetySettings: [
@@ -568,14 +555,13 @@ Fincan içinde telve/tortu desenleri var mı?
           console.log('✅ Coffee validation result:', parsed);
           
           // Validate response structure
-          if (typeof parsed.isValid === 'boolean' && typeof parsed.reason === 'string') {
+          if (typeof parsed.isValid === 'boolean') {
             return {
               isValid: parsed.isValid,
-              reason: parsed.reason
             };
           } else {
             console.error('❌ Invalid response structure:', parsed);
-            return { isValid: false, reason: 'AI yanıtı geçersiz yapıda' };
+            return { isValid: false };
           }
           
         } catch (parseError) {
@@ -600,7 +586,6 @@ Fincan içinde telve/tortu desenleri var mı?
               if (typeof extracted.isValid === 'boolean') {
                 return {
                   isValid: extracted.isValid,
-                  reason: extracted.reason || 'AI doğrulama tamamlandı'
                 };
               }
             }
@@ -608,23 +593,23 @@ Fincan içinde telve/tortu desenleri var mı?
             // If all else fails, try to determine from response text
             const responseTextLower = responseText.toLowerCase();
             if (responseTextLower.includes('geçersiz') || responseTextLower.includes('false') || responseTextLower.includes('invalid')) {
-              return { isValid: false, reason: 'Görüntü analizi: Geçersiz resim tespit edildi' };
+              return { isValid: false };
             } else if (responseTextLower.includes('geçerli') || responseTextLower.includes('true') || responseTextLower.includes('valid')) {
-              return { isValid: true, reason: 'Görüntü analizi: Tüm resimler uygun' };
+              return { isValid: true };
             }
             
           } catch (fallbackError) {
             console.error('❌ Fallback parse also failed:', fallbackError);
           }
           
-          return { isValid: false, reason: 'Görüntü analizi başarısız oldu' };
+          return { isValid: false };
         }
       }
       
-      return { isValid: false, reason: 'AI yanıtı alınamadı' };
+      return { isValid: false };
     } catch (error) {
       console.error('❌ Coffee validation error:', error);
-      return { isValid: false, reason: 'Görüntü doğrulama hatası' };
+      return { isValid: false };
     }
   };
 

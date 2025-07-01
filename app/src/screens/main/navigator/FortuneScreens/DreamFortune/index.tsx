@@ -33,18 +33,26 @@ const DreamFortune = () => {
 
     setIsSubmitting(true);
     try {
-      // Get fortune cost
-      const fortuneIndex = seer.fortunes.indexOf('Rüya Yorumu');
-      const fortuneCost = seer.coins[fortuneIndex] || seer.coins[0];
-
-
-      // Check user's coin balance
+      // Check if user has any pending fortunes
       const userDoc = await getDoc(doc(db, 'users', user.uid));
       if (!userDoc.exists()) {
         throw new Error('Kullanıcı verisi bulunamadı');
       }
-
+      
       const userData = userDoc.data();
+      const fortuneRecords = userData.fortunerecord || [];
+      
+      // Check for pending fortunes
+      const pendingFortunes = fortuneRecords.filter((fortune: any) => fortune.status === 'pending');
+      if (pendingFortunes.length > 0) {
+        showToast('Zaten beklemede olan bir falınız var. Lütfen önceki falınızın tamamlanmasını bekleyiniz.', 'error');
+        return;
+      }
+
+      // Get fortune cost
+      const fortuneIndex = seer.fortunes.indexOf('Rüya Yorumu');
+      const fortuneCost = seer.coins[fortuneIndex] || seer.coins[0];
+
       const currentCoins = userData.coins || 0;
 
       if (currentCoins < fortuneCost) {
@@ -58,18 +66,15 @@ const DreamFortune = () => {
       });
 
       showToast(`${fortuneCost} coin harcandı. Rüya falınız hazırlanıyor...`, 'info');
-
-      // Get user data for personalization
-      const userDocRef = doc(db, 'users', user.uid);
-      const userDocExists = await getDoc(userDocRef);
-      const userDataExists = userDocExists.exists() ? userDocExists.data() : {};
-
+      setTimeout(()=> {
+        showToast('Fal hazırlama işlemi biraz zaman alabilir, lütfen bekleyiniz...', 'info');
+      }, 5000)
       // Generate AI interpretation immediately
       const aiResult = await generateFortuneInterpretation({
         fortuneType: 'Rüya Yorumu',
         seerData: seer,
         dreamText: dreamText.trim(),
-        userData: userDataExists
+        userData: userData
       });
 
       // Create fortune record with AI result but pending status
