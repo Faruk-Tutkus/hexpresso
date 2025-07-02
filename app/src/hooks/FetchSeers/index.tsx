@@ -1,6 +1,6 @@
 import { db } from "@api/config.firebase";
 import { collection, getDocs } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MMKV } from "react-native-mmkv";
 // Fallback olarak local JSON dosyasını import et
 import seersLocalData from '@json/seers/seers.json';
@@ -32,9 +32,9 @@ interface UseFetchSeersReturn {
 const cacheSeersData = (data: Seer[]) => {
   try {
     storage.set('seers_data', JSON.stringify(data));
-    console.log('💾 Veriler cache\'e kaydedildi');
+    console.log('💾 Seers veriler cache\'e kaydedildi');
   } catch (error) {
-    console.error('❌ Cache kaydetme hatası:', error);
+    console.error('❌ Seers cache kaydetme hatası:', error);
   }
 };
 
@@ -43,12 +43,12 @@ const getCachedSeersData = (): Seer[] | null => {
     const cachedData = storage.getString('seers_data');
     if (cachedData) {
       const parsed = JSON.parse(cachedData);
-      console.log('📦 Cache\'den veri okundu:', parsed.length, 'seer');
+      console.log('📦 Seers cache\'den veri okundu:', parsed.length, 'seer');
       return parsed;
     }
     return null;
   } catch (error) {
-    console.error('❌ Cache okuma hatası:', error);
+    console.error('❌ Seers cache okuma hatası:', error);
     return null;
   }
 };
@@ -60,10 +60,10 @@ const getLocalSeersData = (): Seer[] => {
       ...seer,
       user: null
     }));
-    console.log('📁 Local JSON\'dan veri okundu:', localSeers.length, 'seer');
+    console.log('📁 Seers local JSON\'dan veri okundu:', localSeers.length, 'seer');
     return localSeers;
   } catch (error) {
-    console.error('❌ Local veri okuma hatası:', error);
+    console.error('❌ Seers local veri okuma hatası:', error);
     return [];
   }
 };
@@ -72,108 +72,167 @@ export const useFetchSeers = (user: any): UseFetchSeersReturn => {
   const [seers, setSeers] = useState<Seer[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const isMountedRef = useRef(true);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   const fetchSeersFromFirebase = async (user: any): Promise<Seer[]> => {
-    if (!user) {
+    if (!user?.uid) {
+      console.log('🚫 FetchSeers: User yok, Firebase fetch atlanıyor');
       return [];
     }
+
     try {
-      console.log('🔥 Firebase bağlantısı deneniyor...');
-      const seersCollection = collection(db, "seer"); // "seers" değil "seer" olmalı
-      console.log('📊 Collection referansı alındı: seer');
+      console.log('🔥 FetchSeers: Firebase bağlantısı deneniyor...');
+      
+      // Abort previous request if it exists
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+      
+      abortControllerRef.current = new AbortController();
+      
+      const seersCollection = collection(db, "seer");
+      console.log('📊 Seers collection referansı alındı: seer');
       
       const snapshot = await getDocs(seersCollection);
-      console.log('📄 Snapshot alındı, belge sayısı:', snapshot.size);
+      
+      // Check if component is still mounted
+      if (!isMountedRef.current) {
+        console.log('🚫 FetchSeers: Component unmounted, aborting');
+        return [];
+      }
+      
+      console.log('📄 Seers snapshot alındı, belge sayısı:', snapshot.size);
       
       const seersData: Seer[] = snapshot.docs.map((doc) => {
-        console.log('📋 Belge ID:', doc.id);
+        console.log('📋 Seers belge ID:', doc.id);
         const data = doc.data();
-        console.log('📝 Belge verisi:', data);
         return {
           id: doc.id,
           ...data
         };
       }) as Seer[];
       
-      console.log('✅ Toplam seer verisi:', seersData.length);
+      console.log('✅ Toplam seers verisi:', seersData.length);
       return seersData;
-    } catch (err) {
-      console.error('❌ Firebase hatası:', err);
+    } catch (err: any) {
+      if (err.name === 'AbortError') {
+        console.log('🚫 FetchSeers: Request aborted');
+        return [];
+      }
+      console.error('❌ FetchSeers Firebase hatası:', err);
       throw err;
     }
   };
 
   const refetch = async () => {
+    if (!user?.uid || !isMountedRef.current) {
+      console.log('🚫 FetchSeers refetch: User yok veya component unmounted');
+      return;
+    }
+
     setLoading(true);
     setError(null);
     
     try {
-      console.log('🔄 Veri yenileme başladı...');
+      console.log('🔄 FetchSeers: Veri yenileme başladı...');
       const data = await fetchSeersFromFirebase(user);
+      
+      if (!isMountedRef.current) return;
       
       if (data && data.length > 0) {
         setSeers(data);
         cacheSeersData(data);
-        console.log('✅ Firebase\'den veri başarıyla yüklendi');
+        console.log('✅ FetchSeers: Firebase\'den veri başarıyla yüklendi');
       } else {
-        throw new Error('Firebase\'den boş veri geldi');
+        throw new Error('Firebase\'den boş seers verisi geldi');
       }
     } catch (err) {
-      console.log('⚠️ Firebase hatası, alternatif kaynaklar deneniyor...');
+      if (!isMountedRef.current) return;
+      
+      console.log('⚠️ FetchSeers: Firebase hatası, alternatif kaynaklar deneniyor...');
       setError('Firebase bağlantı sorunu');
       
       // 1. Önce cache'deki veriyi dene
       const cachedData = getCachedSeersData();
       if (cachedData && cachedData.length > 0) {
         setSeers(cachedData);
-        console.log('✅ Cache\'den veri yüklendi');
+        console.log('✅ FetchSeers: Cache\'den veri yüklendi');
       } else {
         // 2. Cache de boşsa local JSON dosyasını kullan
         const localData = getLocalSeersData();
         if (localData && localData.length > 0) {
           setSeers(localData);
-          cacheSeersData(localData); // Local veriyi cache'e kaydet
-          console.log('✅ Local JSON\'dan veri yüklendi');
+          cacheSeersData(localData);
+          console.log('✅ FetchSeers: Local JSON\'dan veri yüklendi');
         } else {
-          console.error('❌ Hiçbir kaynaktan veri alınamadı');
+          console.error('❌ FetchSeers: Hiçbir kaynaktan veri alınamadı');
           setError('Falcı bilgileri yüklenemedi');
         }
       }
     } finally {
-      setLoading(false);
+      if (isMountedRef.current) {
+        setLoading(false);
+      }
     }
   };
 
   useEffect(() => {
     const initializeData = async () => {
-      console.log('🚀 Hook başlatılıyor...');
+      if (!user?.uid) {
+        console.log('⏳ FetchSeers: User bekleniyor...');
+        setSeers([]);
+        setLoading(false);
+        setError(null);
+        return;
+      }
+
+      console.log('🚀 FetchSeers Hook başlatılıyor...');
       
       // Önce cache'deki veriyi kontrol et
       const cachedData = getCachedSeersData();
       if (cachedData && cachedData.length > 0) {
         setSeers(cachedData);
         setLoading(false);
-        console.log('⚡ Cache\'den hızlı yükleme tamamlandı');
+        console.log('⚡ FetchSeers: Cache\'den hızlı yükleme tamamlandı');
         
         // Arka planda güncel veriyi getir
         try {
           const freshData = await fetchSeersFromFirebase(user);
-          if (freshData && freshData.length > 0) {
+          if (isMountedRef.current && freshData && freshData.length > 0) {
             setSeers(freshData);
             cacheSeersData(freshData);
-            console.log('🔄 Arka plan güncellemesi tamamlandı');
+            console.log('🔄 FetchSeers: Arka plan güncellemesi tamamlandı');
           }
         } catch (err) {
-          console.log('⚠️ Arka plan güncellemesi başarısız, cache verisi kullanılıyor');
+          console.log('⚠️ FetchSeers: Arka plan güncellemesi başarısız, cache verisi kullanılıyor');
         }
       } else {
         // Cache'de veri yoksa sırayla dene
-        console.log('💭 Cache boş, diğer kaynaklar deneniyor...');
+        console.log('💭 FetchSeers: Cache boş, diğer kaynaklar deneniyor...');
         await refetch();
       }
     };
 
     initializeData();
+
+    // Cleanup function
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
+  }, [user?.uid]); // Artık user'a bağlı!
+
+  // Component unmount cleanup
+  useEffect(() => {
+    return () => {
+      isMountedRef.current = false;
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+        abortControllerRef.current = null;
+      }
+    };
   }, []);
 
   return {

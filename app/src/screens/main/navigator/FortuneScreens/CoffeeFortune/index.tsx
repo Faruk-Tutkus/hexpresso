@@ -347,7 +347,7 @@ const CoffeeFortune = () => {
   const generateFortuneInterpretation = async ({ fortuneType, seerData, images, userData }: any) => {
     try {
       const { GoogleGenAI, HarmBlockThreshold, HarmCategory } = require('@google/genai');
-      const ai = new GoogleGenAI({ apiKey: "AIzaSyBeAM7n8yGpXmNJfDL7WkUcC09m0fKEQNo" });
+      const ai = new GoogleGenAI({ apiKey: "AIzaSyDYDevsAsKXs-6P6-qYckbj7YIPCYw9abE" });
 
       const prompt = `
 🧙‍♀️ Sen Kimsin?
@@ -500,7 +500,7 @@ Yanıt sadece JSON formatında olacak ✅`;
   const validateCoffeeImages = async (images: string[]) => {
     try {
       const { GoogleGenAI, HarmBlockThreshold, HarmCategory } = require('@google/genai');
-      const ai = new GoogleGenAI({ apiKey: "AIzaSyBeAM7n8yGpXmNJfDL7WkUcC09m0fKEQNo" });
+      const ai = new GoogleGenAI({ apiKey: "AIzaSyDYDevsAsKXs-6P6-qYckbj7YIPCYw9abE" });
 
       // Use the stored base64 data instead of converting
       const validBase64Images = selectedImagesBase64.filter(base64 => base64);

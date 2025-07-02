@@ -15,7 +15,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import styles from './styles'
 
-const ai = new GoogleGenAI({ apiKey: "AIzaSyBeAM7n8yGpXmNJfDL7WkUcC09m0fKEQNo" });
+const ai = new GoogleGenAI({ apiKey: "AIzaSyDYDevsAsKXs-6P6-qYckbj7YIPCYw9abE" });
 
 interface AskAIType {
   type: 'sign' | 'comment'
@@ -36,7 +36,10 @@ const AskAI = ({ type }: AskAIType) => {
   //console.log(getDateRangeForPeriod('daily', new Date().toISOString()))
 
   useEffect(() => {
-    if (!user?.uid) return;
+    if (!user?.uid) {
+      setCoins(0);
+      return;
+    }
 
     // Real-time listener for user document changes
     const unsubscribe = onSnapshot(doc(db, 'users', user.uid), (doc) => {
@@ -44,11 +47,14 @@ const AskAI = ({ type }: AskAIType) => {
         const data = doc.data();
         setCoins(data?.coins || 0);
       }
+    }, (error) => {
+      console.error('AskAI listener error:', error);
+      setCoins(0);
     });
 
     // Cleanup listener on unmount
     return () => unsubscribe();
-  }, [user])
+  }, [user?.uid])
 
   const getResponse = async () => {
     try {

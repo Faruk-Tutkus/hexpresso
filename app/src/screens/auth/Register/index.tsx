@@ -2,11 +2,12 @@ import { ContainerButton, CustomButton, FloatingLabelInput, UnderLineText } from
 import { useFetchData, useFetchSeers, useSignInWithGoogle, useSignUpWithEmail } from '@hooks'
 import { useAuth, useTheme, useToast } from '@providers'
 import { router, useLocalSearchParams } from 'expo-router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import '../../../utils/i18n'
 import styles from './styles'
+
 const Register = () => {
   const { colors } = useTheme()
   const { name } = useLocalSearchParams()
@@ -20,6 +21,8 @@ const Register = () => {
   const { signUp } = useSignUpWithEmail()
   const [isLoading, setIsLoading] = useState(false)
   const [isGoogleLoading, setIsGoogleLoading] = useState(false)
+  const [authenticationComplete, setAuthenticationComplete] = useState(false)
+  const [isNewUser, setIsNewUser] = useState(false)
   const [errorMessage, setErrorMessage] = useState({
     email: '',
     password: '',
@@ -29,6 +32,31 @@ const Register = () => {
   const { user } = useAuth();
   const { loading: dataLoading} = useFetchData(user);
   const { loading: seersLoading, error: seersError } = useFetchSeers(user);
+
+  // Navigation logic - sürekli olarak loading state'leri dinle
+  useEffect(() => {
+    if (!user || !authenticationComplete) return;
+
+    console.log('Register Navigation check:', {
+      user: !!user,
+      authenticationComplete,
+      isNewUser,
+      dataLoading,
+      seersLoading,
+      seersError: !!seersError
+    });
+
+    if (isNewUser) {
+      console.log('New user - navigating to Introduction');
+      router.replace('/src/screens/side/Introduction');
+      setAuthenticationComplete(false); // Reset
+    } else if (!dataLoading && !seersLoading && !seersError) {
+      console.log('Existing user - data loaded, navigating to FortuneTellingScreen');
+      router.replace('/src/screens/main/navigator/(tabs)/FortuneTellingScreen');
+      setAuthenticationComplete(false); // Reset
+    }
+  }, [user, authenticationComplete, isNewUser, dataLoading, seersLoading, seersError]);
+
   const validation = () => {
     if (password !== rePassword) {
       setErrorMessage(prev => ({ ...prev, password: t('auth.auth/password-not-match') }))
@@ -73,32 +101,27 @@ const Register = () => {
           setErrorMessage(prev => ({ ...prev, general: errorMsg }))
         }
       }
-    } finally {
       setIsLoading(false)
     }
   }
+
   const handleSignInGoogle = async () => {
     try {
       setIsGoogleLoading(true);
       const result = await signInGoogle();
-      console.log(result.newUser);
+      console.log('Google register result:', result.newUser);
       if (result.user) {
-        if (result.newUser) {
-          router.replace('/src/screens/side/Introduction');
-        } else {
-          if (!dataLoading && !seersLoading && !seersError) {
-           //showToast("İlk yükleme uzun sürebilir, lütfen bekleyiniz", 'success')
-            router.replace('/src/screens/main/navigator/FortuneTellingScreen');
-          }
-        }
+        setIsNewUser(result.newUser);
+        setAuthenticationComplete(true);
+        showToast('Google ile giriş başarılı! Veriler yükleniyor...', 'success');
       }
     } catch (error: any) {
       console.log(error);
       showToast(t('auth.auth/google-sign-in-error'), 'error');
-    } finally {
       setIsGoogleLoading(false);
     }
   }
+
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.content}>

@@ -2,11 +2,12 @@ import { ContainerButton, CustomButton, FloatingLabelInput, UnderLineText } from
 import { useFetchData, useFetchSeers, useSignInWithApple, useSignInWithEmail, useSignInWithFacebook, useSignInWithGoogle } from '@hooks'
 import { useAuth, useTheme, useToast } from '@providers'
 import { router, useLocalSearchParams } from 'expo-router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
 import styles from './styles'
+
 const Login = () => {
   const { colors } = useTheme()
   const { email: emailParam, password: passwordParam, displayName: displayNameParam } = useLocalSearchParams()
@@ -23,6 +24,8 @@ const Login = () => {
   const [isGoogleLoading, setIsGoogleLoading] = useState(false)
   const [isFacebookLoading, setIsFacebookLoading] = useState(false)
   const [isAppleLoading, setIsAppleLoading] = useState(false)
+  const [authenticationComplete, setAuthenticationComplete] = useState(false)
+  const [isNewUser, setIsNewUser] = useState(false)
   const [errorMessage, setErrorMessage] = useState({
     email: '',
     password: '',
@@ -32,6 +35,30 @@ const Login = () => {
   const { loading: dataLoading} = useFetchData(user);
   const { loading: seersLoading, error: seersError } = useFetchSeers(user);
   
+  // Navigation logic - sürekli olarak loading state'leri dinle
+  useEffect(() => {
+    if (!user || !authenticationComplete) return;
+
+    console.log('Navigation check:', {
+      user: !!user,
+      authenticationComplete,
+      isNewUser,
+      dataLoading,
+      seersLoading,
+      seersError: !!seersError
+    });
+
+    if (isNewUser) {
+      console.log('New user - navigating to Introduction');
+      router.replace('/src/screens/side/Introduction');
+      setAuthenticationComplete(false); // Reset
+    } else if (!dataLoading && !seersLoading && !seersError) {
+      console.log('Existing user - data loaded, navigating to FortuneTellingScreen');
+      router.replace('/src/screens/main/navigator/(tabs)/FortuneTellingScreen');
+      setAuthenticationComplete(false); // Reset
+    }
+  }, [user, authenticationComplete, isNewUser, dataLoading, seersLoading, seersError]);
+
   const handleSignIn = async () => {
     try {
       setIsLoading(true);
@@ -39,18 +66,15 @@ const Login = () => {
 
       const userCredential = await signIn(email, password);
 
-      if (userCredential?.user?.emailVerified && userCredential.newUser) {
-        router.replace('/src/screens/side/Introduction');
-      } else if (userCredential?.user?.emailVerified && !userCredential.newUser) {
-        // Data fetch işlemini bekle  
-        
-        if (!dataLoading && !seersLoading && !seersError) {
-          router.replace('/src/screens/main/navigator/(tabs)/GuideScreen');
-        }
+      if (userCredential?.user?.emailVerified) {
+        setIsNewUser(userCredential.newUser);
+        setAuthenticationComplete(true);
+        showToast('Giriş başarılı! Veriler yükleniyor...', 'success');
       }
     } catch (error: any) {
       if (error === 'auth/email-not-verified') {
         showToast(t('auth.auth/email-not-verified'), 'error');
+        setIsLoading(false);
         return;
       }
 
@@ -65,30 +89,23 @@ const Login = () => {
         setErrorMessage(prev => ({ ...prev, general: errorMsg }));
         showToast(errorMsg, 'error');
       }
-    } finally {
       setIsLoading(false);
-    }
+    } 
   };
   
   const handleSignInGoogle = async () => {
     try {
       setIsGoogleLoading(true);
       const result = await signInGoogle();
-      console.log(result.newUser);
+      console.log('Google login result:', result.newUser);
       if (result.user) {
-        if (result.newUser) {
-          router.replace('/src/screens/side/Introduction');
-        } else {
-          // Veri fetch işlemini bekle
-          if (!dataLoading && !seersLoading && !seersError) {
-            router.replace('/src/screens/main/navigator/FortuneTellingScreen');
-          }
-        }
+        setIsNewUser(result.newUser);
+        setAuthenticationComplete(true);
+        showToast('Google ile giriş başarılı! Veriler yükleniyor...', 'success');
       }
     } catch (error: any) {
       console.log(error);
       showToast(t('auth.auth/google-sign-in-error'), 'error');
-    } finally {
       setIsGoogleLoading(false);
     }
   }
@@ -97,21 +114,15 @@ const Login = () => {
     try {
       setIsFacebookLoading(true);
       const result = await signInFacebook();
-      console.log(result.newUser);
+      console.log('Facebook login result:', result.newUser);
       if (result.user) {
-        if (result.newUser) {
-          router.replace('/src/screens/side/Introduction');
-        } else {
-          // Veri fetch işlemini bekle
-          if (!dataLoading && !seersLoading && !seersError) {
-            router.replace('/src/screens/main/navigator/FortuneTellingScreen');
-          }
-        }
+        setIsNewUser(result.newUser);
+        setAuthenticationComplete(true);
+        showToast('Facebook ile giriş başarılı! Veriler yükleniyor...', 'success');
       }
     } catch (error: any) {
       console.log(error);
       showToast(t('auth.auth/facebook-sign-in-error'), 'error');
-    } finally {
       setIsFacebookLoading(false);
     }
   }
@@ -120,21 +131,15 @@ const Login = () => {
     try {
       setIsAppleLoading(true);
       const result = await signInApple();
-      console.log(result.newUser);
+      console.log('Apple login result:', result.newUser);
       if (result.user) {
-        if (result.newUser) {
-          router.replace('/src/screens/side/Introduction');
-        } else {
-          // Veri fetch işlemini bekle
-          if (!dataLoading && !seersLoading && !seersError) {
-            router.replace('/src/screens/main/navigator/FortuneTellingScreen');
-          }
-        }
+        setIsNewUser(result.newUser);
+        setAuthenticationComplete(true);
+        showToast('Apple ile giriş başarılı! Veriler yükleniyor...', 'success');
       }
     } catch (error: any) {
       console.log(error);
       showToast(t('auth.auth/apple-sign-in-error'), 'error');
-    } finally {
       setIsAppleLoading(false);
     }
   }

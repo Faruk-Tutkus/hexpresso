@@ -161,7 +161,7 @@ const Introduction = () => {
               longitude: location?.longitude || 0,
             },
             updatedAt: new Date(),
-            coins: 50,
+            coins: 500,
           });
           
           console.log('🚀 Introduction: Kullanıcı kaydedildi, cache için veri yükleniyor...');

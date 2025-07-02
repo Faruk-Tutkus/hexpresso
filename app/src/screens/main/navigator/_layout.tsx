@@ -19,8 +19,8 @@ export default function Layout() {
   const router = useRouter();
   const pathname = usePathname();
   
-  // Initialize Fortune Processor for automatic AI processing
-  useFortuneProcessor();
+  // Initialize Fortune Processor for automatic AI processing - only for authenticated users
+  useFortuneProcessor(user);
   
   SystemUI.setBackgroundColorAsync(colors.background);
 
@@ -94,17 +94,25 @@ export default function Layout() {
   }
 
   useEffect(() => {
-    if (!user?.uid) return;
+    if (!user?.uid) {
+      setUserName(null);
+      return;
+    }
+    
     const unsubscribe = onSnapshot(doc(db, 'users', user.uid), (doc) => {
       if (doc.exists()) {
         const data = doc.data();
         setUserName(data?.name || null);
       }
+    }, (error) => {
+      console.error('Layout listener error:', error);
+      setUserName(null);
     });
+    
     getUserInfo();
 
     return () => unsubscribe();
-  }, [user]);
+  }, [user?.uid]);
 
   const CustomDrawerContent = (props: any) => {
     return (

@@ -83,12 +83,18 @@ const SplashScreen = () => {
 
       // User var ve newUser değil - data yüklenmesini bekle
       if (!dataLoading && !seersLoading) {
-        if (signs && signs.length > 0 && seers && seers.length > 0) {
+        const userRef = doc(db, "users", user.uid);
+        const docRef = await getDoc(userRef);
+        if (signs && signs.length > 0 && seers && seers.length > 0 && !docRef.data()?.newUser && docRef.exists() && user.emailVerified) {
           console.log('✅ SplashScreen: Veri yüklendi, ana ekrana yönlendiriliyor');
           router.replace('/src/screens/main/navigator/FortuneTellingScreen');
-        } else if (error) {
+        } else if (error || seersError || docRef.data()?.newUser || user.emailVerified) {
           console.log('⚠️ SplashScreen: Veri yüklenemedi, Introduction\'a yönlendiriliyor');
           router.replace('/src/screens/side/Introduction');
+        }
+        else if (!docRef.exists() || !user.emailVerified) {
+          console.log('⚠️ SplashScreen: Veri yüklenemedi, Introduction\'a yönlendiriliyor');
+          router.replace('/src/screens/side/StartScreen');
         }
       }
     };

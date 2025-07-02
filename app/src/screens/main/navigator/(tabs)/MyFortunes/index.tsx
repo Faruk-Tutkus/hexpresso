@@ -46,6 +46,11 @@ const MyFortunes = () => {
     if (!user?.uid || fortunes.length === 0) return;
 
     const interval = setInterval(async () => {
+      // Double check user still exists before making Firebase calls
+      if (!user?.uid) {
+        return;
+      }
+
       const now = new Date();
       let updatedFortunes = [...fortunes];
       let hasUpdates = false;
@@ -67,16 +72,20 @@ const MyFortunes = () => {
               };
               hasUpdates = true;
 
-              // Update in Firestore in background
-              updateDoc(doc(db, 'users', user.uid), {
-                fortunerecord: arrayRemove(fortune)
-              }).then(() => {
-                return updateDoc(doc(db, 'users', user.uid), {
-                  fortunerecord: arrayUnion(updatedFortunes[i])
+              // Update in Firestore in background - with additional user check
+              if (user?.uid) {
+                updateDoc(doc(db, 'users', user.uid), {
+                  fortunerecord: arrayRemove(fortune)
+                }).then(() => {
+                  if (user?.uid) {
+                    return updateDoc(doc(db, 'users', user.uid), {
+                      fortunerecord: arrayUnion(updatedFortunes[i])
+                    });
+                  }
+                }).catch((error) => {
+                  console.error('Error updating fortune status:', error);
                 });
-              }).catch((error) => {
-                console.error('Error updating fortune status:', error);
-              });
+              }
 
               console.log(`🎉 Fortune ${fortune.id} status updated to completed!`);
             } catch (error) {
@@ -96,7 +105,11 @@ const MyFortunes = () => {
   }, [user?.uid, fortunes]);
 
   useEffect(() => {
-    if (!user?.uid) return;
+    if (!user?.uid) {
+      setFortunes([]);
+      setLoading(false);
+      return;
+    }
 
     // Listen to user document changes for fortunerecord array
     const unsubscribe = onSnapshot(doc(db, 'users', user.uid), (doc) => {
@@ -121,6 +134,7 @@ const MyFortunes = () => {
       }
     }, (error) => {
       console.error('Fortune listener error:', error);
+      setFortunes([]);
       setLoading(false);
     });
 

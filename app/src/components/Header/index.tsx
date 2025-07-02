@@ -6,7 +6,7 @@ import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { User } from 'firebase/auth';
 import { doc, onSnapshot } from 'firebase/firestore';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Animated, Text, TouchableOpacity, View } from 'react-native';
 import Reanimated, { FadeIn } from 'react-native-reanimated';
@@ -25,7 +25,13 @@ const Header = ({ user, onPress }: HeaderProps) => {
   const [coins, setCoins] = useState<number>(0)
   const { t } = useTranslation()
   useEffect(() => {
-    if (!user?.uid) return;
+    if (!user?.uid) {
+      // Reset state when user is null
+      setHoroscopeInfo('');
+      setUpdatedAt(null);
+      setCoins(0);
+      return;
+    }
 
     // Real-time listener for user document changes
     const unsubscribe = onSnapshot(doc(db, 'users', user.uid), (doc) => {
@@ -35,11 +41,17 @@ const Header = ({ user, onPress }: HeaderProps) => {
         setUpdatedAt(data?.updatedAt || null);
         setCoins(data?.coins || 0);
       }
+    }, (error) => {
+      console.error('Header listener error:', error);
+      // Reset state on error
+      setHoroscopeInfo('');
+      setUpdatedAt(null);
+      setCoins(0);
     });
 
     // Cleanup listener on unmount
     return () => unsubscribe();
-  }, [user])
+  }, [user?.uid])
 
   const shakeAnimationValue = useRef(new Animated.Value(0)).current;
   const breathingAnimationValue = useRef(new Animated.Value(0)).current;

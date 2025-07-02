@@ -341,7 +341,7 @@ const HandFortune = () => {
   const generateFortuneInterpretation = async ({ fortuneType, seerData, images, userData }: any) => {
     try {
       const { GoogleGenAI, HarmBlockThreshold, HarmCategory } = require('@google/genai');
-      const ai = new GoogleGenAI({ apiKey: "AIzaSyBeAM7n8yGpXmNJfDL7WkUcC09m0fKEQNo" });
+      const ai = new GoogleGenAI({ apiKey: "AIzaSyDYDevsAsKXs-6P6-qYckbj7YIPCYw9abE" });
 
       if (!leftHandBase64 || !rightHandBase64) {
         console.error('Base64 data is missing for hand images');
@@ -516,7 +516,7 @@ Yanıt sadece JSON formatında olacak ✅`;
   const validateHandImages = async (leftHandUri: string, rightHandUri: string) => {
     try {
       const { GoogleGenAI, HarmBlockThreshold, HarmCategory } = require('@google/genai');
-      const ai = new GoogleGenAI({ apiKey: "AIzaSyBeAM7n8yGpXmNJfDL7WkUcC09m0fKEQNo" });
+      const ai = new GoogleGenAI({ apiKey: "AIzaSyDYDevsAsKXs-6P6-qYckbj7YIPCYw9abE" });
 
       // Use the stored base64 data instead of converting
       // If the base64 data isn't available for some reason, we'll just fail validation

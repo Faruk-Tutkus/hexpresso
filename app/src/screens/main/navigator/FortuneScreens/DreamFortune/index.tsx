@@ -123,7 +123,7 @@ const DreamFortune = () => {
   const generateFortuneInterpretation = async ({ fortuneType, seerData, dreamText, userData }: any) => {
     try {
       const { GoogleGenAI, HarmBlockThreshold, HarmCategory } = require('@google/genai');
-      const ai = new GoogleGenAI({ apiKey: "AIzaSyBeAM7n8yGpXmNJfDL7WkUcC09m0fKEQNo" });
+      const ai = new GoogleGenAI({ apiKey: "AIzaSyDYDevsAsKXs-6P6-qYckbj7YIPCYw9abE" });
 
       const prompt = `
 🧙‍♀️ Sen kimsin?

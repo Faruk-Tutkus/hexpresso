@@ -1,6 +1,6 @@
 import { db } from "@api/config.firebase";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MMKV } from "react-native-mmkv";
 
 // Fallback olarak local JSON dosyalarını import et
@@ -75,13 +75,20 @@ const getLocalSignsData = (): any[] => {
   }
 };
 
-const fetchSignsFromFirebase = async (): Promise<any[]> => {
+const fetchSignsFromFirebase = async (abortController?: AbortController): Promise<any[]> => {
   try {
     console.log('🔥 Firebase signs bağlantısı deneniyor...');
     const docRef = collection(db, "signs");
     console.log('📊 Signs collection referansı alındı');
     
     const snapshot = await getDocs(docRef);
+    
+    // Check if request was aborted
+    if (abortController?.signal.aborted) {
+      console.log('🚫 Signs Firebase request aborted');
+      return [];
+    }
+    
     console.log('📄 Signs snapshot alındı, belge sayısı:', snapshot.size);
     
     const signsData = snapshot.docs.map((item) => {
@@ -132,7 +139,11 @@ const fetchSignsFromFirebase = async (): Promise<any[]> => {
     }
     
     return signsData;
-  } catch (err) {
+  } catch (err: any) {
+    if (err.name === 'AbortError') {
+      console.log('🚫 Signs Firebase request aborted');
+      return [];
+    }
     console.error('❌ Firebase signs hatası:', err);
     throw err;
   }
@@ -142,14 +153,30 @@ export const useFetchData = (user: any): UseFetchDataReturn => {
   const [signs, setSigns] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const isMountedRef = useRef(true);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   const refetch = async () => {
+    if (!user?.uid || !isMountedRef.current) {
+      console.log('🚫 FetchData refetch: User yok veya component unmounted');
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
     try {
       console.log('🔄 Signs veri yenileme başladı...');
-      const data = await fetchSignsFromFirebase();
+      
+      // Abort previous request if it exists
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+      
+      abortControllerRef.current = new AbortController();
+      const data = await fetchSignsFromFirebase(abortControllerRef.current);
+      
+      if (!isMountedRef.current) return;
       
       if (data && data.length > 0) {
         setSigns(data);
@@ -159,6 +186,8 @@ export const useFetchData = (user: any): UseFetchDataReturn => {
         throw new Error('Firebase\'den boş signs verisi geldi');
       }
     } catch (err) {
+      if (!isMountedRef.current) return;
+      
       console.log('⚠️ Firebase signs hatası, alternatif kaynaklar deneniyor...');
       setError('Firebase bağlantı sorunu');
       
@@ -180,22 +209,29 @@ export const useFetchData = (user: any): UseFetchDataReturn => {
         }
       }
     } finally {
-      setLoading(false);
+      if (isMountedRef.current) {
+        setLoading(false);
+      }
     }
   };
 
   useEffect(() => {
     const initializeData = async () => {
-      if (!user) {
+      if (!user?.uid) {
         console.log('⏳ FetchData: User bekleniyor...');
+        setSigns([]);
         setLoading(false);
+        setError(null);
         return;
       }
 
       try {
         const userDoc = await getDoc(doc(db, 'users', user.uid));
+        if (!isMountedRef.current) return;
+        
         if (userDoc.data()?.newUser) {
           console.log('👤 Yeni kullanıcı, veri yükleme atlanıyor');
+          setSigns([]);
           setLoading(false);
           return;
         }
@@ -215,7 +251,16 @@ export const useFetchData = (user: any): UseFetchDataReturn => {
         // Arka planda güncel veriyi getir
         try {
           console.log('🔄 Arka plan signs güncellemesi başlıyor...');
-          const freshData = await fetchSignsFromFirebase();
+          
+          // Abort previous request if it exists
+          if (abortControllerRef.current) {
+            abortControllerRef.current.abort();
+          }
+          
+          abortControllerRef.current = new AbortController();
+          const freshData = await fetchSignsFromFirebase(abortControllerRef.current);
+          
+          if (!isMountedRef.current) return;
           
           // Update kontrolü
           const docSet = doc(db, 'settings', 'update');
@@ -238,7 +283,25 @@ export const useFetchData = (user: any): UseFetchDataReturn => {
     };
 
     initializeData();
-  }, [user]);
+
+    // Cleanup function
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
+  }, [user?.uid]);
+
+  // Component unmount cleanup
+  useEffect(() => {
+    return () => {
+      isMountedRef.current = false;
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+        abortControllerRef.current = null;
+      }
+    };
+  }, []);
 
   return {
     signs,
@@ -247,6 +310,5 @@ export const useFetchData = (user: any): UseFetchDataReturn => {
     refetch
   };
 };
-
 
 export default useFetchData;

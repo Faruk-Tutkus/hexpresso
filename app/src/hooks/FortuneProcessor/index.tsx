@@ -1,5 +1,5 @@
 import { db } from '@api/config.firebase';
-import { arrayRemove, arrayUnion, collection, doc, getDocs, updateDoc } from 'firebase/firestore';
+import { arrayRemove, arrayUnion, doc, onSnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 
 interface FortuneRecord {
@@ -16,83 +16,73 @@ interface FortuneRecord {
   result?: string;
 }
 
-interface UserWithFortunes {
-  uid: string;
-  fortunerecord: FortuneRecord[];
-}
-
-export const useFortuneProcessor = () => {
+export const useFortuneProcessor = (user: any) => {
   const [processing, setProcessing] = useState(false);
   const [processedCount, setProcessedCount] = useState(0);
 
-  const updateFortuneInUserDoc = async (userId: string, oldFortune: FortuneRecord, newFortune: FortuneRecord) => {
-    try {
-      // Remove old fortune and add updated fortune
-      await updateDoc(doc(db, 'users', userId), {
-        fortunerecord: arrayRemove(oldFortune)
-      });
-      
-      await updateDoc(doc(db, 'users', userId), {
-        fortunerecord: arrayUnion(newFortune)
-      });
-    } catch (error) {
-      console.error('Error updating fortune in user doc:', error);
-      throw error;
-    }
-  };
-
-  const processPendingFortunes = async () => {
-    if (processing) return;
+  const processPendingFortunes = async (userFortunes: FortuneRecord[], userId: string) => {
+    if (processing || !userId || !user?.uid) return;
     
     setProcessing(true);
     let processed = 0;
 
     try {
-      // Get all users to check their fortunerecord arrays
-      const usersSnapshot = await getDocs(collection(db, 'users'));
       const now = new Date();
-
-      for (const userDoc of usersSnapshot.docs) {
-        const userData = userDoc.data();
-        const fortuneRecords = userData.fortunerecord || [];
+      
+      // Find pending fortunes that are ready to be revealed (timer expired)
+      const readyFortunes = userFortunes.filter((fortune: FortuneRecord) => {
+        if (fortune.status !== 'pending') return false;
         
-        // Find pending fortunes that are ready to be revealed (timer expired)
-        const readyFortunes = fortuneRecords.filter((fortune: FortuneRecord) => {
-          if (fortune.status !== 'pending') return false;
-          
-          const completionTime = fortune.estimatedCompletionTime.toDate?.() 
-            ? fortune.estimatedCompletionTime.toDate()
-            : new Date(fortune.estimatedCompletionTime);
-          
-          return completionTime <= now;
-        });
+        const completionTime = fortune.estimatedCompletionTime.toDate?.() 
+          ? fortune.estimatedCompletionTime.toDate()
+          : new Date(fortune.estimatedCompletionTime);
+        
+        return completionTime <= now;
+      });
 
-        // Process each ready fortune for this user
-        for (const fortune of readyFortunes) {
-          try {
-            console.log(`Revealing fortune ${fortune.id} for user ${userDoc.id}`);
-            
-            // Simply change status to completed if result exists
-            if (fortune.result) {
-              const completedFortune = {
-                ...fortune,
-                status: 'completed' as const,
-                completedAt: new Date()
-              };
-              await updateFortuneInUserDoc(userDoc.id, fortune, completedFortune);
-              processed++;
-              console.log(`Fortune ${fortune.id} revealed successfully`);
-            } else {
-              console.log(`Fortune ${fortune.id} has no result, skipping`);
-            }
-          } catch (error) {
-            console.error(`Error revealing fortune ${fortune.id}:`, error);
+      // Process each ready fortune for this user
+      for (const fortune of readyFortunes) {
+        try {
+          // Double check user still exists before Firebase operations
+          if (!user?.uid) {
+            console.log('User logged out during processing, stopping');
+            break;
           }
+
+          console.log(`Revealing fortune ${fortune.id} for user ${userId}`);
+          
+          // Simply change status to completed if result exists
+          if (fortune.result) {
+            const completedFortune = {
+              ...fortune,
+              status: 'completed' as const,
+              completedAt: new Date()
+            };
+            
+            // Update user's fortune record
+            const { updateDoc } = await import('firebase/firestore');
+            await updateDoc(doc(db, 'users', userId), {
+              fortunerecord: arrayRemove(fortune)
+            });
+            
+            await updateDoc(doc(db, 'users', userId), {
+              fortunerecord: arrayUnion(completedFortune)
+            });
+            
+            processed++;
+            console.log(`Fortune ${fortune.id} revealed successfully`);
+          } else {
+            console.log(`Fortune ${fortune.id} has no result, skipping`);
+          }
+        } catch (error) {
+          console.error(`Error revealing fortune ${fortune.id}:`, error);
         }
       }
 
       setProcessedCount(processed);
-      console.log(`Revealed ${processed} fortunes successfully`);
+      if (processed > 0) {
+        console.log(`Revealed ${processed} fortunes successfully`);
+      }
     } catch (error) {
       console.error('Error in fortune processing:', error);
     } finally {
@@ -100,22 +90,32 @@ export const useFortuneProcessor = () => {
     }
   };
 
-  // Auto-process every 30 seconds (much more frequent for better UX)
+  // Listen to user's document and process fortunes when they change
   useEffect(() => {
-    const interval = setInterval(() => {
-      processPendingFortunes();
-    }, 30 * 1000); // 30 seconds
+    if (!user?.uid) {
+      setProcessedCount(0);
+      return;
+    }
 
-    // Initial process
-    processPendingFortunes();
+    // Listen to user document changes
+    const unsubscribe = onSnapshot(doc(db, 'users', user.uid), (docSnapshot) => {
+      if (docSnapshot.exists() && user?.uid) {
+        const userData = docSnapshot.data();
+        const fortuneRecords = userData.fortunerecord || [];
+        
+        // Process fortunes whenever the document updates
+        processPendingFortunes(fortuneRecords, user.uid);
+      }
+    }, (error) => {
+      console.error('FortuneProcessor listener error:', error);
+    });
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => unsubscribe();
+  }, [user?.uid]);
 
   return {
     processing,
-    processedCount,
-    processPendingFortunes
+    processedCount
   };
 };
 
