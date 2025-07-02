@@ -1,3 +1,4 @@
+import { Banner } from '@ads';
 import { SeerCard } from '@components';
 import { useFetchSeers } from '@hooks';
 import { useAuth, useTheme, useToast } from '@providers';
@@ -23,6 +24,7 @@ const FortuneTellingHeader = React.memo(() => {
   const { colors } = useTheme();
 
   return (
+    <>
     <Animated.View
       style={[styles.headerContainer, { backgroundColor: colors.secondaryText }]}
       entering={FadeInDown.duration(800).springify()}
@@ -35,6 +37,10 @@ const FortuneTellingHeader = React.memo(() => {
       </Text>
       <View style={[styles.divider, { backgroundColor: colors.primary }]} />
     </Animated.View>
+    <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+      <Banner adType='banner' />
+    </View>
+    </>
   );
 });
 

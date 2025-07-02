@@ -1,3 +1,4 @@
+import { Banner } from '@ads';
 import { db } from '@api/config.firebase';
 import Icon from '@assets/icons';
 import { useAuth, useTheme } from '@providers';
@@ -138,6 +139,7 @@ const MyFortunes = () => {
 
   // Memoized Scrollable Header Component
   const ScrollableHeader = useCallback(() => (
+    <>
     <Animated.View
       style={[styles.headerContainer, { backgroundColor: colors.secondaryText }]}
       entering={FadeInDown.duration(800).springify()}
@@ -150,6 +152,10 @@ const MyFortunes = () => {
       </Text>
       <View style={[styles.divider, { backgroundColor: colors.primary }]} />
     </Animated.View>
+    <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+      <Banner adType='banner' />
+    </View>
+    </>
   ), [colors]);
 
   const renderFortuneCard = useCallback(({ item, index }: { item: FortuneRecord; index: number }) => (
@@ -374,7 +380,7 @@ const FortuneCardContent = ({
   const renderCoffeeImages = () => {
     const images = Array.isArray(fortune.images) ? fortune.images : [];
     const imageLabels = ['1. Fincan İçi', '2. Fincan Dışı', '3. Tabak Üstü', '4. Genel Görünüm'];
-    
+
     return (
       <Animated.View
         style={styles.coffeeInputSection}
@@ -384,10 +390,10 @@ const FortuneCardContent = ({
           <Icon name="cafe-outline" size={16} color={colors.primary} />
           <Text style={[styles.inputSectionLabel, { color: colors.primary }]}>Kahve Fincanı Fotoğrafları</Text>
         </View>
-        
+
         <View style={styles.coffeeImagesGrid}>
           {images.slice(0, 4).map((imageUrl: string, index: number) => (
-            <Animated.View 
+            <Animated.View
               key={index}
               style={[styles.coffeeImageItem, { borderColor: colors.border }]}
               entering={FadeInUp.delay((index + 1) * 100).springify()}
@@ -409,7 +415,7 @@ const FortuneCardContent = ({
 
   const renderHandImages = () => {
     const images = fortune.images;
-    
+
     return (
       <Animated.View
         style={styles.handInputSection}
@@ -419,10 +425,9 @@ const FortuneCardContent = ({
           <Icon name="hand-left-outline" size={16} color={colors.primary} />
           <Text style={[styles.inputSectionLabel, { color: colors.primary }]}>El Fotoğrafları</Text>
         </View>
-        
         <View style={styles.handImagesRow}>
           {images?.leftHand && (
-            <Animated.View 
+            <Animated.View
               style={[styles.handImageItem, { borderColor: colors.border }]}
               entering={FadeInUp.delay(100).springify()}
             >
@@ -436,9 +441,9 @@ const FortuneCardContent = ({
               </Text>
             </Animated.View>
           )}
-          
+
           {images?.rightHand && (
-            <Animated.View 
+            <Animated.View
               style={[styles.handImageItem, { borderColor: colors.border }]}
               entering={FadeInUp.delay(200).springify()}
             >
@@ -467,16 +472,16 @@ const FortuneCardContent = ({
           <Icon name="moon-outline" size={16} color={colors.primary} />
           <Text style={[styles.inputSectionLabel, { color: colors.primary }]}>Anlatılan Rüya</Text>
         </View>
-        
-        <View style={[styles.dreamTextContainer, { 
-          backgroundColor: colors.surface, 
-          borderColor: colors.border 
+
+        <View style={[styles.dreamTextContainer, {
+          backgroundColor: colors.surface,
+          borderColor: colors.border
         }]}>
           <Text style={[styles.dreamText, { color: colors.text }]}>
             {fortune.dreamText}
           </Text>
         </View>
-        
+
         <View style={styles.dreamStats}>
           <Text style={[styles.dreamStatsText, { color: colors.secondaryText }]}>
             📝 {fortune.dreamText?.length || 0} karakter

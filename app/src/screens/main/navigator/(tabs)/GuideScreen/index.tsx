@@ -64,9 +64,13 @@ const GuideScreen = () => {
         <Text style={{ color: colors.text, fontSize: 16, fontFamily: 'Domine-Regular', textAlign: 'center', marginTop: 10 }}>Yıldızlardan mesaj bekleniyor...</Text>
       </View> :
         <>
-          <Banner adType='banner' />
           <FlatList
-            ListHeaderComponent={<AskAI type="sign" />}
+            ListHeaderComponent={
+              <>
+                <AskAI type="sign" />
+                <Banner adType='banner' />
+              </>
+            }
             data={data}
             renderItem={({ item }) => <HoroscopeCard sign={item.sign} date={item.date} image={item.image} onPress={() => {
               showInterstitial()

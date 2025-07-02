@@ -190,7 +190,7 @@ const SignComments = () => {
   useEffect(() => {
     if (!loading && signs.length > 0 && flatListRef.current) {
       console.log('🎯 ScrollToSign: Seçili burca scroll ediliyor...', selectedSignIndex);
-      
+
       // Kısa bir delay ile scroll işlemi yap
       const scrollTimer = setTimeout(() => {
         flatListRef.current?.scrollToOffset({
@@ -335,7 +335,7 @@ const SignComments = () => {
         showInterstitial()
         return
       }
-      
+
       const newDate = new Date(currentDate)
       newDate.setDate(newDate.getDate() - 1)
       setCurrentDate(newDate)
@@ -353,7 +353,7 @@ const SignComments = () => {
         showInterstitial()
         return
       }
-      
+
       const nextDay = new Date(currentDate)
       nextDay.setDate(nextDay.getDate() + 1)
       nextDay.setHours(0, 0, 0, 0)
@@ -427,7 +427,7 @@ const SignComments = () => {
   const renderCommentCard = ({ item }: { item: CommentCard }) => {
     const isExpanded = expandedCard === item.id
     const { cardAnimatedStyle, contentAnimatedStyle } = getAnimatedStyles(item.type)
-    
+
     const cardColors = {
       daily: colors.primary,
       weekly: colors.secondary,
@@ -539,8 +539,7 @@ const SignComments = () => {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <Banner />
-      <ScrollView 
+      <ScrollView
         showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl
@@ -556,6 +555,10 @@ const SignComments = () => {
         {/* AI Assistant Section - Now at the top */}
         <View style={styles.aiSection}>
           <AskAI type="comment" />
+        </View>
+
+        <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+          <Banner adType='banner' />
         </View>
 
         {/* Zodiac Signs Horizontal List */}
@@ -623,8 +626,8 @@ const SignComments = () => {
               onChange={onDateChange}
               minimumDate={new Date(new Date().getFullYear(), 0, 1)}
               maximumDate={new Date(new Date().getFullYear(), 11, 31)}
-              // For iOS, the DatePicker is shown inline
-              // For Android, it's shown as a modal and automatically dismissed after selection
+            // For iOS, the DatePicker is shown inline
+            // For Android, it's shown as a modal and automatically dismissed after selection
             />
           )}
         </View>

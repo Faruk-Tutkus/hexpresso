@@ -295,7 +295,9 @@ const Signs = () => {
         </Text>
         <Text style={[styles.signDates, { color: colors.background }]}>{data.dates}</Text>
       </View>
-      <Banner adType='banner' />
+      <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+        <Banner adType='banner' />
+      </View>
       {/* About Section */}
       <InfoCard
         title="Hakkında"
@@ -322,13 +324,17 @@ const Signs = () => {
           onPress={() => openModal('Düşmanlar', data.enemy, 'warning')}
         />
       </View>
-      <Banner adType='banner' />
+      <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+        <Banner adType='banner' />
+      </View>
       {/* Careers Section */}
       <CareerCard careers={data.careers} />
 
       {/* Famous People */}
       <FamousCard famous={data.famous} />
-      <Banner adType='banner' />
+      <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+        <Banner adType='banner' />
+      </View>
       {/* What Makes Happy */}
       <View style={styles.twoColumnContainer}>
         <HalfCard
@@ -368,7 +374,9 @@ const Signs = () => {
         icon="heart-circle"
         backgroundColor={colors.secondary + '20'}
       />
-      <Banner adType='banner' />
+      <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+        <Banner adType='banner' />
+      </View>
       {/* Friends */}
       <InfoCard
         title="Arkadaşlık"
