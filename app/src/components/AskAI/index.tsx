@@ -37,7 +37,7 @@ const AskAI = ({ type }: AskAIType) => {
 
   useEffect(() => {
     if (!user?.uid) return;
-    
+
     // Real-time listener for user document changes
     const unsubscribe = onSnapshot(doc(db, 'users', user.uid), (doc) => {
       if (doc.exists()) {
@@ -56,13 +56,13 @@ const AskAI = ({ type }: AskAIType) => {
       if (user?.uid) {
         const userInfo = doc(db, 'users', user?.uid);
         const docSnap = await getDoc(userInfo);
-        
+
         if (docSnap.exists()) {
           const data = docSnap.data();
           const todayInfo = doc(db, 'signs', data.sunSign);
           const todayDocSnap = await getDoc(todayInfo);
-          
-          const daily = todayDocSnap.data()?.daily.find((item: any) => 
+
+          const daily = todayDocSnap.data()?.daily.find((item: any) =>
             item.date === getDateRangeForPeriod('daily', new Date().toISOString())
           );
 
@@ -113,28 +113,22 @@ const AskAI = ({ type }: AskAIType) => {
     try {
       const response = await ai.models.generateContent({
         model: "gemini-1.5-flash",
-        contents: value + JSON.stringify({
+        contents: 'Kullanıcının sormuş olduğu soru: ' + value + '\n' + JSON.stringify({
           userInfo: {
-            name: userData.name,
-            sunSign: userData.sunSign,
-            moonSign: userData.moonSign,
-            ascendantSign: userData.ascendantSign,
-            age: userData.age,
-            gender: userData.gender,
-            birthWeekday: userData.birthWeekday
+            name: `Kullanıcının adı: ${userData.name}`,
+            sunSign: `Güneş burcu: ${userData.sunSign}`,
+            moonSign: `Ay burcu: ${userData.moonSign}`,
+            ascendantSign: `Yükselen burcu: ${userData.ascendantSign}`,
+            age: `Yaş: ${userData.age}`,
+            gender: `Cinsiyet: ${userData.gender}`,
+            birthWeekday: `Doğduğu gün: ${userData.birthWeekday}`
           },
-          currentState: {
-            mood: userData.mood,
-            love: userData.love,
-            need: userData.need,
-            meaning: userData.meaning,
-            curious: userData.curious,
-            experience: userData.experience,
-            reason: userData.reason
-          },
-          prompt: userData.prompt,
-          description: userData.description || ''
+          prompt: `Kullanıcı sorulara verdiği cevaplar: ${userData.prompt}`,
+          ...(type === 'comment' && {
+            description: `Yorum içeriği: ${userData.description || 'Belirtilmedi'}`
+          })
         }),
+
         config: {
           safetySettings: [
             {
@@ -154,8 +148,73 @@ const AskAI = ({ type }: AskAIType) => {
               threshold: HarmBlockThreshold.BLOCK_NONE,
             },
           ],
-          systemInstruction: type === 'sign' ? `Mordecai, Google tarafından değil "Faruk Tutkus" tarafından geliştirilmiş burçlar ve astroloji konusunda oldukça bilgili ve güvenilir bir asistandır. Burçların özellikleri, elementleri, nitelikleri, yükselenleri, gezegenleri, arasında yaşanan ilişkiler, uyumları, mitolojik arka planları, sembolleri, taşları, renkleri ve bunun gibi burçlarla ilgili her konuda oldukça detaylı ve doğru bilgi verir. Doğum haritasında Güneş, Ay ve yükselen burcunun etkileri, natal açıları ve bunun insanın karakterinde ve hayatında oluşturabileceği potansiyel durumlar gibi pek çok konuda da yardımlaşabilir. Ancak günlük, haftalık, aylık ya da yıllık burç yorumları ve geleceğe dair tahminlerde bulunması kesinlikle yasaktır, bu türden konular için "burç yorumları" sayfasını ziyaret etmelisizini gibi bir ifade kullanmalıdır; bunun yerine daha çok burçlar arasında ilişki, uyum, özellik ve karakter analizleri gibi kalıcılığı olan ve daha teorik bilgi gerektiren konulara odaklanır. Mordecai, samimi, net, oldukça bilgili ve zaman zaman esprili üslubuyla insanlara değerli ve aydınlatıcı bilgiler sunmayı hedefleyen, tamamen tarafsız ve etik çalışan, modern ve güvenilir bir burç asistanıdır. Mordecai en az 20 en fazla 35 kelimeden oluşan net cevaplar verebilir.` :
-            `Mordecai, Google tarafından değil "Faruk Tutkus" tarafından geliştirilmiş verilen günlük, haftalık, aylık ya da yıllık burç yorumlarını kullanıcının kendi bilgileri (burcu, yükseleni, doğum tarihi gibi) ilə harmanlayıp ona özel ve gerçekçi burç yorumları oluşturabilen, tamamen güvenilir ve tarafsız hizmet sunan bir yapay zeka asistanıdır. Mordecai, olumlu ya da olumsuz — kötü, zor, ya da pek de hoş olmayan tahminleri dahi olduğu gibi ve açık bir dille aktarır; asla gerçekleri yumuşatmaya ya da süsleme yapmaya kalkışmaz. Bu sebepten Mordecai, burçların genel özellikleri, karakterleri ya da mitolojik arka planlarıyla ilgili bilgi vermekle görevli değildir; onun asıl görevi, kullanıcının kendi burcuna göre elde edilen ve tamamen gerçekçi olan, kişiselleştirilebilir burç yorumlarını sunmaktır. Mordecai en az 35 en fazla 45 kelimeden oluşan net cevaplar verebilir.`,
+          systemInstruction: type === 'sign' ? `
+🧠 Mordecai Nedir?
+Faruk Tutkus tarafından geliştirilen, sadece astrolojik bakış açısıyla konuşan akıllı bir burç asistanıdır.
+
+✅ Ne Yapar?
+Sorulara yalnızca astroloji üzerinden cevap verir.
+
+Senin bilgilerini (ama adını vermeden) kullanarak kişisel ve duruma özel analiz yapar.
+
+Hep anlık ruh haline, enerjine ve çevrene odaklanır.
+
+Yorumları özgün, kısa (15-75 kelime) ve profesyoneldir.
+
+Genel değil, tam sana özel konuşur.
+
+🚫 Ne Yapamaz?
+Kesinlikle şu konulara girmez:
+
+❌ Rüya yorumu, hayal, düş veya uyku ile ilgili HER ŞEY
+
+❌ Fal, tarot, kehanet, gelecek tahmini
+
+❌ “Senin burcun şu, yaşın bu” gibi açık bilgiler
+
+❌ Burçların genel özellikleri, mitolojik hikâyeleri veya klasik bilgiler
+
+❌ Anlamsız mesajlara ve sorulara cevap vermek
+
+💡 Özetle:
+Mordecai sadece astrolojiyi kullanarak, seninle ilgili şeyleri senin yerine fark edip yorumlayan zeki bir danışman. Asla tahmin yapmaz, rüya anlatmaz, kişisel bilgilerini açık etmez.
+Sadece astrolojik enerjine odaklanır ve içgörü verir.
+`  :
+            `
+🔮 Mordecai Nedir?
+Faruk Tutkus’un geliştirdiği, tamamen kişiye özel çalışan astrolojik analiz asistanıdır.
+Ama klasik burç uygulamalarından farklı olarak, günü yorumlar, hayatı değil.
+
+✅ Ne Yapar?
+Sadece günlük ve kişisel yorumlar verir.
+
+Kullanıcının ruh halini, ihtiyaçlarını, meraklarını analiz eder.
+
+Tüm kullanıcı bilgilerini (burç, yaş, cinsiyet, ruh hali vs.) yorumlarına entegre eder.
+
+Ama bu bilgileri sadece %20 oranında kullanır.
+
+Yani bilgi sadece yön verir, asıl odak o anki enerji ve duygu durumundadır.
+
+Yorumlar kısa (45-75 kelime) ama yoğun, net ve doğrudur.
+
+Gerektiğinde destek olur, gerektiğinde sarsar. Abartmaz, süslemez, yalakalık yapmaz.
+
+🚫 Ne Yapamaz?
+❌ “Burcun şu”, “yükselenin bu”, “sen şu yaşındasın” gibi bilgiler vermez.
+
+❌ Genel burç açıklamaları, mitoloji, astroloji tarihi gibi konulara girmez.
+
+❌ Klişe veya yapay övgü kullanmaz.
+
+❌ Kullanıcının kimliğini açığa çıkaracak hiçbir şeyi söylemez.
+
+⚖️ Önemli Denge:
+Mordecai, seni tanır ama seni senin kadar ciddiye almaz.
+Kişisel bilgilerini sadece %20 oranında analizine yansıtır,
+geri kalan %80’i senin şu anki enerjinden ve sorduğun şeyden çıkarır.
+Yani seninle ilgilenir, ama sana körü körüne uymaz.
+`,
           responseMimeType: 'application/json',
           responseSchema: {
             type: Type.OBJECT,
@@ -262,7 +321,7 @@ const AskAI = ({ type }: AskAIType) => {
       }
     }
     progress.value = withTiming(0, { duration: 1250 });
-    
+
     const userData = await getResponse();
     if (userData) {
       const aiResponse = await getAIResponse(userData);
@@ -274,20 +333,20 @@ const AskAI = ({ type }: AskAIType) => {
   }
 
   return (
-    <Animated.View style={[styles.container, { borderColor: colors.border,backgroundColor: colors.secondaryText }, animatedContainerStyle]}>
+    <Animated.View style={[styles.container, { borderColor: colors.border, backgroundColor: colors.secondaryText }, animatedContainerStyle]}>
       {type === 'sign' && (
         <FloatingLabelInput
-        placeholder="Mordecai'ya sor"
-        type="text"
-        leftIcon="search"
-        rightIcon="send"
-        value={value}
-        onChangeText={onChangeText}
-        onRightIconPress={handleSendSign}
-        loading={isLoading}
-        error={error}
-        isAi={true}
-      />
+          placeholder="Mordecai'ya sor"
+          type="text"
+          leftIcon="search"
+          rightIcon="send"
+          value={value}
+          onChangeText={onChangeText}
+          onRightIconPress={handleSendSign}
+          loading={isLoading}
+          error={error}
+          isAi={true}
+        />
       )}
       {type === 'comment' && (
         <CustomButton
@@ -296,12 +355,12 @@ const AskAI = ({ type }: AskAIType) => {
           leftIcon="search"
           variant="primary"
           loading={isLoading}
-          contentStyle={{width: '60%', marginTop: 16}}
+          contentStyle={{ width: '60%', marginTop: 16 }}
         />
       )}
-      <Animated.View 
+      <Animated.View
         style={[
-          styles.responseContainer, 
+          styles.responseContainer,
           { borderColor: colors.border },
           animatedResponseStyle
         ]}
