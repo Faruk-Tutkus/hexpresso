@@ -88,12 +88,12 @@ const SplashScreen = () => {
         if (signs && signs.length > 0 && seers && seers.length > 0 && !docRef.data()?.newUser && docRef.exists() && user.emailVerified) {
           console.log('✅ SplashScreen: Veri yüklendi, ana ekrana yönlendiriliyor');
           router.replace('/src/screens/main/navigator/FortuneTellingScreen');
-        } else if (error || seersError || docRef.data()?.newUser || user.emailVerified) {
+        } else if (error || seersError || docRef.data()?.newUser || !user.emailVerified) {
           console.log('⚠️ SplashScreen: Veri yüklenemedi, Introduction\'a yönlendiriliyor');
           router.replace('/src/screens/side/Introduction');
         }
-        else if (!docRef.exists() || !user.emailVerified) {
-          console.log('⚠️ SplashScreen: Veri yüklenemedi, Introduction\'a yönlendiriliyor');
+        else if (!docRef.exists()) {
+          console.log('⚠️ SplashScreen: User dokümanı bulunamadı, StartScreen\'e yönlendiriliyor');
           router.replace('/src/screens/side/StartScreen');
         }
       }

@@ -6,7 +6,7 @@ import { useAuth, useTheme, useToast } from '@providers'
 import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore"
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Text } from 'react-native'
+import { Text, View } from 'react-native'
 import Animated, {
   interpolate,
   useAnimatedStyle,
@@ -127,7 +127,9 @@ const AskAI = ({ type }: AskAIType) => {
             ascendantSign: `Yükselen burcu: ${userData.ascendantSign}`,
             age: `Yaş: ${userData.age}`,
             gender: `Cinsiyet: ${userData.gender}`,
-            birthWeekday: `Doğduğu gün: ${userData.birthWeekday}`
+            birthWeekday: `Doğduğu gün: ${userData.birthWeekday}`,
+            date: `Doğum tarihi: ${userData.date}`,
+            time: `Doğum saati: ${userData.time}`
           },
           prompt: `Kullanıcı sorulara verdiği cevaplar: ${userData.prompt}`,
           ...(type === 'comment' && {
@@ -176,7 +178,7 @@ Kesinlikle şu konulara girmez:
 
 ❌ Fal, tarot, kehanet, gelecek tahmini
 
-❌ “Senin burcun şu, yaşın bu” gibi açık bilgiler
+❌ "Senin burcun şu, yaşın bu" gibi açık bilgiler
 
 ❌ Burçların genel özellikleri, mitolojik hikâyeleri veya klasik bilgiler
 
@@ -188,7 +190,7 @@ Sadece astrolojik enerjine odaklanır ve içgörü verir.
 `  :
             `
 🔮 Mordecai Nedir?
-Faruk Tutkus’un geliştirdiği, tamamen kişiye özel çalışan astrolojik analiz asistanıdır.
+Faruk Tutkus'un geliştirdiği, tamamen kişiye özel çalışan astrolojik analiz asistanıdır.
 Ama klasik burç uygulamalarından farklı olarak, günü yorumlar, hayatı değil.
 
 ✅ Ne Yapar?
@@ -207,7 +209,7 @@ Yorumlar kısa (45-75 kelime) ama yoğun, net ve doğrudur.
 Gerektiğinde destek olur, gerektiğinde sarsar. Abartmaz, süslemez, yalakalık yapmaz.
 
 🚫 Ne Yapamaz?
-❌ “Burcun şu”, “yükselenin bu”, “sen şu yaşındasın” gibi bilgiler vermez.
+❌ "Burcun şu", "yükselenin bu", "sen şu yaşındasın" gibi bilgiler vermez.
 
 ❌ Genel burç açıklamaları, mitoloji, astroloji tarihi gibi konulara girmez.
 
@@ -218,7 +220,7 @@ Gerektiğinde destek olur, gerektiğinde sarsar. Abartmaz, süslemez, yalakalık
 ⚖️ Önemli Denge:
 Mordecai, seni tanır ama seni senin kadar ciddiye almaz.
 Kişisel bilgilerini sadece %20 oranında analizine yansıtır,
-geri kalan %80’i senin şu anki enerjinden ve sorduğun şeyden çıkarır.
+geri kalan %80'i senin şu anki enerjinden ve sorduğun şeyden çıkarır.
 Yani seninle ilgilenir, ama sana körü körüne uymaz.
 `,
           responseMimeType: 'application/json',
@@ -254,18 +256,18 @@ Yani seninle ilgilenir, ama sana körü körüne uymaz.
 
   const animatedResponseStyle = useAnimatedStyle(() => {
     return {
-      maxHeight: interpolate(progress.value, [0, 1], [110, 450]),
+      maxHeight: interpolate(progress.value, [0, 1], [250, 750]),
       opacity: interpolate(progress.value, [0, 1], [0, 1])
     }
   })
   const animatedContainerStyle = useAnimatedStyle(() => {
     return {
-      maxHeight: interpolate(progress.value, [0, 0.4], [110, 450]),
+      maxHeight: interpolate(progress.value, [0, 0.4], [250, 750]),
     }
   })
   const handleSendSign = async () => {
-    if (coins < 25 || !user?.uid) {
-      showToast('Yetersiz kredi en az 25 kredi gerekiyor', 'error')
+    if (coins < 50 || !user?.uid) {
+      showToast('Yetersiz kredi en az 50 kredi gerekiyor', 'error')
       return;
     }
     if (!value.trim() && type === 'sign') {
@@ -276,9 +278,9 @@ Yani seninle ilgilenir, ama sana körü körüne uymaz.
       return;
     }
     progress.value = withTiming(0, { duration: 1250 });
-    if (user?.uid && coins >= 25) {
+    if (user?.uid && coins >= 50) {
       await updateDoc(doc(db, 'users', user?.uid), {
-        coins: coins - 25
+        coins: coins - 50
       })
       const userDoc = await getDoc(doc(db, 'users', user?.uid))
       const userData = userDoc.data()?.profileCompletionRewardGiven
@@ -311,14 +313,14 @@ Yani seninle ilgilenir, ama sana körü körüne uymaz.
       setIsLoading(false)
       return;
     }
-    if (coins < 50 || !user?.uid) {
-      showToast('Yetersiz kredi en az 50 kredi gerekiyor', 'error')
+    if (coins < 100 || !user?.uid) {
+      showToast('Yetersiz kredi en az 100 kredi gerekiyor', 'error')
       setIsLoading(false)
       return;
     }
-    if (user?.uid && coins >= 50) {
+    if (user?.uid && coins >= 100) {
       await updateDoc(doc(db, 'users', user?.uid), {
-        coins: coins - 50
+        coins: coins - 100
       })
       const userDoc = await getDoc(doc(db, 'users', user?.uid))
       const userData = userDoc.data()?.profileCompletionRewardGiven
@@ -341,28 +343,46 @@ Yani seninle ilgilenir, ama sana körü körüne uymaz.
   return (
     <Animated.View style={[styles.container, { borderColor: colors.border, backgroundColor: colors.secondaryText }, animatedContainerStyle]}>
       {type === 'sign' && (
-        <FloatingLabelInput
-          placeholder="Mordecai'ya sor"
-          type="text"
-          leftIcon="search"
-          rightIcon="send"
-          value={value}
-          onChangeText={onChangeText}
-          onRightIconPress={handleSendSign}
-          loading={isLoading}
-          error={error}
-          isAi={true}
-        />
+        <>
+          <Text style={[styles.headerTitle, { color: colors.background }]}>
+          Burçlar
+          </Text>
+          <Text style={[styles.headerDescription, { color: colors.background }]}>
+          Burçların genel özelliklerini keşfet ve Mordecai\'ya burçlar hakkında merak ettiğin her şeyi sor!
+          </Text>
+          <FloatingLabelInput
+            placeholder="Mordecai'ya sor"
+            type="text"
+            leftIcon="search"
+            rightIcon="send"
+            value={value}
+            onChangeText={onChangeText}
+            onRightIconPress={handleSendSign}
+            loading={isLoading}
+            error={error}
+            isAi={true}
+          />
+          <View style={[styles.divider, { backgroundColor: colors.primary }]} />
+        </>
       )}
       {type === 'comment' && (
-        <CustomButton
-          title="Özel Burç Yorumun"
-          onPress={handleSendComment}
-          leftIcon="search"
-          variant="primary"
-          loading={isLoading}
-          contentStyle={{ width: '60%', marginTop: 16 }}
-        />
+        <>
+          <Text style={[styles.headerTitle, { color: colors.background }]}>
+          Burç Yorumları
+          </Text>
+          <Text style={[styles.headerDescription, { color: colors.background }]}>
+          Günlük, haftalık, aylık ve yıllık burç yorumlarını incele. Mordecai\'dan sadece sana özel günlük analiz al!
+          </Text>
+          <CustomButton
+            title="Özel Burç Yorumun"
+            onPress={handleSendComment}
+            leftIcon="search"
+            variant="primary"
+            loading={isLoading}
+            contentStyle={{ width: '60%', marginTop: 16 }}
+          />
+          <View style={[styles.divider, { backgroundColor: colors.primary }]} />
+        </>
       )}
       <Animated.View
         style={[

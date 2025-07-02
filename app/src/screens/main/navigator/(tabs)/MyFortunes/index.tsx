@@ -154,21 +154,21 @@ const MyFortunes = () => {
   // Memoized Scrollable Header Component
   const ScrollableHeader = useCallback(() => (
     <>
-    <Animated.View
-      style={[styles.headerContainer, { backgroundColor: colors.secondaryText }]}
-      entering={FadeInDown.duration(800).springify()}
-    >
-      <Text style={[styles.title, { color: colors.background }]}>
-        Fallarım
-      </Text>
-      <Text style={[styles.subtitle, { color: colors.background }]}>
-        Fal geçmişinizi ve sonuçlarınızı takip edin
-      </Text>
-      <View style={[styles.divider, { backgroundColor: colors.primary }]} />
-    </Animated.View>
-    <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-      <Banner adType='banner' />
-    </View>
+      <Animated.View
+        style={[styles.headerContainer, { backgroundColor: colors.secondaryText }]}
+        entering={FadeInDown.duration(800).springify()}
+      >
+        <Text style={[styles.title, { color: colors.background }]}>
+          Fallarım
+        </Text>
+        <Text style={[styles.subtitle, { color: colors.background }]}>
+          Fal geçmişinizi ve sonuçlarınızı takip edin
+        </Text>
+        <View style={[styles.divider, { backgroundColor: colors.primary }]} />
+      </Animated.View>
+      <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+        <Banner adType='banner' />
+      </View>
     </>
   ), [colors]);
 
