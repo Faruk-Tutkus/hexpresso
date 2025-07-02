@@ -1,4 +1,4 @@
-import { Banner, Rewarded } from '@ads';
+import { Banner, Rewarded, RewardedInterstitial } from '@ads';
 import Icon from '@assets/icons';
 import { Modal as AppModal, CustomButton } from '@components';
 import { Task, useAITaskValidator, useTaskManager } from '@hooks';
@@ -26,14 +26,14 @@ const Coins = () => {
   const [referralCode] = useState('HEXP2024');
   const [selectedTaskForValidation, setSelectedTaskForValidation] = useState<Task | null>(null);
   const [refreshing, setRefreshing] = useState(false);
-  
+
   // Modal states
   const [modalVisible, setModalVisible] = useState(false);
   const [modalConfig, setModalConfig] = useState({
     title: '',
     message: '',
     confirmText: '',
-    onConfirm: () => {},
+    onConfirm: () => { },
     iconName: 'checkmark-circle' as any
   });
 
@@ -117,11 +117,11 @@ const Coins = () => {
     console.log('AI Validation started for task:', task.id);
     showToast('🤖 AI doğrulama başlatılıyor... Lütfen ekran görüntünüzü seçin.', 'success');
     setSelectedTaskForValidation(task);
-    
+
     try {
       // Permission kontrolü
       const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-      
+
       if (permissionResult.granted === false) {
         showModal(
           'İzin Gerekli',
@@ -154,9 +154,9 @@ const Coins = () => {
       if (result.assets && result.assets[0] && result.assets[0].base64) {
         const base64Image = result.assets[0].base64;
         console.log('Base64 image received, length:', base64Image.length);
-        
+
         showToast('🧠 AI görsel analizi devam ediyor...', 'info');
-        
+
         try {
           console.log('Starting AI validation...');
           const validationResult = await validateTask(
@@ -217,7 +217,7 @@ const Coins = () => {
         console.log('No base64 image in response');
         showToast('Geçerli bir görsel seçilmedi', 'error');
       }
-      
+
     } catch (error) {
       console.error('Image picker error:', error);
       showToast('Görsel seçimi sırasında hata oluştu', 'error');
@@ -251,7 +251,7 @@ const Coins = () => {
 
   const shareFacebook = async () => {
     const facebookUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent('https://hexpresso.app') + '&quote=' + encodeURIComponent('🌟 Hexpresso ile günlük burç yorumlarımı takip ediyorum! Astroloji ve burç yorumları için harika bir uygulama. Sen de dene! 🔮✨');
-    
+
     try {
       await Linking.openURL(facebookUrl);
       const facebookTask = tasks.find(t => t.id === 'facebook_share');
@@ -281,7 +281,7 @@ const Coins = () => {
   const shareTweet = async () => {
     const tweetText = '🌟 Hexpresso ile günlük burç yorumlarımı okuyorum! Gelecekteki planlarım için harika ipuçları alıyorum. Sen de dene! 🔮✨ #Hexpresso #Burç #Astroloji';
     const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
-    
+
     try {
       await Linking.openURL(tweetUrl);
       const tweetTask = tasks.find(t => t.id === 'twitter_tweet');
@@ -379,7 +379,7 @@ const Coins = () => {
             color={colors.background}
           />
         </View>
-        
+
         <View style={styles.taskInfo}>
           <Text style={[styles.taskTitle, { color: colors.text }]}>
             {task.title}
@@ -409,7 +409,7 @@ const Coins = () => {
             leftIcon={task.icon || 'star'}
             contentStyle={[styles.actionButton, { backgroundColor: colors.primary }]}
           />
-          
+
           {/* AI Doğrulama Butonu */}
           <CustomButton
             title="AI Doğrula"
@@ -437,8 +437,8 @@ const Coins = () => {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <ScrollView 
-        style={styles.container} 
+      <ScrollView
+        style={styles.container}
         showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl
@@ -452,14 +452,14 @@ const Coins = () => {
         }
       >
         <View style={styles.scrollContainer}>
-          
+
           {/* Header */}
           <View style={[styles.header, { backgroundColor: colors.secondaryText }]}>
             <Text style={[styles.headerTitle, { color: colors.background }]}>
               Coin Kazan
             </Text>
             <Text style={[styles.headerSubtitle, { color: colors.background }]}>
-              Görevleri tamamla, AI ile doğrula, coin kazan!
+              Görevleri tamamla, Reklam izle, coin kazan!
             </Text>
             <View style={styles.coinContainer}>
               <Image
@@ -501,7 +501,7 @@ const Coins = () => {
             <Text style={[styles.referralDescription, { color: colors.text }]}>
               Arkadaşlarını davet et, her davet için 200 coin kazan!
             </Text>
-            
+
             <View style={[
               styles.referralCodeContainer,
               { borderColor: colors.primary }
@@ -520,7 +520,7 @@ const Coins = () => {
                 leftIcon="copy"
                 contentStyle={[styles.referralButton, { backgroundColor: colors.primary }]}
               />
-              
+
               <CustomButton
                 title="Paylaş"
                 onPress={shareReferralCode}
@@ -533,9 +533,17 @@ const Coins = () => {
           </View>
 
           {/* Ads */}
-          <Banner adType='banner' />
+          <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+            <Banner adType='banner' />
+          </View>
           <Rewarded rewardedType='high' />
-          
+          <Rewarded rewardedType='medium' />
+          <Rewarded rewardedType='low' />
+
+          <RewardedInterstitial rewardedType='high' />
+          <RewardedInterstitial rewardedType='medium' />
+          <RewardedInterstitial rewardedType='low' />
+
         </View>
       </ScrollView>
 
@@ -554,7 +562,7 @@ const Coins = () => {
             <Text style={[styles.instructionTitle, { color: colors.text }]}>
               📸 Instagram Story Paylaşımı
             </Text>
-            
+
             <View style={styles.instructionStep}>
               <View style={[styles.stepNumber, { backgroundColor: colors.primary }]}>
                 <Text style={[styles.stepNumberText, { color: colors.background }]}>1</Text>

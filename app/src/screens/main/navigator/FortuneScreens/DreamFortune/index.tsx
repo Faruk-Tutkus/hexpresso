@@ -1,3 +1,4 @@
+import { useInterstitial } from '@ads';
 import { db } from '@api/config.firebase';
 import { CustomButton } from '@components';
 import { Seer, useToggleKeyboard } from '@hooks';
@@ -20,6 +21,7 @@ const DreamFortune = () => {
   const [dreamText, setDreamText] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const isKeyboardVisible = useToggleKeyboard();
+  const { showInterstitial } = useInterstitial({})
   const submitFortune = async () => {
     if (dreamText.trim().length < 50) {
       showToast('Lütfen en az 50 karakter uzunluğunda rüyanızı anlatınız', 'error');
@@ -38,10 +40,10 @@ const DreamFortune = () => {
       if (!userDoc.exists()) {
         throw new Error('Kullanıcı verisi bulunamadı');
       }
-      
+
       const userData = userDoc.data();
       const fortuneRecords = userData.fortunerecord || [];
-      
+
       // Check for pending fortunes
       const pendingFortunes = fortuneRecords.filter((fortune: any) => fortune.status === 'pending');
       if (pendingFortunes.length > 0) {
@@ -66,9 +68,14 @@ const DreamFortune = () => {
       });
 
       showToast(`${fortuneCost} coin harcandı. Rüya falınız hazırlanıyor...`, 'info');
-      setTimeout(()=> {
+      setTimeout(() => {
         showToast('Fal hazırlama işlemi biraz zaman alabilir, lütfen bekleyiniz...', 'info');
       }, 5000)
+
+      setTimeout(() => {
+        showInterstitial();
+      }, 7500)
+
       // Generate AI interpretation immediately
       const aiResult = await generateFortuneInterpretation({
         fortuneType: 'Rüya Yorumu',
@@ -119,14 +126,18 @@ const DreamFortune = () => {
       const ai = new GoogleGenAI({ apiKey: "AIzaSyBeAM7n8yGpXmNJfDL7WkUcC09m0fKEQNo" });
 
       const prompt = `
-Sen ${seerData.name} adında bir falcısın. Karakter: "${seerData.character}"
-Hayat hikayen: "${seerData.lifestory}"
+🧙‍♀️ Sen kimsin?
+Sen bir falcısın. İsmin: ${seerData.name}
+Karakterin: "${seerData.character}"
+Hayat hikâyen: "${seerData.lifestory}"
+Hakkında kısa bilgi: "${seerData.info}"
+Bu bilgiler senin tarzını, dilini ve sezgilerini şekillendirir.
+Kullanıcıya bu detayları asla doğrudan söylemezsin, ama yorumlarında özünü hissettirirsin.
 
-${fortuneType} yapacaksın.
+🕯️ Görevin Nedir?
+Kullanıcının istediği fal türünde (${fortuneType}) detaylı, kişisel ve anlamlı bir yorum yapmak.
 
-Yorum yaparken kendi özünü ve bilgilerini kullan ancak bunları kullanıcıya hissettirme.
-
-KULLANICI BİLGİLERİ:
+👤 Kullanıcı Bilgileri
 - Yaş: ${userData?.age || 'bilinmiyor'}
 - Burç: ${userData?.sunSign || 'bilinmiyor'}
 - Yükselen: ${userData?.ascendantSign || 'bilinmiyor'}
@@ -143,13 +154,37 @@ KULLANICI BİLGİLERİ:
 - Q10: ${userData?.prompt?.q10 || 'bilinmiyor'}
 - Q11: ${userData?.prompt?.q11 || 'bilinmiyor'}
 
-Bu bilgileri de kullanarak yorumunu daha kişisel ve anlamlı yap.
-Kişinin bilgilerini direkt kullanıcıya söyleme.
-Kullanıcı bilgileri harmanlayarak yorumunu daha kişisel ve anlamlı yap.
+Bu bilgileri doğrudan asla kullanmazsın.
+Yani şöyle şeyler söyleyemezsin:
 
-Bu bilgileri de kullanarak yorumunu daha kişisel ve anlamlı yap.
+“Sen 26 yaşındasın” ❌
+“Sen bir Koç burcusun” ❌
 
-ÇOK ÖNEMLİ: Yanıtını SADECE JSON formatında ver, başka hiçbir metin ekleme:
+Bunun yerine, bu bilgileri kendi iç dünyanda süzüp, hislerinle harmanlayıp, yorumuna doğal şekilde yedirirsin.
+Yani:
+“Yaşamın bazı dönemlerinde sabırsızlıkla atıldığın konular sonradan seni düşündürmüş olabilir...”
+“Ait olduğun şeyleri sorgulaman çok doğal, çünkü dış dünyayla iç dünyan bazen çelişiyor gibi...”
+“İçten gelen bir dürtüyle başlattığın bazı şeylerin sonunda seni yoran sorularla baş başa kaldığın olmuş gibi...”
+“Dışarıdan her şey sakin görünse de, içsel devinimlerinin seni başka yönlere çektiği zamanlar yaşanıyor olabilir.”
+“Ait hissettiğin yerin sınırları değişmiş olabilir; alışkanlıkla kalmak mı, yoksa kalbinle gitmek mi?”
+“Bazı kararları kendin için değil de başkalarının beklentisiyle aldığını fark ettiğin anlar sana yük gibi gelmiş olabilir.”
+“Bir şeyleri kontrol etme arzun, özgürleşme ihtiyacını bastırıyor olabilir; belki de çözüm serbest bırakmakta gizlidir.”
+“Güçlü görünme çaban, kırılgan yanlarını bastırmış olabilir; oysa gerçek dayanıklılık orada saklı.”
+“Sen çoğu şeyi dışarı yansıtmadan içte yaşarsın; bu da bazen seni anlaşılmamış hissettirebilir.”
+“İçinde taşıdığın eski bir hikâye, bugün verdiğin tepkilerin sessiz mimarı gibi duruyor.”
+“Bazı yollar sende kalıcı izler bırakmış olabilir; yürüdüğün yönü değiştirmen değil, yolculuğu yeniden tanımlaman gerekebilir.”
+“Sana ‘doğru’ diye öğretilen şeyler ile gerçekten doğru hissettiklerin arasındaki mesafe son zamanlarda büyümüş olabilir.”
+
+🌙 Rüya Yorumu Nasıl Olmalı?
+Rüya metni: "${dreamText}"
+
+Metindeki sembolleri, objeleri, karakterleri, duyguları, ortamı analiz et.
+
+Yorumu kişiye özel hale getir, ama gizemli ve sezgisel kal.
+
+✨ Yanıt Formatı (ZORUNLU)
+Hiçbir şekilde dış metin, açıklama, başlık kullanma.
+Sadece şu JSON formatı ile cevap ver:
 
 {
   "interpretation": "Ana yorum burada (300-500 kelime)",
@@ -159,10 +194,16 @@ Bu bilgileri de kullanarak yorumunu daha kişisel ve anlamlı yap.
   "positiveAspects": ["Olumlu yön 1", "Olumlu yön 2"]
 }
 
-Rüya metni: "${dreamText}"
-Rüya sembollerini analiz et: ortam, karakterler, duygular, objeler.
-Falcı karakterin uygun dil kullan, Türkçe yaz, "sen" diye hitap et.
-`;
+🔐 Kural Özeti
+Bilgileri doğrudan söyleme ❌
+
+Yorumlara özünü, sezgini, falcılık deneyimini kat ✅
+
+Bilgileri zarifçe süsle, sezgisel cümlelerle ör ✅
+
+Yorumlar kişisel, gizemli, ama net olsun ✅
+
+Yanıt sadece JSON formatında, başka hiçbir şey yazma ✅`;
 
       const response = await ai.models.generateContent({
         model: "gemini-2.5-flash",
@@ -230,10 +271,10 @@ Falcı karakterin uygun dil kullan, Türkçe yaz, "sen" diye hitap et.
 
   return (
     <KeyboardAvoidingView
-    style={{ flex: 1, paddingBottom: isKeyboardVisible ? 100 : 0 }}
-    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-    keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}>
-    <View style={[styles.container, { backgroundColor: colors.background }]}>
+      style={{ flex: 1, paddingBottom: isKeyboardVisible ? 100 : 0 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}>
+      <View style={[styles.container, { backgroundColor: colors.background }]}>
         <ScrollView style={styles.content} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
           {/* Seer Info */}
           <Animated.View

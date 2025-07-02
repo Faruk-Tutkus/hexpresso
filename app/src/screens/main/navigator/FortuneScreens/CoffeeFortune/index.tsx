@@ -1,3 +1,4 @@
+import { useInterstitial } from '@ads';
 import { db, storage } from '@api/config.firebase';
 import Icon from '@assets/icons';
 import { CustomButton, PhotoPickerModal } from '@components';
@@ -19,6 +20,7 @@ const CoffeeFortune = () => {
   const { colors } = useTheme();
   const { user } = useAuth();
   const { showToast } = useToast();
+  const { showInterstitial } = useInterstitial({})
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [selectedImagesBase64, setSelectedImagesBase64] = useState<string[]>([]);
   const [uploadingIndex, setUploadingIndex] = useState<number | null>(null);
@@ -266,6 +268,11 @@ const CoffeeFortune = () => {
       setTimeout(()=> {
         showToast('Fal hazırlama işlemi biraz zaman alabilir, lütfen bekleyiniz...', 'info');
       }, 5000)
+
+      setTimeout(()=> {
+        showInterstitial();
+      }, 7500)
+
       
       // Upload all images sequentially to show progress
       const downloadUrls: string[] = [];
@@ -292,8 +299,6 @@ const CoffeeFortune = () => {
         });
         throw new Error('Tüm fotoğraflar yüklenemedi');
       }
-
-      showToast('Falınız hazırlanıyor bu işlem biraz zaman alabilir...', 'info');
 
       // Generate AI interpretation immediately
       const aiResult = await generateFortuneInterpretation({
@@ -345,14 +350,28 @@ const CoffeeFortune = () => {
       const ai = new GoogleGenAI({ apiKey: "AIzaSyBeAM7n8yGpXmNJfDL7WkUcC09m0fKEQNo" });
 
       const prompt = `
-Sen ${seerData.name} adında bir falcısın. Karakter: "${seerData.character}"
-Hayat hikayen: "${seerData.lifestory}"
+🧙‍♀️ Sen Kimsin?
+Sen bir falcısın.
+Adın: ${seerData.name}
+Karakterin: "${seerData.character}"
+Hakkında kısa bilgi: "${seerData.info}"
+Geçmişin, hayat yolculuğun: "${seerData.lifestory}"
 
-${fortuneType} yorumu yapacaksın.
+Bu bilgiler senin yorum stilini ve bakış açını şekillendirir.
+Ama kullanıcıya hiçbir zaman bu karakter detaylarını açıkça söylemezsin.
+Yalnızca sezgilerinle hissettirirsin.
 
-Yorum yaparken kendi özünü ve bilgilerini kullan ancak bunları kullanıcıya hissettirme.
+☕ Ne Yapacaksın?
+Kullanıcı "${fortuneType}" yorumunu istiyor.
+Sen bu yorumda:
 
-KULLANICI BİLGİLERİ:
+Kahve telvesinden, sembollerden, hislerden yola çıkarak derin analiz yaparsın.
+
+Telvede "kader çizgileri, değişim sembolleri" gibi işaretler varsa onları yorumuna katarsın.
+
+Kullanıcının geçmişi, hali ve ihtiyacı hakkında sezgisel yorumlar yaparsın.
+
+👤 Kullanıcı Bilgileri
 - Yaş: ${userData?.age || 'bilinmiyor'}
 - Burç: ${userData?.sunSign || 'bilinmiyor'}
 - Yükselen: ${userData?.ascendantSign || 'bilinmiyor'}
@@ -369,25 +388,49 @@ KULLANICI BİLGİLERİ:
 - Q10: ${userData?.prompt?.q10 || 'bilinmiyor'}
 - Q11: ${userData?.prompt?.q11 || 'bilinmiyor'}
 
-Bu bilgileri de kullanarak yorumunu daha kişisel ve anlamlı yap.
-Kişinin bilgilerini direkt kullanıcıya söyleme.
-Kullanıcı bilgileri harmanlayarak yorumunu daha kişisel ve anlamlı yap.
+Bu bilgileri asla doğrudan söylemezsin.
+Yani şu tarz ifadeler YASAK:
 
-Bu bilgileri de kullanarak yorumunu daha kişisel ve anlamlı yap.
+❌ “Sen şu burçsun”
+❌ “Şu yaştasın”
+❌ “Yükselenin bu”
 
-ÇOK ÖNEMLİ: Yanıtını SADECE JSON formatında ver, başka hiçbir metin ekleme:
+Onun yerine, bu bilgileri yorumuna dolaylı şekilde, sezgisel biçimde katarsın.
+Yani şöyle olur:
+“Hayatında bazı şeyleri kontrol etme isteği bazen seni yoruyor olabilir.”
+“Son dönemde çevrende gördüğün değişimler, içindeki dönüşümü de tetiklemiş gibi.”
+“Son zamanlarda yaşadığın belirsizlikler, seni içten içe biraz yormuş gibi.”
+“Kendini ifade etme ihtiyacın, bazen etrafındakilerle olan dengeni zorluyor olabilir.”
+“Yaşadığın deneyimler, iç dünyanda sessiz ama derin bir değişimi başlatmış.”
+“İçindeki huzur arayışı, dış dünyadaki karmaşayla çatışıyor gibi.”
+“Bazen kendi duygularını anlamakta zorlandığın anlar seni yavaşlatıyor olabilir.”
+“Yakın çevrende gördüğün hareketlilik, senin de adım atmanı cesaretlendiriyor.”
+“Geçmişte yaşadığın bazı izler, bugün verdiğin kararları etkiliyor gibi.”
+“İçsel sesin, dışarıdaki seslerden daha güçlü ve yönlendirici olmaya başlıyor.”
+“Bilinmezlikler karşısında hissettiğin endişe, seni temkinli adımlar atmaya zorluyor.”
+“Kendine yüklediğin beklentiler, bazen gerçek potansiyelini gölgelemiş olabilir.”
+
+✨ Yanıt Formatı (Zorunlu)
+Cevabını sadece aşağıdaki JSON yapısıyla ver.
+Hiçbir ekstra açıklama, metin veya yorum yazma.
 
 {
   "interpretation": "Ana yorum burada (300-500 kelime)",
-  "advice": "Tavsiyeler burada (100-200 kelime)", 
+  "advice": "Tavsiyeler burada (100-200 kelime)",
   "timeframe": "Zaman dilimi",
   "warnings": ["Uyarı 1", "Uyarı 2"],
   "positiveAspects": ["Olumlu yön 1", "Olumlu yön 2"]
 }
+🔐 Kritik Kurallar:
+Kullanıcı bilgileri doğrudan söylenmeyecek ❌
 
-Kahve fincanı analizi: Telve desenlerinde kader çizgileri, değişim sembolleri görüldü.
-Falcı karakterin uygun dil kullan, Türkçe yaz, "sen" diye hitap et.
-`;
+Bilgiler yorumlara sezgisel ve zarif şekilde yedirilecek ✅
+
+Yorumlar kişisel, doğal ve derin olacak ✅
+
+Dili, falcı karakterine uygun şekilde seç (samimi, gizemli, içten) ✅
+
+Yanıt sadece JSON formatında olacak ✅`;
 
       const response = await ai.models.generateContent({
         model: "gemini-2.5-flash",

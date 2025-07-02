@@ -2,7 +2,7 @@ import { db } from '@api/config.firebase'
 import { CustomButton } from '@components'
 import { useAuth, useTheme, useToast } from '@providers'
 import { doc, increment, updateDoc } from 'firebase/firestore'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { ActivityIndicator, Image, Text, View } from 'react-native'
 import { AdEventType, RewardedAd, RewardedAdEventType, TestIds } from 'react-native-google-mobile-ads'
 import styles from './styles'
@@ -28,7 +28,7 @@ export default function Rewarded({
   const rewarded_high = useMemo(() => RewardedAd.createForAdRequest(adUnitId_high), [])
   const rewarded_medium = useMemo(() => RewardedAd.createForAdRequest(adUnitId_medium), [])
   const rewarded_low = useMemo(() => RewardedAd.createForAdRequest(adUnitId_low), [])
-  const [rewardAmount, setRewardAmount] = useState(rewardedType === 'high' ? 25 : rewardedType === 'medium' ? 10 : 5)
+  const [rewardAmount, setRewardAmount] = useState(rewardedType === 'high' ? 300 : rewardedType === 'medium' ? 200 : 100)
   const [rewardText, setRewardText] = useState('coin')
   const { colors } = useTheme()
   const { showToast } = useToast();
@@ -119,7 +119,7 @@ export default function Rewarded({
             </View>
           ) : (
             <CustomButton
-              title={loaded ? "Reklamı İzle" : "Gösterilecek Reklam Yok"}
+              title={loaded ? "Reklamı İzle" : "Reklam Yok"}
               onPress={showAd}
               disabled={!loaded}
               leftIcon="play-circle"

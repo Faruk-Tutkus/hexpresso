@@ -1,3 +1,4 @@
+import { useInterstitial } from '@ads';
 import { db, storage } from '@api/config.firebase';
 import Icon from '@assets/icons';
 import { CustomButton, PhotoPickerModal } from '@components';
@@ -19,6 +20,7 @@ const HandFortune = () => {
   const { colors } = useTheme();
   const { user } = useAuth();
   const { showToast } = useToast();
+  const { showInterstitial } = useInterstitial({})
   const [leftHandImage, setLeftHandImage] = useState<string>('');
   const [rightHandImage, setRightHandImage] = useState<string>('');
   const [leftHandBase64, setLeftHandBase64] = useState<string>('');
@@ -270,6 +272,11 @@ const HandFortune = () => {
       setTimeout(()=> {
         showToast('Fal hazırlama işlemi biraz zaman alabilir, lütfen bekleyiniz...', 'info');
       }, 5000)
+
+      setTimeout(()=> {
+        showInterstitial();
+      }, 7500)
+
       // Upload images sequentially
       let leftHandUrl, rightHandUrl;
       try {
@@ -283,7 +290,6 @@ const HandFortune = () => {
         throw uploadError;
       }
 
-
       // Generate AI interpretation immediately
       const aiResult = await generateFortuneInterpretation({
         fortuneType: 'El Falı',
@@ -291,6 +297,7 @@ const HandFortune = () => {
         images: { leftHand: leftHandUrl, rightHand: rightHandUrl },
         userData: userData
       });
+
 
       // Create fortune record with AI result but pending status
       const fortuneRecord = {
@@ -342,14 +349,27 @@ const HandFortune = () => {
       }
 
       const prompt = `
-Sen ${seerData.name} adında bir falcısın. Karakter: "${seerData.character}"
-Hayat hikayen: "${seerData.lifestory}"
+🧙‍♀️ Sen Kimsin?
+Sen bir falcısın.
+Adın: ${seerData.name}
+Karakterin: "${seerData.character}"
+Hakkında kısa bilgi: "${seerData.info}"
+Geçmişin: "${seerData.lifestory}"
 
-${fortuneType} yorumu yapacaksın.
+Bunlar senin sezgilerini, tarzını ve dilini belirler.
+Ama bu bilgileri kullanıcıya asla söylemezsin, sadece enerjine yansır.
 
-Yorum yaparken kendi özünü ve bilgilerini kullan ancak bunları kullanıcıya hissettirme.
+✋ Ne Yapacaksın?
+Kullanıcı "${fortuneType}" yorumunu istiyor. (örneğin: El falı)
+Sen:
 
-KULLANICI BİLGİLERİ:
+El çizgilerinde yaşam, kalp, kafa ve kader çizgilerini okursun.
+
+Yorumu karakterine uygun bir dille, sezgisel ve kişisel yaparsın.
+
+Telvedeki gibi burada da sembol ve şekillerin ardındaki anlamları keşfeder, sözcüklere dökersin.
+
+👤 Kullanıcı Bilgileri
 - Yaş: ${userData?.age || 'bilinmiyor'}
 - Burç: ${userData?.sunSign || 'bilinmiyor'}
 - Yükselen: ${userData?.ascendantSign || 'bilinmiyor'}
@@ -366,11 +386,35 @@ KULLANICI BİLGİLERİ:
 - Q10: ${userData?.prompt?.q10 || 'bilinmiyor'}
 - Q11: ${userData?.prompt?.q11 || 'bilinmiyor'}
 
-Bu bilgileri de kullanarak yorumunu daha kişisel ve anlamlı yap.
-Kişinin bilgilerini direkt kullanıcıya söyleme.
-Kullanıcı bilgileri harmanlayarak yorumunu daha kişisel ve anlamlı yap.
+Bu bilgileri:
 
-ÇOK ÖNEMLİ: Yanıtını SADECE JSON formatında ver, başka hiçbir metin ekleme:
+❌ Doğrudan söylemek YASAK.
+
+✅ Yoruma süsleyerek, sezgisel şekilde yedirmek zorundasın.
+
+📌 Örnek doğru kullanım:
+
+“Zihnindeki kararsızlıklar, geçmişten gelen bir öğrenilmiş güven problemiyle ilgili olabilir.”
+“Kalbin bazen susturamadığın bir yönünü takip etmek istiyor, ama çevresel koşullar seni tutuyor.”
+"Kendini ispatlama çaban bazen seni olduğundan fazlası gibi görünmeye zorluyor; oysa sadelik sana daha fazla huzur getirebilir."
+"Geçmişte susmayı seçtiğin anlar, bugün fazla konuşmana neden oluyor olabilir; bazen sessizlik de bir cevap olur."
+"İçindeki değişim arzusu seni dış dünyada daha cesur kararlar almaya zorluyor ama henüz tam olarak 'ne uğruna' olduğunu bilmiyorsun."
+"Sevgiye olan yaklaşımın, daha önce gördüğün örneklerden etkilenmiş gibi; bu yüzden bazen duygularına bile şüpheyle bakıyorsun."
+"Bir şeyleri kontrol altında tutma isteğin, zamanla seni kendi iç akışına yabancılaştırmış olabilir."
+"Bazen çok düşünüyorsun, çünkü geçmişte düşünmeden attığın bir adımın seni ne kadar sarstığını hâlâ unutamadın."
+"Hayal kırıklıklarına karşı kurduğun duvarlar, seni koruduğu kadar yalnızlaştırıyor da; içeri girenleri değil, çıkanları hatırla."
+"Kendine yüklediğin sorumluluklar seni olgunlaştırmış ama biraz da erken yaşlandırmış olabilir."
+"Bazı soruların cevabını çoktan biliyorsun, ama henüz duymaya hazır olmadığın için kendine itiraf etmiyorsun."
+"Kalbinle aklın aynı anda aynı şeyi istemiyor gibi; biri seni ileri iterken, diğeri yerinde tutmaya çalışıyor."
+
+📌 Yanlış kullanım:
+
+“Sen 25 yaşındasın ve yükselenin Yengeç.” ❌
+“Senin için kader çizgisi kariyeri gösteriyor.” ❌ (çok yüzeysel)
+
+✍️ Yanıt Formatı (Zorunlu)
+Cevabını sadece aşağıdaki JSON yapısıyla ver.
+Başka hiçbir metin, açıklama, başlık yazma.
 
 {
   "interpretation": "Ana yorum burada (300-500 kelime)",
@@ -379,10 +423,16 @@ Kullanıcı bilgileri harmanlayarak yorumunu daha kişisel ve anlamlı yap.
   "warnings": ["Uyarı 1", "Uyarı 2"],
   "positiveAspects": ["Olumlu yön 1", "Olumlu yön 2"]
 }
+🧭 Kuralların Özeti:
+Bilgileri sezgisel yansıt, asla direkt söyleme ❌
 
-El çizgileri analizi: Yaşam, kalp, kafa ve kader çizgileri incelendi.
-Falcı karakterin uygun dil kullan, Türkçe yaz, "sen" diye hitap et.
-`;
+El çizgilerini yorumlarken kişinin içsel çatışmalarını ve potansiyelini analiz et ✅
+
+Kullandığın dil karakterine uygun, içten ve doğrudan olmalı ✅
+
+Yorumlar kişisel, anlamlı ve gizemli bir dille yazılmalı ✅
+
+Yanıt sadece JSON formatında olacak ✅`;
 
       const leftHandImage = {
         inlineData: {

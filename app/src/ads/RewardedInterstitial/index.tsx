@@ -2,7 +2,7 @@ import { db } from '@api/config.firebase'
 import { CustomButton } from '@components'
 import { useAuth, useTheme, useToast } from '@providers'
 import { doc, increment, updateDoc } from 'firebase/firestore'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { ActivityIndicator, Image, Text, View } from 'react-native'
 import { AdEventType, RewardedAdEventType, RewardedInterstitialAd, TestIds } from 'react-native-google-mobile-ads'
 import styles from './styles'
@@ -29,7 +29,7 @@ export default function RewardedInterstitial({
   const rewarded_high = useMemo(() => RewardedInterstitialAd.createForAdRequest(adUnitId_high), [])
   const rewarded_medium = useMemo(() => RewardedInterstitialAd.createForAdRequest(adUnitId_medium), [])
   const rewarded_low = useMemo(() => RewardedInterstitialAd.createForAdRequest(adUnitId_low), [])
-  const [rewardAmount, setRewardAmount] = useState(rewardedType === 'high' ? 25 : rewardedType === 'medium' ? 10 : 5)
+  const [rewardAmount, setRewardAmount] = useState(rewardedType === 'high' ? 300 : rewardedType === 'medium' ? 200 : 100)
   const [rewardText, setRewardText] = useState('coin')
   const { colors } = useTheme()
   const { showToast } = useToast()
@@ -49,7 +49,7 @@ export default function RewardedInterstitial({
     const rewardListener = rewarded.addAdEventListener(RewardedAdEventType.EARNED_REWARD, reward => {
       console.log('RewardedInterstitial ödül alındı:', reward)
       showToast('Bonus ödül alındı!', 'success')
-      //setRewardAmount(reward.amount)
+      setRewardAmount(reward.amount)
       setRewardText(reward.type)
       updateDoc(userRef, {
         coins: increment(reward.amount)
@@ -59,7 +59,7 @@ export default function RewardedInterstitial({
 
     const closedListener = rewarded.addAdEventListener(AdEventType.CLOSED, () => {
       console.log('RewardedInterstitial reklam kapatıldı, yeni reklam yükleniyor...')
-      showToast('Reklam kapatıldı, ödül kazanamadınız', 'error')
+      //showToast('Reklam kapatıldı, ödül kazanamadınız', 'error')
       setLoaded(false)
       setLoading(true)
       rewarded.load() // Sonraki reklam için tekrar yükle
@@ -126,7 +126,7 @@ export default function RewardedInterstitial({
             </View>
           ) : (
             <CustomButton
-              title="Bonus Reklamı İzle"
+              title={loaded ? "Bonus Reklamı İzle" : "Reklam Yok"}
               onPress={showAd}
               disabled={!loaded}
               leftIcon="tv"
