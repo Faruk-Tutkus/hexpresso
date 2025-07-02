@@ -347,6 +347,145 @@ const FortuneCardContent = ({
     if (coin >= 100) return 'cash-outline';
     return 'logo-bitcoin';
   };
+
+  const renderInputSection = () => {
+    return (
+      <Animated.View
+        style={[styles.inputContainer, { borderColor: colors.border }]}
+        entering={SlideInDown.duration(400).springify()}
+      >
+        <View style={styles.inputHeader}>
+          <Icon name="file-tray-full-outline" size={20} color={colors.secondary} />
+          <Text style={[styles.inputTitle, { color: colors.text }]}>
+            Gönderilen İçerik
+          </Text>
+        </View>
+
+        <View style={[styles.inputDivider, { backgroundColor: colors.secondary }]} />
+
+        {/* Render different content based on fortune type */}
+        {fortune.fortuneType === 'Kahve Falı' && renderCoffeeImages()}
+        {fortune.fortuneType === 'El Falı' && renderHandImages()}
+        {fortune.fortuneType === 'Rüya Yorumu' && renderDreamText()}
+      </Animated.View>
+    );
+  };
+
+  const renderCoffeeImages = () => {
+    const images = Array.isArray(fortune.images) ? fortune.images : [];
+    const imageLabels = ['1. Fincan İçi', '2. Fincan Dışı', '3. Tabak Üstü', '4. Genel Görünüm'];
+    
+    return (
+      <Animated.View
+        style={styles.coffeeInputSection}
+        entering={FadeInUp.delay(100).springify()}
+      >
+        <View style={styles.inputSectionHeader}>
+          <Icon name="cafe-outline" size={16} color={colors.primary} />
+          <Text style={[styles.inputSectionLabel, { color: colors.primary }]}>Kahve Fincanı Fotoğrafları</Text>
+        </View>
+        
+        <View style={styles.coffeeImagesGrid}>
+          {images.slice(0, 4).map((imageUrl: string, index: number) => (
+            <Animated.View 
+              key={index}
+              style={[styles.coffeeImageItem, { borderColor: colors.border }]}
+              entering={FadeInUp.delay((index + 1) * 100).springify()}
+            >
+              <Image
+                source={{ uri: imageUrl }}
+                style={styles.coffeeImage}
+                contentFit="cover"
+              />
+              <Text style={[styles.coffeeImageLabel, { color: colors.secondaryText }]}>
+                {imageLabels[index] || `${index + 1}. Fotoğraf`}
+              </Text>
+            </Animated.View>
+          ))}
+        </View>
+      </Animated.View>
+    );
+  };
+
+  const renderHandImages = () => {
+    const images = fortune.images;
+    
+    return (
+      <Animated.View
+        style={styles.handInputSection}
+        entering={FadeInUp.delay(100).springify()}
+      >
+        <View style={styles.inputSectionHeader}>
+          <Icon name="hand-left-outline" size={16} color={colors.primary} />
+          <Text style={[styles.inputSectionLabel, { color: colors.primary }]}>El Fotoğrafları</Text>
+        </View>
+        
+        <View style={styles.handImagesRow}>
+          {images?.leftHand && (
+            <Animated.View 
+              style={[styles.handImageItem, { borderColor: colors.border }]}
+              entering={FadeInUp.delay(100).springify()}
+            >
+              <Image
+                source={{ uri: images.leftHand }}
+                style={styles.handImage}
+                contentFit="cover"
+              />
+              <Text style={[styles.handImageLabel, { color: colors.secondaryText }]}>
+                👈 Sol El
+              </Text>
+            </Animated.View>
+          )}
+          
+          {images?.rightHand && (
+            <Animated.View 
+              style={[styles.handImageItem, { borderColor: colors.border }]}
+              entering={FadeInUp.delay(200).springify()}
+            >
+              <Image
+                source={{ uri: images.rightHand }}
+                style={styles.handImage}
+                contentFit="cover"
+              />
+              <Text style={[styles.handImageLabel, { color: colors.secondaryText }]}>
+                👉 Sağ El
+              </Text>
+            </Animated.View>
+          )}
+        </View>
+      </Animated.View>
+    );
+  };
+
+  const renderDreamText = () => {
+    return (
+      <Animated.View
+        style={styles.dreamInputSection}
+        entering={FadeInUp.delay(100).springify()}
+      >
+        <View style={styles.inputSectionHeader}>
+          <Icon name="moon-outline" size={16} color={colors.primary} />
+          <Text style={[styles.inputSectionLabel, { color: colors.primary }]}>Anlatılan Rüya</Text>
+        </View>
+        
+        <View style={[styles.dreamTextContainer, { 
+          backgroundColor: colors.surface, 
+          borderColor: colors.border 
+        }]}>
+          <Text style={[styles.dreamText, { color: colors.text }]}>
+            {fortune.dreamText}
+          </Text>
+        </View>
+        
+        <View style={styles.dreamStats}>
+          <Text style={[styles.dreamStatsText, { color: colors.secondaryText }]}>
+            📝 {fortune.dreamText?.length || 0} karakter
+          </Text>
+        </View>
+      </Animated.View>
+    );
+  };
+
   const renderResultSection = () => {
     if (!fortune.result) return null;
     //console.log(fortune.result);
@@ -585,6 +724,7 @@ const FortuneCardContent = ({
         </Animated.View>
       )}
 
+      {isExpanded && renderInputSection()}
       {isExpanded && renderResultSection()}
     </View>
   );

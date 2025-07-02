@@ -364,4 +364,116 @@ export default StyleSheet.create({
     alignItems: 'center',
     marginLeft: 12,
   },
+
+  // Input Section Styles
+  inputContainer: {
+    marginTop: 16,
+    borderRadius: 12,
+    padding: 16,
+    borderWidth: 1,
+    marginBottom: 16,
+  },
+  inputHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  inputTitle: {
+    fontSize: 18,
+    fontFamily: 'Domine-Bold',
+    marginLeft: 8,
+  },
+  inputDivider: {
+    height: 2,
+    marginBottom: 16,
+    borderRadius: 1,
+  },
+  
+  // Input Section Headers
+  inputSectionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  inputSectionLabel: {
+    fontSize: 14,
+    fontFamily: 'Domine-Bold',
+    marginLeft: 6,
+  },
+
+  // Coffee Images Styles
+  coffeeInputSection: {
+    marginBottom: 16,
+  },
+  coffeeImagesGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  coffeeImageItem: {
+    width: '48%',
+    marginBottom: 12,
+    borderRadius: 8,
+    borderWidth: 1,
+    overflow: 'hidden',
+  },
+  coffeeImage: {
+    width: '100%',
+    aspectRatio: 1,
+  },
+  coffeeImageLabel: {
+    fontSize: 12,
+    fontFamily: 'Domine-Medium',
+    textAlign: 'center',
+    paddingVertical: 8,
+  },
+
+  // Hand Images Styles
+  handInputSection: {
+    marginBottom: 16,
+  },
+  handImagesRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  handImageItem: {
+    width: '48%',
+    borderRadius: 8,
+    borderWidth: 1,
+    overflow: 'hidden',
+  },
+  handImage: {
+    width: '100%',
+    aspectRatio: 0.8,
+  },
+  handImageLabel: {
+    fontSize: 12,
+    fontFamily: 'Domine-Medium',
+    textAlign: 'center',
+    paddingVertical: 8,
+  },
+
+  // Dream Text Styles
+  dreamInputSection: {
+    marginBottom: 16,
+  },
+  dreamTextContainer: {
+    borderRadius: 8,
+    borderWidth: 1,
+    padding: 12,
+    marginBottom: 8,
+  },
+  dreamText: {
+    fontSize: 14,
+    fontFamily: 'Domine-Regular',
+    lineHeight: 20,
+    textAlign: 'justify',
+  },
+  dreamStats: {
+    alignItems: 'flex-end',
+  },
+  dreamStatsText: {
+    fontSize: 12,
+    fontFamily: 'Domine-Medium',
+  },
 });
