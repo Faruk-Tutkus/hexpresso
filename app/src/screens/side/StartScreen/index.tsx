@@ -215,7 +215,7 @@ const StartScreen = () => {
               ]}
             >
               <Text style={[styles.description, { color: colors.secondaryText }]}>
-                Kişiselleştirilmiş astroloji rehberin{'\n'}
+                Kişiselleştirilmiş fal ve burç rehberin{'\n'}
                 seni bekliyor
               </Text>
             </Animated.View>

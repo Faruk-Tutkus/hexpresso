@@ -240,8 +240,8 @@ const CoffeeFortune = () => {
 
       // Validate coffee images with AI first
       showToast('Görüntüler doğrulanıyor...', 'info');
-      const validImages = selectedImages.filter(img => img);
-      const validation = await validateCoffeeImages(validImages);
+      const validBase64Images = selectedImagesBase64.filter(base64 => base64);
+      const validation = await validateCoffeeImages(validBase64Images);
       console.log(validation);
       if (!validation.isValid) {
         showToast(`Geçersiz görüntü lütfen kahve fincanı fotoğrafınızı kontrol ediniz`, 'error');
@@ -304,7 +304,7 @@ const CoffeeFortune = () => {
       const aiResult = await generateFortuneInterpretation({
         fortuneType: 'Kahve Falı',
         seerData: seer,
-        images: downloadUrls,
+        images: selectedImagesBase64,
         userData: userData
       });
 
@@ -349,6 +349,19 @@ const CoffeeFortune = () => {
       const { GoogleGenAI, HarmBlockThreshold, HarmCategory } = require('@google/genai');
       const ai = new GoogleGenAI({ apiKey: "AIzaSyDYDevsAsKXs-6P6-qYckbj7YIPCYw9abE" });
 
+      if (!images) {
+        console.error('Base64 data is missing for coffee images');
+        return;
+      }
+
+      const imageData = images.map((image: string) => ({
+        inlineData: {
+          data: image,
+          mimeType: "image/jpeg"
+        }
+      }));
+      
+
       const prompt = `
 🧙‍♀️ Sen Kimsin?
 Sen bir falcısın.
@@ -366,6 +379,8 @@ Kullanıcı "${fortuneType}" yorumunu istiyor.
 Sen bu yorumda:
 
 Kahve telvesinden, sembollerden, hislerden yola çıkarak derin analiz yaparsın.
+
+Gönderilen görseller: fincanın içi (telve deseni), diğeri tabağın üstü, diğeri fincanın dış yanı ve diğeri genel görünüm (kapalı fincan + tabak).
 
 Telvede "kader çizgileri, değişim sembolleri" gibi işaretler varsa onları yorumuna katarsın.
 
@@ -434,7 +449,7 @@ Yanıt sadece JSON formatında olacak ✅`;
 
       const response = await ai.models.generateContent({
         model: "gemini-2.5-flash",
-        contents: prompt,
+        contents: [prompt, ...imageData],
         config: {
           responseMimeType: 'application/json',
           responseSchema: {
@@ -503,25 +518,26 @@ Yanıt sadece JSON formatında olacak ✅`;
       const ai = new GoogleGenAI({ apiKey: "AIzaSyDYDevsAsKXs-6P6-qYckbj7YIPCYw9abE" });
 
       // Use the stored base64 data instead of converting
-      const validBase64Images = selectedImagesBase64.filter(base64 => base64);
+      //const validBase64Images = selectedImagesBase64.filter(base64 => base64);
       
-      if (validBase64Images.length < 4) {
+      if (images.length < 4) {
         console.error('Insufficient base64 data for coffee images');
         return { isValid: false };
       }
 
-      console.log(`🤖 Validating ${validBase64Images.length} coffee images with AI...`);
+      console.log(`🤖 Validating ${images.length} coffee images with AI...`);
 
       const systemInstruction = `
 Sen bir kahve falı uzmanısın. Görüntüleri analiz ederek kahve falı için uygun olup olmadığını değerlendiriyorsun.
 
 KONTROL KRİTERLERİ:
-- Her bir görseli kontrol et
-- Her bir görselde gerçek kahve fincanı var mı?
-- Her bir görselde telve/kahve tortusu görünüyor mu?
-- Her bir görselde türk kahvesi fincanı mı (geniş, alçak)?
-- Her bir görselde kahve fincanı var mı?
-- Yüklenen tüm görseller kriterleri sağlıyor mu?
+- En az bir görselde gerçek bir kahve fincanı yer almalı.
+- En az bir görselde fincan içinde kahve telvesi/tortusu açıkça görünmeli.
+- En az bir görselde Türk kahvesi fincanı (geniş ve alçak tipte) kullanılmalı.
+- En az bir görselde fincanın dış yüzeyi görünür olmalı.
+- En az bir görselde tabak ve kapalı fincan birlikte yer almalı.
+- En az bir görselde fincan net şekilde seçilebiliyor olmalı (bulanık veya karanlık olmamalı).
+- Yüklenen tüm görseller kriterlerden en az birini sağlamalıdır aksi takdirde geçersiz olarak değerlendir.
 
 GEÇERSİZ DURUMLAR:
 - Kahve fincanı yok
@@ -538,13 +554,13 @@ GEÇERSİZ DURUMLAR:
 `;
 
       const prompt = `
-Bu ${validBase64Images.length} kahve fincanı görüntüsünü analiz et.
+Bu ${images.length} kahve fincanı görüntüsünü analiz et.
 Her görüntünün kahve falı için uygun olup olmadığını değerlendir.
 Fincan içinde telve/tortu desenleri var mı?
 `;
 
       // Create image data objects
-      const imageData = validBase64Images.map(base64 => ({
+      const imageData = images.map(base64 => ({
         inlineData: {
           data: base64,
           mimeType: "image/jpeg"
@@ -731,16 +747,16 @@ Fincan içinde telve/tortu desenleri var mı?
           </Text>
           <View style={styles.instructionList}>
             <Text style={[styles.instructionItem, { color: colors.secondaryText }]}>
-              • 1️⃣ Fincanın içi (telve deseni)
+              • 1️⃣ Genel görünüm (Kapalı fincan + tabak)
             </Text>
             <Text style={[styles.instructionItem, { color: colors.secondaryText }]}>
-              • 2️⃣ Fincanın dış yanı
+              • 2️⃣ Fincanın içi (telve deseni)
             </Text>
             <Text style={[styles.instructionItem, { color: colors.secondaryText }]}>
               • 3️⃣ Tabağın üstü
             </Text>
             <Text style={[styles.instructionItem, { color: colors.secondaryText }]}>
-              • 4️⃣ Genel görünüm (fincan + tabak)
+              • 4️⃣ Fincanın dış yanı
             </Text>
           </View>
         </Animated.View>

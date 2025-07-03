@@ -13,10 +13,9 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         alignItems: 'center',
         paddingVertical: 30,
-        paddingHorizontal: 40,
         borderBottomLeftRadius: 25,
         borderBottomRightRadius: 25,
-        marginBottom: 20,
+        marginBottom: 10,
     },
     headerTitle: {
         fontSize: 32,
@@ -34,7 +33,7 @@ const styles = StyleSheet.create({
     },
     divider: {
         width: 60,
-        height: 2,
+        height: 3,
         marginTop: 16,
         marginBottom: 8,
     },

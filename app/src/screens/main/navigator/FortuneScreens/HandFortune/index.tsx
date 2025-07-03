@@ -148,8 +148,9 @@ const HandFortune = () => {
       console.log(`📊 Blob created - Size: ${blob.size} bytes, Type: ${blob.type}`);
       
       // Check blob size (max 5MB)
-      if (blob.size > 5 * 1024 * 1024) {
-        throw new Error('Dosya boyutu çok büyük (max 5MB)');
+      if (blob.size > 10 * 1024 * 1024) {
+        showToast('Dosya boyutu çok büyük (max 10MB)', 'error');
+        throw new Error('Dosya boyutu çok büyük (max 10MB)');
       }
       
       // Check if user is authenticated
@@ -360,7 +361,7 @@ Bunlar senin sezgilerini, tarzını ve dilini belirler.
 Ama bu bilgileri kullanıcıya asla söylemezsin, sadece enerjine yansır.
 
 ✋ Ne Yapacaksın?
-Kullanıcı "${fortuneType}" yorumunu istiyor. (örneğin: El falı)
+Kullanıcı "${fortuneType}" yorumunu istiyor.
 Sen:
 
 El çizgilerinde yaşam, kalp, kafa ve kader çizgilerini okursun.

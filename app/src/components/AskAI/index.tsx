@@ -256,13 +256,13 @@ Yani seninle ilgilenir, ama sana körü körüne uymaz.
 
   const animatedResponseStyle = useAnimatedStyle(() => {
     return {
-      maxHeight: interpolate(progress.value, [0, 1], [250, 750]),
+      maxHeight: interpolate(progress.value, [0, 1], [type === 'sign' ? 275 : 250, 750]),
       opacity: interpolate(progress.value, [0, 1], [0, 1])
     }
   })
   const animatedContainerStyle = useAnimatedStyle(() => {
     return {
-      maxHeight: interpolate(progress.value, [0, 0.4], [250, 750]),
+      maxHeight: interpolate(progress.value, [0, 0.4], [type === 'sign' ? 270 : 250, 750]),
     }
   })
   const handleSendSign = async () => {
