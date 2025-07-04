@@ -1,59 +1,95 @@
 import { Toast } from '@components';
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
+import { View } from 'react-native';
 
 type ToastState = {
+  id: string;
   message: string;
-  type: 'success' | 'error' | 'info';
+  type: 'success' | 'error' | 'info' | 'warning';
+  title?: string;
+  duration?: number;
+  showProgress?: boolean;
 };
 
 type ToastContextType = {
-  showToast: (message: string, type: 'success' | 'error' | 'info') => void;
+  showToast: (
+    message: string, 
+    type: 'success' | 'error' | 'info' | 'warning',
+    options?: {
+      title?: string;
+      duration?: number;
+      showProgress?: boolean;
+    }
+  ) => void;
+  hideToast: (id?: string) => void;
 };
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
 export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
-  const [toast, setToast] = useState<ToastState | null>(null);
-  const timeoutRef = useRef<number | null>(null);
+  const [toasts, setToasts] = useState<ToastState[]>([]);
   const isMountedRef = useRef(true);
 
-  const showToast = (message: string, type: 'success' | 'error' | 'info') => {
+  const showToast = (
+    message: string, 
+    type: 'success' | 'error' | 'info' | 'warning',
+    options?: {
+      title?: string;
+      duration?: number;
+      showProgress?: boolean;
+    }
+  ) => {
     if (!isMountedRef.current) {
       console.log('🚫 ToastProvider: Component unmounted, skipping toast');
       return;
     }
-
-    // Clear existing timeout if any
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = null;
-    }
-
-    setToast({ message, type });
-    
-    timeoutRef.current = setTimeout(() => {
-      if (isMountedRef.current) {
-        setToast(null);
-      }
-      timeoutRef.current = null;
-    }, 3000);
+    const id = Math.random().toString(36).substr(2, 9);
+    const toast: ToastState = {
+      id,
+      message,
+      type,
+      title: options?.title,
+      duration: options?.duration || 4000,
+      showProgress: options?.showProgress !== false
+    };
+    setToasts(prev => [toast, ...prev]);
   };
 
-  // Cleanup on unmount
+  const hideToast = (id?: string) => {
+    if (id) {
+      setToasts(prev => prev.filter(t => t.id !== id));
+    } else {
+      setToasts([]);
+    }
+  };
+
   useEffect(() => {
     return () => {
       isMountedRef.current = false;
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = null;
-      }
     };
   }, []);
 
   return (
-    <ToastContext.Provider value={{ showToast }}>
+    <ToastContext.Provider value={{ showToast, hideToast }}>
       {children}
-      <Toast message={toast?.message} type={toast?.type} />
+      {/* Toasts container at the top, stacking vertically */}
+      {toasts.length > 0 && (
+        <View style={{ position: 'absolute', top: 60, left: 0, right: 0, zIndex: 9999, pointerEvents: 'box-none' }} pointerEvents="box-none">
+          {toasts.map((toast, idx) => (
+            <Toast
+              key={toast.id}
+              message={toast.message}
+              type={toast.type}
+              title={toast.title}
+              duration={toast.duration}
+              showProgress={toast.showProgress}
+              onClose={() => hideToast(toast.id)}
+              index={idx}
+              total={toasts.length}
+            />
+          ))}
+        </View>
+      )}
     </ToastContext.Provider>
   );
 };

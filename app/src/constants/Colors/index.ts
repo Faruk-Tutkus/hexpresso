@@ -19,7 +19,7 @@ const Colors = {
     surface: '#7478F4',             
     primary: '#8C52FF',                      
     secondary: '#3DC8F1',            
-    border: '#0f0f0f',              
+    border: '#2e2e2e',              
     text: '#000000',                
     secondaryText: '#292a2c',       
     errorBorder: '#E23642',        

@@ -18,6 +18,7 @@ interface FloatingLabelInputProps {
   onRightIconPress?: () => void;
   loading?: boolean;
   isAi?: boolean;
+  customBorderColor?: string;
 }
 
 const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
@@ -33,7 +34,8 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
   onBlur,
   onRightIconPress,
   loading = false,
-  isAi = false
+  isAi = false,
+  customBorderColor
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -113,7 +115,7 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
         styles.inputContainer,
         localError && styles.errorContainer,
         { 
-          borderColor: localError ? borderColor : isFocused ? colors.primary : colors.border 
+          borderColor: localError ? borderColor : isFocused ? colors.primary : customBorderColor ?? colors.border 
         }
       ]}>
         {leftIcon && (

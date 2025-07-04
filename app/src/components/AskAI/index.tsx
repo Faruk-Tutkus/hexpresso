@@ -361,6 +361,7 @@ Yani seninle ilgilenir, ama sana körü körüne uymaz.
             loading={isLoading}
             error={error}
             isAi={true}
+            customBorderColor={colors.background}
           />
           <View style={[styles.divider, { backgroundColor: colors.primary }]} />
         </>
