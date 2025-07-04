@@ -1,15 +1,22 @@
-import { AuthProvider, ThemeProvider, ToastProvider, useTheme } from "@providers";
+import { AuthProvider, ThemeProvider, ToastProvider, useAuth, useTheme } from "@providers";
 import '@utils/i18n';
 import { useFonts } from 'expo-font';
-import { Stack } from "expo-router";
+import * as Notifications from 'expo-notifications';
+import { Stack, useRouter } from "expo-router";
 import * as SplashScreen from 'expo-splash-screen';
 import * as SystemUI from 'expo-system-ui';
 import { useEffect } from "react";
 import mobileAds from 'react-native-google-mobile-ads';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+
 export function AppContent() {
   const { theme, colors } = useTheme();
+  const user = useAuth();
   const insets = useSafeAreaInsets();
+  const router = useRouter();
+  if (!user) {
+    return
+  }
   useEffect(() => {
     SplashScreen.hideAsync();
   }, []);
@@ -17,6 +24,22 @@ export function AppContent() {
   useEffect(() => {
     SystemUI.setBackgroundColorAsync(colors.background);
   }, [colors.background]);
+
+  // Notification response handling
+  useEffect(() => {
+    const subscription = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log('🔔 Notification response received:', response);
+      
+      // Check if it's a fortune completion notification
+      const data = response.notification.request.content.data;
+      if (data && (data.type === 'fortune_completed' || data.type === 'fortune_reminder') && user) {
+        console.log('🎯 Fortune notification clicked, navigating to MyFortunes');
+        router.replace('/src/screens/main/navigator/(tabs)/MyFortunes');
+      }
+    });
+
+    return () => subscription.remove();
+  }, [router]);
 
   const [fontsLoaded, fontError] = useFonts({
     'Almendra-Regular': require('./src/assets/fonts/Almendra-Regular.ttf'),

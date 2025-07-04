@@ -28,7 +28,7 @@ export default function Rewarded({
   const rewarded_high = useMemo(() => RewardedAd.createForAdRequest(adUnitId_high), [])
   const rewarded_medium = useMemo(() => RewardedAd.createForAdRequest(adUnitId_medium), [])
   const rewarded_low = useMemo(() => RewardedAd.createForAdRequest(adUnitId_low), [])
-  const [rewardAmount, setRewardAmount] = useState(rewardedType === 'high' ? 300 : rewardedType === 'medium' ? 200 : 100)
+  const [rewardAmount, setRewardAmount] = useState(rewardedType === 'high' ? 40 : rewardedType === 'medium' ? 20 : 10)
   const [rewardText, setRewardText] = useState('coin')
   const { colors } = useTheme()
   const { showToast } = useToast();

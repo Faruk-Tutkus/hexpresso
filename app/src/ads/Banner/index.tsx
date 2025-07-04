@@ -8,7 +8,7 @@ interface BannerProps {
 
 export default function BannerExample({ adType = 'banner' }: BannerProps) {
   return (
-    <Animated.View>
+    <Animated.View style={{ width: '100%', justifyContent: 'center', alignItems: 'center' }}>
       <BannerAd
       unitId={adUnitId}
       size={adType === 'banner' ? BannerAdSize.ANCHORED_ADAPTIVE_BANNER : BannerAdSize.INLINE_ADAPTIVE_BANNER}

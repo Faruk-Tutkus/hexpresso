@@ -270,10 +270,6 @@ const CoffeeFortune = () => {
         showToast('Fal hazırlama işlemi biraz zaman alabilir, lütfen bekleyiniz...', 'info');
       }, 5000)
 
-      setTimeout(()=> {
-        showInterstitial();
-      }, 10000)
-
       
       // Upload all images sequentially to show progress
       const downloadUrls: string[] = [];
@@ -329,11 +325,15 @@ const CoffeeFortune = () => {
       });
       
       // Schedule notification for when fortune is completed
-      await scheduleFortuneCompletionNotification({
+      const notificationId = await scheduleFortuneCompletionNotification({
         seerName: seer.name,
         fortuneType: 'Kahve Falı',
         responseTimeMinutes: seer.responsetime
       });
+
+      if (notificationId) {
+        showInterstitial();
+      }
       
       showToast('Kahve falınız başarıyla gönderildi!', 'success');
       router.replace('/src/screens/main/navigator/(tabs)/MyFortunes');

@@ -1,3 +1,4 @@
+import { Banner } from '@ads'
 import { db } from '@api/config.firebase'
 import Icon from '@assets/icons'
 import { Modal as AppModal, Container, CustomButton } from '@components'
@@ -89,7 +90,9 @@ const SettingsScreen = () => {
           onPress={() => setModalVisible(true)}
         />
       </Container>
-
+      <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+        <Banner adType='interstitial' />
+      </View>
       {/* Confirm Deletion Modal */}
       <AppModal
         visible={modalVisible}

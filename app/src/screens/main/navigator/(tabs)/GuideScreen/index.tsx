@@ -1,10 +1,11 @@
 import { Banner, useInterstitial } from '@ads';
 import { AskAI, HoroscopeCard } from '@components';
 import { useFetchData } from '@hooks';
-import { useAuth, useTheme } from '@providers';
+import { useAuth, useTheme, useToast } from '@providers';
 import { useRouter } from 'expo-router';
+import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, FlatList, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, RefreshControl, Text, View } from 'react-native';
 
 enum numSign {
   Aries = 0,
@@ -26,9 +27,14 @@ const GuideScreen = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
   const router = useRouter();
-  
+  const { showToast } = useToast();
   // FetchSeers ile aynı hook yapısı
   const { signs, loading, error, refetch } = useFetchData(user);
+
+  const onRefresh = useCallback(async () => {
+    refetch()
+    showToast('Veriler güncellendi', 'info');
+  }, []);
 
   const { showInterstitial } = useInterstitial({})
 
@@ -87,8 +93,14 @@ const GuideScreen = () => {
             maxToRenderPerBatch={10}
             windowSize={5}
             // Pull-to-refresh functionality
-            refreshing={loading}
-            onRefresh={refetch}
+            refreshControl={
+              <RefreshControl
+              refreshing={loading}
+              onRefresh={onRefresh}
+              colors={[colors.surface]}
+              progressBackgroundColor={colors.text}
+              />
+            }
           />
         </>}
     </View>

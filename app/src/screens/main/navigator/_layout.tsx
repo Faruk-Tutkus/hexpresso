@@ -173,6 +173,7 @@ export default function Layout() {
                 pathname.includes('GuideScreen') ||
                 pathname.includes('SignComments') ||
                 pathname.includes('Signs') ||
+                pathname.includes('MyFortunes') ||
                 pathname === '/' ||
                 pathname === '';
             } else {

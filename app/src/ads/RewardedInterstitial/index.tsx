@@ -29,7 +29,7 @@ export default function RewardedInterstitial({
   const rewarded_high = useMemo(() => RewardedInterstitialAd.createForAdRequest(adUnitId_high), [])
   const rewarded_medium = useMemo(() => RewardedInterstitialAd.createForAdRequest(adUnitId_medium), [])
   const rewarded_low = useMemo(() => RewardedInterstitialAd.createForAdRequest(adUnitId_low), [])
-  const [rewardAmount, setRewardAmount] = useState(rewardedType === 'high' ? 300 : rewardedType === 'medium' ? 200 : 100)
+  const [rewardAmount, setRewardAmount] = useState(rewardedType === 'high' ? 40 : rewardedType === 'medium' ? 20 : 10)
   const [rewardText, setRewardText] = useState('coin')
   const { colors } = useTheme()
   const { showToast } = useToast()

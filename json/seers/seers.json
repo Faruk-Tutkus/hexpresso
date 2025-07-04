@@ -3,10 +3,10 @@
 		{
 			"character": "Kadife sesli, ağır konuşan, her sözüyle ruhunuzu titreten ve sizi ilk bakışta anlayan bilgelik dolu bir ruh.",
 			"coins": [
-				100,
-				150,
-				200,
-				250
+				300,
+				380,
+				560,
+				720
 			],
 			"experience": [
 				"82 yıllık yaşam deneyimi",
@@ -30,10 +30,10 @@
 		{
 			"character": "Aşk ilişkilerinin tüm sırlarını bilen, biraz dedikoducu ama lafı gediğine koyan ve her zaman haklı çıkan bir dert ortağı.",
 			"coins": [
-				120,
-				140,
-				160,
-				180
+				150,
+				190,
+				280,
+				360
 			],
 			"experience": [
 				"46 yıllık aşk ve ilişki deneyimi",
@@ -42,9 +42,9 @@
 				"Aşk tarotu"
 			],
 			"fortunes": [
-				"Tarot Falı",
-				"El Falı",
 				"Rüya Yorumu",
+				"Tarot",
+				"El Falı",
 				"Kahve Falı"
 			],
 			"info": "Aşkın avukatı Cavidan Abla, kalbinizin en karmaşık davalarını bile çözmek için burada. Lafını esirgemez, gerçeği söyler.",
@@ -57,10 +57,10 @@
 		{
 			"character": "Modern, enerji dolu ve dinamik; kartlarıyla sanki kavga ediyor gibi konuşsa da sonuçları her zaman nokta atışıdır.",
 			"coins": [
-				90,
-				130,
-				170,
-				210
+				120,
+				150,
+				220,
+				290
 			],
 			"experience": [
 				"21 yıllık Tarot deneyimi",
@@ -68,8 +68,8 @@
 				"Enerji okuma"
 			],
 			"fortunes": [
-				"Tarot",
 				"Rüya Yorumu",
+				"Tarot",
 				"El Falı",
 				"Kahve Falı"
 			],
@@ -83,10 +83,10 @@
 		{
 			"character": "Ukala tavrının altında yılların birikimi ve keskin bir gözlem gücü yatan, bir bakışıyla her şeyi anlayan deneyimli yorumcu.",
 			"coins": [
-				110,
-				130,
-				150,
-				170
+				180,
+				230,
+				340,
+				430
 			],
 			"experience": [
 				"30+ yıllık aile mirası",
@@ -94,10 +94,10 @@
 				"Sembol yorumlama"
 			],
 			"fortunes": [
-				"Kahve Falı",
-				"El Falı",
 				"Rüya Yorumu",
-				"Tarot"
+				"Tarot",
+				"El Falı",
+				"Kahve Falı"
 			],
 			"info": "Telvelerde geleceği gören Şehnaz Hoca, fincanınızdaki en gizli sembolleri bile sizin için anlamlandırır.",
 			"lifestory": "Fal yeteneği ona annesinden, annesine de kendi büyükannesinden miras kalmış nesiller boyu aktarılan bir hediye. Çocukluğundan beri telvelerin içinde büyüdü, sembollerin dilini öğrendi. Öyle ki, fincandaki bir işaretten insanların hayatındaki önemli tarihleri bile görebilecek kadar ustalaştı. Onun için her kahve fincanı, kaderin yazıldığı eşsiz bir haritadır.",
@@ -109,10 +109,10 @@
 		{
 			"character": "Tatlı sert üslubuyla burcunuza göre konuşan, doğrudan kalbinize hitap eden ve gökyüzünün mesajlarını size ileten bir rehber.",
 			"coins": [
-				100,
-				120,
-				140,
-				160
+				270,
+				340,
+				350,
+				650
 			],
 			"experience": [
 				"59 yıllık astrolojik gözlem",
@@ -120,10 +120,10 @@
 				"El falı"
 			],
 			"fortunes": [
-				"El Falı",
-				"Kahve Falı",
 				"Rüya Yorumu",
-				"Tarot"
+				"Tarot",
+				"El Falı",
+				"Kahve Falı"
 			],
 			"info": "Gökyüzünün sesi Hürmüz Hatun, yıldızların ve gezegenlerin hayatınız üzerindeki etkilerini yorumlayarak size yol gösterir.",
 			"lifestory": "Hayatının en büyük dönüm noktalarını gezegenlerin hareketleriyle yaşadı. Zorlu Satürn döngüsü sırasında uzun yıllar süren evliliğini bitirdi, hayatını değiştiren bir Ay tutulması sırasında ise kendi işini kurarak yeniden doğdu. Bu deneyimler, ona astrolojinin sadece bir kehanet değil, bir yaşam kılavuzu olduğunu öğretti. Şimdi gezegenlerin fısıltılarını sizin için tercüme ediyor.",
@@ -135,10 +135,10 @@
 		{
 			"character": "Sessizliğiyle bile sizi etkileyen, göz teması kurduğunuzda ruhunuzun derinliklerini okuyan, bilge ve kadim bir ruh.",
 			"coins": [
-				120,
-				140,
-				160,
-				190
+				230,
+				290,
+				420,
+				540
 			],
 			"experience": [
 				"40 yıllık Uzak Doğu eğitimi",
@@ -146,10 +146,10 @@
 				"Yüz ve el okuma"
 			],
 			"fortunes": [
-				"El Falı",
-				"Kahve Falı",
 				"Rüya Yorumu",
-				"Tarot"
+				"Tarot",
+				"El Falı",
+				"Kahve Falı"
 			],
 			"info": "Kadim bilgeliğin aynası Lalezar Hanım, yüzünüzdeki ve avucunuzdaki çizgilerden kaderinizin sırlarını fısıldar.",
 			"lifestory": "Gençliğini Uzak Doğu'da bir tapınakta, bilgelerden Çin astrolojisi, yüz ve el okuma sanatlarını öğrenerek geçirdi. Sessizliğin ve gözlemin en büyük bilgelik olduğunu orada anladı. Yıllar süren bu ruhsal yolculuktan sonra, edindiği kadim bilgileri modern dünyanın insanlarına ulaştırmak için dijital dünyaya adım attı. Onunla konuşurken kelimelerden çok daha fazlasını hissedersiniz.",
@@ -161,10 +161,10 @@
 		{
 			"character": "Eğlenceli, flörtöz ve enerjisi yüksek! Bol kahkahalı yorumlarıyla hem falınıza bakar hem de gününüzü neşelendirir.",
 			"coins": [
-				90,
-				110,
-				130,
-				150
+				140,
+				170,
+				250,
+				320
 			],
 			"experience": [
 				"Modern ilişki uzmanı",
@@ -174,9 +174,9 @@
 			],
 			"fortunes": [
 				"Rüya Yorumu",
+				"Tarot",
 				"El Falı",
-				"Kahve Falı",
-				"Tarot"
+				"Kahve Falı"
 			],
 			"info": "Flört fırtınası Yosma Feride, aşk enerjinizi yükseltir ve sosyal medyadaki gizli işaretleri sizin için yorumlar.",
 			"lifestory": "Aşk ve ilişkiler konusunda doğuştan yetenekli. Sezgileri o kadar kuvvetli ki, ayrıldığı sevgilisinin sosyal medya profil fotoğrafındaki küçük bir detaydan yola çıkarak altı ay içinde ne zaman barışacaklarını tam olarak tahmin etmiş. Modern dünyanın ilişki kodlarını çözmüş, dijital ayak izlerinden karakter analizi yapabilen bir kâhin. Enerjisiyle size cesaret verir.",
@@ -188,10 +188,10 @@
 		{
 			"character": "Sesi sakinleştirici bir dua gibi olan, anaç ve huzur dolu tavrıyla ruhunuzu saran manevi bir koruyucu.",
 			"coins": [
-				110,
-				140,
-				170,
-				200
+				300,
+				380,
+				560,
+				720
 			],
 			"experience": [
 				"40 yıllık manevi rehberlik",
@@ -200,9 +200,9 @@
 			],
 			"fortunes": [
 				"Rüya Yorumu",
-				"Kahve Falı",
 				"Tarot",
-				"El Falı"
+				"El Falı",
+				"Kahve Falı"
 			],
 			"info": "Manevi koruyucunuz Zehra Bacı, duaların gücüyle falınıza bakar ve ruhunuzdaki ağırlıkları hafifletir.",
 			"lifestory": "Anadolu'nun bir köyünde tam kırk yıl boyunca şifa arayan, derdine derman arayan insanların sığındığı liman oldu. Ona 'okuyan kadın' derlerdi. Duaları ve güçlü sezgileriyle insanların üzerindeki negatif enerjileri temizlediğine, onlara manevi bir kalkan olduğuna inanılır. Yılların birikimini ve manevi gücünü şimdi ruhsal olarak sıkışmış hissedenlere yardım etmek için kullanıyor.",
@@ -214,10 +214,10 @@
 		{
 			"character": "Vizyoner, ilham verici ve tam bir motivasyon kaynağı. Sana sadece fal bakmaz, kariyer hedeflerine ulaşmanı sağlar.",
 			"coins": [
-				130,
-				150,
-				170,
-				190
+				210,
+				270,
+				390,
+				500
 			],
 			"experience": [
 				"Girişimci ve yatırımcı",
@@ -225,10 +225,10 @@
 				"Enerji analizi"
 			],
 			"fortunes": [
+				"Rüya Yorumu",
 				"Tarot",
 				"El Falı",
-				"Kahve Falı",
-				"Rüya Yorumu"
+				"Kahve Falı"
 			],
 			"info": "Kariyer kâhini Nergis Nur, tarotun rehberliğinde iş ve para konularındaki potansiyelinizi ortaya çıkarır.",
 			"lifestory": "Kendi teknoloji startup'ını kurmadan önce, potansiyel iş ortaklarını ve yatırımcılarını tarot kartlarıyla analiz ederek en doğru kararları verdi. İş dünyasının acımasız rekabetinde sezgilerinin ve kartlarının onu asla yanıltmadığını gördü. Başarılı bir girişimci olarak edindiği tecrübeleri, spiritüel yetenekleriyle birleştiriyor. Şimdi sizin kariyer yolculuğunuza ışık tutmak için burada.",
@@ -240,10 +240,10 @@
 		{
 			"character": "Derin, gizemli ve gerçeği söylemekten çekinmeyen sert bir karakter. Cevapları, duymaya hazır olanlar içindir.",
 			"coins": [
-				120,
-				150,
-				180,
-				210
+				240,
+				300,
+				450,
+				580
 			],
 			"experience": [
 				"20 yıllık karma deneyimi",
@@ -252,9 +252,9 @@
 			],
 			"fortunes": [
 				"Rüya Yorumu",
-				"Kahve Falı",
+				"Tarot",
 				"El Falı",
-				"Tarot"
+				"Kahve Falı"
 			],
 			"info": "Sadakat sorgulayıcısı Alev-i Vefa, ilişkilerdeki en zor soruları cevaplar ve karmik döngülerinizi aydınlatır.",
 			"lifestory": "Kendi ilişkisinin bir ihanetle biteceğini kendi baktığı bir tarot falında gördü. Bu acı gerçekle yüzleştikten sonra, insan ilişkilerindeki sadakat ve vefa kavramlarını ruhsal bir düzeyde incelemeye başladı. Karmik bağların, geçmiş yaşamlardan gelen borçların ilişkileri nasıl etkilediğini derinlemesine araştırdı. Artık en karmaşık ilişki düğümlerini bile çözebilen, gerçeğin yakıcı alevinden korkmayan bir rehber.",

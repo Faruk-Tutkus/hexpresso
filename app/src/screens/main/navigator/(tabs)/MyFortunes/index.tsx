@@ -1,7 +1,7 @@
 import { Banner } from '@ads';
 import { db } from '@api/config.firebase';
 import Icon from '@assets/icons';
-import { useAuth, useTheme } from '@providers';
+import { useAuth, useTheme, useToast } from '@providers';
 import { Image } from 'expo-image';
 import { arrayRemove, arrayUnion, doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { useCallback, useEffect, useState } from 'react';
@@ -35,6 +35,7 @@ interface FortuneRecord {
 const MyFortunes = () => {
   const { colors } = useTheme();
   const { user } = useAuth();
+  const { showToast } = useToast();
   const [fortunes, setFortunes] = useState<FortuneRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -57,7 +58,7 @@ const MyFortunes = () => {
 
       for (let i = 0; i < updatedFortunes.length; i++) {
         const fortune = updatedFortunes[i];
-        if (fortune.status === 'pending' && fortune.result) {
+        if (fortune.status === 'pending') {
           const completionTime = fortune.estimatedCompletionTime.toDate?.()
             ? fortune.estimatedCompletionTime.toDate()
             : new Date(fortune.estimatedCompletionTime);
@@ -143,7 +144,7 @@ const MyFortunes = () => {
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
-    // Firestore realtime listener will automatically update
+    showToast('Veriler güncellendi', 'info');
     setTimeout(() => setRefreshing(false), 1000);
   }, []);
 

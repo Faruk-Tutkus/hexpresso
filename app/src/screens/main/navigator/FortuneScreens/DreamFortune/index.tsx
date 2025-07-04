@@ -73,9 +73,6 @@ const DreamFortune = () => {
         showToast('Fal hazırlama işlemi biraz zaman alabilir, lütfen bekleyiniz...', 'info');
       }, 5000)
 
-      setTimeout(() => {
-        showInterstitial();
-      }, 10000)
 
       // Generate AI interpretation immediately
       const aiResult = await generateFortuneInterpretation({
@@ -105,11 +102,15 @@ const DreamFortune = () => {
       });
 
       // Schedule notification for when fortune is completed
-      await scheduleFortuneCompletionNotification({
+      const notificationId = await scheduleFortuneCompletionNotification({
         seerName: seer.name,
         fortuneType: 'Rüya Yorumu',
         responseTimeMinutes: seer.responsetime
       });
+
+      if (notificationId) {
+        showInterstitial();
+      }
       
       showToast('Rüya falınız başarıyla gönderildi!', 'success');
       router.replace('/src/screens/main/navigator/(tabs)/MyFortunes');

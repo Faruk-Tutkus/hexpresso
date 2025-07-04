@@ -4,10 +4,10 @@ import Icon from '@assets/icons'
 import { AskAI } from '@components'
 import { Ionicons } from '@expo/vector-icons'
 import { getDateRangeForPeriod, useFetchData } from '@hooks'
-import { useAuth, useTheme } from '@providers'
+import { useAuth, useTheme, useToast } from '@providers'
 import DatePicker from '@react-native-community/datetimepicker'
 import { doc, onSnapshot } from 'firebase/firestore'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ActivityIndicator, FlatList, Platform, RefreshControl, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import Animated, { Easing, interpolate, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
@@ -38,6 +38,7 @@ interface CommentCard {
 const SignComments = () => {
   const { colors } = useTheme()
   const { t } = useTranslation()
+  const { showToast } = useToast();
   const { user } = useAuth()
   const [selectedSignIndex, setSelectedSignIndex] = useState(0)
   const [commentCards, setCommentCards] = useState<CommentCard[]>([])
@@ -48,6 +49,11 @@ const SignComments = () => {
 
   // Modern hook yapısı - FetchSeers ile aynı
   const { signs, loading, error, refetch } = useFetchData(user);
+
+  const onRefresh = useCallback(async () => {
+    refetch()
+    showToast('Veriler güncellendi', 'info');
+  }, []);
 
   const { showInterstitial } = useInterstitial({})
 
@@ -544,7 +550,7 @@ const SignComments = () => {
         refreshControl={
           <RefreshControl
             refreshing={loading}
-            onRefresh={refetch}
+            onRefresh={onRefresh}
             colors={[colors.primary]}
             tintColor={colors.primary}
             title="Yorumlar güncelleniyor..."
