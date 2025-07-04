@@ -2,6 +2,7 @@ export { default as useAITaskValidator, type AIValidationResponse, type TaskVali
 export { default as useFetchData } from './FetchData'
 export { default as useFetchSeers, type Seer } from './FetchSeers'
 export { default as useFortuneAI } from './FortuneAI'
+export { default as useFortuneNotificationManager, type FortuneNotificationData } from './FortuneNotificationManager'
 export { default as useFortuneProcessor } from './FortuneProcessor'
 export { FullAstroResult, getFullAstro, getSunSign } from './GetHoroscopeInfo'
 export { default as GetTimeBasedGreeting, default as useGetTime } from './GetTime'

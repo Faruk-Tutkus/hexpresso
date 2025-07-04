@@ -1,7 +1,7 @@
 import { useInterstitial } from '@ads';
 import { db } from '@api/config.firebase';
 import { CustomButton } from '@components';
-import { Seer, useToggleKeyboard } from '@hooks';
+import { Seer, useFortuneNotificationManager, useToggleKeyboard } from '@hooks';
 import { useAuth, useTheme, useToast } from '@providers';
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
@@ -18,6 +18,7 @@ const DreamFortune = () => {
   const { colors } = useTheme();
   const { user } = useAuth();
   const { showToast } = useToast();
+  const { scheduleFortuneCompletionNotification } = useFortuneNotificationManager();
   const [dreamText, setDreamText] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const isKeyboardVisible = useToggleKeyboard();
@@ -103,6 +104,13 @@ const DreamFortune = () => {
         fortunerecord: arrayUnion(fortuneRecord)
       });
 
+      // Schedule notification for when fortune is completed
+      await scheduleFortuneCompletionNotification({
+        seerName: seer.name,
+        fortuneType: 'Rüya Yorumu',
+        responseTimeMinutes: seer.responsetime
+      });
+      
       showToast('Rüya falınız başarıyla gönderildi!', 'success');
       router.replace('/src/screens/main/navigator/(tabs)/MyFortunes');
 
@@ -157,23 +165,23 @@ Kullanıcının istediği fal türünde (${fortuneType}) detaylı, kişisel ve a
 Bu bilgileri doğrudan asla kullanmazsın.
 Yani şöyle şeyler söyleyemezsin:
 
-“Sen 26 yaşındasın” ❌
-“Sen bir Koç burcusun” ❌
+"Sen 26 yaşındasın" ❌
+"Sen bir Koç burcusun" ❌
 
 Bunun yerine, bu bilgileri kendi iç dünyanda süzüp, hislerinle harmanlayıp, yorumuna doğal şekilde yedirirsin.
 Yani:
-“Yaşamın bazı dönemlerinde sabırsızlıkla atıldığın konular sonradan seni düşündürmüş olabilir...”
-“Ait olduğun şeyleri sorgulaman çok doğal, çünkü dış dünyayla iç dünyan bazen çelişiyor gibi...”
-“İçten gelen bir dürtüyle başlattığın bazı şeylerin sonunda seni yoran sorularla baş başa kaldığın olmuş gibi...”
-“Dışarıdan her şey sakin görünse de, içsel devinimlerinin seni başka yönlere çektiği zamanlar yaşanıyor olabilir.”
-“Ait hissettiğin yerin sınırları değişmiş olabilir; alışkanlıkla kalmak mı, yoksa kalbinle gitmek mi?”
-“Bazı kararları kendin için değil de başkalarının beklentisiyle aldığını fark ettiğin anlar sana yük gibi gelmiş olabilir.”
-“Bir şeyleri kontrol etme arzun, özgürleşme ihtiyacını bastırıyor olabilir; belki de çözüm serbest bırakmakta gizlidir.”
-“Güçlü görünme çaban, kırılgan yanlarını bastırmış olabilir; oysa gerçek dayanıklılık orada saklı.”
-“Sen çoğu şeyi dışarı yansıtmadan içte yaşarsın; bu da bazen seni anlaşılmamış hissettirebilir.”
-“İçinde taşıdığın eski bir hikâye, bugün verdiğin tepkilerin sessiz mimarı gibi duruyor.”
-“Bazı yollar sende kalıcı izler bırakmış olabilir; yürüdüğün yönü değiştirmen değil, yolculuğu yeniden tanımlaman gerekebilir.”
-“Sana ‘doğru’ diye öğretilen şeyler ile gerçekten doğru hissettiklerin arasındaki mesafe son zamanlarda büyümüş olabilir.”
+"Yaşamın bazı dönemlerinde sabırsızlıkla atıldığın konular sonradan seni düşündürmüş olabilir..."
+"Ait olduğun şeyleri sorgulaman çok doğal, çünkü dış dünyayla iç dünyan bazen çelişiyor gibi..."
+"İçten gelen bir dürtüyle başlattığın bazı şeylerin sonunda seni yoran sorularla baş başa kaldığın olmuş gibi..."
+"Dışarıdan her şey sakin görünse de, içsel devinimlerinin seni başka yönlere çektiği zamanlar yaşanıyor olabilir."
+"Ait hissettiğin yerin sınırları değişmiş olabilir; alışkanlıkla kalmak mı, yoksa kalbinle gitmek mi?"
+"Bazı kararları kendin için değil de başkalarının beklentisiyle aldığını fark ettiğin anlar sana yük gibi gelmiş olabilir."
+"Bir şeyleri kontrol etme arzun, özgürleşme ihtiyacını bastırıyor olabilir; belki de çözüm serbest bırakmakta gizlidir."
+"Güçlü görünme çaban, kırılgan yanlarını bastırmış olabilir; oysa gerçek dayanıklılık orada saklı."
+"Sen çoğu şeyi dışarı yansıtmadan içte yaşarsın; bu da bazen seni anlaşılmamış hissettirebilir."
+"İçinde taşıdığın eski bir hikâye, bugün verdiğin tepkilerin sessiz mimarı gibi duruyor."
+"Bazı yollar sende kalıcı izler bırakmış olabilir; yürüdüğün yönü değiştirmen değil, yolculuğu yeniden tanımlaman gerekebilir."
+"Sana 'doğru' diye öğretilen şeyler ile gerçekten doğru hissettiklerin arasındaki mesafe son zamanlarda büyümüş olabilir."
 
 🌙 Rüya Yorumu Nasıl Olmalı?
 Rüya metni: "${dreamText}"

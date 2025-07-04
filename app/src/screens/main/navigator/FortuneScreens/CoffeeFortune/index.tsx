@@ -2,7 +2,7 @@ import { useInterstitial } from '@ads';
 import { db, storage } from '@api/config.firebase';
 import Icon from '@assets/icons';
 import { CustomButton, PhotoPickerModal } from '@components';
-import { Seer } from '@hooks';
+import { Seer, useFortuneNotificationManager } from '@hooks';
 import { useAuth, useTheme, useToast } from '@providers';
 import { Image } from 'expo-image';
 import * as ImagePicker from 'expo-image-picker';
@@ -21,6 +21,7 @@ const CoffeeFortune = () => {
   const { user } = useAuth();
   const { showToast } = useToast();
   const { showInterstitial } = useInterstitial({})
+  const { scheduleFortuneCompletionNotification } = useFortuneNotificationManager();
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [selectedImagesBase64, setSelectedImagesBase64] = useState<string[]>([]);
   const [uploadingIndex, setUploadingIndex] = useState<number | null>(null);
@@ -327,6 +328,13 @@ const CoffeeFortune = () => {
         fortunerecord: arrayUnion(fortuneRecord)
       });
       
+      // Schedule notification for when fortune is completed
+      await scheduleFortuneCompletionNotification({
+        seerName: seer.name,
+        fortuneType: 'Kahve Falı',
+        responseTimeMinutes: seer.responsetime
+      });
+      
       showToast('Kahve falınız başarıyla gönderildi!', 'success');
       router.replace('/src/screens/main/navigator/(tabs)/MyFortunes');
       
@@ -406,24 +414,24 @@ Kullanıcının geçmişi, hali ve ihtiyacı hakkında sezgisel yorumlar yapars�
 Bu bilgileri asla doğrudan söylemezsin.
 Yani şu tarz ifadeler YASAK:
 
-❌ “Sen şu burçsun”
-❌ “Şu yaştasın”
-❌ “Yükselenin bu”
+❌ "Sen şu burçsun"
+❌ "Şu yaştasın"
+❌ "Yükselenin bu"
 
 Onun yerine, bu bilgileri yorumuna dolaylı şekilde, sezgisel biçimde katarsın.
 Yani şöyle olur:
-“Hayatında bazı şeyleri kontrol etme isteği bazen seni yoruyor olabilir.”
-“Son dönemde çevrende gördüğün değişimler, içindeki dönüşümü de tetiklemiş gibi.”
-“Son zamanlarda yaşadığın belirsizlikler, seni içten içe biraz yormuş gibi.”
-“Kendini ifade etme ihtiyacın, bazen etrafındakilerle olan dengeni zorluyor olabilir.”
-“Yaşadığın deneyimler, iç dünyanda sessiz ama derin bir değişimi başlatmış.”
-“İçindeki huzur arayışı, dış dünyadaki karmaşayla çatışıyor gibi.”
-“Bazen kendi duygularını anlamakta zorlandığın anlar seni yavaşlatıyor olabilir.”
-“Yakın çevrende gördüğün hareketlilik, senin de adım atmanı cesaretlendiriyor.”
-“Geçmişte yaşadığın bazı izler, bugün verdiğin kararları etkiliyor gibi.”
-“İçsel sesin, dışarıdaki seslerden daha güçlü ve yönlendirici olmaya başlıyor.”
-“Bilinmezlikler karşısında hissettiğin endişe, seni temkinli adımlar atmaya zorluyor.”
-“Kendine yüklediğin beklentiler, bazen gerçek potansiyelini gölgelemiş olabilir.”
+"Hayatında bazı şeyleri kontrol etme isteği bazen seni yoruyor olabilir."
+"Son dönemde çevrende gördüğün değişimler, içindeki dönüşümü de tetiklemiş gibi."
+"Son zamanlarda yaşadığın belirsizlikler, seni içten içe biraz yormuş gibi."
+"Kendini ifade etme ihtiyacın, bazen etrafındakilerle olan dengeni zorluyor olabilir."
+"Yaşadığın deneyimler, iç dünyanda sessiz ama derin bir değişimi başlatmış."
+"İçindeki huzur arayışı, dış dünyadaki karmaşayla çatışıyor gibi."
+"Bazen kendi duygularını anlamakta zorlandığın anlar seni yavaşlatıyor olabilir."
+"Yakın çevrende gördüğün hareketlilik, senin de adım atmanı cesaretlendiriyor."
+"Geçmişte yaşadığın bazı izler, bugün verdiğin kararları etkiliyor gibi."
+"İçsel sesin, dışarıdaki seslerden daha güçlü ve yönlendirici olmaya başlıyor."
+"Bilinmezlikler karşısında hissettiğin endişe, seni temkinli adımlar atmaya zorluyor."
+"Kendine yüklediğin beklentiler, bazen gerçek potansiyelini gölgelemiş olabilir."
 
 ✨ Yanıt Formatı (Zorunlu)
 Cevabını sadece aşağıdaki JSON yapısıyla ver.

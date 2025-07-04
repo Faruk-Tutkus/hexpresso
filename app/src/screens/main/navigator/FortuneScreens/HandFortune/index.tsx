@@ -2,7 +2,7 @@ import { useInterstitial } from '@ads';
 import { db, storage } from '@api/config.firebase';
 import Icon from '@assets/icons';
 import { CustomButton, PhotoPickerModal } from '@components';
-import { Seer } from '@hooks';
+import { Seer, useFortuneNotificationManager } from '@hooks';
 import { useAuth, useTheme, useToast } from '@providers';
 import { Image } from 'expo-image';
 import * as ImagePicker from 'expo-image-picker';
@@ -21,6 +21,7 @@ const HandFortune = () => {
   const { user } = useAuth();
   const { showToast } = useToast();
   const { showInterstitial } = useInterstitial({})
+  const { scheduleFortuneCompletionNotification } = useFortuneNotificationManager();
   const [leftHandImage, setLeftHandImage] = useState<string>('');
   const [rightHandImage, setRightHandImage] = useState<string>('');
   const [leftHandBase64, setLeftHandBase64] = useState<string>('');
@@ -322,6 +323,13 @@ const HandFortune = () => {
         fortunerecord: arrayUnion(fortuneRecord)
       });
       
+      // Schedule notification for when fortune is completed
+      await scheduleFortuneCompletionNotification({
+        seerName: seer.name,
+        fortuneType: 'El Falı',
+        responseTimeMinutes: seer.responsetime
+      });
+      
       showToast('El falınız başarıyla gönderildi!', 'success');
       router.replace('/src/screens/main/navigator/(tabs)/MyFortunes');
       
@@ -395,8 +403,8 @@ Bu bilgileri:
 
 📌 Örnek doğru kullanım:
 
-“Zihnindeki kararsızlıklar, geçmişten gelen bir öğrenilmiş güven problemiyle ilgili olabilir.”
-“Kalbin bazen susturamadığın bir yönünü takip etmek istiyor, ama çevresel koşullar seni tutuyor.”
+"Zihnindeki kararsızlıklar, geçmişten gelen bir öğrenilmiş güven problemiyle ilgili olabilir."
+"Kalbin bazen susturamadığın bir yönünü takip etmek istiyor, ama çevresel koşullar seni tutuyor."
 "Kendini ispatlama çaban bazen seni olduğundan fazlası gibi görünmeye zorluyor; oysa sadelik sana daha fazla huzur getirebilir."
 "Geçmişte susmayı seçtiğin anlar, bugün fazla konuşmana neden oluyor olabilir; bazen sessizlik de bir cevap olur."
 "İçindeki değişim arzusu seni dış dünyada daha cesur kararlar almaya zorluyor ama henüz tam olarak 'ne uğruna' olduğunu bilmiyorsun."
@@ -408,10 +416,10 @@ Bu bilgileri:
 "Bazı soruların cevabını çoktan biliyorsun, ama henüz duymaya hazır olmadığın için kendine itiraf etmiyorsun."
 "Kalbinle aklın aynı anda aynı şeyi istemiyor gibi; biri seni ileri iterken, diğeri yerinde tutmaya çalışıyor."
 
-📌 Yanlış kullanım:
+�� Yanlış kullanım:
 
-“Sen 25 yaşındasın ve yükselenin Yengeç.” ❌
-“Senin için kader çizgisi kariyeri gösteriyor.” ❌ (çok yüzeysel)
+"Sen 25 yaşındasın ve yükselenin Yengeç." ❌
+"Senin için kader çizgisi kariyeri gösteriyor." ❌ (çok yüzeysel)
 
 ✍️ Yanıt Formatı (Zorunlu)
 Cevabını sadece aşağıdaki JSON yapısıyla ver.
