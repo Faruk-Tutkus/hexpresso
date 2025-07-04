@@ -56,19 +56,6 @@ const FortuneTellingScreen = () => {
     setActiveIndex(activeIndex === index ? null : index);
   }, [activeIndex]);
 
-  const onRefresh = useCallback(async () => {
-    setRefreshing(true);
-    try {
-      await refetch();
-      console.log('🔄 Refresh tamamlandı. Seers uzunluğu:', seers.length);
-      console.log('📊 Seers verisi:', seers);
-    } catch (err) {
-      console.error('❌ Refresh hatası:', err);
-      showToast('Veriler güncellenirken bir hata oluştu', 'error');
-    } finally {
-      setRefreshing(false);
-    }
-  }, [refetch, showToast, seers]);
 
   const renderSeerCard = useCallback(({ item, index }: { item: any, index: number }) => (
     <Animated.View

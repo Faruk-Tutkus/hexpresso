@@ -228,13 +228,13 @@ const About = () => {
 
         <View style={styles.socialButtons}>
           <ContainerButton
-            title="Instagram'dan DM Gönder"
+            title="Instagram"
             leftImage={require('@assets/image/instagram.png')}
             onPress={() => openURL('https://www.instagram.com/thefarukt')}
           />
 
           <ContainerButton
-            title="GitHub'da İncele"
+            title="GitHub"
             leftImage={require('@assets/image/github.png')}
             onPress={() => openURL('https://github.com/Faruk-Tutkus')}
           />

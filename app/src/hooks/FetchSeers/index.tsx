@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { MMKV } from "react-native-mmkv";
 // Fallback olarak local JSON dosyasını import et
 import seersLocalData from '@json/seers/seers.json';
+import { useToast } from "@providers";
 
 const storage = new MMKV({ id: 'seers_data' });
 
@@ -74,7 +75,7 @@ export const useFetchSeers = (user: any): UseFetchSeersReturn => {
   const [error, setError] = useState<string | null>(null);
   const isMountedRef = useRef(true);
   const abortControllerRef = useRef<AbortController | null>(null);
-
+  const { showToast } = useToast();
   const fetchSeersFromFirebase = async (user: any): Promise<Seer[]> => {
     if (!user?.uid) {
       console.log('🚫 FetchSeers: User yok, Firebase fetch atlanıyor');
@@ -143,6 +144,7 @@ export const useFetchSeers = (user: any): UseFetchSeersReturn => {
       if (data && data.length > 0) {
         setSeers(data);
         cacheSeersData(data);
+        showToast('Veriler güncellendi', 'info');
         console.log('✅ FetchSeers: Firebase\'den veri başarıyla yüklendi');
       } else {
         throw new Error('Firebase\'den boş seers verisi geldi');

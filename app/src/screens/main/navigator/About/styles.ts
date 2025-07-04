@@ -43,7 +43,8 @@ export default StyleSheet.create({
   bodyText: {
     fontSize: 16,
     lineHeight: 24,
-    textAlign: 'justify',
+    marginBottom: 20,
+    textAlign: 'center',
   },
   featureContainer: {
     flexDirection: 'row',
