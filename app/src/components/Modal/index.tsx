@@ -25,6 +25,11 @@ interface PhotoPickerModalProps {
   onGallery: () => void;
 }
 
+interface NoInternetModalProps {
+  visible: boolean;
+  onRetry: () => void;
+}
+
 const ProfileModal: React.FC<ProfileModalProps> = ({
   visible,
   onClose,
@@ -136,6 +141,47 @@ export const PhotoPickerModal: React.FC<PhotoPickerModalProps> = ({
               İptal
             </Text>
           </TouchableOpacity>
+        </View>
+      </View>
+    </Modal>
+  );
+};
+
+export const NoInternetModal: React.FC<NoInternetModalProps> = ({
+  visible,
+  onRetry
+}) => {
+  const { colors } = useTheme();
+
+  return (
+    <Modal
+      visible={visible}
+      transparent
+      animationType="fade"
+      onRequestClose={() => {}} // Prevent closing by back button
+    >
+      <View style={[styles.modalOverlay, { backgroundColor: colors.background }]}>
+        <View style={[styles.modalContent, { backgroundColor: colors.background, borderWidth: 1, borderColor: colors.border }]}>
+          <View style={styles.modalIcon}>
+            <Ionicons name="cellular-outline" size={50} color={colors.errorText} />
+          </View>
+          
+          <Text style={[styles.modalTitle, { color: colors.text }]}>
+            İnternet Bağlantısı Yok
+          </Text>
+          
+          <Text style={[styles.modalDescription, { color: colors.secondaryText }]}>
+            Uygulamayı kullanabilmek için internet bağlantınızı kontrol edin ve tekrar deneyin.
+          </Text>
+          
+          <View style={styles.modalButtons}>
+            <CustomButton 
+              title="Tekrar Dene"
+              variant="primary"
+              onPress={onRetry}
+              contentStyle={{ width: '100%' }}
+            />
+          </View>
         </View>
       </View>
     </Modal>

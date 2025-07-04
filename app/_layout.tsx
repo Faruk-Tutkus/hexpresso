@@ -1,25 +1,35 @@
+import { NoInternetModal } from '@components';
 import { AuthProvider, ThemeProvider, ToastProvider, useAuth, useTheme } from "@providers";
+import { useNetInfo } from '@react-native-community/netinfo';
 import '@utils/i18n';
 import { useFonts } from 'expo-font';
 import * as Notifications from 'expo-notifications';
 import { Stack, useRouter } from "expo-router";
-import * as SplashScreen from 'expo-splash-screen';
+
 import * as SystemUI from 'expo-system-ui';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import mobileAds from 'react-native-google-mobile-ads';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-SplashScreen.preventAutoHideAsync();
 export function AppContent() {
   const { theme, colors } = useTheme();
   const user = useAuth();
   const insets = useSafeAreaInsets();
   const router = useRouter();
-  if (!user) {
-    return
-  }
+  const [isConnected, setIsConnected] = useState(true);
+  const netInfo = useNetInfo();
+
   useEffect(() => {
-    SplashScreen.hideAsync();
-  }, []);
+    if (netInfo.isConnected !== null) {
+      setIsConnected(netInfo.isConnected);
+    }
+  }, [netInfo.isConnected]);
+
+  const handleRetry = () => {
+    // Force re-check network connection
+    if (netInfo.isConnected !== null) {
+      setIsConnected(netInfo.isConnected);
+    }
+  };
 
   useEffect(() => {
     SystemUI.setBackgroundColorAsync(colors.background);
@@ -64,31 +74,40 @@ export function AppContent() {
   }
 
   return (
-    <Stack
-      //initialRouteName="src/screens/main/navigator"
-      screenOptions={{
-        headerShown: false,
-        animation: 'fade',
-        animationDuration: 2500,
-        statusBarStyle: theme === 'dark' ? 'light' : 'dark',
-        statusBarBackgroundColor: colors.background,
-        contentStyle: {
-          backgroundColor: colors.background,
-          marginBottom: insets.bottom,
-        },
-      }}
-    >
-      <Stack.Screen name="src/screens/side/SplashScreen/index" />
-      <Stack.Screen name="src/screens/auth/Register/index" />
-      <Stack.Screen name="src/screens/auth/Login/index" />
-      <Stack.Screen name="src/screens/side/StartScreen/index" />
-      <Stack.Screen name="src/screens/side/Introduction/index" />
-      <Stack.Screen name="src/screens/main/navigator" />
-      <Stack.Screen name="src/screens/main/navigator/FortuneScreens/DreamFortune/index" />
-      <Stack.Screen name="src/screens/main/navigator/FortuneScreens/HandFortune/index" />
-      <Stack.Screen name="src/screens/main/navigator/FortuneScreens/CoffeeFortune/index" />
-      <Stack.Screen name="src/screens/main/navigator/(tabs)/MyFortunes/index" />
-    </Stack>
+    <>
+      <NoInternetModal 
+        visible={!isConnected}
+        onRetry={handleRetry}
+      />
+      
+      {user && isConnected && (
+        <Stack
+          //initialRouteName="src/screens/main/navigator"
+          screenOptions={{
+            headerShown: false,
+            animation: 'fade',
+            animationDuration: 2500,
+            statusBarStyle: theme === 'dark' ? 'light' : 'dark',
+            statusBarBackgroundColor: colors.background,
+            contentStyle: {
+              backgroundColor: colors.background,
+              marginBottom: insets.bottom,
+            },
+          }}
+        >
+          <Stack.Screen name="src/screens/side/SplashScreen/index" />
+          <Stack.Screen name="src/screens/auth/Register/index" />
+          <Stack.Screen name="src/screens/auth/Login/index" />
+          <Stack.Screen name="src/screens/side/StartScreen/index" />
+          <Stack.Screen name="src/screens/side/Introduction/index" />
+          <Stack.Screen name="src/screens/main/navigator" />
+          <Stack.Screen name="src/screens/main/navigator/FortuneScreens/DreamFortune/index" />
+          <Stack.Screen name="src/screens/main/navigator/FortuneScreens/HandFortune/index" />
+          <Stack.Screen name="src/screens/main/navigator/FortuneScreens/CoffeeFortune/index" />
+          <Stack.Screen name="src/screens/main/navigator/(tabs)/MyFortunes/index" />
+        </Stack>
+      )}
+    </>
   )
 }
 

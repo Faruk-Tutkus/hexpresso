@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
   modalButtons: {
-    flexDirection: 'row' as const,
+    justifyContent: 'center',
     gap: 15,
     width: '100%',
   },
