@@ -16,7 +16,7 @@ const useAITaskValidator = () => {
 	const [error, setError] = useState<string | null>(null);
 
 	// Google AI Client
-	const ai = new GoogleGenerativeAI("AIzaSyBeAM7n8yGpXmNJfDL7WkUcC09m0fKEQNo");
+	const ai = new GoogleGenerativeAI("AIzaSyDYDevsAsKXs-6P6-qYckbj7YIPCYw9abE");
 
 	const validateTask = async (
 		imageBase64: string,
