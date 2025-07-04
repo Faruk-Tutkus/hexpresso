@@ -8,7 +8,7 @@ import * as SystemUI from 'expo-system-ui';
 import { useEffect } from "react";
 import mobileAds from 'react-native-google-mobile-ads';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-
+SplashScreen.preventAutoHideAsync();
 export function AppContent() {
   const { theme, colors } = useTheme();
   const user = useAuth();
