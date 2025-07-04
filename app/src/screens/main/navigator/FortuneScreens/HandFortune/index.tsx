@@ -277,7 +277,7 @@ const HandFortune = () => {
 
       setTimeout(()=> {
         showInterstitial();
-      }, 7500)
+      }, 10000)
 
       // Upload images sequentially
       let leftHandUrl, rightHandUrl;

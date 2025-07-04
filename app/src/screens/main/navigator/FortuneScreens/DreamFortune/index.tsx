@@ -75,7 +75,7 @@ const DreamFortune = () => {
 
       setTimeout(() => {
         showInterstitial();
-      }, 7500)
+      }, 10000)
 
       // Generate AI interpretation immediately
       const aiResult = await generateFortuneInterpretation({

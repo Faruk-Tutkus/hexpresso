@@ -272,7 +272,7 @@ const CoffeeFortune = () => {
 
       setTimeout(()=> {
         showInterstitial();
-      }, 7500)
+      }, 10000)
 
       
       // Upload all images sequentially to show progress

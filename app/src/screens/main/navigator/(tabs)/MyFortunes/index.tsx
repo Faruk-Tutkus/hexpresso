@@ -24,7 +24,7 @@ interface FortuneRecord {
   images?: any;
   dreamText?: string;
   createdAt: any;
-  status: 'pending' | 'completed' | 'processing';
+  status: 'pending' | 'completed';
   responseTime: number;
   estimatedCompletionTime: any;
   coins: number;
@@ -271,10 +271,8 @@ const FortuneCardContent = ({
     switch (fortune.status) {
       case 'pending':
         return <Icon name="time-outline" size={18} color={colors.primary} />;
-      case 'processing':
-        return <Icon name="refresh-outline" size={18} color={colors.errorText} />;
       case 'completed':
-        return <Icon name="checkmark-circle-outline" size={18} color={colors.secondary} />;
+        return <Icon name="checkmark-circle-outline" size={18} color={colors.primary} />;
       default:
         return <Icon name="help-circle-outline" size={18} color={colors.errorText} />;
     }
@@ -285,9 +283,7 @@ const FortuneCardContent = ({
       case 'pending':
         return timeRemaining === 'Hazır!'
           ? 'Falınız hazır!'
-          : `Mistik güçler çalışıyor... ${timeRemaining}`;
-      case 'processing':
-        return 'Kaderin yorumlanıyor...';
+          : `Kaderin yorumlanıyor... ${timeRemaining}`;
       case 'completed':
         return 'Falınız yorumlandı!';
       default:
@@ -579,8 +575,8 @@ const FortuneCardContent = ({
             entering={FadeInUp.delay(500).springify()}
           >
             <View style={styles.sectionHeader}>
-              <Icon name="warning-outline" size={16} color="#FFC107" />
-              <Text style={[styles.sectionLabel, { color: '#FFC107' }]}>Dikkat Edilmesi Gerekenler</Text>
+              <Icon name="warning-outline" size={16} color="#d6a102" />
+              <Text style={[styles.sectionLabel, { color: '#d6a102' }]}>Dikkat Edilmesi Gerekenler</Text>
             </View>
             {parsedResult.warnings.map((warning: string, index: number) => (
               <Text key={index} style={[styles.sectionText, { color: colors.text, marginBottom: 8 }]}>
@@ -654,12 +650,12 @@ const FortuneCardContent = ({
           styles.statusBadge,
           {
             backgroundColor: fortune.status === 'completed'
-              ? `${colors.secondary}20`
+              ? `${colors.secondaryText}`
               : fortune.status === 'pending'
                 ? `${colors.primary}15`
                 : `${colors.errorText}15`,
             borderColor: fortune.status === 'completed'
-              ? colors.secondary
+              ? colors.primary
               : fortune.status === 'pending'
                 ? colors.primary
                 : colors.errorText
@@ -673,7 +669,7 @@ const FortuneCardContent = ({
           </View>
           <Text style={[styles.statusMessage, {
             color: fortune.status === 'completed'
-              ? colors.secondary
+              ? colors.background
               : fortune.status === 'pending'
                 ? colors.primary
                 : colors.errorText

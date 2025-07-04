@@ -100,7 +100,7 @@ const useFortuneNotificationManager = () => {
       console.log(`✅ Fortune completion notification scheduled with ID: ${notificationId}`);
       
       // Also schedule a reminder notification 5 minutes before completion (if response time > 10 minutes)
-      if (fortuneData.responseTimeMinutes > 10) {
+      if (fortuneData.responseTimeMinutes >= 10) {
         const reminderTriggerSeconds = Math.max(triggerSeconds - (5 * 60), 60); // At least 1 minute from now
         
         // @ts-ignore - Expo Notifications trigger type issue

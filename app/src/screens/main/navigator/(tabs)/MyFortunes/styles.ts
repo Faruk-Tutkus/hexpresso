@@ -115,7 +115,7 @@ export default StyleSheet.create({
   resultContainer: {
     marginTop: 16,
     borderRadius: 12,
-    padding: 16,
+    padding: 8,
     borderWidth: 1,
   },
   resultHeader: {
@@ -140,10 +140,10 @@ export default StyleSheet.create({
   },
   sectionIcon: {
     marginBottom: 8,
-    alignItems: 'flex-start',
+    alignItems: 'center',
   },
   interpretationText: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Domine-Regular',
     lineHeight: 24,
     textAlign: 'justify',
@@ -161,7 +161,7 @@ export default StyleSheet.create({
     marginLeft: 6,
   },
   sectionText: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Domine-Regular',
     lineHeight: 20,
     textAlign: 'justify',
@@ -369,7 +369,7 @@ export default StyleSheet.create({
   inputContainer: {
     marginTop: 16,
     borderRadius: 12,
-    padding: 16,
+    padding: 8,
     borderWidth: 1,
     marginBottom: 16,
   },
@@ -464,7 +464,7 @@ export default StyleSheet.create({
     marginBottom: 8,
   },
   dreamText: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Domine-Regular',
     lineHeight: 20,
     textAlign: 'justify',
