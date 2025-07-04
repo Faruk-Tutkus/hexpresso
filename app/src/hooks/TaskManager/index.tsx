@@ -29,7 +29,7 @@ const defaultTasks: Task[] = [
     platform: 'instagram',
     completed: false,
     icon: 'logo-instagram',
-    url: 'https://instagram.com/hexpresso'
+    url: 'https://www.instagram.com/hexpresso.app'
   },
   {
     id: 'twitter_follow', 
@@ -40,7 +40,7 @@ const defaultTasks: Task[] = [
     platform: 'twitter',
     completed: false,
     icon: 'logo-twitter',
-    url: 'https://twitter.com/hexpresso'
+    url: 'https://x.com/hexpressoapp'
   },
   {
     id: 'facebook_share',

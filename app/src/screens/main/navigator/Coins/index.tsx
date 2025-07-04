@@ -250,7 +250,8 @@ const Coins = () => {
   };
 
   const shareFacebook = async () => {
-    const facebookUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent('https://hexpresso.app') + '&quote=' + encodeURIComponent('🌟 Hexpresso ile günlük burç yorumlarımı takip ediyorum! Astroloji ve burç yorumları için harika bir uygulama. Sen de dene! 🔮✨');
+    const appId = '1347955562982110';
+    const facebookUrl = `https://www.facebook.com/dialog/share?app_id=${appId}&display=popup&href=${encodeURIComponent('https://hexpresso.app')}&quote=${encodeURIComponent('🌟 Hexpresso ile günlük burç yorumlarımı takip ediyorum! Astroloji ve burç yorumları için harika bir uygulama. Sen de dene! 🔮✨')}`;
 
     try {
       await Linking.openURL(facebookUrl);
@@ -279,7 +280,7 @@ const Coins = () => {
   };
 
   const shareTweet = async () => {
-    const tweetText = '🌟 Hexpresso ile günlük burç yorumlarımı okuyorum! Gelecekteki planlarım için harika ipuçları alıyorum. Sen de dene! 🔮✨ #Hexpresso #Burç #Astroloji';
+    const tweetText = '🌟 Hexpresso ile günlük burç yorumlarımı okuyorum! Gelecekteki planlarım için harika ipuçları alıyorum. Sen de dene! 🔮✨ #Hexpresso #Burç #Astroloji #HexpressoApp #Fal';
     const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
 
     try {
@@ -491,7 +492,7 @@ const Coins = () => {
           {tasks.map(renderTaskCard)}
 
           {/* Referral Card */}
-          <View style={[
+          {/* <View style={[
             styles.referralCard,
             { borderColor: colors.border, borderWidth: 1 }
           ]}>
@@ -530,7 +531,7 @@ const Coins = () => {
                 contentStyle={[styles.referralButton, { backgroundColor: colors.secondary }]}
               />
             </View>
-          </View>
+          </View> */}
 
           {/* Ads */}
           <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center' }}>

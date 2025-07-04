@@ -2,14 +2,17 @@ import { AuthProvider, ThemeProvider, ToastProvider, useTheme } from "@providers
 import '@utils/i18n';
 import { useFonts } from 'expo-font';
 import { Stack } from "expo-router";
+import * as SplashScreen from 'expo-splash-screen';
 import * as SystemUI from 'expo-system-ui';
 import { useEffect } from "react";
 import mobileAds from 'react-native-google-mobile-ads';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-
 export function AppContent() {
   const { theme, colors } = useTheme();
   const insets = useSafeAreaInsets();
+  useEffect(() => {
+    SplashScreen.hideAsync();
+  }, []);
 
   useEffect(() => {
     SystemUI.setBackgroundColorAsync(colors.background);

@@ -14,6 +14,15 @@
     "plugins": [
       "@react-native-google-signin/google-signin",
       [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/adaptive-icon.png",
+          "color": "#000000",
+          "defaultChannel": "default",
+          "enableBackgroundRemoteNotifications": false
+        }
+      ],
+      [
         "expo-location",
         {
           "locationAlwaysAndWhenInUsePermission": "Hexpresso uygulaması konumunuzu kullanarak size daha iyi hizmet sunmak istiyor."

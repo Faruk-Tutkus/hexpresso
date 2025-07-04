@@ -348,7 +348,7 @@ Yani seninle ilgilenir, ama sana körü körüne uymaz.
           Burçlar
           </Text>
           <Text style={[styles.headerDescription, { color: colors.background }]}>
-          Burçların genel özelliklerini keşfet ve Mordecai\'ya burçlar hakkında merak ettiğin her şeyi sor!
+          Burçların genel özelliklerini keşfet ve Mordecai'ya burçlar hakkında merak ettiğin her şeyi sor!
           </Text>
           <FloatingLabelInput
             placeholder="Mordecai'ya sor"
@@ -372,7 +372,7 @@ Yani seninle ilgilenir, ama sana körü körüne uymaz.
           Burç Yorumları
           </Text>
           <Text style={[styles.headerDescription, { color: colors.background }]}>
-          Günlük, haftalık, aylık ve yıllık burç yorumlarını incele. Mordecai\'dan sadece sana özel günlük analiz al!
+          Günlük, haftalık, aylık ve yıllık burç yorumlarını incele. Mordecai'dan sadece sana özel günlük analiz al!
           </Text>
           <CustomButton
             title="Özel Burç Yorumun"

@@ -55,7 +55,7 @@ GÖREV: ${description}
 						return baseInstruction + `
 KONTROL KRİTERLERİ:
 - Ekran görüntüsü Instagram uygulamasından mı?
-- Hexpresso hesabının profil sayfası görünüyor mu?
+- Hexpresso App hesabının profil sayfası görünüyor mu?
 - "Takip Ediliyor" veya "Following" butonu aktif mi?
 - Hesap adı "hexpresso" veya benzeri görünüyor mu?
 
