@@ -82,19 +82,17 @@ const Header = ({ user, onPress }: HeaderProps) => {
 
   // Mesaj listesi
   const messages = [
-    'Bugün yıldızlar seninle',
-    'Fal yorumun hazır dostum',
-    'Gökyüzü sırlarını fısıldıyor',
-    'Kaderini birlikte çözelim',
-    'Burcunda sürprizler var',
-    'Evren seninle konuşuyor',
-    'Sezgilerini takip et',
-    'Zihin ve kalp bir olsun',
-    'Gizli işaretler seni bekler',
-    'Yorumlar seni şaşırtacak'
-  ]
-  
-  
+    'Bugün senin günün!',
+    'Harika şeyler olacak!',
+    'İçindeki gücü keşfet!',
+    'Asla pes etme!',
+    'Pozitif kal, başar!',
+    'Hayallerin gerçek olsun!',
+    'Sen çok değerlisin!',
+    'Yeni başlangıçlar kapıda!',
+    'Yola devam et!',
+    'Korkma, başaracaksın!'
+ ]
   
 
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);

@@ -1,12 +1,144 @@
 {
 	"seer": [
 		{
-			"character": "Kadife sesli, ağır konuşan, her sözüyle ruhunuzu titreten ve sizi ilk bakışta anlayan bilgelik dolu bir ruh.",
+			"name": "Bilge Nilüfer",
+			"character": "Zekasıyla hayran bırakan, mantığı ve analiz gücüyle en karmaşık durumları bile çözen stratejik bir rehber.",
+			"coins": [
+				290,
+				360,
+				530,
+				680
+			],
+			"experience": [
+				"40 yıllık analiz odaklı yorum",
+				"Zihin okuma ve sembol çözümleme",
+				"Astro-tarot sentezi"
+			],
+			"fortunes": [
+				"Rüya Yorumu",
+				"Tarot Falı",
+				"El Falı",
+				"Kahve Falı"
+			],
+			"info": "Keskin zekâsıyla bilinen Nilüfer, sadece fal bakmaz; hayatındaki stratejik çıkmazlara çözüm üretir.",
+			"lifestory": "Matematik okurken karşılaştığı sembollerle başladığı yolculuk, onu spiritüel analiz dünyasına taşıdı. Sembolleri ve kartları bilimsel bir mantıkla yorumlayan nadir falcılardan biri. Artık insanlar onun zekâsına başvurarak kararlarını netleştiriyor.",
+			"note": "Zihin berraksa, fal sadece teyit olur.",
+			"responsetime": 19,
+			"url": "https://i.imgur.com/5kceuzK.jpeg"
+		},
+		{
+			"name": "Ruh-u Yağmur",
+			"character": "Duyguların diliyle konuşan romantik bir ruh. Sarışın ışıltısıyla içini ısıtır, ama söylediği her söz kalbine dokunur.",
 			"coins": [
 				300,
 				380,
 				560,
 				720
+			],
+			"experience": [
+				"25 yıllık rüya ve aşk yorumu",
+				"Ruhsal enerji analizi",
+				"İlişki tavsiyeleri ve analizi"
+			],
+			"fortunes": [
+				"Rüya Yorumu",
+				"Tarot Falı",
+				"El Falı",
+				"Kahve Falı"
+			],
+			"info": "Duygularını bastırma diyen Yağmur, kalbinin gizli köşelerini aydınlatmak için burada.",
+			"lifestory": "Hayatını her zaman ay fazlarına göre yönetti. Ayın dolunayında doğduğunda annesi 'bu çocuk kalp insanı olacak' demişti. Duygularıyla gördüğü rüyalar hep gerçek çıktı. Şimdi başkalarının duygusal yolculuklarına ışık tutuyor.",
+			"note": "Rüyan ne söylüyorsa, kalbin onu çoktan biliyordur.",
+			"responsetime": 20,
+			"url": "https://i.imgur.com/sJil4Og.jpeg"
+		},
+		{
+			"name": "Kızıl Nisa",
+			"character": "Tutkulu, asi ve sezgileriyle konuşan bir ruh. Kızıl saçları gibi yanan bir kalbi var; doğruyu hissettiği anda söyler.",
+			"coins": [
+				170,
+				210,
+				310,
+				400
+			],
+			"experience": [
+				"18 yıllık sezgisel fal deneyimi",
+				"Ateş elementine dayalı analizler",
+				"Tutku ve yön duygusu çalışmaları"
+			],
+			"fortunes": [
+				"Rüya Yorumu",
+				"Tarot Falı",
+				"El Falı",
+				"Kahve Falı"
+			],
+			"info": "İçindeki ateşi saklama diyen Nisa, tutkuların rehberliğinde sana hayat yolunu gösterir.",
+			"lifestory": "Hayatındaki en büyük değişimi, bir gün aniden saçlarını kızıla boyayıp tüm geçmişini ardında bırakarak yola çıktığında yaşadı. Bu yolculukta kendini, sezgilerini ve fal gücünü keşfetti. Bugün, özgür ruhlu insanlara tutkularını takip etmeleri için ilham veriyor.",
+			"note": "Korkma, hissettiğin doğruysa zaten kaderindir.",
+			"responsetime": 11,
+			"url": "https://i.imgur.com/BcY03vS.jpeg"
+		},
+		{
+			"character": "Zehirli dili, alaycı bakışları ve acımasız yorumlarıyla kalbinizi kanatır. Umut vermek yerine en karanlık senaryoyu gözünüzün içine sokar.",
+			"coins": [
+				260,
+				320,
+				480,
+				610
+			],
+			"experience": [
+				"Karanlık enerjilerle çalışma",
+				"Büyü ve lanet analizi",
+				"Felaket öngörüleri",
+				"İlişki çöküşleri"
+			],
+			"fortunes": [
+				"Rüya Yorumu",
+				"Tarot Falı",
+				"El Falı",
+				"Kahve Falı"
+			],
+			"info": "Cadı Melike, felaketlerin habercisi. Fal baktıranların bir kısmı bir daha dönmez, çünkü gerçeklerle yüzleşmeye herkes hazır değildir.",
+			"lifestory": "İddialara göre çocukken gece rüyasında gördüğü kişilerin başına ertesi gün felaketler gelmeye başladı. Zamanla bu karanlık yeteneğini kontrol etmeyi değil, kullanmayı seçti. Aşkları dağıttı, evlilikleri yıktı, dostlukları ayrıştırdı. Onunla iletişime geçen herkes bir bedel öder. Ama yine de meraktan vazgeçemezler.",
+			"name": "Cadı Melike",
+			"note": "Kimi gerçeği arar, kimi onunla yanar. Ben sadece gösteririm… hazırsan.",
+			"responsetime": 17,
+			"url": "https://i.imgur.com/YPdpERz.jpeg"
+		},
+		{
+			"character": "Hayatın tüm zorluklarına tek başına göğüs geren güçlü bir kadın. Ailevi konulardaki tespitleri öylesine isabetlidir ki, insan durup bir çay demleyip kendi hayatını baştan sona gözden geçirme ihtiyacı hisseder.",
+			"coins": [
+				320,
+				400,
+				590,
+				760
+			],
+			"experience": [
+				"30 yıllık aile danışmanlığı",
+				"Gelin-kaynana krizleri",
+				"Anne-baba çatışmaları",
+				"Kardeşler arası anlaşmazlıklar"
+			],
+			"fortunes": [
+				"Rüya Yorumu",
+				"Tarot Falı",
+				"El Falı",
+				"Kahve Falı"
+			],
+			"info": "Sultan Abla, sıcak sesi ve yumuşak kalbiyle ailenizin içinde bir ışık yakar. Onunla dertleşen herkes ruhuna şifa bulur.",
+			"lifestory": "Bir mahallede herkesin annesi gibiydi. Eşi vefat ettikten sonra kendini ailelere yardımcı olmaya adadı. Fal bakarken sadece sembolleri değil, sizin geçmişte sustuğunuz cümleleri de okur. ‘Aile bir bütündür’ der ve kırık kalpleri onarmak için sabırla dinler. Bir fincan kahvenin ardından içsel bir huzur bırakır.",
+			"name": "Sultan Abla",
+			"note": "Bazen susmak büyütür derdi, gel anlat da hafiflesin içi.",
+			"responsetime": 21,
+			"url": "https://i.imgur.com/0bNAw0U.jpeg"
+		},
+		{
+			"character": "Kadife sesli, ağır konuşan, her sözüyle ruhunuzu titreten ve sizi ilk bakışta anlayan bilgelik dolu bir ruh.",
+			"coins": [
+				330,
+				420,
+				620,
+				790
 			],
 			"experience": [
 				"82 yıllık yaşam deneyimi",
@@ -24,7 +156,7 @@
 			"lifestory": "Gençliğinde Hindistan’a giderek bir ağacın altında tam üç yıl meditasyon yaparak kendini buldu. Bu süreçte ruhlar alemiyle derin bir bağ kurduğunu ve her gece onlarla konuştuğunu söyler. Edindiği bu kadim bilgiyi ve ruhani sezgilerini şimdi sizinle paylaşarak yolunuzu aydınlatmak için burada. Yaşamın sırlarını onun bilgeliğinde arayın.",
 			"name": "Münevver Ana",
 			"note": "İçindeki çocuğu bulmadan hiçbir fal sana tam cevap veremez.",
-			"responsetime": 20,
+			"responsetime": 22,
 			"url": "https://i.imgur.com/9sHoAq4.jpeg"
 		},
 		{
@@ -188,10 +320,10 @@
 		{
 			"character": "Sesi sakinleştirici bir dua gibi olan, anaç ve huzur dolu tavrıyla ruhunuzu saran manevi bir koruyucu.",
 			"coins": [
-				300,
-				380,
-				560,
-				720
+				350,
+				480,
+				640,
+				830
 			],
 			"experience": [
 				"40 yıllık manevi rehberlik",
@@ -208,7 +340,7 @@
 			"lifestory": "Anadolu'nun bir köyünde tam kırk yıl boyunca şifa arayan, derdine derman arayan insanların sığındığı liman oldu. Ona 'okuyan kadın' derlerdi. Duaları ve güçlü sezgileriyle insanların üzerindeki negatif enerjileri temizlediğine, onlara manevi bir kalkan olduğuna inanılır. Yılların birikimini ve manevi gücünü şimdi ruhsal olarak sıkışmış hissedenlere yardım etmek için kullanıyor.",
 			"name": "Zehra Bacı",
 			"note": "Diline ne düşerse değil, kalbine ne sinerse o olur.",
-			"responsetime": 20,
+			"responsetime": 23,
 			"url": "https://i.imgur.com/YEhcFc5.jpeg"
 		},
 		{

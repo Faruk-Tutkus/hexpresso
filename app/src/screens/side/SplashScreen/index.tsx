@@ -13,23 +13,23 @@ const SplashScreen = () => {
   const { theme, colors } = useTheme()
   const { user, loading: authLoading } = useAuth()
   const [texts] = useState([
-    "Sana bir sır fısıldayacağım, hazır ol...",
-    "Bugün kaderini değiştirecek bir şey olacak...",
-    "Boşuna bekleme, mesaj gelmeyecek...",
-    "Yıldızlar kulağıma senin adını fısıldadı...",
-    "Fal fincanın sana konuşmak istiyor...",
-    "Bugün evrende senin adına bir kıpırtı var...",
-    "Gözlerini kapat... Dileğini tuttun mu?",
-    "Kahvenin dibinde bir sır saklı...",
-    "Geleceğin gölgeleri şekillenmeye başladı...",
-    "Kalbinin cevabını bulmaya çok yakınsın...",
-    "Yıldızlar seninle dalga geçmiyor bu kez...",
-    "Bugün enerjin bambaşka, fark ettin mi?",
-    "O kişi sana göre değildi zaten, takılma...",
-    "Mutsuzluğunun sebebi sana doğru gelmekte...",
-    "Geçen yıl bugün ne oldu hatırlıyor musun?",
-    "Yarın için heyecanlı mısın?",
-  ])
+    "İçindeki gücü keşfet, bugün her şeye yetersin!",
+    "Harika bir gün seni bekliyor, mucizelere açık ol!",
+    "Kalbinin sesini dinle, doğru yol orada!",
+    "Yıldızlar senin için hizalanıyor, dileklerini dile getir!",
+    "Her adımın seni başarıya bir adım daha yaklaştırıyor!",
+    "Bugün evrenin sana sürprizleri var, gülümse!",
+    "Gözlerini kapat ve hayallerini gerçeğe dönüştür!",
+    "Potansiyelin sınırsız, bugün yeni bir başlangıç yap!",
+    "Geleceğin parlıyor, ışığını saçmaya devam et!",
+    "Aradığın cevaplar içinde, sadece inan!",
+    "Şans seninle, cesur adımlar at!",
+    "Bugün enerjin harika, etrafına neşe saç!",
+    "Her bitiş yeni bir başlangıçtır, ileriye bak!",
+    "Mutluluk sana doğru geliyor, kalbini açık tut!",
+    "Geçmiş tecrübelerin seni güçlendirdi, unutma!",
+    "Yarın için heyecanlan, yeni zaferler seni bekliyor!",
+ ])
 
   const [randomText, setRandomText] = useState('');
 
