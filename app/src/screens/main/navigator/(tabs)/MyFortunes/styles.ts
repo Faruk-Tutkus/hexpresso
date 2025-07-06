@@ -302,7 +302,7 @@ export default StyleSheet.create({
   statusMessage: {
     fontSize: 14,
     fontFamily: 'Domine-SemiBold',
-    lineHeight: 20,
+    lineHeight: 15,
     flex: 1,
   },
   countdownBadge: {
@@ -484,7 +484,11 @@ export default StyleSheet.create({
   tarotCardsGrid: {
     marginBottom: 8,
   },
-
+  tarotCardsHorizontalList: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    flexGrow: 1,
+  },
   tarotCardPosition: {
     fontSize: 16,
     fontFamily: 'Domine-Bold',
@@ -498,11 +502,11 @@ export default StyleSheet.create({
     fontFamily: 'Domine-Medium',
   },
   tarotCardDisplayItem: {
-    flexDirection: 'row',
+    width: 250,
     borderRadius: 8,
     borderWidth: 1,
     padding: 12,
-    marginBottom: 12,
+    marginRight: 12,
     alignItems: 'center',
   },
   tarotCardImageContainer: {
@@ -576,7 +580,7 @@ export default StyleSheet.create({
 
   // Flip card additional styles
   flipWrapper: {
-    flex: 1,
+    flex: 1
   },
   tarotCardImageContainerLarge: {
     width: 170,

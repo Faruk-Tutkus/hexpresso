@@ -1,6 +1,7 @@
-import { Banner } from '@ads';
+import { Banner, SpeedUpReward } from '@ads';
 import { db } from '@api/config.firebase';
 import Icon from '@assets/icons';
+import { useFortuneNotificationManager } from '@hooks';
 import { useAuth, useTheme, useToast } from '@providers';
 import { Image } from 'expo-image';
 import { arrayRemove, arrayUnion, doc, onSnapshot, updateDoc } from 'firebase/firestore';
@@ -32,6 +33,7 @@ interface FortuneRecord {
   coins: number;
   result?: any;
   completedAt?: any;
+  speedUpUsed?: number;
 }
 
 const MyFortunes = () => {
@@ -245,7 +247,69 @@ const FortuneCardContent = ({
   onToggle: () => void;
 }) => {
   const [timeRemaining, setTimeRemaining] = useState<string>('');
-  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const { user } = useAuth();
+  const { showToast } = useToast();
+  const { updateFortuneNotificationTime } = useFortuneNotificationManager();
+
+  const speedUpFortune = useCallback(async () => {
+    if (!user?.uid || fortune.status !== 'pending') return;
+
+    try {
+      console.log('⚡ Starting fortune speed up process...');
+
+      // Mevcut completion time'ı al
+      const currentCompletionTime = fortune.estimatedCompletionTime.toDate?.()
+        ? fortune.estimatedCompletionTime.toDate()
+        : new Date(fortune.estimatedCompletionTime);
+
+      // 30 saniye düş
+      const newCompletionTime = new Date(currentCompletionTime.getTime() - (30 * 1000));
+      
+      // Minimum 30 saniye kalsın
+      const minCompletionTime = new Date(Date.now() + 30000);
+      const finalCompletionTime = newCompletionTime > minCompletionTime ? newCompletionTime : minCompletionTime;
+
+      // Yeni response time hesapla (dakika cinsinden)
+      const newResponseTimeMinutes = Math.max(
+        Math.ceil((finalCompletionTime.getTime() - Date.now()) / (1000 * 60)),
+        1
+      );
+
+      // Fortune record'u güncelle
+      const updatedFortune = {
+        ...fortune,
+        estimatedCompletionTime: finalCompletionTime,
+        responseTime: newResponseTimeMinutes,
+        speedUpUsed: (fortune.speedUpUsed || 0) + 1, // Kaç kez hızlandırıldığını takip et
+      };
+
+      // Firebase'de güncelle
+      await updateDoc(doc(db, 'users', user.uid), {
+        fortunerecord: arrayRemove(fortune)
+      });
+
+      await updateDoc(doc(db, 'users', user.uid), {
+        fortunerecord: arrayUnion(updatedFortune)
+      });
+
+      // Notification'ı güncelle
+      await updateFortuneNotificationTime(
+        fortune.id,
+        newResponseTimeMinutes,
+        {
+          seerName: fortune.seerData.name,
+          fortuneType: fortune.fortuneType,
+          responseTimeMinutes: newResponseTimeMinutes,
+        }
+      );
+
+      console.log('✅ Fortune speed up completed successfully');
+      
+    } catch (error) {
+      console.error('❌ Error speeding up fortune:', error);
+      showToast('Hızlandırma işlemi başarısız oldu', 'error');
+    }
+  }, [user?.uid, fortune, updateFortuneNotificationTime, showToast]);
 
   useEffect(() => {
     if (fortune.status !== 'pending') return;
@@ -543,6 +607,38 @@ const FortuneCardContent = ({
   const renderTarotCards = () => {
     const selectedCards = fortune.selectedCards || [];
     console.log(selectedCards);
+    
+    const renderTarotCard = ({ item: card, index }: { item: any; index: number }) => (
+      <Animated.View
+        key={index}
+        style={[styles.tarotCardDisplayItem, { borderColor: colors.border }]}
+        entering={FadeInUp.delay((index + 1) * 100).springify()}
+      >
+        <FlipCard
+          flipHorizontal
+          flipVertical={false}
+          clickable
+          style={styles.flipWrapper}
+          perspective={1000}
+          onFlipEnd={() => {
+            // Ensure scroll is re-enabled after flip animation
+            console.log('Flip animation ended');
+          }}
+        >
+          {/* FRONT: card info */}
+          <View style={styles.tarotCardDisplayInfo}>
+            <Text style={[styles.tarotCardPosition, { color: colors.primary }]}> {card.position}. {card.meaning}</Text>
+            <Text style={[styles.tarotCardDisplayName, { color: colors.text }]}>{card.name}</Text>
+            {card.info && <Text style={[styles.tarotCardInfo, { color: colors.secondaryText }]}>{card.info}</Text>}
+          </View>
+          {/* BACK: card image */}
+          <View style={styles.tarotCardImageContainerLarge}>
+            <RNImage source={getTarotCardImage(card.imageKey)} style={styles.tarotCardDisplayImageLarge} />
+          </View>
+        </FlipCard>
+      </Animated.View>
+    );
+
     return (
       <Animated.View
         style={styles.tarotInputSection}
@@ -553,33 +649,24 @@ const FortuneCardContent = ({
           <Text style={[styles.inputSectionLabel, { color: colors.primary }]}>Seçilen Tarot Kartları</Text>
         </View>
 
-        <View style={styles.tarotCardsGrid}>
-          {selectedCards.map((card: any, index: number) => (
-            <Animated.View
-              key={index}
-              style={[styles.tarotCardDisplayItem, { borderColor: colors.border }]}
-              entering={FadeInUp.delay((index + 1) * 100).springify()}
-            >
-              <FlipCard
-                flipHorizontal
-                flipVertical={false}
-                clickable
-                style={styles.flipWrapper}
-              >
-                {/* FRONT: card info */}
-                <View style={styles.tarotCardDisplayInfo}>
-                  <Text style={[styles.tarotCardPosition, { color: colors.primary }]}> {card.position}. {card.meaning}</Text>
-                  <Text style={[styles.tarotCardDisplayName, { color: colors.text }]}>{card.name}</Text>
-                  {card.info && <Text style={[styles.tarotCardInfo, { color: colors.secondaryText }]}>{card.info}</Text>}
-                </View>
-                {/* BACK: card image */}
-                <View style={styles.tarotCardImageContainerLarge}>
-                  <RNImage source={getTarotCardImage(card.imageKey)} style={styles.tarotCardDisplayImageLarge} />
-                </View>
-              </FlipCard>
-            </Animated.View>
-          ))}
-        </View>
+        <FlatList
+          data={selectedCards}
+          keyExtractor={(item, index) => `tarot-card-${index}-${item.id || item.name}`}
+          renderItem={renderTarotCard}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.tarotCardsHorizontalList}
+          snapToInterval={262}
+          snapToAlignment="start"
+          decelerationRate="fast"
+          scrollEventThrottle={16}
+          removeClippedSubviews={false}
+          getItemLayout={(data, index) => ({
+            length: 262,
+            offset: 262 * index,
+            index,
+          })}
+        />
 
         <View style={styles.tarotStats}>
           <Text style={[styles.tarotStatsText, { color: colors.secondaryText }]}> 🃏 {selectedCards.length} kart seçildi</Text>
@@ -772,6 +859,23 @@ const FortuneCardContent = ({
           </View>
         )}
       </Animated.View>
+
+      {/* Speed Up Reward Section for Pending Fortunes */}
+      {fortune.status === 'pending' && (
+        <Animated.View
+          entering={FadeIn.delay(300).springify()}
+        >
+          <SpeedUpReward
+            remainingMinutes={Math.ceil((
+              fortune.estimatedCompletionTime.toDate?.()
+                ? fortune.estimatedCompletionTime.toDate().getTime()
+                : new Date(fortune.estimatedCompletionTime).getTime()
+            ) / (1000 * 60)) - Math.ceil(Date.now() / (1000 * 60))}
+            onSpeedUpSuccess={speedUpFortune}
+            disabled={fortune.speedUpUsed ? fortune.speedUpUsed >= 10 : false} // Maksimum 10 kez hızlandırma
+          />
+        </Animated.View>
+      )}
 
       {/* Enhanced Result Button */}
       {fortune.status === 'completed' && fortune.result && (

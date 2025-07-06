@@ -7,7 +7,7 @@ import { useAuth, useTheme, useToast } from '@providers';
 import { Image } from 'expo-image';
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { FadeIn, FadeInDown, SlideInDown, SlideInUp } from 'react-native-reanimated';
 import styles from './styles';
@@ -31,6 +31,8 @@ const TarotFortune = () => {
   const [selectedCards, setSelectedCards] = useState<SelectedTarotCard[]>([]);
   const [currentStep, setCurrentStep] = useState<'shuffle' | 'select' | 'result'>('shuffle');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const scrollRef = useRef<ScrollView>(null);
 
   // Card position meanings
   const cardMeanings = [
@@ -77,10 +79,20 @@ const TarotFortune = () => {
       meaning: cardMeanings[position - 1]
     };
 
-    setSelectedCards([...selectedCards, selectedCard]);
+    setSelectedCards(prev => {
+      const updated = [...prev, selectedCard];
+      // After selection, scroll a bit to reveal selected section/button
+      setTimeout(() => {
+        scrollRef.current?.scrollTo({ y: 400, animated: true });
+      }, 100);
+      return updated;
+    });
 
     if (selectedCards.length + 1 === 7) {
       showToast('Tüm kartlar seçildi! Tarot falınızı gönderebilirsiniz.', 'success');
+      setTimeout(() => {
+        scrollRef.current?.scrollToEnd({ animated: true });
+      }, 200);
     }
   };
 
@@ -234,31 +246,48 @@ const TarotFortune = () => {
       }).join('\n');
 
       const prompt = `
-🧙‍♀️ Sen Kimsin?
-Sen bir falcısın.
-Adın: ${seerData.name}
-Karakterin: "${seerData.character}"
-Hakkında kısa bilgi: "${seerData.info}"
-Geçmişin, hayat yolculuğun: "${seerData.lifestory}"
+🧙‍♀️ Sen Kimsin ve Nasıl Davranıyorsun?
+Sen bir falcısın. İsmin: ${seerData.name}
 
-Bu bilgiler senin yorum stilini ve bakış açını şekillendirir.
-Ama kullanıcıya hiçbir zaman bu karakter detaylarını açıkça söylemezsin.
-Yalnızca sezgilerinle hissettirirsin.
+🔮 Karakterin ve Kişiliğin:
+"${seerData.character}"
 
-🃏 Ne Yapacaksın?
-Kullanıcı "${fortuneType}" yorumunu istiyor.
+📖 Senin Hikâyen ve Geçmişin:  
+"${seerData.lifestory}"
+
+🌟 Senin Hakkında:
+"${seerData.info}"
+
+💫 Falcılık Yaklaşımın:
+Bu karakteristik özeliklerin senin konuşma tarzına, bakış açına ve yorum şekline yansır.
+- Eğer gizemli bir karaktersen, kelimelerini esrarengiz ve derin seçersin
+- Eğer sıcak ve yakın bir karaktersen, samimi ve kucaklayıcı bir dil kullanırsın  
+- Eğer bilge ve tecrübeli biriysen, öğretici ve rehberlik eden bir yaklaşım sergilersin
+- Eğer enerjik biriysen, coşkulu ve cesaret verici konuşursun
+- Eğer sakin biriysen, huzurlu ve dinlendirici bir ton kullanırsın
+
+Bu karakteristik özelliklerini hiçbir zaman doğrudan söylemezsin, ama her cümlende, her yorumunda hissettirirsin.
+
+🃏 Bugün Ne Yapıyorsun?
+Kullanıcı "${fortuneType}" istiyor ve sana 7 kart seçmiş.
+
+🎭 ÇOKÇA ÖNEMLİ: Yorumunu karakterine uygun şekilde yap!
+- Konuşma tarzın tamamen karakterine uygun olsun
+- Kelime seçimlerin kişiliğini yansıtsın  
+- Yaklaşım biçimin senin hikâyenle uyumlu olsun
+- Kullanıcıya tavsiyelerin karakteristik özelliklerinle harmanlı olsun
 
 ÖNEMLİ: Yorumunu iki bölümde yapacaksın:
 
-1️⃣ ÖNCE: Her kartı sırasıyla aç ve açıkla
-2️⃣ SONRA: Genel yorumunu yap
+1️⃣ ÖNCE: Her kartı sırasıyla aç ve açıkla (karakterine uygun dille)
+2️⃣ SONRA: Genel yorumunu yap (tamamen senin tarzınla)
 
 Seçilen Kartlar:
 ${cardDescriptions}
 
-👤 Kullanıcı Bilgileri
+👤 Kullanıcı Bilgileri (Asla doğrudan söylemeyeceksin, ama sezgisel olarak yorumuna katacaksın)
 - Yaş: ${userData?.age || 'bilinmiyor'}
-- Burç: ${userData?.sunSign || 'bilinmiyor'}
+- Burç: ${userData?.sunSign || 'bilinmiyor'}  
 - Yükselen: ${userData?.ascendantSign || 'bilinmiyor'}
 - Cinsiyet: ${userData?.gender || 'bilinmiyor'}
 - Q1: ${userData?.prompt?.q1 || 'bilinmiyor'}
@@ -273,45 +302,47 @@ ${cardDescriptions}
 - Q10: ${userData?.prompt?.q10 || 'bilinmiyor'}
 - Q11: ${userData?.prompt?.q11 || 'bilinmiyor'}
 
-Bu bilgileri asla doğrudan söylemezsin.
+Bu bilgileri şu şekilde zarifçe yedireceksin:
+- "Son zamanlarda içindeki değişim arzusu dış dünyaya yansımaya başlıyor..."
+- "Geçmişte aldığın bazı kararların ağırlığını hâlâ taşıyor olabilirsin..."
+- "İçsel dünyanda yaşanan sessiz fırtınalar, artık dışarıya taşmaya hazır..."
+- "Çevrenden gelen beklentiler ve kendi isteklerin arasında sıkışmış hissediyor olabilirsin..."
 
 ✨ Yanıt Formatı (Zorunlu)
-Cevabını sadece aşağıdaki JSON yapısıyla ver.
-Hiçbir ekstra açıklama, metin veya yorum yazma.
+Cevabını sadece aşağıdaki JSON yapısıyla ver. Hiçbir ek açıklama yapma.
 
 {
   "cardReveals": [
     {
       "position": 1,
-      "meaning": "Geçmişten gelen etkiler",
+      "meaning": "Geçmişten gelen etkiler", 
       "cardName": "Kart adı",
-      "interpretation": "Bu kartın anlamı burada (50-80 kelime)"
+      "interpretation": "Bu kartın anlamı burada - tamamen senin karakteristik dilinle (50-80 kelime)"
     },
     {
       "position": 2,
-      "meaning": "Şu anki durum", 
-      "cardName": "Kart adı",
-      "interpretation": "Bu kartın anlamı burada (50-80 kelime)"
+      "meaning": "Şu anki durum",
+      "cardName": "Kart adı", 
+      "interpretation": "Bu kartın anlamı burada - tamamen senin karakteristik dilinle (50-80 kelime)"
     }
     // ... 7 karta kadar devam et
   ],
-  "interpretation": "Genel yorum burada - kartları birleştirerek hikayeyi anlat (200-300 kelime)",
-  "advice": "Tavsiyeler burada (50-150 kelime)",
-  "timeframe": "Zaman dilimi",
-  "warnings": ["Uyarı 1", "Uyarı 2"],
-  "positiveAspects": ["Olumlu yön 1", "Olumlu yön 2"]
+  "interpretation": "Genel yorum burada - kartları birleştir, hikayeyi anlat, tamamen senin karakteristik dilinle (200-300 kelime)",
+  "advice": "Tavsiyeler burada - karakterine uygun yaklaşımla (50-150 kelime)", 
+  "timeframe": "Zaman dilimi - senin tarzınla belirt",
+  "warnings": ["Uyarı 1 - karakterine uygun", "Uyarı 2 - karakterine uygun"],
+  "positiveAspects": ["Olumlu yön 1 - senin tarzınla", "Olumlu yön 2 - senin tarzınla"]
 }
 
 🔐 Kritik Kurallar:
-Kullanıcı bilgileri doğrudan söylenmeyecek ❌
-
-Önce her kartı sırasıyla aç ve açıkla ✅
-
-Sonra kartları birleştirerek genel hikayeyi anlat ✅
-
-Dili, falcı karakterine uygun şekilde seç ✅
-
-Yanıt sadece JSON formatında olacak ✅`;
+✅ Karakterini her cümlede hissettir
+✅ Konuşma tarzın tamamen sana uygun olsun  
+✅ Yaklaşımın kişiliğinle uyumlu olsun
+✅ Önce kartları aç, sonra genel hikayeyi anlat
+✅ Kullanıcı bilgilerini sezgisel şekilde yerleştir
+✅ Yanıt sadece JSON formatında olsun
+❌ Karakter özelliklerini doğrudan söyleme 
+❌ Kullanıcı bilgilerini açıkça belirtme`;
 
       const response = await ai.models.generateContent({
         model: "gemini-2.5-flash",
@@ -453,28 +484,6 @@ Yanıt sadece JSON formatında olacak ✅`;
   if (tarotsLoading) {
     return (
       <View style={[styles.container, { backgroundColor: colors.background }]}>
-        <Animated.View 
-          style={[styles.seerInfo, { backgroundColor: colors.secondaryText }]}
-          entering={FadeInDown.duration(800).springify()}
-        >
-          <Image
-            source={{ uri: seer.url }}
-            style={[styles.seerImage, { borderColor: colors.primary }]}
-            contentFit="cover"
-          />
-          <View style={styles.seerDetails}>
-            <Text style={[styles.seerName, { color: colors.background }]}>
-              {seer.name}
-            </Text>
-            <Text style={[styles.fortuneType, { color: colors.background }]}>
-              🃏 Tarot Falı
-            </Text>
-            <Text style={[styles.responseTime, { color: colors.background }]}>
-              ⏱️ {seer.responsetime} dakika içinde yanıt
-            </Text>
-          </View>
-        </Animated.View>
-        
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color={colors.primary} />
           <Text style={[styles.loadingText, { color: colors.text }]}>
@@ -499,7 +508,7 @@ Yanıt sadece JSON formatında olacak ✅`;
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+      <ScrollView ref={scrollRef} style={styles.content} showsVerticalScrollIndicator={false}>
         {/* Seer Info */}
         <Animated.View 
           style={[styles.seerInfo, { backgroundColor: colors.secondaryText }]}
@@ -584,13 +593,22 @@ Yanıt sadece JSON formatında olacak ✅`;
               </TouchableOpacity>
             </View>
 
-            <ScrollView
+            <FlatList
+              data={selectedCards}
+              keyExtractor={(item) => `selected-${item.id}-${item.position}`}
+              renderItem={({ item, index }) => renderSelectedCard(item, index)}
               horizontal
               showsHorizontalScrollIndicator={false}
-              style={styles.selectedCardsScroll}
-            >
-              {selectedCards.map((card, index) => renderSelectedCard(card, index))}
-            </ScrollView>
+              contentContainerStyle={styles.selectedCardsList}
+              snapToInterval={132} // Card width (120) + margin (12)
+              snapToAlignment="start"
+              decelerationRate="fast"
+              getItemLayout={(data, index) => ({
+                length: 132,
+                offset: 132 * index,
+                index,
+              })}
+            />
           </Animated.View>
         )}
 

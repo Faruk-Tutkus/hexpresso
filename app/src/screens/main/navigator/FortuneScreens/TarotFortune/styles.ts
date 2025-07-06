@@ -46,7 +46,7 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 32,
+    paddingHorizontal: 20,
   },
   loadingText: {
     fontSize: 16,
@@ -119,6 +119,10 @@ export default StyleSheet.create({
     marginLeft: 4,
   },
   selectedCardsScroll: {
+    paddingVertical: 8,
+  },
+  selectedCardsList: {
+    paddingHorizontal: 8,
     paddingVertical: 8,
   },
   selectedCardContainer: {

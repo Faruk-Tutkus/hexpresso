@@ -107,13 +107,14 @@ const useFortuneNotificationManager = () => {
         const reminderNotificationId = await Notifications.scheduleNotificationAsync({
           content: {
             title: '⏳ Falınız Yakında Hazır',
-            body: `${fortuneData.seerName} tarafından ${fortuneData.fortuneType} yorumunuz 5 dakika içinde tamamlanacak.`,
+            body: `${fortuneData.seerName} tarafından ${fortuneData.fortuneType === 'Rüya Yorumu' ? 'Rüya' : fortuneData.fortuneType} yorumunuz 5 dakika içinde tamamlanacak.`,
             data: {
               type: 'fortune_reminder',
               seerName: fortuneData.seerName,
               fortuneType: fortuneData.fortuneType,
             },
             sound: false,
+            vibrate: [0, 250, 250, 250],
           },
           trigger: {
             type: 'timeInterval',
@@ -128,6 +129,94 @@ const useFortuneNotificationManager = () => {
       
     } catch (error) {
       console.error('❌ Error scheduling fortune notification:', error);
+      return null;
+    }
+  };
+
+  const updateFortuneNotificationTime = async (
+    fortuneId: string,
+    newResponseTimeMinutes: number,
+    fortuneData: FortuneNotificationData
+  ): Promise<string | null> => {
+    try {
+      console.log(`⏰ Updating fortune notification time for ${fortuneId} to ${newResponseTimeMinutes} minutes`);
+      
+      // Cancel existing notifications for this fortune
+      const scheduledNotifications = await Notifications.getAllScheduledNotificationsAsync();
+      const fortuneNotifications = scheduledNotifications.filter(notification => 
+        notification.content.data?.fortuneId === fortuneId ||
+        notification.content.data?.seerName === fortuneData.seerName
+      );
+      
+      // Cancel old notifications
+      for (const notification of fortuneNotifications) {
+        await Notifications.cancelScheduledNotificationAsync(notification.identifier);
+        console.log(`🗑️ Cancelled old notification: ${notification.identifier}`);
+      }
+      
+      // Check permissions
+      const hasPermission = await requestPermissions();
+      if (!hasPermission) {
+        console.log('❌ No notification permission, skipping schedule');
+        return null;
+      }
+
+      // Calculate new trigger time
+      const triggerSeconds = newResponseTimeMinutes * 60;
+      
+      console.log(`⏰ New notification will trigger in ${triggerSeconds} seconds (${newResponseTimeMinutes} minutes)`);
+
+      // Schedule new notification with updated time
+      const notificationId = await Notifications.scheduleNotificationAsync({
+        content: {
+          title: '🔮 Falınız Hazır!',
+          body: `${fortuneData.seerName} tarafından ${fortuneData.fortuneType === 'Rüya Yorumu' ? 'Rüya' : fortuneData.fortuneType} yorumunuz tamamlandı.`,
+          data: {
+            type: 'fortune_completed',
+            seerName: fortuneData.seerName,
+            fortuneType: fortuneData.fortuneType,
+            fortuneId: fortuneId,
+          },
+          sound: true,
+        },
+        trigger: {
+          type: 'timeInterval',
+          seconds: triggerSeconds,
+        } as any,
+      });
+
+      console.log(`✅ Updated fortune notification scheduled with ID: ${notificationId}`);
+      
+      // Schedule reminder if applicable
+      if (newResponseTimeMinutes >= 5) {
+        const reminderTriggerSeconds = Math.max(triggerSeconds - (2 * 60), 30); // At least 30 seconds from now
+        
+        const reminderNotificationId = await Notifications.scheduleNotificationAsync({
+          content: {
+            title: '⚡ Falınız Çok Yakında!',
+            body: `${fortuneData.seerName} tarafından ${fortuneData.fortuneType === 'Rüya Yorumu' ? 'Rüya' : fortuneData.fortuneType} yorumunuz 2 dakika içinde tamamlanacak.`,
+            data: {
+              type: 'fortune_reminder',
+              seerName: fortuneData.seerName,
+              fortuneType: fortuneData.fortuneType,
+              fortuneId: fortuneId,
+            },
+            sound: false,
+            vibrate: [0, 250, 250, 250],
+          },
+          trigger: {
+            type: 'timeInterval',
+            seconds: reminderTriggerSeconds,
+          } as any,
+        });
+
+        console.log(`🔔 Updated fortune reminder notification scheduled with ID: ${reminderNotificationId}`);
+      }
+
+      return notificationId;
+      
+    } catch (error) {
+      console.error('❌ Error updating fortune notification:', error);
       return null;
     }
   };
@@ -169,6 +258,7 @@ const useFortuneNotificationManager = () => {
 
   return {
     scheduleFortuneCompletionNotification,
+    updateFortuneNotificationTime,
     cancelFortuneNotification,
     cancelAllFortuneNotifications,
     getScheduledNotifications,
