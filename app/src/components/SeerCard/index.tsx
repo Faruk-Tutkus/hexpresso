@@ -7,12 +7,12 @@ import { router } from 'expo-router';
 import React, { memo, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import Animated, {
-	FadeIn,
-	FadeInDown,
-	FadeOut,
-	LayoutAnimationConfig,
-	SlideInDown,
-	ZoomIn
+    FadeIn,
+    FadeInDown,
+    FadeOut,
+    LayoutAnimationConfig,
+    SlideInDown,
+    ZoomIn
 } from 'react-native-reanimated';
 import styles from './styles';
 
@@ -100,7 +100,7 @@ const SeerCard: React.FC<SeerCardProps> = memo(({ seer, isExpanded, onPress }) =
 				break;
 			case 'tarot':
 			case 'tarot falı':
-				routePath = `/src/screens/main/navigator/FortuneScreens/CoffeeFortune?seerData=${seerDataParam}`;
+				routePath = `/src/screens/main/navigator/FortuneScreens/TarotFortune?seerData=${seerDataParam}`;
 				break;
 			default:
 				showToast('Bu fal türü henüz desteklenmiyor', 'error');

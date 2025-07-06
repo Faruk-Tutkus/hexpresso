@@ -5,7 +5,8 @@ import { useAuth, useTheme, useToast } from '@providers';
 import { Image } from 'expo-image';
 import { arrayRemove, arrayUnion, doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { useCallback, useEffect, useState } from 'react';
-import { FlatList, RefreshControl, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, RefreshControl, Image as RNImage, Text, TouchableOpacity, View } from 'react-native';
+import FlipCard from 'react-native-flip-card';
 import Animated, {
   FadeIn,
   FadeInDown,
@@ -23,6 +24,7 @@ interface FortuneRecord {
   fortuneType: string;
   images?: any;
   dreamText?: string;
+  selectedCards?: any[];
   createdAt: any;
   status: 'pending' | 'completed';
   responseTime: number;
@@ -243,6 +245,7 @@ const FortuneCardContent = ({
   onToggle: () => void;
 }) => {
   const [timeRemaining, setTimeRemaining] = useState<string>('');
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   useEffect(() => {
     if (fortune.status !== 'pending') return;
@@ -301,6 +304,7 @@ const FortuneCardContent = ({
       case 'Rüya Yorumu':
         return '🌙';
       case 'Tarot':
+      case 'Tarot Falı':
         return '🃏';
       default:
         return '🔮';
@@ -314,6 +318,7 @@ const FortuneCardContent = ({
     // Eğer result zaten bir object ise, direkt döndür
     if (typeof result === 'object' && result !== null) {
       return {
+        cardReveals: Array.isArray(result.cardReveals) ? result.cardReveals : [],
         interpretation: result.interpretation || result.yorum || 'Yorum bulunamadı',
         advice: result.advice || result.tavsiye || '',
         timeframe: result.timeframe || result.zaman || '',
@@ -327,6 +332,7 @@ const FortuneCardContent = ({
       try {
         const parsed = JSON.parse(result);
         return {
+          cardReveals: Array.isArray(parsed.cardReveals) ? parsed.cardReveals : [],
           interpretation: parsed.interpretation || parsed.yorum || result,
           advice: parsed.advice || parsed.tavsiye || '',
           timeframe: parsed.timeframe || parsed.zaman || '',
@@ -336,6 +342,7 @@ const FortuneCardContent = ({
       } catch (error) {
         console.error('JSON parse error:', error);
         return {
+          cardReveals: [],
           interpretation: result,
           advice: '',
           timeframe: '',
@@ -347,6 +354,7 @@ const FortuneCardContent = ({
 
     // Fallback
     return {
+      cardReveals: [],
       interpretation: 'Sonuç yüklenemedi',
       advice: '',
       timeframe: '',
@@ -384,6 +392,7 @@ const FortuneCardContent = ({
         {fortune.fortuneType === 'Kahve Falı' && renderCoffeeImages()}
         {fortune.fortuneType === 'El Falı' && renderHandImages()}
         {fortune.fortuneType === 'Rüya Yorumu' && renderDreamText()}
+        {fortune.fortuneType === 'Tarot Falı' && renderTarotCards()}
       </Animated.View>
     );
   };
@@ -502,6 +511,83 @@ const FortuneCardContent = ({
     );
   };
 
+  // Tarot card image mapping - Required for React Native bundler
+  const getTarotCardImage = (cardId: string | number) => {
+    // Ensure id is stringified number 0-77
+    const id = String(cardId);
+    const cardImages: { [key: string]: any } = {
+      '0': require('@assets/tarots/0.png'), '1': require('@assets/tarots/1.png'), '2': require('@assets/tarots/2.png'), '3': require('@assets/tarots/3.png'),
+      '4': require('@assets/tarots/4.png'), '5': require('@assets/tarots/5.png'), '6': require('@assets/tarots/6.png'), '7': require('@assets/tarots/7.png'),
+      '8': require('@assets/tarots/8.png'), '9': require('@assets/tarots/9.png'), '10': require('@assets/tarots/10.png'), '11': require('@assets/tarots/11.png'),
+      '12': require('@assets/tarots/12.png'), '13': require('@assets/tarots/13.png'), '14': require('@assets/tarots/14.png'), '15': require('@assets/tarots/15.png'),
+      '16': require('@assets/tarots/16.png'), '17': require('@assets/tarots/17.png'), '18': require('@assets/tarots/18.png'), '19': require('@assets/tarots/19.png'),
+      '20': require('@assets/tarots/20.png'), '21': require('@assets/tarots/21.png'), '22': require('@assets/tarots/22.png'), '23': require('@assets/tarots/23.png'),
+      '24': require('@assets/tarots/24.png'), '25': require('@assets/tarots/25.png'), '26': require('@assets/tarots/26.png'), '27': require('@assets/tarots/27.png'),
+      '28': require('@assets/tarots/28.png'), '29': require('@assets/tarots/29.png'), '30': require('@assets/tarots/30.png'), '31': require('@assets/tarots/31.png'),
+      '32': require('@assets/tarots/32.png'), '33': require('@assets/tarots/33.png'), '34': require('@assets/tarots/34.png'), '35': require('@assets/tarots/35.png'),
+      '36': require('@assets/tarots/36.png'), '37': require('@assets/tarots/37.png'), '38': require('@assets/tarots/38.png'), '39': require('@assets/tarots/39.png'),
+      '40': require('@assets/tarots/40.png'), '41': require('@assets/tarots/41.png'), '42': require('@assets/tarots/42.png'), '43': require('@assets/tarots/43.png'),
+      '44': require('@assets/tarots/44.png'), '45': require('@assets/tarots/45.png'), '46': require('@assets/tarots/46.png'), '47': require('@assets/tarots/47.png'),
+      '48': require('@assets/tarots/48.png'), '49': require('@assets/tarots/49.png'), '50': require('@assets/tarots/50.png'), '51': require('@assets/tarots/51.png'),
+      '52': require('@assets/tarots/52.png'), '53': require('@assets/tarots/53.png'), '54': require('@assets/tarots/54.png'), '55': require('@assets/tarots/55.png'),
+      '56': require('@assets/tarots/56.png'), '57': require('@assets/tarots/57.png'), '58': require('@assets/tarots/58.png'), '59': require('@assets/tarots/59.png'),
+      '60': require('@assets/tarots/60.png'), '61': require('@assets/tarots/61.png'), '62': require('@assets/tarots/62.png'), '63': require('@assets/tarots/63.png'),
+      '64': require('@assets/tarots/64.png'), '65': require('@assets/tarots/65.png'), '66': require('@assets/tarots/66.png'), '67': require('@assets/tarots/67.png'),
+      '68': require('@assets/tarots/68.png'), '69': require('@assets/tarots/69.png'), '70': require('@assets/tarots/70.png'), '71': require('@assets/tarots/71.png'),
+      '72': require('@assets/tarots/72.png'), '73': require('@assets/tarots/73.png'), '74': require('@assets/tarots/74.png'), '75': require('@assets/tarots/75.png'),
+      '76': require('@assets/tarots/76.png'), '77': require('@assets/tarots/77.png'),
+    };
+    return cardImages[id] || cardImages['0'];
+  };
+
+  const renderTarotCards = () => {
+    const selectedCards = fortune.selectedCards || [];
+    console.log(selectedCards);
+    return (
+      <Animated.View
+        style={styles.tarotInputSection}
+        entering={FadeInUp.delay(100).springify()}
+      >
+        <View style={styles.inputSectionHeader}>
+          <Icon name="sparkles-outline" size={16} color={colors.primary} />
+          <Text style={[styles.inputSectionLabel, { color: colors.primary }]}>Seçilen Tarot Kartları</Text>
+        </View>
+
+        <View style={styles.tarotCardsGrid}>
+          {selectedCards.map((card: any, index: number) => (
+            <Animated.View
+              key={index}
+              style={[styles.tarotCardDisplayItem, { borderColor: colors.border }]}
+              entering={FadeInUp.delay((index + 1) * 100).springify()}
+            >
+              <FlipCard
+                flipHorizontal
+                flipVertical={false}
+                clickable
+                style={styles.flipWrapper}
+              >
+                {/* FRONT: card info */}
+                <View style={styles.tarotCardDisplayInfo}>
+                  <Text style={[styles.tarotCardPosition, { color: colors.primary }]}> {card.position}. {card.meaning}</Text>
+                  <Text style={[styles.tarotCardDisplayName, { color: colors.text }]}>{card.name}</Text>
+                  {card.info && <Text style={[styles.tarotCardInfo, { color: colors.secondaryText }]}>{card.info}</Text>}
+                </View>
+                {/* BACK: card image */}
+                <View style={styles.tarotCardImageContainerLarge}>
+                  <RNImage source={getTarotCardImage(card.imageKey)} style={styles.tarotCardDisplayImageLarge} />
+                </View>
+              </FlipCard>
+            </Animated.View>
+          ))}
+        </View>
+
+        <View style={styles.tarotStats}>
+          <Text style={[styles.tarotStatsText, { color: colors.secondaryText }]}> 🃏 {selectedCards.length} kart seçildi</Text>
+        </View>
+      </Animated.View>
+    );
+  };
+
   const renderResultSection = () => {
     if (!fortune.result) return null;
     //console.log(fortune.result);
@@ -527,7 +613,7 @@ const FortuneCardContent = ({
         {/* Main Interpretation */}
         <Animated.View
           style={styles.interpretationSection}
-          entering={FadeInUp.delay(200).springify()}
+          entering={FadeInUp.delay(fortune.fortuneType === 'Tarot Falı' ? 800 : 200).springify()}
         >
           <View style={styles.sectionIcon}>
             <Icon name="eye-outline" size={16} color={colors.primary} />

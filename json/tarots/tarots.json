@@ -1,0 +1,394 @@
+{
+  "tarots": [
+    {
+      "info": "Serinin ilk kartı olan Deli, senin de yeni başlangıçların eşiğinde olduğuna işaret eder. Hayatında yepyeni bir sayfa açılmak üzere ve bu süreçte heyecan verici fırsatlar seni bekliyor olabilir. Saf niyetle yola çıkman gerektiğini ancak her ihtimale karşı da tetikte olman gerektiğini söyler. Deli kartında riskler ve fırsatlar hep yan yanadır. Bu nedenle hem kalbinin sesini dinlemeli hem de sezgilerini hafife almamalısın. Neşeyle atılan minik bir adım, bazen hayatı kökten değiştirir. Bu kart, evrenin sana \"atla, ben seni yakalayacağım\" dediği anı temsil eder.",
+      "name": "Deli",
+      "url": "0.png"
+    },
+    {
+      "info": "Büyücü kartı, potansiyelinin gerçeğe dönüşmesini temsil eder. Hayatındaki kaynakları fark edip onları en iyi şekilde kullanma becerisine sahipsin. Şu anda düşündüğün şeyleri gerçeğe dönüştürme kapasiten oldukça yüksek. Bu kart, eyleme geçmek, yaratıcılığını konuşturmak ve gücünü göstermek gerektiğini söyler. Aldığın kararlar, geleceğe dair düşüncelerin sonunda somut birer eyleme dönüşecektir. Özgürlük, yaratıcılık, beceri, öz güven…Eğer ne istediğini biliyorsan, senin önünde hiçbir engel duramaz. Bu dönem, içsel gücünü dışa yansıtmanın ve kaderini kendi ellerinle şekillendirmenin zamanı.",
+      "name": "Büyücü",
+      "url": "1.png"
+    },
+    {
+      "info": "Bilgeliğin ve yüksek gücün temsilcisidir. Bu kart, gizeme, bilinmeyenlere ve sezgilere işaret eder. Bu kart karşına çıktığında, bilinçaltındaki mesajlara daha fazla kulak vermen gerektiğini gösterir. Bir karara varmadan önce iyice düşünüp taşınılması gerekir. Kişi, görünmeyen bağların henüz farkında değildir. Karar alırken mantıktan çok sezgilere yönelmek daha doğru olabilir. Dışarıdan gelen bilgiler yetersiz olduğunda içsel bilgelik en güvenilir kaynaktır. Bu kart, yüzeyin altında daha derin anlamlar olduğunu hatırlatır.",
+      "name": "Baş Rahibe (Azize)",
+      "url": "2.png"
+    },
+    {
+      "info": "Doğa, bolluk ve bereketin simgesidir. Kadınlığın, doğurganlığın bir göstergesidir. Hayatına huzur, sıcaklık ve koruyucu bir enerji girebilir. Bu kart aynı zamanda üretkenliği ve sevgiyle büyümeyi temsil eder. İçsel dişil enerjinle bağlantıya geçmeni, sevgiyle beslemeni ve büyütmeni önerir. Bereketin sana doğru akmasına izin ver, sabırlı olursan tüm dileklerin gerçekleşecek. Özellikle ilişkilerinde her şey yoluna girecek. Yeter ki kalpten istemeyi ve sevgiyle emek vermeyi unutma.",
+      "name": "İmparatoriçe",
+      "url": "3.png"
+    },
+    {
+      "info": "Düzen, kontrol ve istikrarın sembolüdür. Güç ve mantık, bu kartın temsil ettiği en önemli ögelerdir. Özellikle bir erkek figürü ön plana çıkar. Kuralları koyan sensin ve sorumluluk da senin ellerinde. Hayatında yapılandırman gereken konulara işaret eder ve disiplinli hareket etmeni öğütler. Bu kart, sağduyu ve mantığın duyguların önüne geçmesi gereken dönemleri simgeler. İnisiyatifi ele alman ve kararlılıkla ilerlemen beklenir. İmparator, güvenliğin ve istikrarın ancak bilinçli liderlikle sağlanabileceğini hatırlatır.",
+      "name": "İmparator",
+      "url": "4.png"
+    },
+    {
+      "info": "Geleneksel değerlerin bir sembolüdür. Bir yol göstericiye ihtiyaç duyabilirsin. Özellikle toplumun onayına, sosyal dayanışmaya ve merhamete ihtiyacın olan bir dönemden geçiyor olabilirsin. Aile, eğitim ya da dini kurumlarla ilgili gelişmeler olabilir. Aynı zamanda bu kart, deneyim ve bilgi paylaşımını simgeler; biri sana rehberlik edebilir ya da sen başkalarına ışık tutabilirsin. Sorgulamak değil, öğrenmek ve uyum sağlamak ön plandadır. Toplumsal normlar ve değerler, kararlarını etkileyebilir. Geleneksel yollarla ilerlemek sana daha büyük bir güven ve istikrar kazandıracaktır.",
+      "name": "Baş Rahip (Aziz)",
+      "url": "5.png"
+    },
+    {
+      "info": "Aşk, romantizm, uyum…Aşıklar kartı sevgi tohumlarının atıldığını ve romantizmin başladığını gösterir. Kişi, değerlerine uygun birisiyle bağ kurmaktadır. Bu kart, uyumlu bir ilişkinin ya da ruh eşinle karşılaşmanın habercisi olabilir. Ancak aynı zamanda kişisel değerlerle ilgili çatışmaları da gündeme getirebilir. İçsel bütünlüğü sağlamak, dışsal bağlarda da uyumu getirir. Bu bir aşk kartıdır ama asıl mesajı, bireyin kendi içindeki dengeyi bulmasıdır. Körü körüne bir bağlılık yerine, bilinçli bir seçim yapmak önemlidir. Gerçek aşk, özgürlükle gelen bir bağdır.",
+      "name": "Aşıklar",
+      "url": "6.png"
+    },
+    {
+      "info": "Azimli bir yolculuğun temsilidir. Zorlukları aşmanın, kararlı olmanın önemine vurgu yapar. Duygulara ve mantığa eşit derecede önem verir. Hedefine doğru ilerlemek istiyorsan disiplinli ve kararlı olmalısın. Duygularını bastırmadan ama onları kontrol altında tutarak ilerlemelisin. Zafer, sadece fiziksel değil, ruhsal bir zaferdir. Kimi zaman bu kart, seyahat, taşınma ya da fiziksel bir yolculuğu da gösterebilir. Ancak her durumda, ipler senin elinde olmalı ve hedefin net olmalıdır. Savaş Arabası, kendi hayatının dizginlerini ele alma zamanının geldiğini söyler.",
+      "name": "Savaş Arabası",
+      "url": "7.png"
+    },
+    {
+      "info": "Gerçek güç, dışsal değil içsel dayanıklılıktır. Bu kart, sabrı, cesareti ve özgüveni temsil eder. Asıl kahramanlık, kalbini koruyarak ilerlemektir. İç gücüne önem ver, kararlı ol. Bu kart, sevgiyle disiplinin birleşimini vurgular. Zor durumlarda bile nazik kalabilmek, gerçek cesaretin göstergesidir. Özgüvenin artıyor, ama bu ego değil, içsel huzurla gelen bir güvendir. Sabır, bu kartın anahtar kelimelerindendir; hemen sonuç beklememelisin. Kendine duyduğun inanç, tüm sorunların çözümünde en büyük yardımcın olacak. İçindeki vahşi tarafı ehlileştirdikçe, hayatta daha sağlam adımlar atarsın.",
+      "name": "Güç",
+      "url": "8.png"
+    },
+    {
+      "info": "Yalnızlık değil, bilinçli içe dönüş bu kartın özüdür. Sessizliğin içinde yanıtlar vardır. Yolculuk dışta değil içtedir. Sen kendi ışığını bulmak ve kendinle derin bir bağ kurmak üzeresin. Bilgelik, bazen yalnız yürüyenlerin ödülüdür. Bazen bu kart, bir mentoru ya da yaşça büyük birinin rehberliğini de simgeler. Ancak en büyük rehberin, kendi iç sesindir. Toplumdan biraz uzaklaşarak kendini yeniden keşfetme vakti gelmiş olabilir. Bu süreçte sabırlı olmalı ve içindeki ışığın sana yol göstermesine izin vermelisin.",
+      "name": "Ermiş",
+      "url": "9.png"
+    },
+    {
+      "info": "Hayat döngüleri durmaz, şans dönmeye devam eder. Bu kart ani değişimleri, yazgının devinimini ve beklenmedik fırsatları gösterir. Her iniş bir çıkışa, her çıkış bir dönüşe gebedir. Şans, tesadüfler ve beklenmedik olaylar yaşamına yön verebilir. Bu kart, kontrolü kaybetmiş gibi hissettiğin anlarda bile evrenin daha büyük bir planı olduğunu hatırlatır. Akışla kalmak, bu süreçte yapabileceğin en bilinçli seçimdir. Kimi zaman bu kart, fırsatların kapını çalacağını ve değerlendirme becerinin sınanacağını gösterir. Direnç göstermek yerine değişimi kucaklamak, sana yeni kapılar açacaktır.",
+      "name": "Kader Çarkı",
+      "url": "10.png"
+    },
+    {
+      "info": "Gerçekler terazide ölçülür ve her karar bir sonuç doğurur. Bu kart, etik, doğruluk ve denge arayışını simgeler. Karar verirken objektif olman gerekebilir. Karma, bu kartın en öne çıkan ögesidir. Ne ektiysen, şimdi biçme zamanı. Bu kart aynı zamanda mahkeme, sözleşme veya yasal konuları da gündeme getirebilir. Adalet, bireysel hakların korunması ve evrensel dengenin sağlanması ile ilgilidir. Kendine ve başkalarına dürüst ol, çünkü gerçek denge ancak hakikatle mümkündür.",
+      "name": "Adalet",
+      "url": "11.png"
+    },
+    {
+      "info": "Her şey durmuş gibi görünebilir, ama bu duraksama bir farkındalık fırsatıdır. Perspektif değişimi, fedakârlık ya da teslimiyetle ilgilidir. Şu an direnmek değil, bırakmak iyileştirir. Bekleyiş içindeyken yeni bir bakış açısı doğabilir. Bu süreçte fedakârlık yapman gerekebilir, ancak bu senin ruhsal olgunlaşman için önemlidir. Asılı kalan kişi fiziksel olarak hareketsiz olsa da zihinsel anlamda aydınlanmaya yakındır. Kontrolü bıraktığında hayatın gerçek ritmini duyabilirsin. Dış dünya durmuş gibi görünse de içsel dünyanda devrim yaşanıyor olabilir.",
+      "name": "Asılan Adam",
+      "url": "12.png"
+    },
+    {
+      "info": "Bir son, ama aynı zamanda kaçınılmaz bir yeniden doğuş. Bu kart dönüşümü, bırakmayı ve yaşamın döngüsel doğasını temsil eder. Eski gitmeden yeni gelemez. Korku değil, arınma zamanı. İyi ya da kötü birçok gelişmenin habercisidir. Korkularınla yüzleşmek yerine onlardan özgürleşme zamanıdır. Kimi zaman bu bir ilişki, bir alışkanlık ya da bir kimlik olabilir. Arınma, sadeleşme ve yenilenme için evren sana alan açıyor. Bu kart, zorlu ama kaçınılmaz bir ruhsal evrimi temsil eder.",
+      "name": "Ölüm",
+      "url": "13.png"
+    },
+    {
+      "info": "Uyum, barış ve güven denge kartının en önemli ögeleridir. Ilımlı ol ve her şeyin bir uyum içinde akmasına izin ver. Zıtlıkları dengelemen, ruhsal büyümeni de sağlar. Aşırılıklardan uzak dur ve uzlaşmayı tercih et. Bu kart, zamanla olan ilişkinin de dengede olması gerektiğini anlatır; hiçbir şey aceleye gelmemeli. Ruhsal bir olgunluk kazanmak için içindeki zıtlıkları barıştırmalısın. Her şeyin yerli yerinde olduğu bir ritim seni bekliyor. Sabır, anlayış ve ölçülülükle ilerlediğinde evrenin ritmiyle uyum içinde olursun.",
+      "name": "Denge",
+      "url": "14.png"
+    },
+    {
+      "info": "Bağımlılıklar, arzular ya da kendini sınırladığın kalıplarla yüzleşme zamanı. Beklenmedik başarısızlıklar, tartışmalar, garip deneyimler yaşayabilirsin. Peki kontrol, kimin elinde? Özgürleşmek için önce farkına varmalısın. Maddi arzular, fiziksel hazlar ya da duygusal saplantılar seni sarmış olabilir. Bu kart aynı zamanda manipülasyon, kıskançlık ya da hırs gibi karanlık duyguların da yükseldiği bir dönemi gösterebilir. Fakat bütün bunlar farkındalıkla dönüştürülebilir. Kendi karanlığınla yüzleşmek seni özgürleştirir. Gerçek kontrolü kazanmak için önce seni kontrol eden kalıpların farkına varmalısın.",
+      "name": "Şeytan",
+      "url": "15.png"
+    },
+    {
+      "info": "Ani, yıkıcı ama arındırıcı bir değişim. Eski yapılar çökecek çünkü sağlam temellere sahip değillerdi. Şok edici olabilir ama gereklidir. Gerçek, enkazın altından bile parıldar ve sana tozlu sayfaları geride bırakıp yepyeni bir başlangıç yapma fırsatı sunar. Hayatında farkında olmadan üzerine kurduğun bir sistem, inanç ya da ilişki çöküyor olabilir. Ancak bu çöküş, seni daha sağlam, dürüst ve gerçek bir düzene davet eder. Direnmek yerine teslim olmak, yeni bir bilinç düzeyine ulaşmanı sağlar. Enkazın ardından kalan boşluk, en saf halinle yeniden inşa etmek için bir fırsattır.",
+      "name": "Yıkılan Kule",
+      "url": "16.png"
+    },
+    {
+      "info": "Umut, şifa ve ilhamın kartıdır. Gece ne kadar karanlık olursa olsun, bir ışık mutlaka parlar. İç huzur ve ruhsal bağlantı burada yeniden kurulur. Dilek tutmak için doğru zaman olabilir. Sakinlik, pozitiflik bu kartın önerdiği başlıca konulardır. Bu kartla birlikte evrenin sana destek olduğunu hissedebilir, ilham verici fikirlerle dolup taşabilirsin. Zihinsel ve duygusal olarak arınma, artık seni taze bir enerjiyle sarar. Geleceğe dair olumlu bir vizyon geliştirmen ve sezgilerine güvenmen gerekir.",
+      "name": "Yıldız",
+      "url": "17.png"
+    },
+    {
+      "info": "Yanılsamalar, rüyalar ve bilinçaltının kartıdır. İlk izlenimlere güvenilmemesi gerektiğini söyler. Her şey net değildir ama bu da keşif için bir davettir. Sis perdesinin arkasında derin bir bilgi gizli. Zihinsel ya da duygusal deneyimler yaşıyor olabilirsin. Bilinçaltına kulak ver. Sisli bir yolda ilerliyormuş gibi hissedebilirsin, ancak bu belirsizlik seni içsel keşfe yönlendirir. İçinde bastırdığın duygular yüzeye çıkabilir ve seni sorgulamaya itebilir. Her şeyin netleşmesi zaman alacaktır, bu yüzden sabırlı ve farkında olman gerekir.",
+      "name": "Ay",
+      "url": "18.png"
+    },
+    {
+      "info": "Neşe, başarı ve çocukça bir saflığı temsil eder. Mutluluğun, netliğin ve canlılığın yaşanmaya başlayacağına işaret eder. Yaşam enerjin yeniden ortaya çıkar. İçindeki ışığı dışa vurma zamanı geldi. Her şey olması gerektiği gibi ilerliyor, her şey yolunda. Güneş, gizli olan her şeyi ortaya çıkarır; bu nedenle artık gizlemene gerek yoktur. Mutluluğun, paylaştıkça büyür ve çevrendekileri de aydınlatır. Güçlü bir özgüven duygusu seni sarar ve hayatına netlik gelir. Hayatın tadını çıkar, çünkü Güneş senin tarafında!",
+      "name": "Güneş",
+      "url": "19.png"
+    },
+    {
+      "info": "Geçmişle yüzleşme ve içsel uyanış zamanı. Bu kart, affetmeyi, kabullenmeyi ve bir şeylerin yeniden doğuşunu temsil eder. Netlik vardır ve nesnel bir bakış açısını benimser. Artık kaçmak değil, yükselmek gerek. Kendi hakikatine çağrılıyorsun. Kendini ve başkalarını affetmek, geçmişle yüzleşmek artık kaçınılmazdır. Artık eski kalıpları bırakmalı ve yepyeni bir benlikle yoluna devam etmelisin. Mahkeme, yargılayan bir kart değil; farkındalıkla ileri gitmeni isteyen bir çağrıdır. Bir şeyler sonlanmakta ama bu son, ruhsal olarak yükselmenin kapısını aralamaktadır.",
+      "name": "Mahkeme",
+      "url": "20.png"
+    },
+    {
+      "info": "Bir döngü tamamlandı; şimdi kutlama ve bütünleşme zamanı! Bu kart başarı, denge, zafer ve evrensel uyumu temsil eder. Ne öğrendiysen, şimdi tüm parçalar birleşiyor. Her son, yeni bir başlangıcın kapısıdır. Kutlama, seyahat, yeni kapıların açılması gibi olumlu gelişmeler bu kartla birlikte gelir. Dünya, sadece sonun değil, aynı zamanda bir başlangıcın da müjdecisidir. Tamamladığın bu döngüyle birlikte artık yeni bir seviyeye geçmeye hazırsın. Şimdi kendini kutla çünkü bu başarı hak edilmiş bir sonucun meyvesidir.",
+      "name": "Dünya",
+      "url": "21.png"
+    },
+    {
+      "info": "İçten gelen güçlü bir ilham kıvılcımı parlıyor. Bu kart, yeni bir tutku, yaratıcı bir fikir ya da harekete geçme isteğinin işaretidir. İçindeki ateş şimdi yanmaya başlıyor. Cesaretle adım atarsan, heyecan verici bir başlangıç yapabilirsin. Risk almalısın. Hayatına yeni bir canlılık ve hareketlilik getirme zamanı. Aynı zamanda kişisel gelişim ve dönüşüm için de kapı aralanıyor. İçindeki ateşi yak ve hedeflerine doğru kararlı adımlarla ilerle. Unutma, her büyük yolculuk küçük bir kıvılcımla başlar.",
+      "name": "Değnek Ası",
+      "url": "22.png"
+    },
+    {
+      "info": "Elinde bir plan var ama hangi yöne yürüyeceğini seçmelisin. Bu kart, vizyon geliştirme ve geleceğe dair karar alma zamanını temsil eder. Dünya önünde açık, yeter ki cesur ol. Beklemekle yetinme, harekete geç. Planların arasında denge kurmak ve mantıklı seçimler yapmak önemlidir. Kendi yolunu çizmek için güven ve kararlılık şarttır. Aynı zamanda bu kart, risk alma ve bilinmeyene adım atma cesaretini simgeler. Geleceğin için büyük kararlar vermeye hazırsın. Potansiyelin farkına var ve harekete geçmekten çekinme.",
+      "name": "Değnek İkilisi",
+      "url": "23.png"
+    },
+    {
+      "info": "Emek verdiğin şeyler meyve vermeye başlıyor. Ufukta fırsatlar görünmeye başladı ve beklentilerin gerçek olmaya başlıyor. Bu kart, genişleme, yolculuk ya da işlerin hız kazandığını simgeler. Uzun vadeli hedeflerin ve vizyonun için umut verir. Emeklerin karşılığını almanın eşiğindesin; şimdi beklemek ve fırsatları doğru zamanda değerlendirmek gerekiyor. Aynı zamanda bu kart, keşif, seyahat ve yeni deneyimlere açık olmayı simgeler. Kendine güven ve sabırla ilerlemeye devam et. Gelecek senin ellerinde şekilleniyor. Hayallerini gerçeğe dönüştürmek için doğru yoldasın.",
+      "name": "Değnek Üçlüsü",
+      "url": "24.png"
+    },
+    {
+      "info": "Kutlama, uyum ve güven dolu bir ortam seni bekliyor. Bu kart; düğün, ev, aile ya da dostlarla paylaşılan mutluluğu simgeler. Sosyal çevrende birlik ve beraberlik duygusu artar. Aynı zamanda bu kart, içsel denge ve güven hissini de güçlendirir. Kutlamaya değer anların ve mutluluğun kapıda olduğunu gösterir. Hayatın keyfini çıkar ve sevdiklerinle paylaştığın bu güzel zamanlara odaklan. Başarılarınla gurur duy ve ara verip bu anı yaşa. Temellerin zaten sağlam, şimdi keyfini sürme zamanı.",
+      "name": "Değnek Dörtlüsü",
+      "url": "25.png"
+    },
+    {
+      "info": "Karışıklık, tartışma ya da rekabet enerjisi etrafı sarabilir. Farklı görüşler çarpışıyor ama bu çatışmalar yapıcı bir dönüşüm getirebilir. Bu kart, mücadeleyle olgunlaşmayı temsil eder. Sakin kalırsan ve azimle çalışırsan işin içinden çıkabilirsin. Her çatışma bir öğrenme fırsatıdır, doğru yaklaşım önemli. Kendi duruşunu koruyarak ve yapıcı olmaya çalışarak zorlukları aşabilirsin. Bu süreçte esnek olmak ve sabırlı davranmak başarıyı getirir. Enerjini kontrollü kullan, gereksiz tartışmalardan kaçın.",
+      "name": "Değnek Beşlisi",
+      "url": "26.png"
+    },
+    {
+      "info": "Zafer seninle! Bu kart, başkaları tarafından takdir edilmek, başarıya ulaşmak ve emeklerinin karşılığını görmekle ilgilidir. Yürüdüğün zorlu yolda şimdi alkış zamanı. Hak ettiğin ışık sonunda üzerinde. Çevrendeki insanlar tarafından destekleniyor ve seviliyorsun. Başarılarının kutlanması ve ödüllendirilmesi söz konusu olabilir. Aynı zamanda bu kart, liderlik ve sorumluluk alma zamanının geldiğini gösterir. Kendini ifade etme ve hedeflerine ulaşmada kararlı ol. Kazanımlarının tadını çıkar, ama mütevazı kalmayı unutma. Ödüllendirilebilir, gururlandırılabilirsin.",
+      "name": "Değnek Altılısı",
+      "url": "27.png"
+    },
+    {
+      "info": "Kazandığın yeri korumak için sağlam durman gerek. Bu kart, savunma, direniş ve haklı bir mücadeleyi temsil eder. Senden beklenen cesaret ve kararlılıktır. Rakiplerinle ya da engellerle başa çıkmak için enerjini ve inancını yüksek tutmalısın. Aynı zamanda bu süreç, içsel gücünü keşfetmek ve sınırlarını test etmek için bir fırsattır. Dirençli ol, pes etme ve hedeflerinden vazgeçme. Bu mücadelede kazanmak için odaklanman şart. Kendine güven, çünkü sen bu savaşta güçlü olan taraftasın. Meydan okumalara rağmen ayakta kalacaksın.",
+      "name": "Değnek Yedilisi",
+      "url": "28.png"
+    },
+    {
+      "info": "Her şey hızla ilerliyor, beklenmedik haberler ya da yolculuklar yolda olabilir. Bu kart enerji akışının serbest kaldığını ve gecikmelerin sona erdiğini gösterir. Harekete geçmek için uygun zamandasın. Bunca zamandır içinde beklettiğin o eneriyi artık açığa çıkarmanın zamanı geldi. Fakat bu süreçte, haberlerin alt metinlerinde gizli mesajlar olabilir. Sana söylenen her şeye inanma, kendi bildiğin yolda ilerlemeye devam et.",
+      "name": "Değnek Sekizlisi",
+      "url": "29.png"
+    },
+    {
+      "info": "Yorgunsun ama hâlâ ayaktasın. Bu kart, geçmişin yaralarıyla mücadele ederken direnç göstermek gerektiğini simgeler. Sonuna geldin, biraz daha sabır. Vazgeçmediğinde kazanacaksın. Bu dönem, planlarını hızla uygulamaya koyduğun, iletişim ve yolculukların yoğun olduğu bir süreç de olabilir. Ani değişimlere açık olmalı ve esnek davranmalısın. Hızlı hareket eden enerjin, seni hedeflerine kısa sürede ulaştırır. Durağanlık sona erdi, şimdi zamanı akışa bırakmalısın. Zaman, sana doğru yolu getirecek.",
+      "name": "Değnek Dokuzlusu",
+      "url": "30.png"
+    },
+    {
+      "info": "Ağır bir yük taşıyor olabilirsin. Sorumluluklar omuzlarında birikmiş. Bu kart, “her şeyi ben yapmak zorundayım” hissini anlatır. Bu kart, sınırlarını ve kapasiteni zorladığını gösterir. Ancak emeklerinin karşılığını almak için dayanman gerekir. Yüklerini hafifletmek için yardım istemeyi düşünebilirsin. Bu süreç, kendi sınırlarını tanıman ve önceliklerini belirlemen için bir uyarıdır. Bazen elindekileri bırakmak ya da paylaşmak en doğru karar olabilir. Kendine iyi bak, dengeni koru ve sağlığını önemse. Yük hafifledikçe ilerlemen kolaylaşacak. Sorumluluklarını paylaş.",
+      "name": "Değnek Onlusu",
+      "url": "31.png"
+    },
+    {
+      "info": "İçinde kıpırdayan heyecan yeni bir yolculuğa çağırıyor seni. Bu kart, yeni fikirler, yaratıcılık ve keşfetme arzusunu temsil eder. Cesur bir adımla yepyeni bir macera başlayabilir. Ateşin küçük ama potansiyelin büyük. Yaratıcılığın ve tutkuların ön planda. Ancak bazen aceleci davranabilir veya sabırsız olabilirsin; dikkatli olmanda fayda var. Öğrenmeye açık ol ve çevrendeki fırsatları değerlendir. İçindeki coşkuyu koru ve kendini ifade etmekten çekinme. Yeni maceralara yelken açma zamanı şimdi. Kimse önünde duramaz.",
+      "name": "Değnek Prensi",
+      "url": "32.png"
+    },
+    {
+      "info": "Tutkulu, enerjik ve kimi zaman aceleci bir karakter. Bu kart, hızla ilerleyen bir eylemi, seyahati ya da ani kararları anlatır. Heyecanla yola çıkmak harika ama yönünü kaybetmemeye dikkat et. Hareket et ama odaklı kal. Dengeyi bulmak önemli. Enerjin yüksek, motivasyonun tavan yapmış durumda. Yeni fırsatlar seni bekliyor, ama planlarını iyi yapman gerekiyor. İnatçı olma, esnek ol ve enerjini doğru yönlendir. Tutkunu ve cesaretini avantaja çevir.",
+      "name": "Değnek Şövalyesi",
+      "url": "33.png"
+    },
+    {
+      "info": "Kendine güvenen, karizmatik, yaratıcı ve çekici bir güç. Bu kart, tutkularını dış dünyaya yansıtan bir kişiliği simgeler. Hem enerjiksin hem de ilham veriyorsun. Sahnede olmayı hak ediyorsun. Kendine güvenin tam ve hedeflerine ulaşmak için kararlı bir şekilde ilerliyorsun. Aynı zamanda şefkatli ve destekleyici bir yönün de var. Sosyal hayatın hareketli ve zenginleşiyor. Bu enerji, seni zor zamanlarda bile ayakta tutar. İçindeki ateşi söndürme, ışığını herkese göster. Kraliçe, sana destek olmaya hep hazır.",
+      "name": "Değnek Kraliçesi",
+      "url": "34.png"
+    },
+    {
+      "info": "Liderlik, vizyon ve yüksek enerjiyle dolusun. Güçlü bir irade ve inançla hedeflerine yöneliyorsun. Bu kart; kararlılık, büyük düşünme ve başkalarına yol gösterme anlamına gelir. Tutkularınla yönettiğin bir dünya kuruyorsun. Risk almaktan çekinmiyor ve zorlukların üstesinden geliyorsun. Aynı zamanda başkalarının fikirlerine de değer veriyor, dengeli kararlar alıyorsun. Vizyonunu gerçekleştirmek için disiplinle çalışıyorsun. Bu dönemde kendine ve çevrendekilere liderlik etmekten çekinme. Gücünü bilinçli kullan, seni takip edenler var.",
+      "name": "Değnek Kralı",
+      "url": "35.png"
+    },
+    {
+      "info": "Kalpten gelen saf bir başlangıca işaret eder. Bu kart, yeni bir aşk, dostluk ya da duygusal farkındalık anlamına gelir. Sevgi dolu bir akış başlıyor olabilir. Bu dönemde duygular daha net ve güçlü bir şekilde ortaya çıkabilir. Sevgiyi almak kadar vermeye de açık olmalısın. Bu kart aynı zamanda yaratıcı projelere veya ilham veren ruhsal deneyimlere de kapı aralayabilir. Kalbinin sesine kulak ver; bu bir iyileşme ve sevgi döngüsünün başlangıcı olabilir.",
+      "name": "Kupa Ası",
+      "url": "36.png"
+    },
+    {
+      "info": "Ruhsal ve duygusal uyumun kartıdır. Cinsel çekiciliğe, aşka, ortaklığa ya da kalpten kalbe kurulan bir bağa işaret ediyor olabilir. Gerçek bir eşitlik ve karşılıklılık enerjisi taşır. Uyumun ve ortak çalışmanın işaretidir. Duygular eşit ve dürüst bir şekilde paylaşılır. Kalpten kalbe kurulan bağ, anlayış ve güven temelinde gelişir. Bu kart aynı zamanda affetme, uzlaşma ve ilişkilerde dengeyi yeniden kurma enerjisi taşır. Şu anda hayatında bir \"ruh eşi\" ile karşılaşma ya da mevcut ilişkinin derinleşme potansiyeli olabilir.",
+      "name": "Kupa İkilisi",
+      "url": "37.png"
+    },
+    {
+      "info": "Kutlama, dostluk ve neşeli birliktelik. Paylaşılan mutluluk, sosyal çevreyle birlikte yaşanır. Bu kart, iyi haberler ve bir araya gelişlerin habercisidir, yakın dönemde kutlamalar olabilir. Sevgi, çoğaldıkça güzelleşir. Doğum günü, düğün, mezuniyet gibi özel anlar ya da beklenmedik güzel gelişmeler kapıda olabilir. Topluluk içinde kendini daha rahat ve ait hissedebilirsin. Hayatındaki insanlarla olan bağların, duygusal olarak seni güçlendirebilir. Bu kart bazen bir barışma ya da uzun süredir beklenen güzel bir haberin gelişini de müjdeler. Kalbini aç, çünkü sevinç paylaşılmaya hazır!",
+      "name": "Kupa Üçlüsü",
+      "url": "38.png"
+    },
+    {
+      "info": "İçine dönmüş, belki de biraz yalnız kalmış bir ruh halini anlatır. Önündeki fırsatları fark etmiyor olabilirsin. Bu kart duygusal durağanlığı ya da tatminsizliği gösterir. Gözlerini açarsan, evrenin sana sunduğu yeni bir teklif var. Dışa dönük olma zamanın geldi. Bu kart, mevcut duygusal durumunu gözden geçirmeni ve yeniden odaklanmanı önerir. Sana sunulan yeni bir teklif, farklı bir bakış açısı ya da destek olabilir. Ama bu fırsatları görebilmek için kabuğundan çıkman gerekir.",
+      "name": "Kupa Dörtlüsü",
+      "url": "39.png"
+    },
+    {
+      "info": "Kayıplarınla ve hayal kırıklığıyla yüzleşme zamanı. Odaklanılan şey giden olsa da, hâlâ değerli olan bir şey geride kalmış olabilir. Bu kart, yas tutmayı ama aynı zamanda iyileşmeye açılan kapıyı temsil eder. Kayıpların yaşanabileceğine fakat kişinin bu durumun farkında olarak iyileşebileceğine işaret eder. Kart, geçmişte takılı kalmaman ve geleceğe umutla bakman gerektiğini hatırlatır. Her kayıp bir ders, her gözyaşı bir arınmadır. Kendine nazik davran ve iyileşmene izin ver; çünkü hayat sana yeni bir kapı açmak üzere.",
+      "name": "Kupa Beşlisi",
+      "url": "40.png"
+    },
+    {
+      "info": "Geçmişten gelen tatlı bir nostalji ya da eski bir bağın yeniden canlanışı. Bu kart çocukluk, saf sevgi ve eski güzel anılarla ilgilidir. Duygusal anlamda içini ısıtacak bir şey sana yaklaşıyor olabilir. Ailenden destek alabilirsin, kalbin yumuşayabilir. Bu dönem, hatıralar aracılığıyla içsel bir barışa ulaşmana da yardımcı olabilir. Ancak bu kart sana geçmişte kalmaman gerektiğini de söyler; geçmişin güzel anıları bugünün ilhamı olabilir ama bugünü yaşamayı unutma. Kalbindeki saflığı koru ve sevgiyi cesurca paylaş.",
+      "name": "Kupa Altılısı",
+      "url": "41.png"
+    },
+    {
+      "info": "Seçenekler çok, ama her biri gerçek değil. Hayaller, illüzyonlar ve kararsızlık bu kartın temasıdır. Duyguların karmaşası içinde netlik kaybolabilir. Seçim yapmadan önce ne istediğini gerçekten bil. Özellikle kalbini etkileyen konularda gerçek arzularını netleştirmek önemlidir. Bu kart seni uyarır: hayal kurmak güzeldir ama ayaklarını yere basmak da gerekir. Seçim yapmadan önce iç sesini dinlemeli ve seni gerçekten tatmin edecek olanı ayırt etmelisin. Her ışıltılı şeyin altın olmadığını unutma; netlik için duygularını sadeleştir.",
+      "name": "Kupa Yedilisi",
+      "url": "42.png"
+    },
+    {
+      "info": "Tatmin etmeyen bir durumdan içsel bir çağrıyla uzaklaşmak. Bu kart, geride bırakmak ama daha derin bir anlam arayışı için gitmek demektir. Kolay bir veda değil, ama ruhun gelişimi için gereklidir. Bazen doğru yolların yalnız yürünmesi gerekir çünkü gerçek içsel dönüşüm orada gerçekleşir. Bu kart cesaret, içsel büyüme ve ruhsal arayışla ilgilidir. Kendini daha fazla tanımak için eski kalıpları geride bırakman gerekiyor olabilir; unutma, bazen gitmek kalmaktan çok daha şifalıdır.",
+      "name": "Kupa Sekizlisi",
+      "url": "43.png"
+    },
+    {
+      "info": "Dileklerin gerçekleştiği, duygusal tatminin kartıdır. Bu kart \"dilek kartı\" olarak da bilinir. İç huzur, keyif ve kendiyle barışık olma hali öne çıkar. Sahip olduklarının kıymetini bilmek mutluluğu artırır. İç huzur ve duygusal doyum, bu kartın özündedir. Aynı zamanda kendini kutlaman, elde ettiklerinin tadını çıkarman için güzel bir zamandır. Ancak bu mutluluk maddi değil, içsel bir doyumla ilgilidir. Şükretmek ve hayatındaki güzellikleri fark etmek seni daha da zenginleştirir. Sahip olduklarınla barışık ol, çünkü bolluk hissi içerden başlar.",
+      "name": "Kupa Dokuzlusu",
+      "url": "44.png"
+    },
+    {
+      "info": "Aile, sevgi ve duygusal doyumun zirvesi. Bu kart, duygusal olarak tamamlanmış bir tabloyu anlatır: huzur, birlik ve içten gelen bir mutluluk. Gerçek mutluluk bazen basit şeylerin içindedir. Kalbin gerçekten evindeyse, bu kart senin için parlar. Her şey dengede, her şey bir uyum içinde. Bu kart, gerçek mutluluğun en çok sevdiklerinle yaşandığını hatırlatır. Aşk, bağlılık ve güven duygularıyla çevrili bir döneme giriyor olabilirsin. Hayatında uzun süredir istediğin bir duygusal tamamlanma gerçekleşiyor olabilir.",
+      "name": "Kupa Onlusu",
+      "url": "45.png"
+    },
+    {
+      "info": "Naif bir duygusal başlangıç ya da beklenmedik bir haber. Bu kart, yeni aşklar, ilham dolu fikirler ya da içten gelen yaratıcı duygularla ilgilidir. Sezgin seni çağırıyor. Kalbinin fısıltılarını duy, yolda seni iyi haberler bekliyor. Bu kart aynı zamanda sanatsal yeteneklerin, içsel hassasiyetin ve romantik arzuların uyanışını da gösterir. Yeni duygular biraz kırılgan olabilir, ama onları cesaretle kucaklaman sana içsel bir büyüme getirebilir. Duygularını bastırma, nazikçe ifade et; çünkü içindeki çocuk konuşmak istiyor.",
+      "name": "Kupa Prensi",
+      "url": "46.png"
+    },
+    {
+      "info": "Romantik, hayalperest ve duygularıyla hareket eden bir enerji. Bu kart bir teklif, aşk mesajı ya da kalpten gelen bir eylemi temsil eder. Duygusal derinlik seni çekiyor olabilir. Kalbinin peşinden git, ama gerçeklikten çok uzaklaşma. Bir ilişkinin romantik bir evreye geçmesi, içsel arzuların peşinden gitme arzusu bu dönemde yoğunlaşabilir. Şövalye zaman zaman hayallere kapılabilir, bu yüzden gerçeklerle bağını koparmamak önemli. İlişkilerde derinlik ve tutku seni çağırıyor olabilir. Duygularına sadık kal, ama hayalperestliğin seni yanıltmasına izin verme.",
+      "name": "Kupa Şövalyesi",
+      "url": "47.png"
+    },
+    {
+      "info": "Sezgisel, şefkatli ve anlayışlı bir enerji. Bu kart iç dünyayı beslemeyi ve başkalarının duygularına da derin bir empatiyle yaklaşmayı simgeler. İç sesinle bağın güçlüdür, duyguların bir pusula gibi çalışır. Onlara güven. İç dünyanı beslemek ve duygusal ihtiyaçlarını fark etmek bu kartın ana temasıdır. Ayrıca yaratıcılık, sezgisel bilgi ve duygusal dengeye de işaret eder. Bu kart seni, iç sesine güvenmeye ve kalbinin bilgeliğini takip etmeye davet eder. Hassas olabilirsin ama bu senin en büyük gücün.",
+      "name": "Kupa Kraliçesi",
+      "url": "48.png"
+    },
+    {
+      "info": "Duygularını dengelemiş, olgun bir enerji. Bu kart, şefkatli ama güçlü bir liderliği anlatır. Duygusal derinliği olan biri, başkalarının duygularına da yön verebilir. Sakin kalmak, fırtınaları dindirebilir. Farklı bakış açılarını da benimse, insanlarla iletişime geç. Kalbinle hareket ediyorsun ama duyguların seni sürüklemiyor; tam aksine, onları bir pusula gibi kullanıyorsun. Bu kart aynı zamanda duygusal olgunluk, sanatla ilgilenme ve ruhsal dengeyi bulma anlamına da gelir. Başkalarına ilham olabilir, duygusal olarak koruyucu ve yol gösterici bir figür haline gelebilirsin.",
+      "name": "Kupa Kralı",
+      "url": "49.png"
+    },
+    {
+      "info": "Zihinsel bir aydınlanma, net bir karar ya da güçlü bir gerçeğin ortaya çıkışı. Bu kart keskin düşünceyi, dürüstlüğü ve zihinsel netliği temsil eder. Hakikat her zaman kolay değildir ama özgürleştirir. Keskin bir zekâ ve net bir bakış açısıyla sorunların üstesinden gelmeye hazırsın. Ancak bu güç dikkatli kullanılmalı; kelimelerin ve düşüncelerin yaralayıcı olabilir. Bu kart, cesaretle düşünce kalıplarını kırmak ve zihnindeki engelleri aşmak için bir fırsattır. İçindeki hakikati keşfet ve adaletin peşinden git. Bazen net olmak, seni özgürleştirir.",
+      "name": "Kılıç Ası",
+      "url": "50.png"
+    },
+    {
+      "info": "Kararsızlık, göz ardı edilen gerçekler ve duygularla yüzleşme korkusu. Bu kart, içsel çatışmayı ve görmezden gelinen sorunları simgeler. Gözünü açmadan yönünü bulamazsın. Seçim yapman gerekiyor, ertelemek çözüm değil. Duygusal ve mantıksal bir ikilem içinde olabilirsin. Ancak kaçınmak yerine durumu tarafsızca değerlendirmek önemlidir. Zihnini sakinleştir ve iç sesine kulak ver; çözüm oradadır. Dengeyi bulmak için cesaretle harekete geçmelisin. Unutma, kararsızlık seni bir yerde tutar, karar almak ise seni ileri taşır.",
+      "name": "Kılıç İkilisi",
+      "url": "51.png"
+    },
+    {
+      "info": "Kalp kırıklığı, hayal kırıklığı veya acı bir gerçeğin açığa çıkışı. Bu kart duygusal bir yaralanmayı anlatır ama aynı zamanda iyileşme sürecinin başlangıcıdır. Gözyaşlarıyla gelen farkındalık seni özgürleştirir. Kalbin kırıldıysa, şimdi ona sahip çıkma zamanı. Hislerini bastırmak yerine kabul etmek, iyileşme yolunda önemli bir adımdır. Bu süreç sancılı olabilir, ama sonunda güçlenerek çıkacaksın. Zamanla duygusal yükler hafifler ve yeni başlangıçlar mümkün olur. Kalbinin kırılmasına izin ver ama pes etme.",
+      "name": "Kılıç Üçlüsü",
+      "url": "52.png"
+    },
+    {
+      "info": "Dinlenme, içe çekilme ve zihinsel toparlanma süreci. Bu kart, bir fırtınanın ardından gelen sakinliği ve ruhsal şarjı temsil eder. Geçici bir duraklama sana iyi gelecek. Kendine sessizlikte alan aç. Meditasyon, uyku veya sessizlik, iyileşmene yardımcı olabilir. Bu süre zarfında kararları ertelemek ve içsel dinginliği yakalamak faydalı olur. Kendine şefkat göster, çünkü güçlü olmak bazen dinlenmekten geçer. Enerjini dengede tut ki sonraki mücadelelere hazır ol. Enerjini depola, lazım olacak.",
+      "name": "Kılıç Dörtlüsü",
+      "url": "53.png"
+    },
+    {
+      "info": "Tartışmalar, gurur savaşı ve kazandığın halde kaybetmiş gibi hissetmek. Bu kart zaferin bedelini ve kırgınlıkların yükünü simgeler. Her haklılık zafer değildir. Rekabetçi ve hırslı olabilirsin, ancak bu tavır çevrendeki insanlarla ilişkilerini zorlayabilir. Geri çekilmek bazen en büyük bilgeliktir. Bu süreçte, kazanmak kadar nasıl kazandığının da önemli olduğunu hatırla. Özellikle iletişimde dikkatli olmak ve empati göstermek gerekir. Zaferlerini sorgula ve onurlu kalmaya çalış. Bu dönem, içsel bir sınavdır; gerçek güç barış ve anlayışta yatar.",
+      "name": "Kılıç Beşlisi",
+      "url": "54.png"
+    },
+    {
+      "info": "Zor bir süreçten sonra daha sakin sulara geçiş. Bu kart, zihinsel ya da fiziksel bir yolculuğu, bir durumu geride bırakmayı temsil eder. Geçmişi arkanda bırakmak zor olabilir ama önünde huzurlu bir gelecek var. Artık sorunlardan uzaklaşıyor, yeni umutlarla ilerliyorsun. Bu yolculuk, bazen fiziksel bir seyahat ya da içsel bir değişim olabilir. Zorluklarla dolu bir dönem sona eriyor, ancak yeni başlangıçlar için sabırlı olman gerekiyor. Yeni bir perspektif kazanarak daha dingin bir ruh haline kavuşabilirsin.",
+      "name": "Kılıç Altılısı",
+      "url": "55.png"
+    },
+    {
+      "info": "Gizlilik, strateji ya da kaçınma söz konusu olabilir. Bu kart, dürüstlükten uzak durumları ya da kendini koruma çabalarını temsil eder. Bazen gerçekleri tam olarak açıklamamak ya da diplomatik davranmak gerekebilir. Ancak bu enerji, güven sorunlarına ve ihanet riskine de işaret edebilir. Dolayısıyla hareketlerinde dikkatli olmalı ve niyetlerini sorgulamalısın. Kendi çıkarların için hareket ederken etik sınırları zorlamamak önemlidir. Stratejik düşün ve planlarını akıllıca yap. Bu kart, bazen “gizli kahramanlık” veya “sessiz zafer” anlamına da gelir.",
+      "name": "Kılıç Yedilisi",
+      "url": "56.png"
+    },
+    {
+      "info": "Zihinsel sıkışmışlık, çaresizlik hissi ve özgürlüğün önündeki görünmeyen engeller. Bu kart, düşüncelerinin seni nasıl hapsettiğini gösterir. Aslında çıkış yolu var ama sen göremiyorsun. Kendi zihinsel zincirlerini kırmanın zamanı geldi. Kendi gücünün farkına varmak ve zihinsel kalıplarını kırmak çok önemlidir. Yardım istemekten çekinme ve olaylara farklı açılardan bakmaya çalış. Bu engeller aslında aşılabilir, tek yapman gereken kendi zincirlerini çözmek. Özgürlüğün kapısı, kendi elindedir.",
+      "name": "Kılıç Sekizlisi",
+      "url": "57.png"
+    },
+    {
+      "info": "Endişe, uykusuzluk ve içsel bir vicdan muhasebesi. Bu kart genellikle aşırı düşünmenin ve içsel korkuların sembolüdür. Korkular gerçek olmayabilir ama seni etkiliyor. İç sesini susturmak için önce onu dinlemelisin. Kendi içindeki panikle yüzleşmek ve mantıklı düşünmek iyileşmenin ilk adımıdır. Destek almak ve duygularını paylaşmak faydalı olabilir. Bu süreçte kendine nazik ol ve kendini yargılamaktan kaçın. Zamanla zihnin sakinleşecek ve yeni bir umut doğacaktır.",
+      "name": "Kılıç Dokuzlusu",
+      "url": "58.png"
+    },
+    {
+      "info": "Bir döngünün acı ama net sonu. Bu kart ihanet, tükenmişlik ya da geri dönülmez bir bitişi simgeler. Ardı arkasına gelen aksiliklerin ardından son yumruk da gelmek üzeredir. En karanlık an, yeni bir günün doğuşuna en yakın zamandır. Bu kart, geçmişi bırakıp yeni bir sayfa açmanın önemini vurgular. Acıların seni tanımlamasına izin verme; onlardan güç al. Kapanışa cesaretle yaklaş çünkü her son aynı zamanda yeni bir başlangıcın kapısıdır. Dibe vurdun ve buradan tek yön yukarı!",
+      "name": "Kılıç Onlusu",
+      "url": "59.png"
+    },
+    {
+      "info": "Meraklı, gözlemci ve tetikte bir enerji. Bu kart bilgi arayışını, yeni fikirleri ve zihinsel hareketliliği temsil eder. Yeni bilgiler öğrenmek, sorgulamak ve iletişimde aktif olmak isteyebilirsin. Sorular sor, gözlem yap, her şey sana bir şey anlatıyor olabilir. Öğrenmeye açık ol. İçindeki çocuk ruhla zorluklara meydan okumaya hazırsın. Gerçekleri aramak ve anlamak için sorgulayıcı olmalısın. İyi bir gözlemci ol ve detaylara dikkat et. Bilgi güçtür, onu doğru kullan.",
+      "name": "Kılıç Prensi",
+      "url": "60.png"
+    },
+    {
+      "info": "Hızlı, kararlı ve bazen düşünmeden harekete geçen bir enerji. Bu kart güçlü fikirleri, mücadele etmeyi ve zihinsel netliği simgeler. Cesur, atılgan ve zaman zaman sabırsız biri olduğunu gösterir. Ancak düşünmeden hareket etmek ya da aceleci kararlar sana zarar verebilir. Zihinsel enerjini doğru yönlendir ve iletişiminde dikkatli ol. İnatçılığın bazen çatışmalara yol açabilir, bu yüzden esnek kalmaya çalış. Gücünü ve hızını kontrol altında tutarsan, başarı kaçınılmazdır. İleri atılmak istiyorsan yönünü iyi belirlemelisin.",
+      "name": "Kılıç Şövalyesi",
+      "url": "61.png"
+    },
+    {
+      "info": "Zekâ, sezgi ve bağımsız düşünceyle hareket eden güçlü bir figür. Bu kart hem netlik hem de duygulardan sıyrılmış analiz yeteneğini temsil eder. Gerçeği olduğu gibi görebilme cesareti sende var. Duygularını inkâr etmeden, aklınla yol al. Kendini aldatmaktan kaçın. Zorluklar karşısında sakin kal ve hakikati savun. İletişim becerilerin güçlüdür ve çevrendekilere rehberlik edebilirsin. Ancak sert ya da soğuk görünme riskin var; empatiyi de unutmamalısın. Duygularla düşünceleri dengele ve kendinle barışık ol. Bu enerji, sorunları çözmekte büyük bir yardımcıdır.",
+      "name": "Kılıç Kraliçesi",
+      "url": "62.png"
+    },
+    {
+      "info": "Adaletli, mantıklı ve otoriter bir düşünce lideri. Bu kart, doğru kararlar alma, aklı kullanma ve sözün gücünü temsil eder. Net olmak bazen duygusuz olmak anlamına gelmez. Adil ve tarafsız olman, güven kazanmanı sağlar. Zihninin kontrol sende; yönü sen belirlemelisin. Duygusal karmaşadan uzak durarak, net ve doğru çözümler üretebilirsin. Eleştirel düşünce ve stratejik planlama senin güçlü yönlerindir. Aynı zamanda etkili bir iletişimcisin. Bu dönemde liderlik rolünü üstlenmekten çekinme.",
+      "name": "Kılıç Kralı",
+      "url": "63.png"
+    },
+    {
+      "info": "Yeni bir maddi başlangıç, fırsat ya da bolluk kapıda. Bu kart tohumların atıldığı, verimli bir dönemin habercisidir. İş, para ya da sağlıkla ilgili güzel bir gelişme seni bekliyor olabilir. Evren sana somut bir armağan sunuyor. Ancak bu fırsatları değerlendirmek için kararlı olmak ve sabırlı davranmak gerekir. Eninde sonunda emeklerinin karşılığını alacaksın. Başlangıç ne kadar küçük görünürse görünsün, ona iyi bakarsan büyür ve kalıcı olur. Sağlam temeller üzerine kurulan her şey uzun vadede seni destekler.",
+      "name": "Tılsım Ası",
+      "url": "64.png"
+    },
+    {
+      "info": "Birden fazla işle, sorumlulukla ya da duyguyla dengede kalmaya çalışıyorsun. Bu kart esnekliği ve değişen koşullara uyum sağlama becerisini temsil eder. Her şey havada gibi görünse de, sen bu akışı yönetebiliyorsun. Önemli olan dengeyi sürdürmek. Dengenin sağlanması bazen zor olabilir ama bu kart sana yeteneklerine güvenmeni hatırlatır. Sakin kalıp, işleri hafife almadan devam edersen, iniş çıkışların üstesinden gelebilirsin. Her şeyin akışına bırakılması gereken dönemlerde de bu kart destek verir.",
+      "name": "Tılsım İkilisi",
+      "url": "65.png"
+    },
+    {
+      "info": "Birlikte çalışmanın, plan yapmanın ve bir beceriyi geliştirmenin zamanı. Bu kart işbirliği, ustalık ve yapı kurma sürecini temsil eder. Yeteneğin değer görüyor. Emeğin görünür hale gelmek üzere. Emek verdiğin işlerin karşılığını görmek, motivasyonunu artırır. Detaylara dikkat ederek, sabır ve disiplinle ilerlemek başarını kalıcı kılar. Bu kart, “ben ve biz” anlayışının güçlenmesi için de cesaret verir. İnsanların sana yardımcı olmasına izin vermelisin.",
+      "name": "Tılsım Üçlüsü",
+      "url": "66.png"
+    },
+    {
+      "info": "Tutunmak güvenlik getirir mi, yoksa seni mi sınırlar? Bu kart maddi ve manevi konularda aşırı korumacılığı ya da sahip olduklarını kaybetme korkusunu simgeler. Mal-mülk, para ve kaynaklarını sıkı sıkıya tutmanın işaretidir. Ancak aşırı tutuculuk ve korku, gelişimini engelleyebilir. Bazen bırakmak, daha büyük kazançları getirir. Bu kart, güvenlik ihtiyacını ortaya koyarken, aynı zamanda sıkışmışlık hissini de gösterebilir. Elindekini kaybetme korkusu, seni değişimden alıkoyabilir. Dengeli olmak ve kaynaklarını akıllıca yönetmek bu süreçte anahtar rol oynar.",
+      "name": "Tılsım Dörtlüsü",
+      "url": "67.png"
+    },
+    {
+      "info": "Yoksunluk, yalnızlık ya da destekten mahrum kalma hissi. Bu kart maddi ya da duygusal bir kaybı temsil eder, fakat yardım her zaman yakındadır. Önemli olan, göremediğin desteği fark etmek. İçinden geçtiğin zor dönem geçici, unutma. Yardım almak ya da destek görmek için çevrene dönmek önemlidir. Dışarıdaki soğukluk, iç dünyandaki mücadeleyi yansıtabilir. Bu zor dönem, dayanıklılığını ve sabrını sınar. Her karanlığın sonunda bir ışık vardır, bunu unutma. Zor zamanlar ruhsal büyüme ve dayanışma fırsatı da sunar.",
+      "name": "Tılsım Beşlisi",
+      "url": "68.png"
+    },
+    {
+      "info": "Almak ve vermek arasında bir denge kurma zamanı. Bu kart cömertliği, yardımlaşmayı ve karşılıklı desteği simgeler. Bugün veren sen isen yarın alıcı sen olabilirsin. Adalet terazilerinin dengesi değişebilir. Maddi ya da manevi olarak dengeyi gözet. Bu kart, insan ilişkilerinde adalet ve şefkati vurgular. Başkalarına yardım etmek, kendine olan güvenini ve iç huzurunu artırır. Aynı zamanda, ihtiyaç duyduğunda yardım istemekten çekinmemen gerektiğini de hatırlatır.",
+      "name": "Tılsım Altılısı",
+      "url": "69.png"
+    },
+    {
+      "info": "Sabırla beklemek, ektiğin tohumların meyve vermesini izlemek. Bu kart uzun vadeli planları, emeğin sonucunu ve ara değerlendirmeyi temsil eder. Hemen sonuç alamadın diye vazgeçme. Süreç sabırla güzelleşir. Başarı bir anda gelmez; düzenli ve disiplinli çaba gerekir. Aynı zamanda hedeflerini yeniden gözden geçirmek ve gerekirse strateji değiştirmek için de uygun bir zamandır. Emeklerinin karşılığını almak istiyorsan, sabrını koru ve yavaş yavaş ilerle. Bu kart, uzun vadeli planlamanın önemini hatırlatır. Başarı için emeğe değer ver ve süreci sahiplen.",
+      "name": "Tılsım Yedilisi",
+      "url": "70.png"
+    },
+    {
+      "info": "Detaylara odaklanmak, bir beceride ustalaşmak için çalışmak. Bu kart azimle yapılan emeği ve profesyonel gelişimi temsil eder. Emek verdiğin konu seni şekillendiriyor. Disiplinli çaban karşılıksız kalmayacak, hatalarından ders çıkarmaya odaklan. Aynı zamanda, işine olan tutkun ve içsel motivasyonun artabilir. Öğrenmeye açık olman, gelişimini hızlandırır. Bu süreçte sabırlı olmalı ve sürekli kendini yenilemelisin. Başarı tesadüfi değildir; çalışmanın ve kararlılığın ürünüdür. Bu kartın ışığında çalışmalarına devam et.",
+      "name": "Tılsım Sekizlisi",
+      "url": "71.png"
+    },
+    {
+      "info": "Kendi başına elde edilen başarı ve iç huzuru temsil eder. Bu kart özgüven, bolluk ve bireysel doyumun göstergesidir. Hayattaki minik detaylardan tat almaya başladığına işaret eder. Hayatında kendine ait, güvenli ve rahat bir alan yarattın. Başarılarının tadını çıkarırken, emeklerinin karşılığını aldığını hissediyorsun. Aynı zamanda kendine olan saygın ve özgüvenin de artıyor. Bu dönem, kendi gücüne ve potansiyeline daha çok inanmanı sağlar. İç huzurun ve mutluluğun somut olarak yansımasıdır.",
+      "name": "Tılsım Dokuzlusu",
+      "url": "72.png"
+    },
+    {
+      "info": "Aile, miras, kökler ve maddi güvenliğin zirvesi. Bu kart kalıcı başarıyı, uzun vadeli bolluğu ve nesiller arası desteği simgeler. Sahip oldukların sadece sana ait değil; bir mirasın, bir geleceğin temeli olabilir. Gerçek zenginlik bazen paylaşımda yatar. Toplumsal statü ve prestij de bu kartın içinde yer alır. Geleceğe sağlam adımlarla yürüdüğünü gösterir. Ailenle veya topluluğunla güçlü bir bağ kurduğun, destek gördüğün bir dönem olabilir. Bu kart, hayatındaki köklü refah ve huzurun sembolüdür.",
+      "name": "Tılsım Onlusu",
+      "url": "73.png"
+    },
+    {
+      "info": "Yeni bir iş, eğitim ya da maddi fırsat habercisi. Bu kart öğrenmeye açık, sabırlı ve hedef odaklı bir enerjiyi temsil eder. Henüz yolun başında olabilirsin ama sağlam adımlar atıyorsun. Ufak bir fikir büyük bir başarıya dönüşebilir. Gerçekçi ve kararlı yaklaşımın, başarıya giden yolda sana destek olur. Aynı zamanda bu kart, sabırla çalışmayı ve detaylara dikkat etmeyi hatırlatır. İçindeki potansiyeli ortaya çıkarma zamanı geldi. Bu süreçte yeniliklere açık ol ve adımlarını sağlam at.",
+      "name": "Tılsım Prensi",
+      "url": "74.png"
+    },
+    {
+      "info": "Dikkatli, çalışkan ve sadık bir enerji. Bu kart, yavaş ama istikrarlı ilerleyişi anlatır. Sabırla inşa edilen her şey sağlam kalır. Hedefine yürürken hiçbir detayı atlama. Zorluklar karşısında yılmadan çalışmaya devam et. Pratik zekan ve çalışma disiplinin sayesinde çevrenden takdir görebilirsin. Bu süreçte kararlılığın ve azmin en büyük gücün olacak. Yolun açık, ama emek vermeye devam etmelisin. Bu sayede verimli, kapsamlı ve sağlam bir başarı elde edeceksin. Şövalye her zaman senin yanında.",
+      "name": "Tılsım Şövalyesi",
+      "url": "75.png"
+    },
+    {
+      "info": "Topraklanmış, üretken ve şefkatli bir karakter. Bu kart hem maddi hem manevi anlamda başkalarına destek olmayı temsil eder. Evini, bedenini ve hayatını sevgiyle besliyorsun. Çevrendekilere destek olurken, kendini de ihmal etmiyorsun. Ev, aile ve finansal konularda başarı ve denge geliyor. Bu kart, doğayla uyumlu, şefkatli ve aynı zamanda ayakları yere basan bir enerjiyi yansıtır. İç huzurun ve pratik zekan sayesinde zorlukların üstesinden geliyorsun. Bolluk senin doğanda var.",
+      "name": "Tılsım Kraliçesi",
+      "url": "76.png"
+    },
+    {
+      "info": "Güvenilir, başarılı ve lider ruhlu bir figür. Bu kart maddi istikrarı, iş dünyasındaki gücü ve sorumlulukla hareket etmeyi temsil eder. Başarı emekle geldi ve şimdi onu yönetme zamanı. Hem sen kazanıyorsun, hem çevrendekiler. Ailene, sevdiklerine karşı koruyucu ve cömertsin. Sabır, disiplin ve pratik yaklaşımla hedeflerine ulaşıyorsun. Bu dönemde liderlik rollerinde öne çıkabilir ya da maddi konularda önemli kararlar alabilirsin. Ayakları yere basan, güven veren bir enerjiyle yoluna devam et. Yeni girişimlerde bulunabilirsin.",
+      "name": "Tılsım Kralı",
+      "url": "77.png"
+    }
+  ]
+}

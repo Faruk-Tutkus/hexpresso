@@ -1,6 +1,7 @@
 export { default as useAITaskValidator, type AIValidationResponse, type TaskValidationResult } from './AITaskValidator'
 export { default as useFetchData } from './FetchData'
 export { default as useFetchSeers, type Seer } from './FetchSeers'
+export { default as useFetchTarots, type TarotCard } from './FetchTarots'
 export { default as useFortuneAI } from './FortuneAI'
 export { default as useFortuneNotificationManager, type FortuneNotificationData } from './FortuneNotificationManager'
 export { default as useFortuneProcessor } from './FortuneProcessor'

@@ -161,7 +161,7 @@ export default StyleSheet.create({
     marginLeft: 6,
   },
   sectionText: {
-    fontSize: 12,
+    fontSize: 13,
     fontFamily: 'Domine-Regular',
     lineHeight: 20,
     textAlign: 'justify',
@@ -475,5 +475,123 @@ export default StyleSheet.create({
   dreamStatsText: {
     fontSize: 12,
     fontFamily: 'Domine-Medium',
+  },
+
+  // Tarot Cards Styles
+  tarotInputSection: {
+    marginBottom: 16,
+  },
+  tarotCardsGrid: {
+    marginBottom: 8,
+  },
+
+  tarotCardPosition: {
+    fontSize: 16,
+    fontFamily: 'Domine-Bold',
+    textAlign: 'center',
+  },
+  tarotStats: {
+    alignItems: 'flex-end',
+  },
+  tarotStatsText: {
+    fontSize: 12,
+    fontFamily: 'Domine-Medium',
+  },
+  tarotCardDisplayItem: {
+    flexDirection: 'row',
+    borderRadius: 8,
+    borderWidth: 1,
+    padding: 12,
+    marginBottom: 12,
+    alignItems: 'center',
+  },
+  tarotCardImageContainer: {
+    width: 60,
+    height: 90,
+    marginRight: 12,
+    borderRadius: 6,
+    overflow: 'hidden',
+  },
+  tarotCardDisplayImage: {
+    width: '100%',
+    height: '100%',
+  },
+  tarotCardDisplayName: {
+    fontSize: 15,
+    fontFamily: 'Domine-Regular',
+    marginTop: 2,
+    textAlign: 'center',
+  },
+  tarotCardInfo: {
+    fontSize: 14,
+    fontFamily: 'Domine-Regular',
+    lineHeight: 24,
+    marginTop: 2,
+    textAlign: 'justify',
+  },
+
+  // Card Reveals Styles (for Tarot readings)
+  cardRevealsSection: {
+    marginBottom: 16,
+  },
+  cardRevealItem: {
+    borderRadius: 8,
+    borderWidth: 1,
+    padding: 12,
+    marginBottom: 12,
+  },
+  cardRevealHeader: {
+    marginBottom: 8,
+  },
+  cardRevealPosition: {
+    fontSize: 13,
+    fontFamily: 'Domine-Bold',
+    marginBottom: 4,
+  },
+  cardRevealName: {
+    fontSize: 12,
+    fontFamily: 'Domine-SemiBold',
+    marginBottom: 6,
+  },
+  cardRevealText: {
+    fontSize: 12,
+    fontFamily: 'Domine-Regular',
+    lineHeight: 18,
+    textAlign: 'justify',
+  },
+
+  // Preview modal styles
+  previewOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.8)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  previewImage: {
+    width: '80%',
+    height: '80%',
+    resizeMode: 'contain',
+    borderRadius: 12,
+  },
+
+  // Flip card additional styles
+  flipWrapper: {
+    flex: 1,
+  },
+  tarotCardImageContainerLarge: {
+    width: 170,
+    height: 250,
+    borderRadius: 8,
+    overflow: 'hidden',
+    alignSelf: 'center',
+  },
+  tarotCardDisplayImageLarge: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain',
+  },
+  tarotCardDisplayInfo: {
+    flex: 1,
+    alignItems: 'center',
   },
 });

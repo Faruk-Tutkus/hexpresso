@@ -196,8 +196,8 @@ Hiçbir şekilde dış metin, açıklama, başlık kullanma.
 Sadece şu JSON formatı ile cevap ver:
 
 {
-  "interpretation": "Ana yorum burada (300-500 kelime)",
-  "advice": "Tavsiyeler burada (100-200 kelime)",
+  "interpretation": "Ana yorum burada (200-300 kelime)",
+  "advice": "Tavsiyeler burada (50-150 kelime)",
   "timeframe": "Zaman dilimi",
   "warnings": ["Uyarı 1", "Uyarı 2"],
   "positiveAspects": ["Olumlu yön 1", "Olumlu yön 2"]
