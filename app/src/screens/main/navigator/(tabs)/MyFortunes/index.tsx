@@ -262,6 +262,9 @@ const FortuneCardContent = ({
         ? fortune.estimatedCompletionTime.toDate()
         : new Date(fortune.estimatedCompletionTime);
 
+      console.log(`📅 Current completion time: ${currentCompletionTime.toLocaleString()}`);
+      console.log(`⏰ Current time: ${new Date().toLocaleString()}`);
+
       // 30 saniye düş
       const newCompletionTime = new Date(currentCompletionTime.getTime() - (30 * 1000));
       
@@ -269,11 +272,15 @@ const FortuneCardContent = ({
       const minCompletionTime = new Date(Date.now() + 30000);
       const finalCompletionTime = newCompletionTime > minCompletionTime ? newCompletionTime : minCompletionTime;
 
+      console.log(`📅 Final completion time: ${finalCompletionTime.toLocaleString()}`);
+
       // Yeni response time hesapla (dakika cinsinden)
       const newResponseTimeMinutes = Math.max(
         Math.ceil((finalCompletionTime.getTime() - Date.now()) / (1000 * 60)),
         1
       );
+
+      console.log(`⏱️ New response time: ${newResponseTimeMinutes} minutes`);
 
       // Fortune record'u güncelle
       const updatedFortune = {
@@ -300,7 +307,8 @@ const FortuneCardContent = ({
           seerName: fortune.seerData.name,
           fortuneType: fortune.fortuneType,
           responseTimeMinutes: newResponseTimeMinutes,
-        }
+        },
+        finalCompletionTime
       );
 
       console.log('✅ Fortune speed up completed successfully');

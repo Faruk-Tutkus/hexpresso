@@ -64,19 +64,19 @@ const useFortuneNotificationManager = () => {
     fortuneData: FortuneNotificationData
   ): Promise<string | null> => {
     try {
-      console.log('📅 Scheduling fortune completion notification...', fortuneData);
+      console.log(`⏰ Scheduling fortune completion notification for ${fortuneData.seerName} - ${fortuneData.fortuneType}`);
       
-      // Check permissions first
+      // Check permissions
       const hasPermission = await requestPermissions();
       if (!hasPermission) {
         console.log('❌ No notification permission, skipping schedule');
         return null;
       }
 
-      // Calculate trigger time (convert minutes to seconds)
-      const triggerSeconds = fortuneData.responseTimeMinutes * 60;
+      // Calculate absolute completion time (from now + response time)
+      const completionTime = new Date(Date.now() + (fortuneData.responseTimeMinutes * 60 * 1000));
       
-      console.log(`⏰ Notification will trigger in ${triggerSeconds} seconds (${fortuneData.responseTimeMinutes} minutes)`);
+      console.log(`⏰ Notification will trigger at: ${completionTime.toLocaleString()} (${fortuneData.responseTimeMinutes} minutes from now)`);
 
       // Schedule the notification
       // @ts-ignore - Expo Notifications trigger type issue
@@ -92,8 +92,8 @@ const useFortuneNotificationManager = () => {
           sound: true,
         },
         trigger: {
-          type: 'timeInterval',
-          seconds: triggerSeconds,
+          type: 'date',
+          date: completionTime,
         } as any,
       });
 
@@ -101,28 +101,31 @@ const useFortuneNotificationManager = () => {
       
       // Also schedule a reminder notification 5 minutes before completion (if response time > 10 minutes)
       if (fortuneData.responseTimeMinutes >= 10) {
-        const reminderTriggerSeconds = Math.max(triggerSeconds - (5 * 60), 60); // At least 1 minute from now
+        const reminderTime = new Date(completionTime.getTime() - (5 * 60 * 1000));
         
-        // @ts-ignore - Expo Notifications trigger type issue
-        const reminderNotificationId = await Notifications.scheduleNotificationAsync({
-          content: {
-            title: '⏳ Falınız Yakında Hazır',
-            body: `${fortuneData.seerName} tarafından ${fortuneData.fortuneType === 'Rüya Yorumu' ? 'Rüya' : fortuneData.fortuneType} yorumunuz 5 dakika içinde tamamlanacak.`,
-            data: {
-              type: 'fortune_reminder',
-              seerName: fortuneData.seerName,
-              fortuneType: fortuneData.fortuneType,
+        // Only schedule reminder if it's in the future
+        if (reminderTime > new Date()) {
+          // @ts-ignore - Expo Notifications trigger type issue
+          const reminderNotificationId = await Notifications.scheduleNotificationAsync({
+            content: {
+              title: '⏳ Falınız Yakında Hazır',
+              body: `${fortuneData.seerName} tarafından ${fortuneData.fortuneType === 'Rüya Yorumu' ? 'Rüya' : fortuneData.fortuneType} yorumunuz 5 dakika içinde tamamlanacak.`,
+              data: {
+                type: 'fortune_reminder',
+                seerName: fortuneData.seerName,
+                fortuneType: fortuneData.fortuneType,
+              },
+              sound: false,
+              vibrate: [0, 250, 250, 250],
             },
-            sound: false,
-            vibrate: [0, 250, 250, 250],
-          },
-          trigger: {
-            type: 'timeInterval',
-            seconds: reminderTriggerSeconds,
-          } as any,
-        });
+            trigger: {
+              type: 'date',
+              date: reminderTime,
+            } as any,
+          });
 
-        console.log(`🔔 Fortune reminder notification scheduled with ID: ${reminderNotificationId}`);
+          console.log(`🔔 Fortune reminder notification scheduled with ID: ${reminderNotificationId}`);
+        }
       }
 
       return notificationId;
@@ -136,7 +139,8 @@ const useFortuneNotificationManager = () => {
   const updateFortuneNotificationTime = async (
     fortuneId: string,
     newResponseTimeMinutes: number,
-    fortuneData: FortuneNotificationData
+    fortuneData: FortuneNotificationData,
+    completionTime?: Date
   ): Promise<string | null> => {
     try {
       console.log(`⏰ Updating fortune notification time for ${fortuneId} to ${newResponseTimeMinutes} minutes`);
@@ -161,12 +165,12 @@ const useFortuneNotificationManager = () => {
         return null;
       }
 
-      // Calculate new trigger time
-      const triggerSeconds = newResponseTimeMinutes * 60;
+      // Use provided completion time or calculate from response time
+      const finalCompletionTime = completionTime || new Date(Date.now() + (newResponseTimeMinutes * 60 * 1000));
       
-      console.log(`⏰ New notification will trigger in ${triggerSeconds} seconds (${newResponseTimeMinutes} minutes)`);
+      console.log(`⏰ New notification will trigger at: ${finalCompletionTime.toLocaleString()} (${newResponseTimeMinutes} minutes from now)`);
 
-      // Schedule new notification with updated time
+      // Schedule new notification with absolute time
       const notificationId = await Notifications.scheduleNotificationAsync({
         content: {
           title: '🔮 Falınız Hazır!',
@@ -180,37 +184,40 @@ const useFortuneNotificationManager = () => {
           sound: true,
         },
         trigger: {
-          type: 'timeInterval',
-          seconds: triggerSeconds,
+          type: 'date',
+          date: finalCompletionTime,
         } as any,
       });
 
       console.log(`✅ Updated fortune notification scheduled with ID: ${notificationId}`);
       
-      // Schedule reminder if applicable
-      if (newResponseTimeMinutes >= 5) {
-        const reminderTriggerSeconds = Math.max(triggerSeconds - (2 * 60), 30); // At least 30 seconds from now
+      // Schedule reminder if applicable (2 minutes before completion)
+      if (newResponseTimeMinutes >= 3) {
+        const reminderTime = new Date(finalCompletionTime.getTime() - (2 * 60 * 1000));
         
-        const reminderNotificationId = await Notifications.scheduleNotificationAsync({
-          content: {
-            title: '⚡ Falınız Çok Yakında!',
-            body: `${fortuneData.seerName} tarafından ${fortuneData.fortuneType === 'Rüya Yorumu' ? 'Rüya' : fortuneData.fortuneType} yorumunuz 2 dakika içinde tamamlanacak.`,
-            data: {
-              type: 'fortune_reminder',
-              seerName: fortuneData.seerName,
-              fortuneType: fortuneData.fortuneType,
-              fortuneId: fortuneId,
+        // Only schedule reminder if it's in the future
+        if (reminderTime > new Date()) {
+          const reminderNotificationId = await Notifications.scheduleNotificationAsync({
+            content: {
+              title: '⚡ Falınız Çok Yakında!',
+              body: `${fortuneData.seerName} tarafından ${fortuneData.fortuneType === 'Rüya Yorumu' ? 'Rüya' : fortuneData.fortuneType} yorumunuz 2 dakika içinde tamamlanacak.`,
+              data: {
+                type: 'fortune_reminder',
+                seerName: fortuneData.seerName,
+                fortuneType: fortuneData.fortuneType,
+                fortuneId: fortuneId,
+              },
+              sound: false,
+              vibrate: [0, 250, 250, 250],
             },
-            sound: false,
-            vibrate: [0, 250, 250, 250],
-          },
-          trigger: {
-            type: 'timeInterval',
-            seconds: reminderTriggerSeconds,
-          } as any,
-        });
+            trigger: {
+              type: 'date',
+              date: reminderTime,
+            } as any,
+          });
 
-        console.log(`🔔 Updated fortune reminder notification scheduled with ID: ${reminderNotificationId}`);
+          console.log(`🔔 Updated fortune reminder notification scheduled with ID: ${reminderNotificationId}`);
+        }
       }
 
       return notificationId;

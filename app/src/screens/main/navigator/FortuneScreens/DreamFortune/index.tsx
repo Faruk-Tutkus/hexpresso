@@ -6,7 +6,7 @@ import { useAuth, useTheme, useToast } from '@providers';
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
 import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, View } from 'react-native';
 import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
 import styles from './styles';
@@ -23,6 +23,15 @@ const DreamFortune = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const isKeyboardVisible = useToggleKeyboard();
   const { showInterstitial } = useInterstitial({})
+  const scrollRef = useRef<ScrollView>(null);
+
+
+  useEffect(() => {
+    if (dreamText.trim().length >= 50) {
+      scrollRef.current?.scrollTo({ y: 400, animated: true });
+    }
+  }, [dreamText.trim().length]);
+
   const submitFortune = async () => {
     if (dreamText.trim().length < 50) {
       showToast('Lütfen en az 50 karakter uzunluğunda rüyanızı anlatınız', 'error');
@@ -287,7 +296,7 @@ Cevabını sadece aşağıdaki JSON yapısıyla ver. Hiçbir ek açıklama yapma
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}>
       <View style={[styles.container, { backgroundColor: colors.background }]}>
-        <ScrollView style={styles.content} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
+        <ScrollView style={styles.content} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled" ref={scrollRef}>
           {/* Seer Info */}
           <Animated.View
             style={[styles.seerInfo, { backgroundColor: colors.secondaryText }]}

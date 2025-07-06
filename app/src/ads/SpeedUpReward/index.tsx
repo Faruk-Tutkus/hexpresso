@@ -6,7 +6,7 @@ import { ActivityIndicator, Text, View } from 'react-native';
 import { AdEventType, RewardedAd, RewardedAdEventType, TestIds } from 'react-native-google-mobile-ads';
 import styles from './styles';
 
-const adUnitId = __DEV__ ? TestIds.REWARDED : 'ca-app-pub-2363017162977044/3456789012'; // Yeni reklam ID'si
+const adUnitId = __DEV__ ? TestIds.REWARDED : 'ca-app-pub-2363017162977044/8007997233'; // Yeni reklam ID'si
 
 interface SpeedUpRewardProps {
   onSpeedUpSuccess?: () => void;
@@ -116,7 +116,7 @@ export default function SpeedUpReward({
             </View>
           ) : (
             <CustomButton
-              title={loaded ? "Hızlandır" : "Reklam Yok"}
+              title={loaded && !disabled && !isShowing ? "Hızlandır" : "Reklam Yok"}
               onPress={showAd}
               disabled={!loaded || disabled || isShowing}
               leftIcon="flash"
