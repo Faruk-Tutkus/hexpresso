@@ -139,7 +139,7 @@ const FloatingDatePicker: React.FC<FloatingDatePickerProps> = ({
           display="calendar"
           value={value || new Date()}
           onChange={handleChangeText}
-          maximumDate={new Date(new Date().setFullYear(new Date().getFullYear() - 8))}
+          maximumDate={new Date(new Date().setFullYear(new Date().getFullYear() - 13))}
           
         />
       )}

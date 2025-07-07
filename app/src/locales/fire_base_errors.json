@@ -62,8 +62,10 @@
       "auth/session-cookie-revoked": "Oturum iptal edildi.",
       "auth/uid-already-exists": "Bu kullanıcı kimliği başka bir kullanıcı tarafından kullanılıyor.",
       "auth/unauthorized-continue-uri": "Yetkisiz yönlendirme adresi.",
-      "auth/user-not-found": "Kullanıcı bulunamadı.",
-      "auth/google-sign-in-error": "Google ile giriş yaparken bir hata oluştu. Lütfen daha sonra tekrar deneyiniz."
+      "auth/user-not-found": "Bu e-posta adresi ile kayıtlı kullanıcı bulunamadı.",
+      "auth/google-sign-in-error": "Google ile giriş yaparken bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.",
+      "auth/password-reset-sent": "Şifre sıfırlama e-postası gönderildi.",
+      "auth/password-reset-failed": "Şifre sıfırlama e-postası gönderilemedi. Lütfen daha sonra tekrar deneyiniz."
   },
   "horoscope": {
     "aquarius": "kova",

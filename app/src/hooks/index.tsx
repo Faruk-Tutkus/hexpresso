@@ -11,6 +11,7 @@ export { checkDatePeriod, formatDateToDisplay, getDateRangeForPeriod, isIsoDateI
 export { canRequestHoroscopeToday, markHoroscopeRequestedToday } from './isToday'
 export { default as loadCache } from './LoadCache'
 export { useEmailVerification } from './SendEmailVerification'
+export { useSendPasswordReset } from './SendPasswordReset'
 export { useSignInWithApple } from './SignInWithApple'
 export { useSignInWithEmail } from './SignInWithEmail'
 export { useSignInWithFacebook } from './SignInWithFacebook'
