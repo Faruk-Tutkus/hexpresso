@@ -179,18 +179,18 @@ const Register = () => {
           />
           <ContainerButton
             title="Facebook ile Giriş Yap"
-            onPress={() => { }}
+            onPress={() => { showToast("Yakında desteklenecek", 'info') }}
             variant="primary"
             size="medium"
             leftImage={require('@assets/image/facebook.png')}
           />
-          <ContainerButton
+          {/* <ContainerButton
             title="Apple ile Giriş Yap"
             onPress={() => { }}
             variant="primary"
             size="medium"
             leftImage={require('@assets/image/apple.png')}
-          />
+          /> */}
         </View>
       </View>
     </View>

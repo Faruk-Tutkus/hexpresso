@@ -122,7 +122,7 @@ const Login = () => {
       }
     } catch (error: any) {
       console.log(error);
-      showToast(t('auth.auth/facebook-sign-in-error'), 'error');
+      showToast("Facebook ile giriş yaparken bir hata oluştu", 'error');
       setIsFacebookLoading(false);
     }
   }
@@ -139,7 +139,7 @@ const Login = () => {
       }
     } catch (error: any) {
       console.log(error);
-      showToast(t('auth.auth/apple-sign-in-error'), 'error');
+      showToast("Apple ile giriş yaparken bir hata oluştu", 'error');
       setIsAppleLoading(false);
     }
   }
@@ -185,20 +185,20 @@ const Login = () => {
           />
           <ContainerButton
             title="Facebook ile Giriş Yap"
-            onPress={handleSignInFacebook}
+            onPress={()=> { showToast("Yakında desteklenecek", 'info') }}
             variant="primary"
             size="medium"
             leftImage={require('@assets/image/facebook.png')}
             loading={isFacebookLoading}
           />
-          <ContainerButton
+          {/* <ContainerButton
             title="Apple ile Giriş Yap"
             onPress={handleSignInApple}
             variant="primary"
             size="medium"
             leftImage={require('@assets/image/apple.png')}
             loading={isAppleLoading}
-          />
+          /> */}
         </View>
       </View>
     </Animated.View>
