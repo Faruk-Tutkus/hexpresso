@@ -207,7 +207,7 @@ const Privacy = () => {
             <Text style={[styles.sectionText, { color: colors.secondaryText }]}>
               Gizlilik konularında bizimle iletişime geçin:{'\n\n'}
               <Text style={{ fontWeight: '600' }}>📧 E-posta:</Text>{'\n'}
-              privacy@hexpresso.com{'\n\n'}
+              so38ware@gmail.com{'\n\n'}
                              <Text style={{ fontWeight: '600' }}>📱 Uygulama İçi:</Text>{'\n'}
                Ayarlar {'->'} Gizlilik {'->'} İletişim{'\n\n'}
               <Text style={{ fontWeight: '600' }}>🏛️ Veri Koruma Kurulu:</Text>{'\n'}
@@ -219,7 +219,7 @@ const Privacy = () => {
 
           <View style={[styles.footerSection, { borderTopColor: colors.border }]}>
             <Text style={[styles.footerText, { color: colors.secondaryText }]}>
-              © 2024 Hexpresso - Faruk Tutkus{'\n'}
+              © 2025 Hexpresso - Faruk Tutkus{'\n'}
               Veri Sorumlusu: Faruk Tutkus{'\n'}
               Bu politika düzenli olarak gözden geçirilir.
             </Text>
