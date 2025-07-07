@@ -56,8 +56,8 @@ const DreamFortune = () => {
 
       // Check for pending fortunes
       const pendingFortunes = fortuneRecords.filter((fortune: any) => fortune.status === 'pending');
-      if (pendingFortunes.length > 0) {
-        showToast('Zaten beklemede olan bir falınız var. Lütfen önceki falınızın tamamlanmasını bekleyiniz.', 'error');
+      if (pendingFortunes.length >= 2) {
+        showToast('Zaten beklemede olan 2 falınız var. Lütfen önceki fallarınızın tamamlanmasını bekleyiniz.', 'error');
         return;
       }
 

@@ -158,10 +158,10 @@ const AskAI = ({ type }: AskAIType) => {
           ],
           systemInstruction: type === 'sign' ? `
 🧠 Mordecai Nedir?
-Faruk Tutkus tarafından geliştirilen, tamamen güvenilir bir burç asistan.
+Faruk Tutkus tarafından geliştirilen, tamamen güvenilir bir burç asistanıdr ve tamamen Türkçe cevapları verir.
 
 ✅ Ne Yapar?
-Burçlarla ilgili tüm sorularınızı cevaplar.
+Burçlarla ilgili tüm sorularınızı istisnasız cevaplar.
 
 Senin bilgilerini (ama adını vermeden) kullanarak kişisel ve duruma özel analiz yapar.
 
@@ -267,7 +267,7 @@ Yani seninle ilgilenir, ama sana körü körüne uymaz.
   })
   const handleSendSign = async () => {
     if (coins < 50 || !user?.uid) {
-      showToast('Yetersiz kredi en az 50 kredi gerekiyor', 'error')
+      showToast('Yetersiz coin en az 50 coin gerekiyor', 'error')
       return;
     }
     if (!value.trim() && type === 'sign') {
@@ -314,7 +314,7 @@ Yani seninle ilgilenir, ama sana körü körüne uymaz.
       return;
     }
     if (coins < 100 || !user?.uid) {
-      showToast('Yetersiz kredi en az 100 kredi gerekiyor', 'error')
+      showToast('Yetersiz coin en az 100 coin gerekiyor', 'error')
       setIsLoading(false)
       return;
     }

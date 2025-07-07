@@ -126,7 +126,7 @@ const Register = () => {
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.content}>
         <FloatingLabelInput
-          placeholder="Name"
+          placeholder="İsim"
           value={displayName as string}
           onChangeText={setDisplayName}
           leftIcon="person"
@@ -134,7 +134,7 @@ const Register = () => {
           error={errorMessage.displayName}
         />
         <FloatingLabelInput
-          placeholder="Email"
+          placeholder="E-posta"
           value={email}
           onChangeText={setEmail}
           leftIcon="mail"
@@ -142,7 +142,7 @@ const Register = () => {
           error={errorMessage.email}
         />
         <FloatingLabelInput
-          placeholder="Password"
+          placeholder="Şifre"
           value={password}
           onChangeText={setPassword}
           leftIcon="lock-closed"
@@ -151,7 +151,7 @@ const Register = () => {
           error={errorMessage.password}
         />
         <FloatingLabelInput
-          placeholder="rePassword"
+          placeholder="Şifre Tekrar"
           value={rePassword}
           onChangeText={setRePassword}
           leftIcon="lock-closed"

@@ -21,10 +21,10 @@ const styles = StyleSheet.create({
   // Section Styles
   signsSection: {
     marginBottom: 25,
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
   },
   commentsSection: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
   },
   aiSection: {
     marginBottom: 25,

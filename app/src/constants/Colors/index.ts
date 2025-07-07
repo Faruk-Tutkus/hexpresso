@@ -20,7 +20,7 @@ const Colors = {
     primary: '#8C52FF',                      
     secondary: '#3DC8F1',            
     border: '#2e2e2e',              
-    text: '#000000',                
+    text: '#252525',                
     secondaryText: '#292a2c',       
     errorBorder: '#E23642',        
     errorText: '#F0656D',           

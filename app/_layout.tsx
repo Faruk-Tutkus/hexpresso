@@ -49,7 +49,7 @@ export function AppContent() {
     });
 
     return () => subscription.remove();
-  }, [router]);
+  }, [router, user]);
 
   const [fontsLoaded, fontError] = useFonts({
     'Almendra-Regular': require('./src/assets/fonts/Almendra-Regular.ttf'),

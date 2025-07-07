@@ -7,12 +7,12 @@ import { router } from 'expo-router';
 import React, { memo, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import Animated, {
-    FadeIn,
-    FadeInDown,
-    FadeOut,
-    LayoutAnimationConfig,
-    SlideInDown,
-    ZoomIn
+	FadeIn,
+	FadeInDown,
+	FadeOut,
+	LayoutAnimationConfig,
+	SlideInDown,
+	ZoomIn
 } from 'react-native-reanimated';
 import styles from './styles';
 

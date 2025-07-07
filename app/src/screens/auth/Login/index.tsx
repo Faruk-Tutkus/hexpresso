@@ -148,7 +148,7 @@ const Login = () => {
     <Animated.View entering={FadeIn} exiting={FadeOut} style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.content}>
         <FloatingLabelInput
-          placeholder="Email"
+          placeholder="E-posta"
           value={email}
           onChangeText={setEmail}
           leftIcon="mail"
@@ -156,7 +156,7 @@ const Login = () => {
           error={errorMessage.email}
         />
         <FloatingLabelInput
-          placeholder="Password"
+          placeholder="Şifre"
           value={password}
           onChangeText={setPassword}
           leftIcon="lock-closed"
@@ -165,7 +165,7 @@ const Login = () => {
           error={errorMessage.password}
         />
         <CustomButton
-          title="Login"
+          title="Giriş Yap"
           onPress={handleSignIn}
           variant="primary"
           size="medium"

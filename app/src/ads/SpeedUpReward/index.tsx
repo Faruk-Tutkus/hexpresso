@@ -37,7 +37,7 @@ export default function SpeedUpReward({
 
     const rewardListener = rewarded.addAdEventListener(RewardedAdEventType.EARNED_REWARD, () => {
       console.log('SpeedUp ödül alındı');
-      showToast('Falınız 30 saniye hızlandırıldı! ⚡', 'success');
+      showToast('Falınız 120 saniye hızlandırıldı!⚡', 'success');
       onSpeedUpSuccess && onSpeedUpSuccess();
     });
 
@@ -79,7 +79,7 @@ export default function SpeedUpReward({
   }, [loaded, isShowing]);
 
   // Süre 1 dakikadan azsa reklam gösterme
-  if (remainingMinutes < 1) {
+  if (remainingMinutes < 2) {
     return null;
   }
 
@@ -98,7 +98,7 @@ export default function SpeedUpReward({
               Hızlandır ⚡
             </Text>
             <Text style={[styles.speedUpDescription, { color: colors.secondaryText }]}>
-              Reklamı izleyerek falınızı 30 saniye hızlandırın
+              Reklamı izleyerek falınızı 120 saniye hızlandırın
             </Text>
             <Text style={[styles.remainingTime, { color: colors.secondary }]}>
               Kalan süre: {remainingMinutes} dakika

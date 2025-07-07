@@ -42,6 +42,14 @@ export default function Layout() {
       description: 'Kişisel bilgileriniz'
     },
     {
+      name: 'Coins',
+      title: 'Altın Kazan',
+      icon: 'play-circle',
+      route: '/src/screens/main/navigator/Coins',
+      colors: ['#FA709A', '#FEE140'],
+      description: 'Altın kazanma yolları'
+    },
+    {
       name: 'About',
       title: 'Hakkımızda',
       icon: 'information-circle',
@@ -56,14 +64,6 @@ export default function Layout() {
       route: '/src/screens/main/navigator/Settings',
       colors: ['#F093FB', '#F5576C'],
       description: 'Uygulama ayarları'
-    },
-    {
-      name: 'Coins',
-      title: 'Altın Kazan',
-      icon: 'play-circle',
-      route: '/src/screens/main/navigator/Coins',
-      colors: ['#FA709A', '#FEE140'],
-      description: 'Altın kazanma yolları'
     },
     {
       name: 'Logout',
@@ -311,14 +311,6 @@ export default function Layout() {
         name="Settings"
         options={{
           title: 'Settings',
-          headerShown: true,
-          drawerItemStyle: { display: 'none' }
-        }}
-      />
-      <Drawer.Screen
-        name="Help"
-        options={{
-          title: 'Help',
           headerShown: true,
           drawerItemStyle: { display: 'none' }
         }}

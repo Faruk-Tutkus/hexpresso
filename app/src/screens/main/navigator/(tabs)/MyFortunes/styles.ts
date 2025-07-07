@@ -32,7 +32,7 @@ export default StyleSheet.create({
     marginTop: 8,
   },
   listContent: {
-    marginHorizontal: 20,
+    marginHorizontal: 16,
     paddingBottom: 20,
   },
   separator: {
@@ -485,8 +485,6 @@ export default StyleSheet.create({
     marginBottom: 8,
   },
   tarotCardsHorizontalList: {
-    paddingHorizontal: 8,
-    paddingVertical: 4,
     flexGrow: 1,
   },
   tarotCardPosition: {
@@ -495,6 +493,7 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
   tarotStats: {
+    marginTop: 16,
     alignItems: 'flex-end',
   },
   tarotStatsText: {
@@ -506,7 +505,7 @@ export default StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1,
     padding: 12,
-    marginRight: 12,
+    marginRight: 6,
     alignItems: 'center',
   },
   tarotCardImageContainer: {
@@ -583,8 +582,7 @@ export default StyleSheet.create({
     flex: 1
   },
   tarotCardImageContainerLarge: {
-    width: 170,
-    height: 250,
+    height: 'auto',
     borderRadius: 8,
     overflow: 'hidden',
     alignSelf: 'center',

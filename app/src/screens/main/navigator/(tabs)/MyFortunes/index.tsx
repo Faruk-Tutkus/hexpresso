@@ -6,7 +6,7 @@ import { useAuth, useTheme, useToast } from '@providers';
 import { Image } from 'expo-image';
 import { arrayRemove, arrayUnion, doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { useCallback, useEffect, useState } from 'react';
-import { FlatList, RefreshControl, Image as RNImage, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, FlatList, RefreshControl, Image as RNImage, Text, TouchableOpacity, View } from 'react-native';
 import FlipCard from 'react-native-flip-card';
 import Animated, {
   FadeIn,
@@ -44,7 +44,6 @@ const MyFortunes = () => {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [expandedCardId, setExpandedCardId] = useState<string | null>(null);
-
 
   // Real-time timer check for immediate status updates
   useEffect(() => {
@@ -265,11 +264,11 @@ const FortuneCardContent = ({
       console.log(`📅 Current completion time: ${currentCompletionTime.toLocaleString()}`);
       console.log(`⏰ Current time: ${new Date().toLocaleString()}`);
 
-      // 30 saniye düş
-      const newCompletionTime = new Date(currentCompletionTime.getTime() - (30 * 1000));
+      // 120 saniye düş
+      const newCompletionTime = new Date(currentCompletionTime.getTime() - (120 * 1000));
       
-      // Minimum 30 saniye kalsın
-      const minCompletionTime = new Date(Date.now() + 30000);
+      // Minimum 5 dakika kalsın
+      const minCompletionTime = new Date(Date.now() + 60 * 5 * 1000);
       const finalCompletionTime = newCompletionTime > minCompletionTime ? newCompletionTime : minCompletionTime;
 
       console.log(`📅 Final completion time: ${finalCompletionTime.toLocaleString()}`);
@@ -615,11 +614,12 @@ const FortuneCardContent = ({
   const renderTarotCards = () => {
     const selectedCards = fortune.selectedCards || [];
     console.log(selectedCards);
-    
+    const width = Dimensions.get('window').width;
+    console.log(width);
     const renderTarotCard = ({ item: card, index }: { item: any; index: number }) => (
       <Animated.View
         key={index}
-        style={[styles.tarotCardDisplayItem, { borderColor: colors.border }]}
+        style={[styles.tarotCardDisplayItem, { borderColor: colors.border, width: width - 80}]}
         entering={FadeInUp.delay((index + 1) * 100).springify()}
       >
         <FlipCard
@@ -640,7 +640,7 @@ const FortuneCardContent = ({
             {card.info && <Text style={[styles.tarotCardInfo, { color: colors.secondaryText }]}>{card.info}</Text>}
           </View>
           {/* BACK: card image */}
-          <View style={styles.tarotCardImageContainerLarge}>
+          <View style={[styles.tarotCardImageContainerLarge, { width: width - 120}]}>
             <RNImage source={getTarotCardImage(card.imageKey)} style={styles.tarotCardDisplayImageLarge} />
           </View>
         </FlipCard>
@@ -664,14 +664,14 @@ const FortuneCardContent = ({
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.tarotCardsHorizontalList}
-          snapToInterval={262}
+          snapToInterval={width - 80 + 6}
           snapToAlignment="start"
           decelerationRate="fast"
           scrollEventThrottle={16}
           removeClippedSubviews={false}
           getItemLayout={(data, index) => ({
-            length: 262,
-            offset: 262 * index,
+            length: width - 80,
+            offset: (width - 80) * index,
             index,
           })}
         />

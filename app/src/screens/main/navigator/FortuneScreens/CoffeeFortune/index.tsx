@@ -231,11 +231,21 @@ const CoffeeFortune = () => {
       
       const userData = userDoc.data();
       const fortuneRecords = userData.fortunerecord || [];
+
+      const fortuneIndex = seer.fortunes.indexOf('Kahve Falı');
+      const fortuneCost = seer.coins[fortuneIndex] || seer.coins[0];
+      
+      const currentCoins = userData.coins || 0;
+      
+      if (currentCoins < fortuneCost) {
+        showToast(`Yetersiz coin! Bu fal için ${fortuneCost} coin gerekli, mevcut: ${currentCoins}`, 'error');
+        return;
+      }
       
       // Check for pending fortunes
       const pendingFortunes = fortuneRecords.filter((fortune: any) => fortune.status === 'pending');
-      if (pendingFortunes.length > 0) {
-        showToast('Zaten beklemede olan bir falınız var. Lütfen önceki falınızın tamamlanmasını bekleyiniz.', 'error');
+      if (pendingFortunes.length >= 2) {
+        showToast('Zaten beklemede olan 2 falınız var. Lütfen önceki fallarınızın tamamlanmasını bekleyiniz.', 'error');
         return;
       }
 
@@ -246,17 +256,6 @@ const CoffeeFortune = () => {
       console.log(validation);
       if (!validation.isValid) {
         showToast(`Geçersiz görüntü lütfen kahve fincanı fotoğrafınızı kontrol ediniz`, 'error');
-        return;
-      }
-      
-      // Get fortune cost
-      const fortuneIndex = seer.fortunes.indexOf('Kahve Falı');
-      const fortuneCost = seer.coins[fortuneIndex] || seer.coins[0];
-      
-      const currentCoins = userData.coins || 0;
-      
-      if (currentCoins < fortuneCost) {
-        showToast(`Yetersiz coin! Bu fal için ${fortuneCost} coin gerekli, mevcut: ${currentCoins}`, 'error');
         return;
       }
       

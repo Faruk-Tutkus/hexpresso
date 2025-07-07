@@ -6,7 +6,7 @@ admin.initializeApp({
 
 admin
   .auth()
-  .updateUser("LNj86pHtPzXuhFlgeI0EPxgBLjI3", {
+  .updateUser("6Kc6XHwXTHcojYFkpdzofZcetIr2", {
     emailVerified: true,
   })
   .then((userRecord) => {

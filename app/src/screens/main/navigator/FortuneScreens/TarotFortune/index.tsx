@@ -137,23 +137,24 @@ const TarotFortune = () => {
       const userData = userDoc.data();
       const fortuneRecords = userData.fortunerecord || [];
 
+       // Get fortune cost
+       const fortuneIndex = seer.fortunes.findIndex(f => f.toLowerCase().includes('tarot'));
+       const fortuneCost = seer.coins[fortuneIndex] || seer.coins[0];
+ 
+       const currentCoins = userData.coins || 0;
+ 
+       if (currentCoins < fortuneCost) {
+         showToast(`Yetersiz coin! Bu fal için ${fortuneCost} coin gerekli, mevcut: ${currentCoins}`, 'error');
+         return;
+       }
+
       // Check for pending fortunes
       const pendingFortunes = fortuneRecords.filter((fortune: any) => fortune.status === 'pending');
-      if (pendingFortunes.length > 0) {
-        showToast('Zaten beklemede olan bir falınız var. Lütfen önceki falınızın tamamlanmasını bekleyiniz.', 'error');
+      if (pendingFortunes.length >=  2) {
+        showToast('Zaten beklemede olan 2 falınız var. Lütfen önceki fallarınızın tamamlanmasını bekleyiniz.', 'error');
         return;
       }
 
-      // Get fortune cost
-      const fortuneIndex = seer.fortunes.findIndex(f => f.toLowerCase().includes('tarot'));
-      const fortuneCost = seer.coins[fortuneIndex] || seer.coins[0];
-
-      const currentCoins = userData.coins || 0;
-
-      if (currentCoins < fortuneCost) {
-        showToast(`Yetersiz coin! Bu fal için ${fortuneCost} coin gerekli, mevcut: ${currentCoins}`, 'error');
-        return;
-      }
 
       // Deduct coins immediately
       await updateDoc(doc(db, 'users', user.uid), {

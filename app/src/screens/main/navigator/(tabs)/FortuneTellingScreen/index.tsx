@@ -1,7 +1,7 @@
 import { Banner } from '@ads';
 import { SeerCard } from '@components';
 import { useFetchSeers } from '@hooks';
-import { useAuth, useTheme, useToast } from '@providers';
+import { useAuth, useTheme } from '@providers';
 import React, { useCallback, useState } from 'react';
 import { ActivityIndicator, FlatList, Platform, RefreshControl, Text, UIManager, View } from 'react-native';
 import Animated, {
@@ -48,9 +48,7 @@ const FortuneTellingScreen = () => {
   const { user } = useAuth();
   const { seers, loading, error, refetch } = useFetchSeers(user);
   const { colors } = useTheme();
-  const { showToast } = useToast();
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [refreshing, setRefreshing] = useState(false);
 
   const toggleCard = useCallback((index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -140,7 +138,7 @@ const FortuneTellingScreen = () => {
         renderItem={renderSeerCard}
         ListHeaderComponent={FortuneTellingHeader}
         ListEmptyComponent={error ? renderErrorComponent : renderEmptyComponent}
-        contentContainerStyle={styles.listContent}
+        contentContainerStyle={[styles.listContent]}
         showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl

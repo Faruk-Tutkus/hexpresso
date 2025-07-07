@@ -144,7 +144,7 @@ export const useFetchSeers = (user: any): UseFetchSeersReturn => {
       if (data && data.length > 0) {
         setSeers(data);
         cacheSeersData(data);
-        showToast('Veriler güncellendi', 'info');
+        //showToast('Veriler güncellendi', 'info');
         console.log('✅ FetchSeers: Firebase\'den veri başarıyla yüklendi');
       } else {
         throw new Error('Firebase\'den boş seers verisi geldi');

@@ -41,7 +41,8 @@ const Toast = ({
       case 'success':
         return {
           icon: 'checkmark-circle',
-          backgroundColor: colors.primary,
+          borderColor: colors.primary,
+          backgroundColor: colors.secondaryText,
           iconColor: colors.background,
           title: title || 'Başarılı',
           message: message || 'İşlem başarıyla tamamlandı'
@@ -49,7 +50,8 @@ const Toast = ({
       case 'error':
         return {
           icon: 'close-circle',
-          backgroundColor: colors.errorBorder,
+          borderColor: colors.errorBorder,
+          backgroundColor: colors.secondaryText,
           iconColor: colors.background,
           title: title || 'Hata',
           message: message || 'Bir hata oluştu'
@@ -57,7 +59,8 @@ const Toast = ({
       case 'warning':
         return {
           icon: 'warning',
-          backgroundColor: '#FF9500',
+          borderColor: '#FF9500',
+          backgroundColor: colors.secondaryText,
           iconColor: colors.background,
           title: title || 'Uyarı',
           message: message || 'Dikkat edilmesi gereken bir durum var'
@@ -65,7 +68,8 @@ const Toast = ({
       case 'info':
         return {
           icon: 'information-circle',
-          backgroundColor: colors.secondary,
+          borderColor: colors.secondary,
+          backgroundColor: colors.secondaryText,
           iconColor: colors.background,
           title: title || 'Bilgi',
           message: message || 'Bilgilendirme mesajı'
@@ -73,7 +77,8 @@ const Toast = ({
       default:
         return {
           icon: 'checkmark-circle',
-          backgroundColor: colors.primary,
+          borderColor: colors.primary,
+          backgroundColor: colors.secondaryText,
           iconColor: colors.background,
           title: title || 'Başarılı',
           message: message || 'İşlem başarıyla tamamlandı'
@@ -84,7 +89,8 @@ const Toast = ({
   const config = getToastConfig();
 
   // Define border color for the left border based on type
-  const borderColor = config.backgroundColor;
+  const borderColor = config.borderColor;
+  const backgroundColor = config.backgroundColor;
 
   const progressStyle = useAnimatedStyle(() => {
     return {
@@ -102,12 +108,6 @@ const Toast = ({
     }
   }, [duration, showProgress, onClose]);
 
-  const handleClose = () => {
-    if (onClose) {
-      onClose();
-    }
-  };
-
   if (!message && !title) return null;
 
   return (
@@ -116,7 +116,7 @@ const Toast = ({
         style={[
           styles.toastWrapper,
           {
-            backgroundColor: colors.background,
+            backgroundColor: backgroundColor,
             borderLeftWidth: 6,
             borderLeftColor: borderColor,
             borderRightWidth: 6,
@@ -138,11 +138,11 @@ const Toast = ({
 
         {/* Content */}
         <View style={styles.contentContainer}>
-          <Text style={[styles.title, { color: colors.text }]}> 
+          <Text style={[styles.title, { color: colors.background }]}> 
             {config.title}
           </Text>
           {message && (
-            <Text style={[styles.message, { color: colors.text }]}> 
+            <Text style={[styles.message, { color: colors.background }]}> 
               {message}
             </Text>
           )}
