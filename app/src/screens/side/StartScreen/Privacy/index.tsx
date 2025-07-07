@@ -179,11 +179,11 @@ const Privacy = () => {
               8. Çocukların Gizliliği
             </Text>
             <Text style={[styles.sectionText, { color: colors.secondaryText }]}>
-              Hexpresso 8 yaş altı çocuklara yönelik değildir:{'\n\n'}
-              • 8 yaş altından bilinçli olarak veri toplamayız{'\n'}
+              Hexpresso 13 yaş altı çocuklara yönelik değildir:{'\n\n'}
+              • 13 yaş altından bilinçli olarak veri toplamayız{'\n'}
               • Böyle bir durumla karşılaştığımızda verileri hemen sileriz{'\n'}
               • Ebeveynler çocuklarının verilerinin silinmesini talep edebilir{'\n'}
-              • 8-18 yaş arası kullanıcılar için ebeveyn izni önerilir
+              • 13-18 yaş arası kullanıcılar için ebeveyn izni önerilir
             </Text>
           </View>
 
