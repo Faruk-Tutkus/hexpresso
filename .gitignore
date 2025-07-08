@@ -38,4 +38,6 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
+json/service_key.json
+
 app-example
