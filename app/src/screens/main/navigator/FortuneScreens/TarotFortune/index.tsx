@@ -239,7 +239,7 @@ const TarotFortune = () => {
   const generateFortuneInterpretation = async ({ fortuneType, seerData, selectedCards, userData }: any) => {
     try {
       const { GoogleGenAI, HarmBlockThreshold, HarmCategory } = require('@google/genai');
-      const ai = new GoogleGenAI({ apiKey: "AIzaSyDYDevsAsKXs-6P6-qYckbj7YIPCYw9abE" });
+      const ai = new GoogleGenAI({ apiKey: process.env.EXPO_PUBLIC_GEMINI_API_KEY || '' });
 
       // Create card descriptions for AI
       const cardDescriptions = selectedCards.map((card: SelectedTarotCard, index: number) => {

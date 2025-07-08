@@ -522,7 +522,7 @@ Cevabını sadece aşağıdaki JSON yapısıyla ver. Hiçbir ek açıklama yapma
   const validateCoffeeImages = async (images: string[]) => {
     try {
       const { GoogleGenAI, HarmBlockThreshold, HarmCategory } = require('@google/genai');
-      const ai = new GoogleGenAI({ apiKey: "AIzaSyDYDevsAsKXs-6P6-qYckbj7YIPCYw9abE" });
+      const ai = new GoogleGenAI({ apiKey: process.env.EXPO_PUBLIC_GEMINI_API_KEY || '' });
 
       // Use the stored base64 data instead of converting
       //const validBase64Images = selectedImagesBase64.filter(base64 => base64);

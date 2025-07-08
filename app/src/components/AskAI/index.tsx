@@ -15,7 +15,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import styles from './styles'
 
-const ai = new GoogleGenAI({ apiKey: "AIzaSyDYDevsAsKXs-6P6-qYckbj7YIPCYw9abE" });
+const ai = new GoogleGenAI({ apiKey: process.env.EXPO_PUBLIC_GEMINI_API_KEY || '' });
 
 interface AskAIType {
   type: 'sign' | 'comment'
@@ -250,19 +250,19 @@ Yani seninle ilgilenir, ama sana körü körüne uymaz.
       return '';
     } catch (error) {
       console.error('Error getting AI response:', error);
-      return '';
+      return 'error';
     }
   }
 
   const animatedResponseStyle = useAnimatedStyle(() => {
     return {
-      maxHeight: interpolate(progress.value, [0, 1], [type === 'sign' ? 275 : 250, 750]),
+      maxHeight: interpolate(progress.value, [0, 1], [type === 'sign' ? 285 : 250, 750]),
       opacity: interpolate(progress.value, [0, 1], [0, 1])
     }
   })
   const animatedContainerStyle = useAnimatedStyle(() => {
     return {
-      maxHeight: interpolate(progress.value, [0, 0.4], [type === 'sign' ? 270 : 250, 750]),
+      maxHeight: interpolate(progress.value, [0, 0.4], [type === 'sign' ? 285 : 250, 750]),
     }
   })
   const handleSendSign = async () => {
@@ -292,6 +292,11 @@ Yani seninle ilgilenir, ama sana körü körüne uymaz.
 
     if (userData) {
       const aiResponse = await getAIResponse(userData);
+      if (aiResponse === 'error') {
+        showToast('Bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.', 'error')
+        setIsLoading(false)
+        return;
+      }
       progress.value = withTiming(1, { duration: 3000 });
       setResponse(aiResponse || '');
       setIsLoading(false)
@@ -379,7 +384,7 @@ Yani seninle ilgilenir, ama sana körü körüne uymaz.
             onPress={handleSendComment}
             leftIcon="search"
             variant="primary"
-            loading={isLoading}
+            disabled={isLoading}
             contentStyle={{ width: '60%', marginTop: 16 }}
           />
           <View style={[styles.divider, { backgroundColor: colors.primary }]} />

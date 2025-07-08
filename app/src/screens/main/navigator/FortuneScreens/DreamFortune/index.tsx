@@ -141,7 +141,7 @@ const DreamFortune = () => {
   const generateFortuneInterpretation = async ({ fortuneType, seerData, dreamText, userData }: any) => {
     try {
       const { GoogleGenAI, HarmBlockThreshold, HarmCategory } = require('@google/genai');
-      const ai = new GoogleGenAI({ apiKey: "AIzaSyDYDevsAsKXs-6P6-qYckbj7YIPCYw9abE" });
+      const ai = new GoogleGenAI({ apiKey: process.env.EXPO_PUBLIC_GEMINI_API_KEY || '' });
 
       const prompt = `
 🧙‍♀️ Sen Kimsin ve Nasıl Davranıyorsun?

@@ -16,7 +16,7 @@ const useAITaskValidator = () => {
 	const [error, setError] = useState<string | null>(null);
 
 	// Google AI Client
-	const ai = new GoogleGenerativeAI("AIzaSyDYDevsAsKXs-6P6-qYckbj7YIPCYw9abE");
+	const ai = new GoogleGenerativeAI(process.env.EXPO_PUBLIC_GEMINI_API_KEY || '');
 
 	const validateTask = async (
 		imageBase64: string,

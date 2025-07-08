@@ -5,13 +5,13 @@ import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC9xZfTqR5GLDhPSg7aquthXtC-i3ZQsUE",
-  authDomain: "hexpresso-5d0d6.firebaseapp.com",
-  projectId: "hexpresso-5d0d6",
-  storageBucket: "hexpresso-5d0d6.firebasestorage.app",
-  messagingSenderId: "503552610366",
-  appId: "1:503552610366:web:6baad630da9010c286816f",
-  measurementId: "G-2HVPF0L7CE"
+  apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
 const reactNativePersistence = (firebaseAuth as any).getReactNativePersistence;

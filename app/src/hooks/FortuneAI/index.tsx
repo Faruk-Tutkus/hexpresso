@@ -18,7 +18,7 @@ interface FortuneAIResponse {
 }
 
 // AI instance
-const ai = new GoogleGenAI({ apiKey: "AIzaSyDYDevsAsKXs-6P6-qYckbj7YIPCYw9abE" });
+const ai = new GoogleGenAI({ apiKey: process.env.EXPO_PUBLIC_GEMINI_API_KEY || '' });
 
 export const useFortuneAI = () => {
   const [loading, setLoading] = useState(false);

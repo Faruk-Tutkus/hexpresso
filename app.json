@@ -76,14 +76,26 @@
         }
       },
       "permissions": [
-        "ACCESS_COARSE_LOCATION",
-        "ACCESS_FINE_LOCATION"
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.INTERNET",
+        "android.permission.RECORD_AUDIO"
       ]
     },
     "ios": {
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "Hexpresso uygulaması konumunuzu kullanarak size daha iyi hizmet sunmak istiyor.",
-        "NSLocationAlwaysUsageDescription": "Hexpresso uygulaması konumunuzu kullanarak size daha iyi hizmet sunmak istiyor."
+        "NSLocationAlwaysUsageDescription": "Hexpresso uygulaması konumunuzu kullanarak size daha iyi hizmet sunmak istiyor.",
+        "SKAdNetworkItems": [
+          {
+            "SKAdNetworkIdentifier": "v9wttpbfk9.skadnetwork"
+          },
+          {
+            "SKAdNetworkIdentifier": "n38lu8286q.skadnetwork"
+          }
+        ]
       }
     },
     "web": {
@@ -91,6 +103,11 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "userInterfaceStyle": "automatic"
+    "userInterfaceStyle": "automatic",
+    "extra": {
+      "eas": {
+        "projectId": "b231d42f-2e5c-48fa-8336-d214c129b92e"
+      }
+    }
   }
 }
