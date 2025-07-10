@@ -14,35 +14,19 @@
       },
       "oauth_client": [
         {
+          "client_id": "503552610366-4iof396hb5baasgb6skk588rb7ps2cgm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.faruktutkus.hexpresso",
+            "certificate_hash": "4be7705a13907ebe1c65acddd77e28a506b612ed"
+          }
+        },
+        {
           "client_id": "503552610366-h2s9imrfccpuh0n653d0g9hl2gflehhf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.faruktutkus.hexpresso",
             "certificate_hash": "96f5aaab0b80b37876b44c0ae47a4a6b0a26dd02"
-          }
-        },
-        {
-          "client_id": "503552610366-litquktjq3f0rhfug7qtblt61ks6jubc.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.faruktutkus.hexpresso",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
-          }
-        },
-        {
-          "client_id": "503552610366-si1i5n92s4p23v912vpkfk6dt43c6usc.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.faruktutkus.hexpresso",
-            "certificate_hash": "7ccdc673556c80da2722d5f530b528c336135342"
-          }
-        },
-        {
-          "client_id": "503552610366-ul10rk2bvmt9c2ujfsvc1l38bro150un.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.faruktutkus.hexpresso",
-            "certificate_hash": "6aa2a3cc5e2c76497b385a7b313e5894091170f4"
           }
         },
         {

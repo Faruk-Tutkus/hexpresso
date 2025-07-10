@@ -2,8 +2,8 @@
   "expo": {
     "name": "Hexpresso",
     "slug": "hexpresso",
-    "version": "1.0.2",
-    "versionCode": 3,
+    "version": "1.0.4",
+    "versionCode": 5,
     "orientation": "portrait",
     "entryPoint": "./index.tsx",
     "newArchEnabled": true,

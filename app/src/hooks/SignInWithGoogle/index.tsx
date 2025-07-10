@@ -8,7 +8,7 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 export const useSignInWithGoogle = () => {
   GoogleSignin.configure({
     webClientId: '503552610366-cncgkggphfoi53jna1euf5qsmpnl46oe.apps.googleusercontent.com',
-    scopes: ['https://www.googleapis.com/auth/drive'], // what API you want to access on behalf of the user, default is email and profile
+    scopes: ['profile', 'email'], // what API you want to access on behalf of the user, default is email and profile
     offlineAccess: false, // if you want to access Google API on behalf of the user FROM YOUR SERVER
     forceCodeForRefreshToken: true, // Her seferinde hesap seçme ekranı gelsin
   });
