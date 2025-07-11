@@ -46,6 +46,10 @@ export function AppContent() {
         console.log('🎯 Fortune notification clicked, navigating to MyFortunes');
         router.replace('/src/screens/main/navigator/(tabs)/MyFortunes');
       }
+      else {
+        console.log('🔔 Notification response received:', response);
+        router.replace('/src/screens/side/StartScreen');
+      }
     });
 
     return () => subscription.remove();
