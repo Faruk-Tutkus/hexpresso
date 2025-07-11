@@ -66,7 +66,7 @@ export default function RewardedInterstitial({
     })
 
     const errorListener = rewarded.addAdEventListener(AdEventType.ERROR, error => {
-      showToast('Reklam yüklenirken bir hata oluştu', 'error')
+      //showToast('Reklam yüklenemedi', 'error')
       console.log('RewardedInterstitial reklam yüklenirken bir hata oluştu', error)
       setLoading(false)
       setLoaded(false)

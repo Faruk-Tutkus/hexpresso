@@ -158,7 +158,7 @@ const Terms = () => {
 
           <View style={[styles.footerSection, { borderTopColor: colors.border }]}>
             <Text style={[styles.footerText, { color: colors.secondaryText }]}>
-              © 2024 Hexpresso - Faruk Tutkus{'\n'}
+              © 2025 Hexpresso - Faruk Tutkus{'\n'}
               Tüm hakları saklıdır.
             </Text>
           </View>

@@ -57,7 +57,7 @@ export const useInterstitial = (options?: InterstitialOptions) => {
     const errorListener = interstitial.addAdEventListener(AdEventType.ERROR, (error) => {
       console.log('Interstitial reklam hatası:', error)
       isLoadingRef.current = false
-      showToast('Reklam yüklenemedi', 'error')
+      //showToast('Reklam yüklenemedi', 'error')
       onAdError && onAdError(error)
 
       // Cleanup listeners

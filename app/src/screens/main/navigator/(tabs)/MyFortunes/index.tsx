@@ -266,10 +266,8 @@ const FortuneCardContent = ({
 
       // 120 saniye düş
       const newCompletionTime = new Date(currentCompletionTime.getTime() - (120 * 1000));
-      
-      // Minimum 5 dakika kalsın
-      const minCompletionTime = new Date(Date.now() + 60 * 5 * 1000);
-      const finalCompletionTime = newCompletionTime > minCompletionTime ? newCompletionTime : minCompletionTime;
+
+      const finalCompletionTime = newCompletionTime;
 
       console.log(`📅 Final completion time: ${finalCompletionTime.toLocaleString()}`);
 

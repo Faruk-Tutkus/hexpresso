@@ -64,7 +64,7 @@ export default function Rewarded({
     })
 
     const errorListener = rewarded.addAdEventListener(AdEventType.ERROR, error => {
-      showToast('Reklam yüklenirken bir hata oluştu', 'error')
+      //showToast('Reklam yüklenemedi', 'error')
       console.log('Reklam yüklenirken bir hata oluştu', error)
       setLoading(false)
       setLoaded(false)

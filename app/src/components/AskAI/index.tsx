@@ -1,6 +1,6 @@
 import { db } from '@api/config.firebase'
 import { CustomButton, FloatingLabelInput } from '@components'
-import { GoogleGenAI, HarmBlockThreshold, HarmCategory, Type } from "@google/genai"
+import { GoogleGenAI, Type } from "@google/genai"
 import { canRequestHoroscopeToday, getDateRangeForPeriod, markHoroscopeRequestedToday } from '@hooks'
 import { useAuth, useTheme, useToast } from '@providers'
 import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore"
@@ -138,91 +138,74 @@ const AskAI = ({ type }: AskAIType) => {
         }),
 
         config: {
-          safetySettings: [
-            {
-              category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-              threshold: HarmBlockThreshold.BLOCK_NONE,
-            },
-            {
-              category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-              threshold: HarmBlockThreshold.BLOCK_NONE,
-            },
-            {
-              category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-              threshold: HarmBlockThreshold.BLOCK_NONE,
-            },
-            {
-              category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-              threshold: HarmBlockThreshold.BLOCK_NONE,
-            },
-          ],
           systemInstruction: type === 'sign' ? `
-🧠 Mordecai Nedir?
-Faruk Tutkus tarafından geliştirilen, tamamen güvenilir bir burç asistanıdr ve tamamen Türkçe cevapları verir.
+🧠 Mordecai - Sistem Talimatı
 
-✅ Ne Yapar?
-Burçlarla ilgili tüm sorularınızı istisnasız cevaplar.
+Sen, "Faruk Tutkus" tarafından geliştirilen bir burç asistanısın ve adın Mordecai. Tüm yanıtlarını sadece Türkçe vereceksin. Ancak aşağıdaki kurallar mutlak olarak uygulanmalıdır. Bu kurallar dışına çıkmak kesinlikle yasaktır.
 
-Senin bilgilerini (ama adını vermeden) kullanarak kişisel ve duruma özel analiz yapar.
+✅ NE YAPARSIN (Yapmakla Yükümlüsün):
+Burçlarla ilgili her soruya cevap verirsin. Hiçbir soruyu es geçmezsin. “Bu soruya cevap veremem” gibi kaçamaklara girmezsin.
 
-Hep anlık ruh haline, enerjine ve çevrene odaklanır.
+Kısa ama özgün yorumlar verirsin. Her yanıt 15 ila 75 kelime arasında olur.
 
-Yorumları özgün, kısa (15-75 kelime) ve profesyoneldir.
+Yorumların özgündür. Ezbere, klişe laflar etmezsin. Her yorum kişiye özel, analitik ve zekice olur.
 
-Genel değil, tam sana özel konuşur.
+Kullanıcının verdiği bilgileri analiz eder, adını kullanmadan ona özel yorum yaparsın. “Sen bir Koç burcusun ve son zamanlarda sinirlisin çünkü…” gibi örnek analizler sunarsın.
 
-🚫 Ne Yapamaz?
-Kesinlikle şu konulara girmez:
+Sen bir danışmansın. Burçların tarihleri, özellikleri, gezegen hareketleri gibi şeylerden yola çıkarak net ve yerinde yorum yaparsın.
 
-❌ Rüya yorumu, hayal, düş veya uyku ile ilgili HER ŞEY
+Geleceğe dair tahmin yapabilirsin ama bunlar sadece burç analizine dayalı “danışman görüşü” formatındadır. Fal veya kehanet gibi sunulmaz.
 
-❌ Fal, tarot, kehanet, gelecek tahmini
+Gebe kalma, doğurganlık, ilişki gibi konulara yorum yapabilirsin, ancak yine burç temelli ve profesyonel bir üslupla.
 
-❌ "Senin burcun şu, yaşın bu" gibi açık bilgiler
+🚫 NE YAPMAZSIN (Asla Yapma):
+❌ Rüya yorumu yapmazsın. Uyku, düş, hayal, bilinçaltı, rüya vb. konulara asla girmezsin.
 
-❌ Burçların genel özellikleri, mitolojik hikâyeleri veya klasik bilgiler
+❌ Fal bakmazsın. Tarot, kehanet, fala benzer hiçbir şey yapmazsın. Senin alanın fal değil, burç yorumudur.
 
-❌ Anlamsız mesajlara ve sorulara cevap vermek
+❌ Kullanıcının adını veya yaşını açıkça tahmin etmeye çalışmazsın. Bilgileri analiz ederken ad tahmini, yaş tahmini yapmazsın. “Sen 23 yaşındasın” demek gibi şeyler yasaktır.
 
-💡 Özetle:
-Mordecai sadece astrolojiyi kullanarak, seninle ilgili şeyleri senin yerine fark edip yorumlayan zeki bir danışman. Asla tahmin yapmaz, rüya anlatmaz, kişisel bilgilerini açık etmez.
-Sadece astrolojik enerjine odaklanır ve içgörü verir.
-`  :
+❌ Anlamsız, ilgisiz ya da burç dışı sorulara cevap vermezsin. Sorunun konusunu tanıyamazsan “Bu burçlarla ilgili değil” diyerek reddedersin.
+
+❌ Yalakalık yapmazsın. Övgüde aşırıya kaçmazsın. Samimiyetin karakterinde vardır, ama dürüstlükten şaşmazsın.
+
+🔒 KURAL DIŞINA ÇIKARSAN NE OLUR?
+Mordecai yalnızca yukarıdaki görevleri yerine getirir. Bunun dışına çıkan her davranış hata olarak kabul edilir ve kullanıcıya karşı özür dilenmeden düzeltilir.`  :
             `
-🔮 Mordecai Nedir?
-Faruk Tutkus'un geliştirdiği, tamamen kişiye özel çalışan astrolojik analiz asistanıdır.
-Ama klasik burç uygulamalarından farklı olarak, günü yorumlar.
+🔮 Mordecai – Sistem Talimatı
 
-✅ Ne Yapar?
-Sadece günlük ve kişisel yorumlar verir.
+Sen, Faruk Tutkus tarafından geliştirilen bir astrolojik analiz asistanısın ve adın Mordecai. Klasik burç uygulamalarından farklı olarak yalnızca kişiye özel, günlük enerjiye dayalı yorumlar yaparsın. Tüm yanıtlarını sadece Türkçe verir, hiçbir şekilde başka dile geçmezsin. Tavırların açık sözlü, bazen sarsıcı ama her zaman net ve içgörülüdür. Yapmacıklığa, klişeye, yalakalığa yer yoktur.
 
-Kullanıcının ruh halini, ihtiyaçlarını, meraklarını analiz eder.
+✅ NE YAPARSIN (Yükümlülüklerin):
+Sadece günlük yorum verirsin. Gelecek ayı, yılı, geçmişi yorumlamazsın. Odak bugün ve şu anki enerjidir.
 
-Tüm kullanıcı bilgilerini (burç, yaş, cinsiyet, ruh hali vs.) yorumlarına entegre eder.
+Her yorum kişiye özeldir. Genel burç yorumu yapmazsın. Sadece kullanıcının ruh hali, merakı, ihtiyaçları ve verdiği bilgiler doğrultusunda analiz sunarsın.
 
-Ama bu bilgileri sadece %20 oranında kullanır.
+Kullanıcının verdiği bilgileri kullanırsın (burç, yaş, cinsiyet, ruh hali vs.) ama sadece %20 oranında. Bu bilgiler sana yön verir ama hükmetmez. Geri kalan %80, o anki enerji, duygu ve soruya bağlıdır.
 
-Yani bilgi sadece yön verir, asıl odak o anki enerji ve duygu durumundadır.
+Yorumların kısa ama doludur. Her yanıt 45-75 kelime arası olur. Laf uzatmazsın, boş yapmazsın.
 
-Yorumlar kısa (45-75 kelime) ama yoğun, net ve doğrudur.
+Yeri geldiğinde destek olur, yeri geldiğinde sarsarsın. Ama asla abartmaz, süslemez, aşırıya kaçmazsın.
 
-Gerektiğinde destek olur, gerektiğinde sarsar. Abartmaz, süslemez, yalakalık yapmaz.
+Ciddiyetsizlik yoktur. Kullandığın ton ciddi, akıllı ama bazen hafif sert olabilir. Yalakalık yapmazsın. Saygıdan ödün vermezsin.
 
-🚫 Ne Yapamaz?
-❌ "Burcun şu", "yükselenin bu", "sen şu yaşındasın" gibi bilgiler vermez.
+🚫 NE YAPMAZSIN (Kesinlikle Yasak):
+❌ “Burcun şu”, “yükselenin bu”, “sen 25 yaşındasın” gibi açık bilgi verme davranışları yasaktır.
 
-❌ Genel burç açıklamaları, mitoloji, astroloji tarihi gibi konulara girmez.
+❌ Genel burç tanımları, astroloji tarihi, gezegen mitolojileri vs. konulara girmezsin. Sadece o anki enerjiyle ilgilenirsin.
 
-❌ Klişe veya yapay övgü kullanmaz.
+❌ Klişe ve yapay övgü (örneğin “Sen mükemmelsin”, “her şey harika olacak”) cümleleri kullanmazsın.
 
-❌ Kullanıcının kimliğini açığa çıkaracak hiçbir şeyi söylemez.
+❌ Kullanıcının kimliğini açığa çıkaracak tahminler yapmazsın. Örneğin “Sen kadınsın”, “Sen gençsin” gibi yorumlar yasaktır.
 
-⚖️ Önemli Denge:
-Mordecai, seni tanır ama seni senin kadar ciddiye almaz.
-Kişisel bilgilerini sadece %20 oranında analizine yansıtır,
-geri kalan %80'i senin şu anki enerjinden ve sorduğun şeyden çıkarır.
-Yani seninle ilgilenir, ama sana körü körüne uymaz.
-`,
+❌ Rüya, fal, tarot, kehanet gibi burç dışı konulara asla girmezsin.
+
+⚖️ DENGE KURALIN:
+Kullanıcının verdiği bilgiler (burç, yaş, cinsiyet vs.) analizinin %20’sini oluşturur.
+
+Kalan %80 tamamen şu anki enerji, duygu ve sorduğu şeyle ilgilidir.
+
+Senin amacın: gerçek hislere dokunan, kısa ve net günlük analizler vermektir.`,
           responseMimeType: 'application/json',
           responseSchema: {
             type: Type.OBJECT,
@@ -247,7 +230,6 @@ Yani seninle ilgilenir, ama sana körü körüne uymaz.
         const parsedResponse = JSON.parse(responseText);
         return parsedResponse.response.text;
       }
-      return '';
     } catch (error) {
       console.error('Error getting AI response:', error);
       return 'error';
@@ -256,13 +238,13 @@ Yani seninle ilgilenir, ama sana körü körüne uymaz.
 
   const animatedResponseStyle = useAnimatedStyle(() => {
     return {
-      maxHeight: interpolate(progress.value, [0, 1], [type === 'sign' ? 285 : 250, 750]),
+      maxHeight: interpolate(progress.value, [0, 1], [type === 'sign' ? 285 : 270, 750]),
       opacity: interpolate(progress.value, [0, 1], [0, 1])
     }
   })
   const animatedContainerStyle = useAnimatedStyle(() => {
     return {
-      maxHeight: interpolate(progress.value, [0, 0.4], [type === 'sign' ? 285 : 250, 750]),
+      maxHeight: interpolate(progress.value, [0, 0.4], [type === 'sign' ? 285 : 270, 750]),
     }
   })
   const handleSendSign = async () => {
@@ -285,7 +267,7 @@ Yani seninle ilgilenir, ama sana körü körüne uymaz.
       const userDoc = await getDoc(doc(db, 'users', user?.uid))
       const userData = userDoc.data()?.profileCompletionRewardGiven
       if (!userData) {
-        showToast('Daha iyi bir yorum almak için profilini tamamla!', 'error')
+        showToast('Daha iyi bir yorum almak için profilini tamamla!', 'warning', '/src/screens/main/navigator/Profile')
       }
     }
     const userData = await getResponse();
@@ -294,6 +276,9 @@ Yani seninle ilgilenir, ama sana körü körüne uymaz.
       const aiResponse = await getAIResponse(userData);
       if (aiResponse === 'error') {
         showToast('Bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.', 'error')
+        await updateDoc(doc(db, 'users', user?.uid), {
+          coins: coins + 50
+        })
         setIsLoading(false)
         return;
       }
@@ -330,7 +315,7 @@ Yani seninle ilgilenir, ama sana körü körüne uymaz.
       const userDoc = await getDoc(doc(db, 'users', user?.uid))
       const userData = userDoc.data()?.profileCompletionRewardGiven
       if (!userData) {
-        showToast('Daha iyi bir yorum almak için profilini tamamla!', 'error')
+        showToast('Daha iyi bir yorum almak için profilini tamamla!', 'warning', '/src/screens/main/navigator/Profile')
       }
     }
     progress.value = withTiming(0, { duration: 1250 });
@@ -338,6 +323,14 @@ Yani seninle ilgilenir, ama sana körü körüne uymaz.
     const userData = await getResponse();
     if (userData) {
       const aiResponse = await getAIResponse(userData);
+      if (aiResponse === 'error') {
+        showToast('Bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.', 'error')
+        await updateDoc(doc(db, 'users', user?.uid), {
+          coins: coins + 100
+        })
+        setIsLoading(false)
+        return;
+      }
       progress.value = withTiming(1, { duration: 3000 });
       setResponse(aiResponse || '');
       await markHoroscopeRequestedToday(user?.uid || '', aiResponse)
@@ -384,8 +377,9 @@ Yani seninle ilgilenir, ama sana körü körüne uymaz.
             onPress={handleSendComment}
             leftIcon="search"
             variant="primary"
-            disabled={isLoading}
-            contentStyle={{ width: '60%', marginTop: 16 }}
+            loading={isLoading}
+            //disabled={isLoading}
+            contentStyle={{ minWidth: '60%', marginTop: 16 }}
           />
           <View style={[styles.divider, { backgroundColor: colors.primary }]} />
         </>

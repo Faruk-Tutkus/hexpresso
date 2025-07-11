@@ -10,6 +10,7 @@ export { default as GetTimeBasedGreeting, default as useGetTime } from './GetTim
 export { checkDatePeriod, formatDateToDisplay, getDateRangeForPeriod, isIsoDateInRange } from './IsDate'
 export { canRequestHoroscopeToday, markHoroscopeRequestedToday } from './isToday'
 export { default as loadCache } from './LoadCache'
+export { default as useRandomApiKey } from './RandomApiKey'
 export { useEmailVerification } from './SendEmailVerification'
 export { useSendPasswordReset } from './SendPasswordReset'
 export { useSignInWithApple } from './SignInWithApple'

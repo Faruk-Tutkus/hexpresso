@@ -9,12 +9,14 @@ type ToastState = {
   title?: string;
   duration?: number;
   showProgress?: boolean;
+  routerTitle?: any;
 };
 
 type ToastContextType = {
   showToast: (
     message: string, 
     type: 'success' | 'error' | 'info' | 'warning',
+    router?: string,
     options?: {
       title?: string;
       duration?: number;
@@ -33,6 +35,7 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
   const showToast = (
     message: string, 
     type: 'success' | 'error' | 'info' | 'warning',
+    router?: string,
     options?: {
       title?: string;
       duration?: number;
@@ -50,7 +53,8 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
       type,
       title: options?.title,
       duration: options?.duration || 4000,
-      showProgress: options?.showProgress !== false
+      showProgress: options?.showProgress !== false,
+      routerTitle: router
     };
     setToasts(prev => [toast, ...prev]);
   };
@@ -84,8 +88,7 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
               duration={toast.duration}
               showProgress={toast.showProgress}
               onClose={() => hideToast(toast.id)}
-              index={idx}
-              total={toasts.length}
+              routerTitle={toast.routerTitle}
             />
           ))}
         </View>

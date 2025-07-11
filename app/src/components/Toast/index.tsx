@@ -1,7 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from "@providers";
+import { useRouter } from 'expo-router';
 import { useEffect } from "react";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import Animated, {
   FadeInUp,
   FadeOutUp,
@@ -19,8 +20,7 @@ interface ToastProps {
   onClose?: () => void;
   duration?: number;
   showProgress?: boolean;
-  index?: number;
-  total?: number;
+  routerTitle?: any;
 }
 
 const Toast = ({ 
@@ -30,11 +30,11 @@ const Toast = ({
   onClose,
   duration = 4000,
   showProgress = true,
-  index = 0,
-  total = 1
+  routerTitle
 }: ToastProps) => {
   const { colors } = useTheme();
   const progress = useSharedValue(1);
+  const router = useRouter();
 
   const getToastConfig = () => {
     switch (type) {
@@ -111,7 +111,10 @@ const Toast = ({
   if (!message && !title) return null;
 
   return (
-    <View style={[styles.container, styles.toastSpacing]}>
+    <TouchableOpacity style={[styles.container, styles.toastSpacing]} 
+    activeOpacity={1}
+    onPress={() => router.navigate(routerTitle || '')}
+    >
       <Animated.View
         style={[
           styles.toastWrapper,
@@ -159,7 +162,7 @@ const Toast = ({
           />
         )}
       </Animated.View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

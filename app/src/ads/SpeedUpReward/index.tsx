@@ -52,7 +52,7 @@ export default function SpeedUpReward({
 
     const errorListener = rewarded.addAdEventListener(AdEventType.ERROR, error => {
       console.log('SpeedUp reklam hatası:', error);
-      showToast('Reklam yüklenirken hata oluştu', 'error');
+      //showToast('Reklam yüklenemedi', 'error');
       setLoading(false);
       setLoaded(false);
       setIsShowing(false);
@@ -78,8 +78,8 @@ export default function SpeedUpReward({
     }
   }, [loaded, isShowing]);
 
-  // Süre 1 dakikadan azsa reklam gösterme
-  if (remainingMinutes < 2) {
+  // Süre 5 dakikadan azsa reklam gösterme
+  if (remainingMinutes < 5) {
     return null;
   }
 

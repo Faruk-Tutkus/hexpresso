@@ -1,7 +1,7 @@
 import { Banner } from '@ads';
 import { SeerCard } from '@components';
 import { useFetchSeers } from '@hooks';
-import { useAuth, useTheme } from '@providers';
+import { useAuth, useTheme, useToast } from '@providers';
 import React, { useCallback, useState } from 'react';
 import { ActivityIndicator, FlatList, Platform, RefreshControl, Text, UIManager, View } from 'react-native';
 import Animated, {
@@ -49,7 +49,7 @@ const FortuneTellingScreen = () => {
   const { seers, loading, error, refetch } = useFetchSeers(user);
   const { colors } = useTheme();
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-
+  const { showToast } = useToast();
   const toggleCard = useCallback((index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   }, [activeIndex]);
@@ -143,8 +143,11 @@ const FortuneTellingScreen = () => {
         refreshControl={
           <RefreshControl
             refreshing={loading}
-            onRefresh={refetch}
-            colors={[colors.primary]}
+            onRefresh={()=> {
+              refetch();
+              showToast('Veriler güncellendi', 'info');
+            }}
+            colors={[colors.primary]} 
             tintColor={colors.primary}
             title="Yorumlar güncelleniyor..."
             titleColor={colors.text}
