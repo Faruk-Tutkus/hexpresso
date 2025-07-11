@@ -1,4 +1,5 @@
 import { GoogleGenerativeAI, SchemaType } from '@google/generative-ai';
+import { useRandomApiKey } from '@hooks';
 import { useState } from 'react';
 
 export interface TaskValidationResult {
@@ -14,9 +15,9 @@ export interface AIValidationResponse {
 const useAITaskValidator = () => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
-
+	const randomApiKey = useRandomApiKey();
 	// Google AI Client
-	const ai = new GoogleGenerativeAI(process.env.EXPO_PUBLIC_GEMINI_API_KEY || '');
+	const ai = new GoogleGenerativeAI(randomApiKey);
 
 	const validateTask = async (
 		imageBase64: string,

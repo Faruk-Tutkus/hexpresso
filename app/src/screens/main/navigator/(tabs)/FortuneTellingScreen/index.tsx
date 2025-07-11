@@ -1,6 +1,6 @@
 import { Banner } from '@ads';
 import { SeerCard } from '@components';
-import { useFetchSeers } from '@hooks';
+import { useFetchSeers, useRandomApiKey } from '@hooks';
 import { useAuth, useTheme, useToast } from '@providers';
 import React, { useCallback, useState } from 'react';
 import { ActivityIndicator, FlatList, Platform, RefreshControl, Text, UIManager, View } from 'react-native';
@@ -53,7 +53,8 @@ const FortuneTellingScreen = () => {
   const toggleCard = useCallback((index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   }, [activeIndex]);
-
+  const randomApiKey = useRandomApiKey();
+  console.log(randomApiKey);
 
   const renderSeerCard = useCallback(({ item, index }: { item: any, index: number }) => (
     <Animated.View
@@ -103,7 +104,7 @@ const FortuneTellingScreen = () => {
     console.log('  - Loading:', loading);
     console.log('  - Error:', error);
     console.log('  - Seers count:', seers.length);
-    console.log('  - Seers data:', seers);
+    //console.log('  - Seers data:', seers);
   }, [loading, error, seers]);
 
   if (loading && seers.length === 0) {

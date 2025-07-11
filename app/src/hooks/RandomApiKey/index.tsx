@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 const RandomApiKey = () => {
   const [ apiKeys ] = useState<string[] | any>([
-    process.env.EXPO_PUBLIC_GEMINI_API_KEY1 || '',
+    //process.env.EXPO_PUBLIC_GEMINI_API_KEY1 || '',
     process.env.EXPO_PUBLIC_GEMINI_API_KEY2 || '',
     process.env.EXPO_PUBLIC_GEMINI_API_KEY3 || '',
     process.env.EXPO_PUBLIC_GEMINI_API_KEY4 || '',

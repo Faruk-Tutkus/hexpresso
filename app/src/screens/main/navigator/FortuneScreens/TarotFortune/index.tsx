@@ -2,7 +2,7 @@ import { useInterstitial } from '@ads';
 import { db } from '@api/config.firebase';
 import Icon from '@assets/icons';
 import { CustomButton } from '@components';
-import { Seer, TarotCard, useFetchTarots, useFortuneNotificationManager } from '@hooks';
+import { Seer, TarotCard, useFetchTarots, useFortuneNotificationManager, useRandomApiKey } from '@hooks';
 import { useAuth, useTheme, useToast } from '@providers';
 import { Image } from 'expo-image';
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
@@ -26,7 +26,7 @@ const TarotFortune = () => {
   const { showInterstitial } = useInterstitial({});
   const { scheduleFortuneCompletionNotification } = useFortuneNotificationManager();
   const { tarots, loading: tarotsLoading, error: tarotsError } = useFetchTarots(user);
-  
+  const randomApiKey = useRandomApiKey();
   const [shuffledCards, setShuffledCards] = useState<TarotCard[]>([]);
   const [selectedCards, setSelectedCards] = useState<SelectedTarotCard[]>([]);
   const [currentStep, setCurrentStep] = useState<'shuffle' | 'select' | 'result'>('shuffle');
@@ -239,7 +239,7 @@ const TarotFortune = () => {
   const generateFortuneInterpretation = async ({ fortuneType, seerData, selectedCards, userData }: any) => {
     try {
       const { GoogleGenAI, HarmBlockThreshold, HarmCategory } = require('@google/genai');
-      const ai = new GoogleGenAI({ apiKey: process.env.EXPO_PUBLIC_GEMINI_API_KEY || '' });
+      const ai = new GoogleGenAI({ apiKey: randomApiKey });
 
       // Create card descriptions for AI
       const cardDescriptions = selectedCards.map((card: SelectedTarotCard, index: number) => {

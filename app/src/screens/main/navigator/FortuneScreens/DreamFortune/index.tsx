@@ -1,7 +1,7 @@
 import { useInterstitial } from '@ads';
 import { db } from '@api/config.firebase';
 import { CustomButton } from '@components';
-import { Seer, useFortuneNotificationManager, useToggleKeyboard } from '@hooks';
+import { Seer, useFortuneNotificationManager, useRandomApiKey, useToggleKeyboard } from '@hooks';
 import { useAuth, useTheme, useToast } from '@providers';
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
@@ -24,7 +24,7 @@ const DreamFortune = () => {
   const isKeyboardVisible = useToggleKeyboard();
   const { showInterstitial } = useInterstitial({})
   const scrollRef = useRef<ScrollView>(null);
-
+  const randomApiKey = useRandomApiKey();
 
   useEffect(() => {
     if (dreamText.trim().length >= 50) {
@@ -141,7 +141,7 @@ const DreamFortune = () => {
   const generateFortuneInterpretation = async ({ fortuneType, seerData, dreamText, userData }: any) => {
     try {
       const { GoogleGenAI, HarmBlockThreshold, HarmCategory } = require('@google/genai');
-      const ai = new GoogleGenAI({ apiKey: process.env.EXPO_PUBLIC_GEMINI_API_KEY || '' });
+      const ai = new GoogleGenAI({ apiKey: randomApiKey });
 
       const prompt = `
 🧙‍♀️ Sen Kimsin ve Nasıl Davranıyorsun?

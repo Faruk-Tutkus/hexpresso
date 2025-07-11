@@ -1,9 +1,9 @@
 import { db } from '@api/config.firebase'
 import { CustomButton, FloatingLabelInput } from '@components'
 import { GoogleGenAI, Type } from "@google/genai"
-import { canRequestHoroscopeToday, getDateRangeForPeriod, markHoroscopeRequestedToday } from '@hooks'
+import { canRequestHoroscopeToday, getDateRangeForPeriod, markHoroscopeRequestedToday, useRandomApiKey } from '@hooks'
 import { useAuth, useTheme, useToast } from '@providers'
-import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore"
+import { doc, getDoc, increment, onSnapshot, updateDoc } from "firebase/firestore"
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Text, View } from 'react-native'
@@ -15,7 +15,6 @@ import Animated, {
 } from 'react-native-reanimated'
 import styles from './styles'
 
-const ai = new GoogleGenAI({ apiKey: process.env.EXPO_PUBLIC_GEMINI_API_KEY || '' });
 
 interface AskAIType {
   type: 'sign' | 'comment'
@@ -23,6 +22,9 @@ interface AskAIType {
 
 
 const AskAI = ({ type }: AskAIType) => {
+  const randomApiKey = useRandomApiKey();
+  const ai = new GoogleGenAI({ apiKey: randomApiKey });
+  //console.log(randomApiKey);
   const [value, onChangeText] = React.useState('')
   const { colors } = useTheme()
   const [response, setResponse] = React.useState<string>('')
@@ -146,7 +148,7 @@ Sen, "Faruk Tutkus" tarafından geliştirilen bir burç asistanısın ve adın M
 ✅ NE YAPARSIN (Yapmakla Yükümlüsün):
 Burçlarla ilgili her soruya cevap verirsin. Hiçbir soruyu es geçmezsin. “Bu soruya cevap veremem” gibi kaçamaklara girmezsin.
 
-Kısa ama özgün yorumlar verirsin. Her yanıt 15 ila 75 kelime arasında olur.
+Kısa ama özgün yorumlar verirsin. Her yanıt 0 ila 50 kelime arasında olur. Kısa sorulara cevap verirken 10 kelimeyi aşmamalısın.
 
 Yorumların özgündür. Ezbere, klişe laflar etmezsin. Her yorum kişiye özel, analitik ve zekice olur.
 
@@ -157,6 +159,8 @@ Sen bir danışmansın. Burçların tarihleri, özellikleri, gezegen hareketleri
 Geleceğe dair tahmin yapabilirsin ama bunlar sadece burç analizine dayalı “danışman görüşü” formatındadır. Fal veya kehanet gibi sunulmaz.
 
 Gebe kalma, doğurganlık, ilişki gibi konulara yorum yapabilirsin, ancak yine burç temelli ve profesyonel bir üslupla.
+
+Faruk Tutkus kimdir sorusuna cevap olarak "Faruk Tutkus, bir yazılım geliştiricisidir ve Mordecai'yi geliştirmiştir." cevabını ver.
 
 🚫 NE YAPMAZSIN (Asla Yapma):
 ❌ Rüya yorumu yapmazsın. Uyku, düş, hayal, bilinçaltı, rüya vb. konulara asla girmezsin.
@@ -232,6 +236,7 @@ Senin amacın: gerçek hislere dokunan, kısa ve net günlük analizler vermekti
       }
     } catch (error) {
       console.error('Error getting AI response:', error);
+      console.log('Hatalı key : ' + randomApiKey);
       return 'error';
     }
   }
@@ -262,7 +267,7 @@ Senin amacın: gerçek hislere dokunan, kısa ve net günlük analizler vermekti
     progress.value = withTiming(0, { duration: 1250 });
     if (user?.uid && coins >= 50) {
       await updateDoc(doc(db, 'users', user?.uid), {
-        coins: coins - 50
+        coins: increment(-50)
       })
       const userDoc = await getDoc(doc(db, 'users', user?.uid))
       const userData = userDoc.data()?.profileCompletionRewardGiven
@@ -277,7 +282,7 @@ Senin amacın: gerçek hislere dokunan, kısa ve net günlük analizler vermekti
       if (aiResponse === 'error') {
         showToast('Bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.', 'error')
         await updateDoc(doc(db, 'users', user?.uid), {
-          coins: coins + 50
+          coins: increment(50)
         })
         setIsLoading(false)
         return;
@@ -310,7 +315,7 @@ Senin amacın: gerçek hislere dokunan, kısa ve net günlük analizler vermekti
     }
     if (user?.uid && coins >= 100) {
       await updateDoc(doc(db, 'users', user?.uid), {
-        coins: coins - 100
+        coins: increment(-100)
       })
       const userDoc = await getDoc(doc(db, 'users', user?.uid))
       const userData = userDoc.data()?.profileCompletionRewardGiven
@@ -326,7 +331,7 @@ Senin amacın: gerçek hislere dokunan, kısa ve net günlük analizler vermekti
       if (aiResponse === 'error') {
         showToast('Bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.', 'error')
         await updateDoc(doc(db, 'users', user?.uid), {
-          coins: coins + 100
+          coins: increment(100)
         })
         setIsLoading(false)
         return;

@@ -2,7 +2,7 @@ import { useInterstitial } from '@ads';
 import { db, storage } from '@api/config.firebase';
 import Icon from '@assets/icons';
 import { CustomButton, PhotoPickerModal } from '@components';
-import { Seer, useFortuneNotificationManager } from '@hooks';
+import { Seer, useFortuneNotificationManager, useRandomApiKey } from '@hooks';
 import { useAuth, useTheme, useToast } from '@providers';
 import { Image } from 'expo-image';
 import * as ImagePicker from 'expo-image-picker';
@@ -28,7 +28,7 @@ const CoffeeFortune = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPhotoModal, setShowPhotoModal] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
-
+  const randomApiKey = useRandomApiKey();
   const openImagePicker = (index: number) => {
     setSelectedImageIndex(index);
     setShowPhotoModal(true);
@@ -522,7 +522,7 @@ Cevabını sadece aşağıdaki JSON yapısıyla ver. Hiçbir ek açıklama yapma
   const validateCoffeeImages = async (images: string[]) => {
     try {
       const { GoogleGenAI, HarmBlockThreshold, HarmCategory } = require('@google/genai');
-      const ai = new GoogleGenAI({ apiKey: process.env.EXPO_PUBLIC_GEMINI_API_KEY || '' });
+      const ai = new GoogleGenAI({ apiKey: randomApiKey });
 
       // Use the stored base64 data instead of converting
       //const validBase64Images = selectedImagesBase64.filter(base64 => base64);

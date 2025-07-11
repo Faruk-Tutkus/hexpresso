@@ -2,7 +2,7 @@ import { useInterstitial } from '@ads';
 import { db, storage } from '@api/config.firebase';
 import Icon from '@assets/icons';
 import { CustomButton, PhotoPickerModal } from '@components';
-import { Seer, useFortuneNotificationManager } from '@hooks';
+import { Seer, useFortuneNotificationManager, useRandomApiKey } from '@hooks';
 import { useAuth, useTheme, useToast } from '@providers';
 import { Image } from 'expo-image';
 import * as ImagePicker from 'expo-image-picker';
@@ -30,7 +30,7 @@ const HandFortune = () => {
   const [uploadingHand, setUploadingHand] = useState<'left' | 'right' | null>(null);
   const [showPhotoModal, setShowPhotoModal] = useState(false);
   const [selectedHand, setSelectedHand] = useState<'left' | 'right' | null>(null);
-
+  const randomApiKey = useRandomApiKey();
   const openImagePicker = (hand: 'left' | 'right') => {
     setSelectedHand(hand);
     setShowPhotoModal(true);
@@ -351,7 +351,7 @@ const HandFortune = () => {
   const generateFortuneInterpretation = async ({ fortuneType, seerData, images, userData }: any) => {
     try {
       const { GoogleGenAI, HarmBlockThreshold, HarmCategory } = require('@google/genai');
-      const ai = new GoogleGenAI({ apiKey: process.env.EXPO_PUBLIC_GEMINI_API_KEY || '' });
+      const ai = new GoogleGenAI({ apiKey: randomApiKey });
 
       if (!leftHandBase64 || !rightHandBase64) {
         console.error('Base64 data is missing for hand images');
@@ -523,7 +523,7 @@ Cevabını sadece aşağıdaki JSON yapısıyla ver. Hiçbir ek açıklama yapma
   const validateHandImages = async (leftHandUri: string, rightHandUri: string) => {
     try {
       const { GoogleGenAI, HarmBlockThreshold, HarmCategory } = require('@google/genai');
-      const ai = new GoogleGenAI({ apiKey: process.env.EXPO_PUBLIC_GEMINI_API_KEY || '' });
+      const ai = new GoogleGenAI({ apiKey: randomApiKey });
 
       // Use the stored base64 data instead of converting
       // If the base64 data isn't available for some reason, we'll just fail validation
