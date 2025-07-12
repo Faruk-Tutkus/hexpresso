@@ -1,15 +1,16 @@
 import { NoInternetModal } from '@components';
+import { useDailyNotificationManager, useDailyRewardManager } from '@hooks';
 import { AuthProvider, ThemeProvider, ToastProvider, useAuth, useTheme } from "@providers";
 import { useNetInfo } from '@react-native-community/netinfo';
 import '@utils/i18n';
 import { useFonts } from 'expo-font';
 import * as Notifications from 'expo-notifications';
 import { Stack, useRouter } from "expo-router";
-
 import * as SystemUI from 'expo-system-ui';
 import { useEffect, useState } from "react";
 import mobileAds from 'react-native-google-mobile-ads';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+
 export function AppContent() {
   const { theme, colors } = useTheme();
   const user = useAuth();
@@ -17,6 +18,8 @@ export function AppContent() {
   const router = useRouter();
   const [isConnected, setIsConnected] = useState(true);
   const netInfo = useNetInfo();
+  const { autoInitializeDailyNotifications } = useDailyNotificationManager();
+  const { autoClaimDailyReward, validateRewardSecurity } = useDailyRewardManager();
 
   useEffect(() => {
     if (netInfo.isConnected !== null) {
@@ -35,6 +38,35 @@ export function AppContent() {
     SystemUI.setBackgroundColorAsync(colors.background);
   }, [colors.background]);
 
+  // Auto-initialize daily notifications when user is authenticated
+  useEffect(() => {
+    if (user?.user?.uid) {
+      console.log('👤 User authenticated, auto-initializing daily notifications...');
+      // Add a small delay to ensure everything is loaded
+      setTimeout(() => {
+        autoInitializeDailyNotifications();
+      }, 1000);
+    }
+  }, [user?.user?.uid, autoInitializeDailyNotifications]);
+
+  // Auto-claim daily reward when user is authenticated
+  useEffect(() => {
+    if (user?.user?.uid) {
+      console.log('💰 User authenticated, checking daily reward...');
+      // Add a small delay to ensure everything is loaded
+      setTimeout(async () => {
+        // Önce güvenlik kontrolü yap
+        const isSecure = await validateRewardSecurity();
+        
+        if (isSecure) {
+          autoClaimDailyReward();
+        } else {
+          console.warn('🚨 Security check failed, daily reward blocked');
+        }
+      }, 2000);
+    }
+  }, [user?.user?.uid, autoClaimDailyReward, validateRewardSecurity]);
+
   // Notification response handling
   useEffect(() => {
     const subscription = Notifications.addNotificationResponseReceivedListener(response => {
@@ -42,13 +74,15 @@ export function AppContent() {
       
       // Check if it's a fortune completion notification
       const data = response.notification.request.content.data;
-      if (data && (data.type === 'fortune_completed' || data.type === 'fortune_reminder') && user) {
+      if (data && (data.type === 'fortune_completed' || data.type === 'fortune_warning') && user) {
         console.log('🎯 Fortune notification clicked, navigating to MyFortunes');
         router.replace('/src/screens/main/navigator/(tabs)/MyFortunes');
       }
-      else {
-        console.log('🔔 Notification response received:', response);
-        router.replace('/src/screens/side/StartScreen');
+      
+      // Check if it's a daily reminder notification
+      if (data && data.type === 'daily_reminder' && user) {
+        console.log('🌅 Daily reminder notification clicked, navigating to main app');
+        router.replace('/src/screens/main/navigator/(tabs)/FortuneTellingScreen');
       }
     });
 

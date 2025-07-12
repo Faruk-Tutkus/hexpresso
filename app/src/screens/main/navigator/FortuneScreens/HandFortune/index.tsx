@@ -7,7 +7,7 @@ import { useAuth, useTheme, useToast } from '@providers';
 import { Image } from 'expo-image';
 import * as ImagePicker from 'expo-image-picker';
 import { router, useLocalSearchParams } from 'expo-router';
-import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { arrayUnion, doc, getDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useState } from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
@@ -317,7 +317,8 @@ const HandFortune = () => {
 
       // Add to user's document fortunerecord array
       await updateDoc(doc(db, 'users', user.uid), {
-        fortunerecord: arrayUnion(fortuneRecord)
+        fortunerecord: arrayUnion(fortuneRecord),
+        lastFortuneCreated: serverTimestamp() // Sunucu zamanını ayrı field olarak ekle
       });
       
       // Schedule notification for when fortune is completed
@@ -325,7 +326,7 @@ const HandFortune = () => {
         seerName: seer.name,
         fortuneType: 'El Falı',
         responseTimeMinutes: seer.responsetime
-      });
+      }, fortuneRecord.id);
 
       if (notificationId) {
         showInterstitial();

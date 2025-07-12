@@ -4,7 +4,7 @@ import Icon from '@assets/icons';
 import { useFortuneNotificationManager } from '@hooks';
 import { useAuth, useTheme, useToast } from '@providers';
 import { Image } from 'expo-image';
-import { arrayRemove, arrayUnion, doc, onSnapshot, updateDoc } from 'firebase/firestore';
+import { arrayRemove, arrayUnion, doc, onSnapshot, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { useCallback, useEffect, useState } from 'react';
 import { Dimensions, FlatList, RefreshControl, Image as RNImage, Text, TouchableOpacity, View } from 'react-native';
 import FlipCard from 'react-native-flip-card';
@@ -44,7 +44,7 @@ const MyFortunes = () => {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [expandedCardId, setExpandedCardId] = useState<string | null>(null);
-
+  console.log('serverTimestamp', serverTimestamp());
   // Real-time timer check for immediate status updates
   useEffect(() => {
     if (!user?.uid || fortunes.length === 0) return;
@@ -255,6 +255,7 @@ const FortuneCardContent = ({
 
     try {
       console.log('⚡ Starting fortune speed up process...');
+      showToast('Falınız hızlandırılıyor...', 'info');
 
       // Mevcut completion time'ı al
       const currentCompletionTime = fortune.estimatedCompletionTime.toDate?.()
@@ -296,7 +297,7 @@ const FortuneCardContent = ({
         fortunerecord: arrayUnion(updatedFortune)
       });
 
-      // Notification'ı güncelle
+      // Enhanced notification güncellemesi - artık sadece 5 dakika öncesi ve tamamlanınca
       await updateFortuneNotificationTime(
         fortune.id,
         newResponseTimeMinutes,
@@ -309,6 +310,7 @@ const FortuneCardContent = ({
       );
 
       console.log('✅ Fortune speed up completed successfully');
+      showToast('Falınız başarıyla hızlandırıldı! 🚀', 'success');
       
     } catch (error) {
       console.error('❌ Error speeding up fortune:', error);

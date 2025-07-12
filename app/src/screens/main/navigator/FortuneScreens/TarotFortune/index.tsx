@@ -6,7 +6,7 @@ import { Seer, TarotCard, useFetchTarots, useFortuneNotificationManager, useRand
 import { useAuth, useTheme, useToast } from '@providers';
 import { Image } from 'expo-image';
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
-import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { arrayUnion, doc, getDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import React, { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { FadeIn, FadeInDown, SlideInDown, SlideInUp } from 'react-native-reanimated';
@@ -205,7 +205,8 @@ const TarotFortune = () => {
 
       // Add to user's document fortunerecord array
       await updateDoc(doc(db, 'users', user.uid), {
-        fortunerecord: arrayUnion(fortuneRecord)
+        fortunerecord: arrayUnion(fortuneRecord),
+        lastFortuneCreated: serverTimestamp() // Sunucu zamanını ayrı field olarak ekle
       });
 
       // Schedule notification for when fortune is completed
@@ -213,7 +214,7 @@ const TarotFortune = () => {
         seerName: seer.name,
         fortuneType: 'Tarot Falı',
         responseTimeMinutes: seer.responsetime
-      });
+      }, fortuneRecord.id);
 
       if (notificationId) {
         showInterstitial();

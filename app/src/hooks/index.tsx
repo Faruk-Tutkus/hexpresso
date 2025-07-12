@@ -1,4 +1,6 @@
 export { default as useAITaskValidator, type AIValidationResponse, type TaskValidationResult } from './AITaskValidator'
+export { default as useDailyNotificationManager } from './DailyNotificationManager'
+export { useDailyRewardManager } from './DailyRewardManager'
 export { default as useFetchData } from './FetchData'
 export { default as useFetchSeers, type Seer } from './FetchSeers'
 export { default as useFetchTarots, type TarotCard } from './FetchTarots'

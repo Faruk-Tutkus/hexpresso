@@ -5,7 +5,7 @@ import { Seer, useFortuneNotificationManager, useRandomApiKey, useToggleKeyboard
 import { useAuth, useTheme, useToast } from '@providers';
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
-import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { arrayUnion, doc, getDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { useEffect, useRef, useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, View } from 'react-native';
 import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
@@ -107,7 +107,8 @@ const DreamFortune = () => {
 
       // Add to user's document fortunerecord array
       await updateDoc(doc(db, 'users', user.uid), {
-        fortunerecord: arrayUnion(fortuneRecord)
+        fortunerecord: arrayUnion(fortuneRecord),
+        lastFortuneCreated: serverTimestamp() // Sunucu zamanını ayrı field olarak ekle
       });
 
       // Schedule notification for when fortune is completed
@@ -115,7 +116,7 @@ const DreamFortune = () => {
         seerName: seer.name,
         fortuneType: 'Rüya Yorumu',
         responseTimeMinutes: seer.responsetime
-      });
+      }, fortuneRecord.id);
 
       if (notificationId) {
         showInterstitial();
